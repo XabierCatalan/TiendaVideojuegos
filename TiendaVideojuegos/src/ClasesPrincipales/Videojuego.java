@@ -5,25 +5,25 @@ import java.io.Serializable;
 public class Videojuego extends Producto implements Serializable,Pagable {
 	protected Genero genero;
 	protected EstadoProducto estado;
-	protected int año;
+	protected int anyo;
 	protected double precio;
 	
 	
 	
 
-	public Videojuego(int id, String nombre, Genero genero, EstadoProducto estado, int año, double precio) {
+	public Videojuego(int id, String nombre, Genero genero, EstadoProducto estado, int anyo, double precio) {
 		super(id, nombre);
 		this.genero = genero;
 		this.estado = estado;
-		this.año = año;
-		this.precio = precio;
+		this.setAnyo(anyo);
+		this.setPrecio(precio);
 	}
 	
 	public Videojuego() {
 		super();
 		this.genero = genero;
 		this.estado = estado;
-		this.año = año;
+		this.anyo = anyo;
 		this.precio = precio;
 	}
 	
@@ -45,12 +45,12 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 		this.estado = estado;
 	}
 
-	public int getAño() {
-		return año;
+	public int getAnyo() {
+		return anyo;
 	}
 
-	public void setAño(int año) {
-		this.año = año;
+	public void setAnyo(int anyo) {
+		this.anyo = anyo;
 	}
 
 	public void setPrecio(double precio) {
