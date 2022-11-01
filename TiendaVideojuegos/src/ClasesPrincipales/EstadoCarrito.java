@@ -1,5 +1,7 @@
 package ClasesPrincipales;
 
-public enum Estado {
+public enum EstadoCarrito {
 	PREPARACIÓN, LISTO, RECOGIDO;
+	
+
 }

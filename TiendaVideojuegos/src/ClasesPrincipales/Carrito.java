@@ -9,10 +9,10 @@ import java.text.SimpleDateFormat;
 public class Carrito implements Serializable {
 	protected String cliente;
 	protected Date fecha;
-	protected Estado estado;
+	protected EstadoCarrito estado;
 	
 	
-	public Carrito(String cliente, Date fecha, Estado estado) {
+	public Carrito(String cliente, Date fecha, EstadoCarrito estado) {
 		super();
 		this.cliente = cliente;
 		this.fecha = fecha;
@@ -22,7 +22,7 @@ public class Carrito implements Serializable {
 		super();
 		this.cliente = "0000 0000 0000 0000";
 		this.fecha = new Date();
-		this.estado = Estado.PREPARACIÓN;
+		this.estado = EstadoCarrito.PREPARACIÓN;
 	}
 
 
@@ -46,12 +46,12 @@ public class Carrito implements Serializable {
 	}
 
 
-	public Estado getEstado() {
+	public EstadoCarrito getEstadoCarrito() {
 		return estado;
 	}
 
 
-	public void setEstado(Estado estado) {
+	public void setEstadoCarrito(EstadoCarrito estado) {
 		this.estado = estado;
 	}
 	
