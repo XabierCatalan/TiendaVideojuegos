@@ -1,5 +1,5 @@
 package ClasesPrincipales;
 
-public class Estado {
-
+public enum Estado {
+	PREPARACIÓN, LISTO, RECOGIDO;
 }
