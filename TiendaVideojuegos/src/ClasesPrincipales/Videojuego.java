@@ -68,7 +68,8 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 
 	@Override
 	public double getPrecio() {
-		// TODO Auto-generated method stub
+		
+		
 		return 0;
 	}
 
