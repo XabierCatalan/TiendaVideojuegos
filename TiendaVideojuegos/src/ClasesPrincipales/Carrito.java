@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 
-public class Carrito implements Serializable {
+public class Carrito implements Serializable, Pagable {
 	protected String cliente;
 	protected Date fecha;
 	protected ArrayList<Pagable> elementos;
@@ -75,6 +75,23 @@ public class Carrito implements Serializable {
 		this.elementos = elementos;
 	
 	}
+	@Override
+	public double getPrecio() {
+		// TODO Auto-generated method stub
+		double precio = 0;
+		
+		for (Pagable pagable : elementos) {
+			precio += pagable.getPrecio();
+		}
+		return precio;
+	}
+	
+	@Override
+	public String toString() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		return "Pedido de " + cliente + ", " + sdf.format(fecha) + ", " + this.getPrecio() + " euros (" + estado + ")";
+	}
+	
 }
 
 	
