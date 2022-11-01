@@ -21,10 +21,10 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 	
 	public Videojuego() {
 		super();
-		this.genero = genero;
-		this.estado = estado;
-		this.anyo = anyo;
-		this.precio = precio;
+		this.genero = genero.ACCIÓN;
+		this.estado = estado.PRIMERA_MANO;
+		this.setAnyo(0);
+		this.setPrecio(0);
 	}
 	
 	
@@ -50,11 +50,20 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 	}
 
 	public void setAnyo(int anyo) {
-		this.anyo = anyo;
+		if (anyo >= 0) {
+			this.anyo = anyo;
+		}
 	}
 
 	public void setPrecio(double precio) {
-		this.precio = precio;
+		if (precio >= 0) {
+			this.precio = precio;
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return nombre + "(" + anyo +") (" + genero + ") (" + estado + ")" + precio + "eur";
 	}
 
 	@Override
@@ -63,10 +72,7 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 		return 0;
 	}
 
-	@Override
-	public String toString() {
-		return nombre + "(" + genero + ") (" + estado + ")" + precio + "eur";
-	}
+	
 	
 	
 	
