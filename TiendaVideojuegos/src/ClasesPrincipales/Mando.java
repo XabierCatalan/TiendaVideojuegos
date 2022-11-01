@@ -2,23 +2,22 @@ package ClasesPrincipales;
 
 import java.io.Serializable;
 
-public class Mando implements Pagable, Serializable {
+public class Mando extends Producto implements Serializable,Pagable {
 
-	protected String nombre;
-	protected EstadoProducto estado;
 	
-	public Mando(String nombre, EstadoProducto estado) {
-		super();
-		this.nombre = nombre;
+	protected EstadoProducto estado;
+	protected double precio;
+	
+	public Mando(int id, String nombre, EstadoProducto estado, double precio) {
+		super(id, nombre);
 		this.estado = estado;
+		this.precio = precio;
 	}
-
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	
+	public Mando() {
+		super();
+		this.estado = estado.PRIMERA_MANO;
+		this.precio = precio;
 	}
 
 	public EstadoProducto getEstado() {
@@ -29,16 +28,20 @@ public class Mando implements Pagable, Serializable {
 		this.estado = estado;
 	}
 
-	@Override
-	public String toString() {
-		return "Mando [nombre=" + nombre + ", estado=" + estado + "]";
+	public double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 
 	@Override
-	public double getPrecio() {
-		// TODO Auto-generated method stub
-		return 0;
+	public String toString() {
+		return nombre + "(" + estado + ")" + precio + "eur";
 	}
+	
+	
 	
 	
 }
