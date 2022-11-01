@@ -62,19 +62,23 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 	}
 	
 	@Override
-	public String toString() {
-		return nombre + "(" + anyo +") (" + genero + ") (" + estado + ")" + precio + "eur";
-	}
-
-	@Override
 	public double getPrecio() {
-	if(this.getEstado()== estado.SEGUNDA_MANO) {
+	if(this.getEstado()== EstadoProducto.SEGUNDA_MANO) {
 		return precio / 3;
 		
 	}else {
 		return precio;
 	}
 }
+	
+	
+	@Override
+	public String toString() {
+		return nombre + "(" + anyo +") (" + genero + ") (" + estado + ")" + precio + "eur";
+	}
+
+	
+
 
 	
 		
