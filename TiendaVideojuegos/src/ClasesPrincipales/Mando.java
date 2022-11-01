@@ -28,13 +28,22 @@ public class Mando extends Producto implements Serializable,Pagable {
 		this.estado = estado;
 	}
 
-	public double getPrecio() {
-		return precio;
-	}
 
 	public void setPrecio(double precio) {
-		this.precio = precio;
+		if (precio >= 0) {
+			this.precio = precio;
+		}
 	}
+	
+	@Override
+	public double getPrecio() {
+	if(this.getEstado()== estado.SEGUNDA_MANO) {
+		return precio / 3;
+		
+	}else {
+		return precio;
+	}
+}
 
 	@Override
 	public String toString() {
