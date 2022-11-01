@@ -16,9 +16,9 @@ public class Carrito implements Serializable {
 	
 	public Carrito(String cliente, Date fecha, EstadoCarrito estado) {
 		super();
-		this.cliente = cliente;
-		this.fecha = fecha;
-		this.Elementos(elementos);
+		this.setCliente(cliente);
+		this.setFecha(fecha);
+		this.setElementos(elementos);
 		this.estado = estado;
 	
 	}
