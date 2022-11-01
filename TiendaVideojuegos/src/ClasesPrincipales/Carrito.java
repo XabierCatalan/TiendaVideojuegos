@@ -1,5 +1,10 @@
 package ClasesPrincipales;
 
-public class Carrito {
+import java.io.Serializable;
+
+
+public class Carrito implements Serializable {
+	protected String cliente;
+	
 
 }
