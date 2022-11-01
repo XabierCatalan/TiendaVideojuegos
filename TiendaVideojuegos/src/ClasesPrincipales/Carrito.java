@@ -12,6 +12,7 @@ public class Carrito implements Serializable {
 	protected Date fecha;
 	protected ArrayList<Pagable> elementos;
 	protected EstadoCarrito estado;
+
 	
 	
 	public Carrito(String cliente, Date fecha, EstadoCarrito estado) {
