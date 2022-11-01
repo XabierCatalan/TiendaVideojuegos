@@ -3,12 +3,14 @@ package ClasesPrincipales;
 import java.io.Serializable;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 
 
 public class Carrito implements Serializable {
 	protected String cliente;
 	protected Date fecha;
+	protected ArrayList<Pagable> elementos;
 	protected EstadoCarrito estado;
 	
 	
@@ -16,12 +18,15 @@ public class Carrito implements Serializable {
 		super();
 		this.cliente = cliente;
 		this.fecha = fecha;
+		this.Elementos(elementos);
 		this.estado = estado;
+	
 	}
 	public Carrito() {
 		super();
 		this.cliente = "0000 0000 0000 0000";
 		this.fecha = new Date();
+		this.elementos = new ArrayList<Pagable>();
 		this.estado = EstadoCarrito.PREPARACIÓN;
 	}
 
@@ -42,8 +47,10 @@ public class Carrito implements Serializable {
 
 
 	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
+		if (fecha != null) {
+			this.fecha = fecha;
+		}
+	}	
 
 
 	public EstadoCarrito getEstadoCarrito() {
@@ -56,7 +63,17 @@ public class Carrito implements Serializable {
 	}
 	
 	
+	private void Elementos(ArrayList<Pagable> elementos2) {
+		// TODO Auto-generated method stub
 	
+	}
+	public ArrayList<Pagable> getElementos() {
+		return elementos;
+	}
+	public void setElementos(ArrayList<Pagable> elementos) {
+		this.elementos = elementos;
+	
+	}
 }
 
 	
