@@ -1,30 +1,31 @@
 package ClasesPrincipales;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import ClasesPrincipales.Consola;
 
-public class Servicio implements Serializable{
+public class Servicio implements Serializable, Pagable{
 	protected TipoServicio servicio;
 	protected Date fecha1;
 	protected double precio;
-	protected Consola consola;
+	protected ArrayList<Arreglable> arreglar;
 	
 	
-	public Servicio(TipoServicio servicio, Date fecha1, double precio, Consola consola) {
+	public Servicio(TipoServicio servicio, Date fecha1, double precio, ArrayList<Arreglable> arreglar) {
 		super();
 		this.servicio = servicio;
-		this.setFecha1(fecha1);
-		this.setPrecio(precio);
-		this.consola = consola;
+		this.fecha1 = fecha1;
+		this.precio = precio;
+		this.arreglar = arreglar;
 	}
 	
 	public Servicio() {
 		super();
-		this.servicio = TipoServicio.REPARACION;
+		this.servicio = TipoServicio.MANTENIMIENTO;
 		this.fecha1 = new Date();
 		this.precio = 0;
-		this.consola = new Consola();
+		this.arreglar = new ArrayList<Arreglable>();
 	}
 
 	public TipoServicio getServicio() {
@@ -44,30 +45,45 @@ public class Servicio implements Serializable{
 	}
 
 	public double getPrecio() {
+		if (this.servicio == TipoServicio.REPARACION) {
+			for (Arreglable a : arreglar) {
+				double p;
+				p =+ a.getPrecio();
+				precio = p / 2.5;
+				}
+		} else if(this.servicio == TipoServicio.MANTENIMIENTO){
+			for (Arreglable a : arreglar) {
+				double p;
+				p =+ a.getPrecio();
+				precio = p / 5;
+			}
+	
+		}
 		return precio;
 	}
 
 	public void setPrecio(double precio) {
-		if (this.servicio == TipoServicio.REPARACION) {
-			this.precio = this.consola.getPrecio() / 2.5;
-		} else {
-			this.precio = this.consola.getPrecio() / 5;
-		}
+		this.precio = precio;
 		
 	}
 
-	public Consola getConsola() {
-		return consola;
+	public ArrayList<Arreglable> getArreglar() {
+		return arreglar;
 	}
 
-	public void setConsola(Consola consola) {
-		this.consola = consola;
+	public void setArreglar(ArrayList<Arreglable> arreglar) {
+		this.arreglar = arreglar;
 	}
 
 	@Override
 	public String toString() {
-		return servicio + ": Consola:" + consola + ", Precio:" + precio + ", Fecha:" + fecha1;
+		return "Tipo de Servicio: " + servicio + ", Arreglamos/Mantenimiento: " + arreglar + ", con un precio total: " + precio + ", en la fecha" + fecha1;
 	}
+
+	
+	
+
+	
 	
 	
 	
