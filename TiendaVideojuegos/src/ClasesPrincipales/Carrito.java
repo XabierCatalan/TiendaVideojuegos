@@ -14,15 +14,15 @@ public class Carrito implements Serializable{
 	protected EstadoCarrito estado;
 
 	
-	
-	public Carrito(String cliente, Date fecha, EstadoCarrito estado) {
+	public Carrito(String cliente, Date fecha, ArrayList<Pagable> elementos, EstadoCarrito estado) {
 		super();
 		this.setCliente(cliente);
 		this.setFecha(fecha);
 		this.setElementos(elementos);
 		this.estado = estado;
-	
+
 	}
+	
 	public Carrito() {
 		super();
 		this.cliente = "0000 0000 0000 0000";

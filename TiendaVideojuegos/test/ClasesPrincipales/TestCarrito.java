@@ -11,10 +11,11 @@ import org.junit.Test;
 public class TestCarrito {
 	
 	Carrito carrito;
-	protected String cliente = "0000 0000 0000 0000";
+	protected String cliente = "0000 0000 0000 0001";
 	protected Date fecha = new Date();
-	protected ArrayList<Pagable> elementos = new ArrayList<>();
+	protected ArrayList<Pagable> elementos = new ArrayList<Pagable>();
 	protected EstadoCarrito estado = EstadoCarrito.LISTO;
+	protected double precio = 10;
 	
 	@Before
 	public void SetUp() {
@@ -28,19 +29,28 @@ public class TestCarrito {
 
 	@Test
 	public void testCarritoStringDateEstadoCarrito() {
-		fail("Not yet implemented");
+		Carrito newCarrito = new Carrito(cliente, fecha, elementos, estado);
+		assertNotNull(newCarrito);
+		assertEquals(newCarrito.getCliente(), cliente);
+		assertEquals(newCarrito.getElementos(), elementos);
+		assertEquals(newCarrito.getFecha(), fecha);
+		assertEquals(newCarrito.getEstadoCarrito(), estado);
 	}
 
 	@Test
 	public void testCarrito() {
 		Carrito newCarrito2 = new Carrito();
 		assertNotNull(newCarrito2);
-		assertEquals(newCarrito2.getCliente(), 0);
+		assertEquals(newCarrito2.getCliente(), "0000 0000 0000 0000");
+		assertEquals(newCarrito2.getElementos(), new ArrayList<Pagable>());
+		assertEquals(newCarrito2.getFecha(), new Date());
+		assertEquals(newCarrito2.getEstadoCarrito(), EstadoCarrito.PREPARACIÓN);
+		
 	}
 
 	@Test
 	public void testGetCliente() {
-		fail("Not yet implemented");
+		assertEquals(carrito.getCliente(), cliente);
 	}
 
 	@Test
@@ -50,7 +60,7 @@ public class TestCarrito {
 
 	@Test
 	public void testGetFecha() {
-		fail("Not yet implemented");
+		assertEquals(carrito.getFecha(), fecha);
 	}
 
 	@Test
@@ -60,7 +70,7 @@ public class TestCarrito {
 
 	@Test
 	public void testGetEstadoCarrito() {
-		fail("Not yet implemented");
+		assertEquals(carrito.getEstadoCarrito(), estado);
 	}
 
 	@Test
@@ -70,7 +80,7 @@ public class TestCarrito {
 
 	@Test
 	public void testGetElementos() {
-		fail("Not yet implemented");
+		assertEquals(carrito.getElementos(), elementos);
 	}
 
 	@Test
@@ -80,7 +90,7 @@ public class TestCarrito {
 
 	@Test
 	public void testGetPrecio() {
-		fail("Not yet implemented");
+		assertEquals(carrito.getPrecio(), precio,0);
 	}
 
 	@Test
