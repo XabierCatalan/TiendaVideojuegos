@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class TiendaGame implements Serializable{
 	
@@ -125,7 +126,88 @@ public class TiendaGame implements Serializable{
 		gestorBD.CrearBBDDConsola();
 		gestorBD.CrearBBDDMando();
 	}
+	
+	private static void printVideojuegos(ArrayList<Videojuego> videojuegos) {
+		if (!videojuegos.isEmpty()) {
+			for (Videojuego a : videojuegos) {
+				System.out.println(String.format(" - %s", a.toString()));
+				}
+		}	
+	}
 
+	private static void printConsola(ArrayList<Consola> consolas) {
+		if (!consolas.isEmpty()) {
+			for (Consola a : consolas) {
+				System.out.println(String.format(" - %s", a.toString()));
+				}
+		}	
+	}
+	
+	private static void printMando(ArrayList<Mando> mandos) {
+		if (!mandos.isEmpty()) {
+			for (Mando a : mandos) {
+				System.out.println(String.format(" - %s", a.toString()));
+				}
+		}	
+	}
+	
+	public static ArrayList<Videojuego> initVideojuego() {
+		ArrayList<Videojuego> videojuegos = new ArrayList<Videojuego>();
+		
+		Videojuego videojuego = new Videojuego();
+		videojuego.setNombre("GTAV");
+		videojuego.setAnyo(2003);
+		videojuego.setEstado(EstadoProducto.PRIMERA_MANO);
+		videojuego.setPrecio(65);
+		
+		videojuego = new Videojuego();
+		videojuego.setNombre("Pokemon");
+		videojuego.setAnyo(2007);
+		videojuego.setEstado(EstadoProducto.SEGUNDA_MANO);
+		videojuego.setPrecio(45);
+		
+		return videojuegos;
+		
+	}
+	
+	public static ArrayList<Consola> initConsola() {
+		ArrayList<Consola> consolas = new ArrayList<Consola>();
+		
+		Consola consola = new Consola();
+		consola.setNombre("PS5");
+		consola.setMarca(Marca.PLAYSTATION);
+		consola.setEstado(EstadoProducto.PRIMERA_MANO);
+		consola.setPrecio(400);
+	
+		
+		consola = new Consola();
+		consola.setNombre("XBOX ONE");
+		consola.setMarca(Marca.XBOX);
+		consola.setEstado(EstadoProducto.SEGUNDA_MANO);
+		consola.setPrecio(200);
+		
+		return consolas;
+		
+	}
+	
+	public static ArrayList<Mando> initMando() {
+		ArrayList<Mando> mandos = new ArrayList<Mando>();
+		
+		Mando mando = new Mando();
+		mando.setNombre("DualShock");
+		mando.setMarca(Marca.PLAYSTATION);
+		mando.setEstado(EstadoProducto.PRIMERA_MANO);
+		mando.setPrecio(35);
+		
+		mando = new Mando();
+		mando.setNombre("NintendoPad");
+		mando.setMarca(Marca.NINTENDO);
+		mando.setEstado(EstadoProducto.SEGUNDA_MANO);
+		mando.setPrecio(20);
+		
+		return mandos;
+		
+	}
 	
 	
 	
