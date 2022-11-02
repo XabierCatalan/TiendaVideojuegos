@@ -8,12 +8,16 @@ public class TestProducto {
 
 	@Test
 	public void testProductoIntString() {
-		fail("Not yet implemented");
+		
+		
 	}
 
 	@Test
 	public void testProducto() {
-		fail("Not yet implemented");
+		Producto newProducto = new Producto();
+		assertNotNull(newProducto);
+		assertEquals(newProducto.getId(), 0,0);
+		assertEquals(newProducto.getNombre(), "");
 	}
 
 	@Test
