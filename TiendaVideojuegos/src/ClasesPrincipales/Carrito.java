@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 
 
-public class Carrito implements Serializable, Pagable {
+public class Carrito implements Serializable{
 	protected String cliente;
 	protected Date fecha;
 	protected ArrayList<Pagable> elementos;
@@ -75,9 +75,7 @@ public class Carrito implements Serializable, Pagable {
 		this.elementos = elementos;
 	
 	}
-	@Override
 	public double getPrecio() {
-		// TODO Auto-generated method stub
 		double precio = 0;
 		
 		for (Pagable pagable : elementos) {
