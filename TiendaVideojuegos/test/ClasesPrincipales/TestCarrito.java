@@ -2,6 +2,7 @@ package ClasesPrincipales;
 
 import static org.junit.Assert.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,13 +10,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TestCarrito {
+	protected Mando mando =new Mando(1,"mando",EstadoProducto.PRIMERA_MANO,5,Marca.PLAYSTATION);
 	
 	Carrito carrito;
 	protected String cliente = "0000 0000 0000 0001";
 	protected Date fecha = new Date();
 	protected ArrayList<Pagable> elementos = new ArrayList<Pagable>();
 	protected EstadoCarrito estado = EstadoCarrito.LISTO;
-	protected double precio = 10;
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	
 	
 	@Before
 	public void SetUp() {
@@ -24,6 +27,7 @@ public class TestCarrito {
 		carrito.setFecha(fecha);
 		carrito.setElementos(elementos);
 		carrito.setEstadoCarrito(estado);
+		
 	}
 	
 
@@ -55,7 +59,10 @@ public class TestCarrito {
 
 	@Test
 	public void testSetCliente() {
-		fail("Not yet implemented");
+		String newCliente = "0000 0000 0000 0003";
+		assertEquals(carrito.getCliente(), cliente);
+		carrito.setCliente(newCliente);
+		assertEquals(carrito.getCliente(), newCliente);
 	}
 
 	@Test
@@ -65,7 +72,10 @@ public class TestCarrito {
 
 	@Test
 	public void testSetFecha() {
-		fail("Not yet implemented");
+		Date newDate = new Date();
+		assertEquals(carrito.getFecha(), fecha);
+		carrito.setFecha(newDate);
+		assertEquals(carrito.getFecha(), newDate);
 	}
 
 	@Test
@@ -75,7 +85,10 @@ public class TestCarrito {
 
 	@Test
 	public void testSetEstadoCarrito() {
-		fail("Not yet implemented");
+		EstadoCarrito newEstado = EstadoCarrito.RECOGIDO;
+		assertEquals(carrito.getEstadoCarrito(),estado);
+		carrito.setEstadoCarrito(newEstado);
+		assertEquals(carrito.getEstadoCarrito(), newEstado);
 	}
 
 	@Test
@@ -85,17 +98,26 @@ public class TestCarrito {
 
 	@Test
 	public void testSetElementos() {
-		fail("Not yet implemented");
+		ArrayList<Pagable> newElementos = new ArrayList<Pagable>();
+		assertEquals(carrito.getElementos(), elementos);
+		carrito.setElementos(newElementos);
+		assertEquals(carrito.getElementos(), newElementos);
 	}
 
 	@Test
 	public void testGetPrecio() {
-		assertEquals(carrito.getPrecio(), precio,0);
+		elementos.add(mando);
+		assertEquals(carrito.getPrecio(), 5,0 );
 	}
 
 	@Test
 	public void testToString() {
-		fail("Not yet implemented");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		String toString = "";
+		System.out.println(toString);
+		System.out.println(carrito.toString());
+		assertEquals(carrito.toString(), toString);
 	}
 
 }
