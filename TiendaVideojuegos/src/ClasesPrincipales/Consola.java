@@ -2,7 +2,7 @@ package ClasesPrincipales;
 
 import java.io.Serializable;
 
-public class Consola extends Producto implements Serializable, Pagable {
+public class Consola extends Producto implements Serializable, Pagable, Arreglable {
 	protected double precio;
 	protected EstadoProducto estado;
 	protected Marca marca;
