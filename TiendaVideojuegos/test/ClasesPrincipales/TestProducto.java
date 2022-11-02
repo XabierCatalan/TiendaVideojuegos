@@ -35,13 +35,13 @@ public class TestProducto {
 
 	@Test
 	public void testGetId() {
-		assertEquals(producto.getId(), 0,0);
+		assertEquals(producto.getId(), id,0);
 	}
 
 	@Test
 	public void testSetId() {
 		Integer newId = 1;
-		assertEquals(producto.getId(), 0,0);
+		assertEquals(producto.getId(), id,0);
 		producto.setId(newId);
 		assertEquals(producto.getId(), newId,0);
 	}
