@@ -2,47 +2,69 @@ package ClasesPrincipales;
 
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class TestProducto {
-
+	Producto producto;
+ protected String nombre = "nombre";
+ protected int id = 0;
+ 
+ @Before
+ public void SetUp() {
+	 producto = new Producto();
+	 producto.setId(0);
+	 producto.setNombre("nombre");
+ }
 	@Test
 	public void testProductoIntString() {
-		
-		
+		Producto newProducto = new Producto(id, nombre);
+		assertNotNull(newProducto);
+		assertEquals(newProducto.getId(), id,0);
+		assertEquals(newProducto.getNombre(), nombre);
 	}
 
 	@Test
 	public void testProducto() {
-		Producto newProducto = new Producto();
-		assertNotNull(newProducto);
-		assertEquals(newProducto.getId(), 0,0);
-		assertEquals(newProducto.getNombre(), "");
+		Producto newProducto2 = new Producto();
+		assertNotNull(newProducto2);
+		assertEquals(newProducto2.getNombre(), "Sin nombre");
+		assertEquals(newProducto2.getId(), 0,0);
+		
 	}
 
 	@Test
 	public void testGetId() {
-		fail("Not yet implemented");
+		assertEquals(producto.getId(), 0,0);
 	}
 
 	@Test
 	public void testSetId() {
-		fail("Not yet implemented");
+		Integer newId = 1;
+		assertEquals(producto.getId(), 0,0);
+		producto.setId(newId);
+		assertEquals(producto.getId(), newId,0);
 	}
 
 	@Test
 	public void testGetNombre() {
-		fail("Not yet implemented");
+		assertEquals(producto.getNombre(), "nombre");
 	}
 
 	@Test
 	public void testSetNombre() {
-		fail("Not yet implemented");
+		String newNombre = "nombre2";
+		assertEquals(producto.getNombre(), nombre);
+		producto.setNombre(newNombre);
+		assertEquals(producto.getNombre(), newNombre);
 	}
 
 	@Test
 	public void testToString() {
-		fail("Not yet implemented");
+		String toString = "Producto " + nombre + "(id: " + id + ")";
+		System.out.println(toString);
+		System.out.println(producto.toString());
+		assertEquals(producto.toString(), toString);
 	}
 
 }

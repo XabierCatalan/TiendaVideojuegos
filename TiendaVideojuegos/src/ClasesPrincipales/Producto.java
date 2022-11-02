@@ -36,7 +36,7 @@ public class Producto {
 
 	@Override
 	public String toString() {
-		return "Producto" + nombre + "(id: " + id + ")";
+		return "Producto " + nombre + "(id: " + id + ")";
 	}
 	
 	
