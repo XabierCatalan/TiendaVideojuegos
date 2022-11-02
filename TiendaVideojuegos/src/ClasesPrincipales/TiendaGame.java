@@ -1,5 +1,7 @@
 package ClasesPrincipales;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -60,7 +62,64 @@ public class TiendaGame implements Serializable{
 	
 	// GUARDAR DATOS Y CARGAR DATOS
 	
+	public void guardarDatosVideojuegoCSV() {
+
+		try {
+			PrintWriter pw = new PrintWriter("carritos.csv");
+			for (Carrito a : carritos ) {
+				pw.println(a.getCliente()
+						+";"+a.getFecha()
+						+";"+a.getElementos()
+						+";"+a.getEstadoCarrito()
+						+";");
+							
+			}
+			
+			pw.close();
+			
+		} catch (FileNotFoundException e) {
+			System.err.println("Error al guardar datos CSV.");
+		}
+	}
 	
+	public void guardarDatosProducotosCSV() {
+
+		try {
+			PrintWriter pw = new PrintWriter("productos.csv");
+			for (Producto a : productos ) {
+				pw.println(a.getId()
+						+";"+a.getNombre()
+						+";");
+							
+			}
+			
+			pw.close();
+			
+		} catch (FileNotFoundException e) {
+			System.err.println("Error al guardar datos CSV.");
+		}
+	}
+	
+	public void guardarDatosServiciosCSV() {
+
+		try {
+			PrintWriter pw = new PrintWriter("servicios.csv");
+			for (Servicio a : servicios ) {
+				pw.println(a.getTipo()
+						+";"+a.getFecha1()
+						+";");
+							
+			}
+			
+			pw.close();
+			
+		} catch (FileNotFoundException e) {
+			System.err.println("Error al guardar datos CSV.");
+		}
+	}
+	
+	
+
 	
 	
 	
