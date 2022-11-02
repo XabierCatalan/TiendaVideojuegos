@@ -58,6 +58,10 @@ public class TiendaGame implements Serializable{
 		return "TiendaGame [carritos=" + carritos + ", productos=" + productos + ", servicios=" + servicios + "]";
 	}
 	
+	// GUARDAR DATOS Y CARGAR DATOS
+	
+	
+	
 	
 	
 	
