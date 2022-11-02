@@ -34,7 +34,6 @@ public class GestorBD {
 					+ "ANYO INTEGER,\n"
 					+ "PRECIO DOUBLE,\n"
 					+ "MARCA ENUM,\n"
-					+ "ESTADOPRODUCTO ENUM,\n"
 					+ ");";
 					
 			
@@ -68,6 +67,29 @@ public class GestorBD {
 			System.err.println(String.format("* Error al borrar el archivo de la BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}
+	}
+	
+	public void insertarDatos(Producto... productos ) {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING);
+		     Statement stmt = con.createStatement()) {
+			//Se define la plantilla de la sentencia SQL
+			String sql = "INSERT INTO PRODUCTO (NAME, GENERO, ESTADOPRODUCTO, ANYO, PRECIO, MARCA) VALUES ('%s', '%s', '%s', '%s', '%s', '%s');";
+			
+			System.out.println("- Insertando productos...");
+			
+			//Se recorren los clientes y se insertan uno a uno
+			for (Producto c : productos) {
+				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.get, c.getPassword()))) {					
+					System.out.println(String.format(" - Cliente insertado: %s", c.toString()));
+				} else {
+					System.out.println(String.format(" - No se ha insertado el cliente: %s", c.toString()));
+				}
+			}			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}				
 	}
 	
 

@@ -2,6 +2,7 @@ package ClasesPrincipales;
 
 import static org.junit.Assert.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.junit.Before;
@@ -16,10 +17,10 @@ public class TestServicio {
 	protected Date fecha = new Date();
 	
 	
-	
+	@Before
 	public void SetUp() {
 		servicio = new Servicio();
-		servicio.setTipo(tipo);
+		servicio.setFecha1(fecha);
 		servicio.setTipo(tipo);
 	}
 
@@ -67,14 +68,19 @@ public class TestServicio {
 
 	@Test
 	public void testToString() {
+		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
 		
+		String toString = "Tipo= " + tipo + ", (" + sdf1.format(fecha) + ")";
+		System.out.println(toString);
+		System.out.println(servicio.toString());
+		assertEquals(servicio.toString(), toString);
 		
 		
 	}
 
 	@Test
 	public void testGetPrecio() {
-		fail("Not yet implemented");
+		assertEquals(servicio.getPrecio(), 25,0);
 	}
 
 }
