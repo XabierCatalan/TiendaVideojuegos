@@ -1,39 +1,38 @@
 package ClasesPrincipales;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import ClasesPrincipales.Consola;
 
-public class Servicio implements Serializable, Pagable{
-	protected TipoServicio servicio;
+public class Servicio implements Serializable,Pagable{
+	protected TipoServicio tipo;
 	protected Date fecha1;
-	protected double precio;
-	protected ArrayList<Arreglable> arreglar;
 	
 	
-	public Servicio(TipoServicio servicio, Date fecha1, double precio, ArrayList<Arreglable> arreglar) {
+	
+	
+	public Servicio(TipoServicio tipo, Date fecha1) {
 		super();
-		this.servicio = servicio;
+		this.tipo = tipo;
 		this.fecha1 = fecha1;
-		this.precio = precio;
-		this.arreglar = arreglar;
+		
 	}
-	
+
 	public Servicio() {
 		super();
-		this.servicio = TipoServicio.MANTENIMIENTO;
+		this.tipo = TipoServicio.MANTENIMIENTO;
 		this.fecha1 = new Date();
-		this.precio = 0;
-		this.arreglar = new ArrayList<Arreglable>();
+		
 	}
 
-	public TipoServicio getServicio() {
-		return servicio;
+	public TipoServicio getTipo() {
+		return tipo;
 	}
 
-	public void setServicio(TipoServicio servicio) {
-		this.servicio = servicio;
+	public void setTipo(TipoServicio tipo) {
+		this.tipo = tipo;
 	}
 
 	public Date getFecha1() {
@@ -44,41 +43,30 @@ public class Servicio implements Serializable, Pagable{
 		this.fecha1 = fecha1;
 	}
 
-	public double getPrecio() {
-		if (this.servicio == TipoServicio.REPARACION) {
-			for (Arreglable a : arreglar) {
-				double p;
-				p =+ a.getPrecio();
-				precio = p / 2.5;
-				}
-		} else if(this.servicio == TipoServicio.MANTENIMIENTO){
-			for (Arreglable a : arreglar) {
-				double p;
-				p =+ a.getPrecio();
-				precio = p / 5;
-			}
-	
-		}
-		return precio;
-	}
-
-	public void setPrecio(double precio) {
-		this.precio = precio;
-		
-	}
-
-	public ArrayList<Arreglable> getArreglar() {
-		return arreglar;
-	}
-
-	public void setArreglar(ArrayList<Arreglable> arreglar) {
-		this.arreglar = arreglar;
+	@Override
+	public String toString() {
+		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+		return "Tipo= " + tipo + ", (" + sdf1.format(fecha1) + ")";
 	}
 
 	@Override
-	public String toString() {
-		return "Tipo de Servicio: " + servicio + ", Arreglamos/Mantenimiento: " + arreglar + ", con un precio total: " + precio + ", en la fecha" + fecha1;
+	public double getPrecio() {
+		if(tipo.equals(TipoServicio.MANTENIMIENTO)) {
+			int precio = 25;
+			return precio;
+		}else {
+			int precio = 50;
+			return precio;
+		}
+		
 	}
+	
+	
+	
+	
+	
+	
+	
 
 	
 	
