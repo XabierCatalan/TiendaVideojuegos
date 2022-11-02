@@ -7,14 +7,14 @@ import org.junit.Test;
 
 public class TestProducto {
 	Producto producto;
- protected String nombre = "nombre";
+ protected String nombre = "nombre1";
  protected int id = 0;
  
  @Before
  public void SetUp() {
 	 producto = new Producto();
-	 producto.setId(0);
-	 producto.setNombre("nombre");
+	 producto.setId(id);
+	 producto.setNombre(nombre);
  }
 	@Test
 	public void testProductoIntString() {
@@ -48,7 +48,7 @@ public class TestProducto {
 
 	@Test
 	public void testGetNombre() {
-		assertEquals(producto.getNombre(), "nombre");
+		assertEquals(producto.getNombre(), nombre);
 	}
 
 	@Test
