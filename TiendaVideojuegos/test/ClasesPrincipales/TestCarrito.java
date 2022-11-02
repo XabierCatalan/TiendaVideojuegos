@@ -112,9 +112,10 @@ public class TestCarrito {
 
 	@Test
 	public void testToString() {
+		elementos.add(mando);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
-		String toString = "";
+		String toString = "Pedido de " + cliente + ", " + sdf.format(fecha) + ", " + carrito.getPrecio() + " euros (" + estado + ")";
 		System.out.println(toString);
 		System.out.println(carrito.toString());
 		assertEquals(carrito.toString(), toString);
