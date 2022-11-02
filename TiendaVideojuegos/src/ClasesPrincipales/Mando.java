@@ -7,17 +7,20 @@ public class Mando extends Producto implements Serializable,Pagable {
 	
 	protected EstadoProducto estado;
 	protected double precio;
+	protected Marca marca;
 	
-	public Mando(int id, String nombre, EstadoProducto estado, double precio) {
+	public Mando(int id, String nombre, EstadoProducto estado, double precio, Marca marca) {
 		super(id, nombre);
 		this.estado = estado;
 		this.precio = precio;
+		this.marca = marca;
 	}
 	
 	public Mando() {
 		super();
 		this.estado = estado.PRIMERA_MANO;
 		this.precio = precio;
+		this.marca = marca.PLAYSTATION;
 	}
 
 	public EstadoProducto getEstado() {
@@ -44,10 +47,19 @@ public class Mando extends Producto implements Serializable,Pagable {
 		return precio;
 	}
 }
+	
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
 
 	@Override
 	public String toString() {
-		return nombre + "(" + estado + ")" + precio + "eur";
+		return nombre + "(" + estado + ") ("+ marca + ")" + precio + "eur";
 	}
 	
 	
