@@ -125,7 +125,33 @@ public class TiendaGame implements Serializable{
 		gestorBD.CrearBBDDVideojuego();
 		gestorBD.CrearBBDDConsola();
 		gestorBD.CrearBBDDMando();
+		
+		ArrayList<Videojuego> videojuegos = initVideojuego();
+		gestorBD.insertarDatosVideojuego(videojuegos.toArray(new Videojuego[videojuegos.size()]));
+		
+		ArrayList<Consola> consolas = initConsola();
+		gestorBD.insertarDatosConsola(consolas.toArray(new Consola[consolas.size()]));
+		
+		ArrayList<Mando> mandos = initMando();
+		gestorBD.insertarDatosMando(mandos.toArray(new Mando[mandos.size()]));
+		
+		videojuegos = gestorBD.obtenerDatosVideojuegos();
+		printVideojuegos(videojuegos);
+		
+		consolas = gestorBD.obtenerDatosConsolas();
+		printConsola(consolas);
+		
+		mandos = gestorBD.obtenerDatosMandos();
+		printMando(mandos);
+		
+		gestorBD.borrarBBDDVideojuego();
+		gestorBD.borrarBBDDConsola();
+		gestorBD.borrarBBDDMando();
+		
+		
+		
 	}
+	
 	
 	private static void printVideojuegos(ArrayList<Videojuego> videojuegos) {
 		if (!videojuegos.isEmpty()) {
@@ -207,6 +233,8 @@ public class TiendaGame implements Serializable{
 		
 		return mandos;
 		
+	
+	
 	}
 	
 	
