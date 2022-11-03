@@ -29,6 +29,9 @@ public class TestVideojuego {
 	@Test
 	public void testToString() {
 		String toString = nombre + "(" + anyo +") (" + genero + ") (" + estado + ")" + precio + "eur";
+		System.out.println(toString);
+		System.out.println(videojuego.toString());
+		assertEquals(videojuego.toString(), toString);
 	}
 
 	@Test
