@@ -38,7 +38,7 @@ public class GestorBD {
 					+ " GENERO ENUM NOT NULL, \n"
 					+ "ESTADOPRODUCTO ENUM NOT NULL,\n"
 					+ "ANYO INTEGER NOT NULL,\n"
-					+ "PRECIO DOUBLE NOT NULL,\n"
+					+ "PRECIO DOUBLE NOT NULL\n"
 					+ ");";
 					
 			if (!stmt.execute(sql)) {
