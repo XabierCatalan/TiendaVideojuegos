@@ -34,7 +34,7 @@ public class GestorBD {
 			
 			String sql = "CREATE TABLE IF NOT EXISTS VIDEOJUEGO (\n"
 					+ " ID INTEGER PRIMARY KEY AUTOINCREMENT, \n"
-					+ " NAME TEXT NOT NULL,\n"
+					+ " NOMBRE TEXT NOT NULL,\n"
 					+ " GENERO ENUM NOT NULL, \n"
 					+ "ESTADOPRODUCTO ENUM NOT NULL,\n"
 					+ "ANYO INTEGER NOT NULL,\n"
@@ -55,7 +55,7 @@ public class GestorBD {
 			
 			String sql = "CREATE TABLE IF NOT EXISTS CONSOLA (\n"
 					+ " ID INTEGER PRIMARY KEY AUTOINCREMENT, \n"
-					+ " NAME TEXT NOT NULL,\n"
+					+ " NOMBRE TEXT NOT NULL,\n"
 					+ "ESTADOPRODUCTO ENUM NOT NULL,\n"
 					+ "PRECIO DOUBLE NOT NULL,\n"
 					+ "MARCA ENUM NOT NULL\n"
@@ -75,7 +75,7 @@ public class GestorBD {
 			
 			String sql = "CREATE TABLE IF NOT EXISTS MANDO (\n"
 					+ " ID INTEGER PRIMARY KEY AUTOINCREMENT, \n"
-					+ " NAME TEXT NOT NULL,\n"
+					+ " NOMBRE TEXT NOT NULL,\n"
 					+ "ESTADOPRODUCTO ENUM NOT NULL,\n"
 					+ "PRECIO DOUBLE NOT NULL,\n"
 					+ "MARCA ENUM NOT NULL\n"
