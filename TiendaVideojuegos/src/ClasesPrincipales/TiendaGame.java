@@ -206,6 +206,7 @@ public class TiendaGame implements Serializable{
 		consola.setMarca(Marca.PLAYSTATION);
 		consola.setEstado(EstadoProducto.PRIMERA_MANO);
 		consola.setPrecio(400);
+		consolas.add(consola);
 	
 		
 		consola = new Consola();
@@ -213,6 +214,7 @@ public class TiendaGame implements Serializable{
 		consola.setMarca(Marca.XBOX);
 		consola.setEstado(EstadoProducto.SEGUNDA_MANO);
 		consola.setPrecio(200);
+		consolas.add(consola);
 		
 		return consolas;
 		
@@ -226,12 +228,14 @@ public class TiendaGame implements Serializable{
 		mando.setMarca(Marca.PLAYSTATION);
 		mando.setEstado(EstadoProducto.PRIMERA_MANO);
 		mando.setPrecio(35);
+		mandos.add(mando);
 		
 		mando = new Mando();
 		mando.setNombre("NintendoPad");
 		mando.setMarca(Marca.NINTENDO);
 		mando.setEstado(EstadoProducto.SEGUNDA_MANO);
 		mando.setPrecio(20);
+		mandos.add(mando);
 		
 		return mandos;
 		
