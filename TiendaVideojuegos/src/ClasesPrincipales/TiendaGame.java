@@ -126,13 +126,13 @@ public class TiendaGame implements Serializable{
 		gestorBD.CrearBBDDConsola();
 		gestorBD.CrearBBDDMando();
 		
-		ArrayList<Videojuego> videojuegos = initVideojuego();
+		List<Videojuego> videojuegos = initVideojuego();
 		gestorBD.insertarDatosVideojuego(videojuegos.toArray(new Videojuego[videojuegos.size()]));
 		
-		ArrayList<Consola> consolas = initConsola();
+		List<Consola> consolas = initConsola();
 		gestorBD.insertarDatosConsola(consolas.toArray(new Consola[consolas.size()]));
 		
-		ArrayList<Mando> mandos = initMando();
+		List<Mando> mandos = initMando();
 		gestorBD.insertarDatosMando(mandos.toArray(new Mando[mandos.size()]));
 		
 		videojuegos = gestorBD.obtenerDatosVideojuegos();
@@ -153,7 +153,7 @@ public class TiendaGame implements Serializable{
 	}
 	
 	
-	private static void printVideojuegos(ArrayList<Videojuego> videojuegos) {
+	private static void printVideojuegos(List<Videojuego> videojuegos) {
 		if (!videojuegos.isEmpty()) {
 			for (Videojuego a : videojuegos) {
 				System.out.println(String.format(" - %s", a.toString()));
@@ -161,7 +161,7 @@ public class TiendaGame implements Serializable{
 		}	
 	}
 
-	private static void printConsola(ArrayList<Consola> consolas) {
+	private static void printConsola(List<Consola> consolas) {
 		if (!consolas.isEmpty()) {
 			for (Consola a : consolas) {
 				System.out.println(String.format(" - %s", a.toString()));
@@ -169,7 +169,7 @@ public class TiendaGame implements Serializable{
 		}	
 	}
 	
-	private static void printMando(ArrayList<Mando> mandos) {
+	private static void printMando(List<Mando> mandos) {
 		if (!mandos.isEmpty()) {
 			for (Mando a : mandos) {
 				System.out.println(String.format(" - %s", a.toString()));
@@ -177,8 +177,8 @@ public class TiendaGame implements Serializable{
 		}	
 	}
 	
-	public static ArrayList<Videojuego> initVideojuego() {
-		ArrayList<Videojuego> videojuegos = new ArrayList<Videojuego>();
+	public static List<Videojuego> initVideojuego() {
+		List<Videojuego> videojuegos = new ArrayList<>();
 		
 		Videojuego videojuego = new Videojuego();
 		videojuego.setNombre("GTAV");
@@ -196,8 +196,8 @@ public class TiendaGame implements Serializable{
 		
 	}
 	
-	public static ArrayList<Consola> initConsola() {
-		ArrayList<Consola> consolas = new ArrayList<Consola>();
+	public static List<Consola> initConsola() {
+		List<Consola> consolas = new ArrayList<>();
 		
 		Consola consola = new Consola();
 		consola.setNombre("PS5");
@@ -216,8 +216,8 @@ public class TiendaGame implements Serializable{
 		
 	}
 	
-	public static ArrayList<Mando> initMando() {
-		ArrayList<Mando> mandos = new ArrayList<Mando>();
+	public static List<Mando> initMando() {
+		List<Mando> mandos = new ArrayList<>();
 		
 		Mando mando = new Mando();
 		mando.setNombre("DualShock");
