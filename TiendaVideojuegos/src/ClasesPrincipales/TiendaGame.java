@@ -185,12 +185,14 @@ public class TiendaGame implements Serializable{
 		videojuego.setAnyo(2003);
 		videojuego.setEstado(EstadoProducto.PRIMERA_MANO);
 		videojuego.setPrecio(65);
+		videojuegos.add(videojuego);
 		
 		videojuego = new Videojuego();
 		videojuego.setNombre("Pokemon");
 		videojuego.setAnyo(2007);
 		videojuego.setEstado(EstadoProducto.SEGUNDA_MANO);
 		videojuego.setPrecio(45);
+		videojuegos.add(videojuego);
 		
 		return videojuegos;
 		
