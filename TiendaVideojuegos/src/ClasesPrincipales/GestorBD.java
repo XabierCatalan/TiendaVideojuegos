@@ -258,8 +258,8 @@ public class GestorBD {
 				videojuego= new Videojuego();
 				videojuego.setId(rs.getInt("ID"));
 				videojuego.setNombre(rs.getString("NOMBRE"));
-				videojuego.setGenero(rs.getObject("GENERO",Genero.class));
-				videojuego.setEstado(rs.getObject("ESTADOPRODUCTO", EstadoProducto.class));
+				videojuego.setGenero(Genero.valueOf(rs.getString("GENERO")));
+				videojuego.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
 				videojuego.setAnyo(rs.getInt("ANYO"));
 				videojuego.setPrecio(rs.getDouble("PRECIO"));
 				
@@ -302,9 +302,9 @@ public class GestorBD {
 				consola= new Consola();
 				consola.setId(rs.getInt("ID"));
 				consola.setNombre(rs.getString("NOMBRE"));
-				consola.setEstado(rs.getObject("ESTADOPRODUCTO", EstadoProducto.class));
+				consola.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
 				consola.setPrecio(rs.getDouble("PRECIO"));
-				consola.setMarca(rs.getObject("MARCA", Marca.class));
+				consola.setMarca(Marca.valueOf(rs.getString("MARCA")));
 				
 			
 				
@@ -345,9 +345,9 @@ public class GestorBD {
 				mando= new Mando();
 				mando.setId(rs.getInt("ID"));
 				mando.setNombre(rs.getString("NOMBRE"));
-				mando.setEstado(rs.getObject("ESTADOPRODUCTO", EstadoProducto.class));
+				mando.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
 				mando.setPrecio(rs.getDouble("PRECIO"));
-				mando.setMarca(rs.getObject("MARCA", Marca.class));
+				mando.setMarca(Marca.valueOf(rs.getString("MARCA")));
 				
 			
 				
