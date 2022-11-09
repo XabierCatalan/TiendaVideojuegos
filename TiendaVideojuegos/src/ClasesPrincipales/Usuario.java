@@ -1,13 +1,16 @@
 package ClasesPrincipales;
 
 public class Usuario {
+	protected int id;
 	protected String nombre;
 	protected String email;
 	protected String contraseña;
 	protected String telefono;
 	
-	public Usuario(String nombre, String email, String contraseña, String telefono) {
+	
+	public Usuario(int id,String nombre, String email, String contraseña, String telefono) {
 		super();
+		this.id = id;
 		this.nombre = nombre;
 		this.email = email;
 		this.contraseña = contraseña;
@@ -16,10 +19,21 @@ public class Usuario {
 	
 	public Usuario() {
 		super();
+		this.id = 0;
 		this.nombre = "Sin nombre";
 		this.email = "Sin email";
 		this.contraseña = "Sin contraseña";
 		this.telefono = "000000000";
+	}
+	
+	
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNombre() {

@@ -15,9 +15,12 @@ public class GestorBD {
 	protected static final String DATABASE_FILE_VIDEOJUEGO = "db/databasevideojuego.db";
 	protected static final String DATABASE_FILE_CONSOLA = "db/databaseconsola.db";
 	protected static final String DATABASE_FILE_MANDO = "db/databasemando.db";
+	protected static final String DATABASE_FILE_USUARIO = "db/databaseusuario.db";
 	protected static final String CONNECTION_STRING_VIDEOJUEGO = "jdbc:sqlite:" + DATABASE_FILE_VIDEOJUEGO;
 	protected static final String CONNECTION_STRING_CONSOLA = "jdbc:sqlite:" + DATABASE_FILE_CONSOLA;
 	protected static final String CONNECTION_STRING_MANDO= "jdbc:sqlite:" + DATABASE_FILE_MANDO;
+	protected static final String CONNECTION_STRING_USUARIO= "jdbc:sqlite:" + DATABASE_FILE_USUARIO;
+
 	
 	public GestorBD() {
 		try {
@@ -83,6 +86,26 @@ public class GestorBD {
 					
 			if (!stmt.execute(sql)) {
 	        	System.out.println("- Se ha creado la tabla Mando");}
+		}catch (Exception ex) {
+			System.err.println(String.format("* Error al crear la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();
+		}
+	}
+	
+	public void CrearBBDDUSusuario() {
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
+			 Statement stmt = con.createStatement()) {
+			
+			String sql = "CREATE TABLE IF NOT EXISTS MANDO (\n"
+					+ " ID INTEGER PRIMARY KEY AUTOINCREMENT, \n"
+					+ " NOMBRE TEXT NOT NULL,\n"
+					+ "EMAIL TEXT NOT NULL,\n"
+					+ "CONTRASEÑA TEXT NOT NULL,\n"
+					+ "TELEFONO TEXT NOT NULL\n"
+					+ ");";
+					
+			if (!stmt.execute(sql)) {
+	        	System.out.println("- Se ha creado la tabla Usuario");}
 		}catch (Exception ex) {
 			System.err.println(String.format("* Error al crear la BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();

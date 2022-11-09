@@ -8,6 +8,7 @@ import org.junit.Test;
 public class UsuarioTest {
 	
 	Usuario usuario;
+	protected int id = 1;
 	protected String nombre = "nombre";
 	protected String email = "email";
 	protected String contraseña = "contraseña";
@@ -16,16 +17,30 @@ public class UsuarioTest {
 	@Before
 	public void SetUp() {
 		usuario = new Usuario();
+		usuario.setId(id);
 		usuario.setNombre(nombre);
 		usuario.setEmail(email);
 		usuario.setContraseña(contraseña);
 		usuario.setTelefono(telefono);
 		
 	}
+	
+	@Test
+	public void testGetId() {
+		assertEquals(usuario.getId(), id,0);
+	}
+
+	@Test
+	public void testSetId() {
+		Integer newId = 1;
+		assertEquals(usuario.getId(), id,0);
+		usuario.setId(newId);
+		assertEquals(usuario.getId(), newId,0);
+	}
 
 	@Test
 	public void testUsuarioStringStringStringString() {
-		Usuario newUsuario = new Usuario(nombre, email, contraseña, telefono);
+		Usuario newUsuario = new Usuario(id,nombre, email, contraseña, telefono);
 		assertNotNull(newUsuario);
 		assertEquals(newUsuario.getNombre(), nombre);
 		assertEquals(newUsuario.getEmail(), email);
