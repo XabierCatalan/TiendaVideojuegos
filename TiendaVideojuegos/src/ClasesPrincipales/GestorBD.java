@@ -96,7 +96,7 @@ public class GestorBD {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
 			 Statement stmt = con.createStatement()) {
 			
-			String sql = "CREATE TABLE IF NOT EXISTS MANDO (\n"
+			String sql = "CREATE TABLE IF NOT EXISTS USUARIO (\n"
 					+ " ID INTEGER PRIMARY KEY AUTOINCREMENT, \n"
 					+ " NOMBRE TEXT NOT NULL,\n"
 					+ "EMAIL TEXT NOT NULL,\n"
