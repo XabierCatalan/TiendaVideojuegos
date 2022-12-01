@@ -37,6 +37,7 @@ public class VentanaMain extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				ventanaCrearCuenta.setVisible(true);
+				
 			}
 		});
 		
