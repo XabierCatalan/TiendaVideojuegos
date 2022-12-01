@@ -5,7 +5,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class VentanaInicioSesion {
+import ClasesPrincipales.*;
+
+public class VentanaInicioSesion extends JFrame {
 	
 	protected JButton Atras;
 	protected JButton iniciarSesion;
@@ -17,7 +19,7 @@ public class VentanaInicioSesion {
 	
 	public VentanaInicioSesion() {
 		
-		Container cp = this.
+		Container cp = this.getContentPane();
 		
 	}
 	
