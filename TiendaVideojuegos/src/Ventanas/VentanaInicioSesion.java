@@ -66,7 +66,7 @@ public class VentanaInicioSesion extends JFrame {
 		
 		this.setTitle("Ventana Inicio Sesion");
 		this.setResizable(false);
-		this.setSize(300,300);
+		this.setSize(450,300);
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setVisible(false);
 	}
