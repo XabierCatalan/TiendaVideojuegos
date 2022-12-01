@@ -4,6 +4,7 @@ package Ventanas;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import Ventanas.*;
 
 import ClasesPrincipales.*;
 
@@ -18,7 +19,10 @@ public class VentanaInicioSesion extends JFrame {
 	protected JLabel IntroDatos;
 	
 	
+	
+	
 	public VentanaInicioSesion() {
+		
 		
 		
 		Container cp = this.getContentPane();
@@ -67,9 +71,18 @@ public class VentanaInicioSesion extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				
+				Main.vM.setVisible(true);
 				dispose();
 				
+				
+			}
+		});
+		
+		iniciarSesion.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
 				
 			}
 		});
@@ -80,8 +93,9 @@ public class VentanaInicioSesion extends JFrame {
 		this.setTitle("Ventana Inicio Sesion");
 		this.setResizable(false);
 		this.setSize(450,150);
-		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(false);
+		
 	}
 	
 

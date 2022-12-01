@@ -9,12 +9,11 @@ import ClasesPrincipales.*;
 public class VentanaMain extends JFrame{
 	protected JButton botonIniciarSesion;
 	protected JButton botonCrearCuenta;
-	protected VentanaInicioSesion ventanaInicioSesion;
-	protected VentanaCrearCuenta ventanaCrearCuenta;
+	
+	
 	
 	public VentanaMain() {
-		ventanaInicioSesion = new VentanaInicioSesion();
-		ventanaCrearCuenta = new VentanaCrearCuenta	();
+		
 		
 		
 		Container cp = this.getContentPane();
@@ -29,7 +28,7 @@ public class VentanaMain extends JFrame{
 		botonIniciarSesion.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ventanaInicioSesion.setVisible(true);
+				Main.vIS.setVisible(true);
 				VentanaMain.this.setVisible(false);
 				
 			}
@@ -38,7 +37,8 @@ public class VentanaMain extends JFrame{
 		botonCrearCuenta.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ventanaCrearCuenta.setVisible(true);
+				Main.vCC.setVisible(true);
+				VentanaMain.this.setVisible(false);
 				
 			}
 		});
@@ -54,9 +54,6 @@ public class VentanaMain extends JFrame{
 		
 	}
 	
-	public static void main(String[] args) {
-		VentanaMain v = new VentanaMain();
-		v.setVisible(true);
-	}
+	
 
 }
