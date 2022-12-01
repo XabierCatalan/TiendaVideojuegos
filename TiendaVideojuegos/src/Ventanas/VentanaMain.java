@@ -29,7 +29,7 @@ public class VentanaMain extends JFrame{
 		botonIniciarSesion.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				ventanaIniciarSesion.setVisible(true);
+				ventanaInicioSesion.setVisible(true);
 			}
 		});
 		

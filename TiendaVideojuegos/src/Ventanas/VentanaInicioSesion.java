@@ -44,6 +44,8 @@ public class VentanaInicioSesion extends JFrame {
 		JPanel JP4 = new JPanel(); //InicioSesion
 		JP4.setLayout(new FlowLayout());
 		
+		JPanel JP5 = new JPanel(); //relleno
+		JPanel JP6 = new JPanel(); // relleno
 		
 		cp.setLayout(BL1);
 		
@@ -61,6 +63,8 @@ public class VentanaInicioSesion extends JFrame {
 		add(JP4, BL1.SOUTH);
 		JP4.add(iniciarSesion);
 		
+		add(JP5, BL1.EAST);
+		add(JP5, BL1.WEST);
 		
 		
 		
