@@ -66,6 +66,7 @@ public class VentanaInicioSesion extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				
+				dispose();
 				
 			}
 		});
