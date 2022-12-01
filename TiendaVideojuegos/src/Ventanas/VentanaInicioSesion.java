@@ -25,7 +25,7 @@ public class VentanaInicioSesion extends JFrame {
 		iniciarSesion = new JButton("Iniciar Sesion");
 		Mail = new JLabel("Mail");
 		Contraseña = new JLabel("Contraseña");
-		IntroDatos = new JLabel("IntroDatos");
+		IntroDatos = new JLabel("Introduzca sus Datos");
 		mail1 = new JTextField("");
 		contraseña1 = new JTextField("");
 		
