@@ -61,6 +61,15 @@ public class VentanaInicioSesion extends JFrame {
 		JP4.add(Atras);
 		JP4.add(iniciarSesion);
 		
+		Atras.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+			}
+		});
+		
 		
 		
 		
