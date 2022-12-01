@@ -17,7 +17,9 @@ public class VentanaInicioSesion extends JFrame {
 	protected JTextField contraseña1;
 	protected JLabel IntroDatos;
 	
+	
 	public VentanaInicioSesion() {
+		
 		
 		Container cp = this.getContentPane();
 		
@@ -67,6 +69,7 @@ public class VentanaInicioSesion extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				dispose();
+				
 				
 			}
 		});
