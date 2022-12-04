@@ -82,7 +82,11 @@ public class VentanaInicioSesion extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
+				//meter metodos de la base de datos que con el mail y contraseña te coja todo del usuario
+				
+				Main.vMP.setVisible(true);
+				dispose();
 				
 			}
 		});

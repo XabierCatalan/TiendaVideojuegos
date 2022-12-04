@@ -81,7 +81,11 @@ public class VentanaCrearCuenta extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
+				//Meter metodo que cree una cuenta nueva con todo vacio excepto los datos
+				
+				Main.vMP.setVisible(true);
+				dispose();
 				
 			}
 		});
