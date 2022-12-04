@@ -59,7 +59,7 @@ public class Mando extends Producto implements Serializable,Pagable {
 
 	@Override
 	public String toString() {
-		return nombre + "(" + estado + ") ("+ marca + ")" + precio + "eur";
+		return "Nombre:" + nombre + " Estado:" + estado + " Marca:"+ marca + " Precio:" + precio + "eur";
 	}
 	
 	

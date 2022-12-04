@@ -93,7 +93,7 @@ public class TiendaGame implements Serializable{
 				v.setEstado(EstadoProducto.valueOf(tokenizer.nextToken()));
 				v.setAnyo(Integer.parseInt(tokenizer.nextToken()));
 				v.setPrecio(Double.parseDouble(tokenizer.nextToken()));
-				System.out.println(v);
+				
 				
 				Videojuegos.add(v);
 			
@@ -110,6 +110,95 @@ public class TiendaGame implements Serializable{
 		
 		return Videojuegos;
 	}
+	
+	public static List<Mando> LeerCSVmandos() {
+		List<Mando> Mandos = new ArrayList<>();
+		Mando m;
+		
+		try (BufferedReader BR = new BufferedReader(new FileReader("Data/mandos.csv"))) {
+			StringTokenizer tokenizer;
+			String linea = null;
+			int numLinea = 0;
+			
+			BR.readLine();
+			
+			int id = 0;
+			
+			
+			while ((linea = BR.readLine()) != null) {
+				m = new Mando();
+				tokenizer = new StringTokenizer(linea, ";");
+				
+				
+				m.setId(0);
+				id++;
+				m.setNombre(tokenizer.nextToken());
+				m.setEstado(EstadoProducto.valueOf(tokenizer.nextToken()));
+				m.setPrecio(Double.parseDouble(tokenizer.nextToken()));
+				m.setMarca(Marca.valueOf(tokenizer.nextToken()));
+				
+				Mandos.add(m);
+				
+			
+			}
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
+			e.printStackTrace();
+		}
+		
+		
+		return Mandos;
+	}
+	
+	public static List<Consola> LeerCSVconsolas() {
+		List<Consola> Consolas = new ArrayList<>();
+		Consola c;
+		
+		try (BufferedReader BR = new BufferedReader(new FileReader("Data/consolas.csv"))) {
+			StringTokenizer tokenizer;
+			String linea = null;
+			int numLinea = 0;
+			
+			BR.readLine();
+			
+			int id = 0;
+			
+			
+			while ((linea = BR.readLine()) != null) {
+				c = new Consola();
+				tokenizer = new StringTokenizer(linea, ";");
+				
+				
+				c.setId(0);
+				id++;
+				c.setNombre(tokenizer.nextToken());
+				c.setEstado(EstadoProducto.valueOf(tokenizer.nextToken()));
+				c.setPrecio(Double.parseDouble(tokenizer.nextToken()));
+				c.setMarca(Marca.valueOf(tokenizer.nextToken()));
+				
+				
+				Consolas.add(c);
+				
+			
+			}
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
+			e.printStackTrace();
+		}
+		
+		
+		return Consolas;
+	}
+	
+
 	
 			
 			
@@ -205,6 +294,10 @@ public class TiendaGame implements Serializable{
 		//gestorBD.borrarBBDDMando();
 		
 		System.out.println(LeerCSVvideojuego());
+		
+		System.out.println(LeerCSVmandos());
+		
+		System.out.println(LeerCSVconsolas());
 		
 		
 		
