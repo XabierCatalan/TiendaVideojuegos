@@ -8,14 +8,16 @@ import java.util.ArrayList;
 
 
 public class Carrito implements Serializable{
+	protected int id;
 	protected Date fecha;
 	protected ArrayList<Pagable> elementos;
 	protected EstadoCarrito estado;
 	protected Usuario usuario;
 
 	
-	public Carrito(Date fecha, ArrayList<Pagable> elementos, EstadoCarrito estado, Usuario usuario) {
+	public Carrito(int id, Date fecha, ArrayList<Pagable> elementos, EstadoCarrito estado, Usuario usuario) {
 		super();
+		this.setId(id);
 		this.setFecha(fecha);
 		this.setElementos(elementos);
 		this.estado = estado;
@@ -25,6 +27,7 @@ public class Carrito implements Serializable{
 	
 	public Carrito() {
 		super();
+		this.id = 0;
 		this.fecha = new Date();
 		this.elementos = new ArrayList<Pagable>();
 		this.estado = EstadoCarrito.PREPARACIÓN;
@@ -34,6 +37,14 @@ public class Carrito implements Serializable{
 
 	
 
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public Date getFecha() {
 		return fecha;

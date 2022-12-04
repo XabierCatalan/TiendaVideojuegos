@@ -13,6 +13,7 @@ public class TestCarrito {
 	protected Mando mando =new Mando(1,"mando",EstadoProducto.PRIMERA_MANO,5,Marca.PLAYSTATION);
 	
 	Carrito carrito;
+	protected int id = 0;
 	protected Date fecha = new Date();
 	protected ArrayList<Pagable> elementos = new ArrayList<Pagable>();
 	protected EstadoCarrito estado = EstadoCarrito.LISTO;
@@ -23,6 +24,7 @@ public class TestCarrito {
 	@Before
 	public void SetUp() {
 		carrito = new Carrito();
+		carrito.setId(id);
 		carrito.setFecha(fecha);
 		carrito.setElementos(elementos);
 		carrito.setEstadoCarrito(estado);
@@ -33,8 +35,9 @@ public class TestCarrito {
 
 	@Test
 	public void testCarritoStringDateEstadoCarrito() {
-		Carrito newCarrito = new Carrito(fecha, elementos, estado, usuario);
+		Carrito newCarrito = new Carrito(id,fecha, elementos, estado, usuario);
 		assertNotNull(newCarrito);
+		assertEquals(newCarrito.getId(), id);
 		assertEquals(newCarrito.getUsuario(), usuario);
 		assertEquals(newCarrito.getElementos(), elementos);
 		assertEquals(newCarrito.getFecha(), fecha);
@@ -45,13 +48,29 @@ public class TestCarrito {
 	public void testCarrito() {
 		Carrito newCarrito2 = new Carrito();
 		assertNotNull(newCarrito2);
-		
+		assertEquals(newCarrito2.getId(), 0);
 		assertEquals(newCarrito2.getFecha(), new Date());
 		assertEquals(newCarrito2.getElementos(), new ArrayList<Pagable>());
 		assertEquals(newCarrito2.getEstadoCarrito(), EstadoCarrito.PREPARACIÓN);
 		//assertEquals(newCarrito2.getUsuario(), new Usuario());
 		
 	}
+	
+	@Test
+	public void testGetId() {
+		assertEquals(carrito.getId(), id);
+	}
+	
+	@Test
+	public void testSetId() {
+		assertEquals(carrito.getId(), id);
+		int newId = 3;
+		assertEquals(carrito.getId(), id);
+		carrito.setId(newId);
+		assertEquals(carrito.getId(), newId);
+	}
+	
+	
 
 	@Test
 	public void testGetUsuario() {
