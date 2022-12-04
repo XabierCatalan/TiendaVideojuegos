@@ -56,10 +56,84 @@ public class VentanaMenuPrincipal extends JFrame{
 		JP2.add(gestReparaciones);
 		JP2.add(calcPrecioVentas);
 		
-		
-
 		cp.add(JP1 , BorderLayout.NORTH);
 		cp.add(JP2 , BorderLayout.CENTER);
+		
+		atras.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Main.vM.setVisible(true);
+				dispose();
+				
+			}
+		});
+		
+		
+		carrito.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				dispose();
+			}
+		});
+		
+		
+		
+		comVideojuego.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				
+				dispose();
+			}
+		});
+		
+		
+		
+		comConsola.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				
+				dispose();
+			}
+		});
+		
+		
+		
+		gestReparaciones.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				
+				dispose();
+			}
+		});
+		
+		
+		
+		calcPrecioVentas.addActionListener( new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				
+				dispose();
+			}
+		});
+		
+		
+		
+		
 		
 		this.setSize(250,250);
 		this.setResizable(false);
