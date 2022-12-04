@@ -115,8 +115,7 @@ public class UsuarioTest {
 
 	@Test
 	public void testToString() {
-		String toString = "Usuario:" + nombre + ", email:" + email + ", contrasenya:" + contrasenya + ", telefono:"
-				+ telefono ;
+		String toString = nombre + ";" + email + ";" + contrasenya + ";" + telefono ;
 		System.out.println(toString);
 		System.out.println(usuario.toString());
 		assertEquals(usuario.toString(), toString);
