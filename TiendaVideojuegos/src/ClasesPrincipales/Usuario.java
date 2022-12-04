@@ -22,7 +22,7 @@ public class Usuario {
 		this.id = 0;
 		this.nombre = "Sin nombre";
 		this.email = "Sin email";
-		this.contraseña = "Sin contraseña";
+		this.contraseña = "Sin contrasenya";
 		this.telefono = "000000000";
 	}
 	
