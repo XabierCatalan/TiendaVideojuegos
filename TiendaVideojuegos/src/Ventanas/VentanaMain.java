@@ -6,6 +6,8 @@ import javax.swing.*;
 
 import ClasesPrincipales.*;
 
+
+
 public class VentanaMain extends JFrame{
 	protected JButton botonIniciarSesion;
 	protected JButton botonCrearCuenta;
@@ -13,6 +15,7 @@ public class VentanaMain extends JFrame{
 	
 	
 	public VentanaMain() {
+		
 		
 		
 		
