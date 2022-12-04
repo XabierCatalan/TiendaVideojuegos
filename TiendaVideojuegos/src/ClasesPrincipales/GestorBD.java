@@ -17,10 +17,12 @@ public class GestorBD {
 	protected static final String DATABASE_FILE_CONSOLA = "db/databaseconsola.db";
 	protected static final String DATABASE_FILE_MANDO = "db/databasemando.db";
 	protected static final String DATABASE_FILE_USUARIO = "db/databaseusuario.db";
+	protected static final String DATABASE_FILE_CARRITO = "db/databasecarrito.db";
 	protected static final String CONNECTION_STRING_VIDEOJUEGO = "jdbc:sqlite:" + DATABASE_FILE_VIDEOJUEGO;
 	protected static final String CONNECTION_STRING_CONSOLA = "jdbc:sqlite:" + DATABASE_FILE_CONSOLA;
 	protected static final String CONNECTION_STRING_MANDO= "jdbc:sqlite:" + DATABASE_FILE_MANDO;
 	protected static final String CONNECTION_STRING_USUARIO= "jdbc:sqlite:" + DATABASE_FILE_USUARIO;
+	protected static final String CONNECTION_STRING_CARRITO = "jdbc:sqlite:" + DATABASE_FILE_CARRITO;
 
 	
 	public GestorBD() {
@@ -93,7 +95,7 @@ public class GestorBD {
 		}
 	}
 	
-	public void CrearBBDDUSusuario() {
+	public void CrearBBDDUsuario() {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
 			 Statement stmt = con.createStatement()) {
 			
@@ -107,6 +109,26 @@ public class GestorBD {
 					
 			if (!stmt.execute(sql)) {
 	        	System.out.println("- Se ha creado la tabla Usuario");}
+		}catch (Exception ex) {
+			System.err.println(String.format("* Error al crear la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();
+		}
+	}
+	
+	public void CrearBBDDCarrito() {
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
+			 Statement stmt = con.createStatement()) {
+			
+			String sql = "CREATE TABLE IF NOT EXISTS CARRITO (\n"
+					+ " ID INTEGER PRIMARY KEY AUTOINCREMENT, \n"
+					+ " FECHA DATE NOT NULL,\n"
+					+ " ELEMENTOS ARRAYLIST<PAGABLE> NOT NULL, \n"
+					+ " ESTADOCARRITO ENUM NOT NULL,\n"
+					+ " USUARIO USUARIO NOT NULL\n"
+					+ ");";
+					
+			if (!stmt.execute(sql)) {
+	        	System.out.println("- Se ha creado la tabla Carrito");}
 		}catch (Exception ex) {
 			System.err.println(String.format("* Error al crear la BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();
@@ -191,6 +213,32 @@ public class GestorBD {
 		}
 	}
 	
+	public void borrarBBDDCarrito() {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
+		     Statement stmt = con.createStatement()) {
+			
+	        String sql = "DROP TABLE IF EXISTS CARRITO";
+			
+	        //Se ejecuta la sentencia de creación de la tabla Estudiantes
+	        if (!stmt.execute(sql)) {
+	        	System.out.println("- Se ha borrado la tabla Carrito");
+	        }
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();			
+		}
+		
+		try {
+			//Se borra el fichero de la BBDD
+			Files.delete(Paths.get(DATABASE_FILE_CARRITO));
+			System.out.println("- Se ha borrado el fichero de la BBDD");
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar el archivo de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}
+	}
+	
 	
 	public void insertarDatosVideojuego(List<Videojuego> videojuegos) {
 		//Se abre la conexión y se obtiene el Statement
@@ -253,6 +301,29 @@ public class GestorBD {
 					System.out.println(String.format(" - mando insertado: %s", c.toString()));
 				} else {
 					System.out.println(String.format(" - No se ha insertado el mando: %s", c.toString()));
+				}
+			}			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}				
+	}
+	
+	public void insertarDatosCarrito(List<Carrito> carritos) {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
+		     Statement stmt = con.createStatement()) {
+			//Se define la plantilla de la sentencia SQL
+			String sql = "INSERT INTO CARRITO ( FECHA, ELEMENTOS, ESTADOCARRITO, USUARIO) VALUES ( '%s', '%s', '%s', '%s');";
+			
+			System.out.println("- Insertando carritos...");
+			
+			//Se recorren los clientes y se insertan uno a uno
+			for (Carrito c : carritos) {
+				if (1 == stmt.executeUpdate(String.format(sql, c.getFecha(), c.getElementos(), c.getEstadoCarrito(), c.getUsuario()))) {					
+					System.out.println(String.format(" - Carrito insertado: %s", c.toString()));
+				} else {
+					System.out.println(String.format(" - No se ha insertado el carrito: %s", c.toString()));
 				}
 			}			
 		} catch (Exception ex) {
@@ -389,6 +460,48 @@ public class GestorBD {
 		}		
 		
 		return mandos;
+	}
+	
+	public ArrayList<Carrito> obtenerDatosCarritos() {
+		ArrayList<Carrito> carritos = new ArrayList<>();
+		
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
+		     Statement stmt = con.createStatement()) {
+			String sql = "SELECT * FROM CARRITO WHERE ID >= 0";
+	//		System.out.println(sql);
+			
+			//Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
+			ResultSet rs = stmt.executeQuery(sql);		
+			
+			
+			Carrito carrito;
+			
+			//Se recorre el ResultSet y se crean objetos Cliente
+			while (rs.next()) {
+				carrito= new Carrito();
+				carrito.setId(rs.getInt("ID"));
+				carrito.setFecha(rs.getDate("FECHA"));
+				carrito.setEstadoCarrito(EstadoCarrito.valueOf(rs.getString("ESTADOCARRITO")));
+				carrito.setUsuario(rs.getString("USUARIO"));
+			
+				
+			
+				
+				//Se inserta cada nuevo cliente en la lista de clientes
+				carritos.add(carrito);
+			}
+			
+			//Se cierra el ResultSet
+			rs.close();
+			
+			System.out.println(String.format("- Se han recuperado %d carritos...", carritos.size()));			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}		
+		
+		return carritos;
 	}
 	
 	public void borrarDatosVideojuego() {
