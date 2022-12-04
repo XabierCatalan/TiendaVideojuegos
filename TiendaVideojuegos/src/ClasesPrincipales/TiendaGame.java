@@ -203,6 +203,7 @@ public class TiendaGame implements Serializable{
 		GestorBD gestorBD = new GestorBD();
 		
 		
+		
 		gestorBD.CrearBBDDVideojuego();
 		gestorBD.CrearBBDDConsola();
 		gestorBD.CrearBBDDMando();
