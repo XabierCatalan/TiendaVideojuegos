@@ -11,7 +11,7 @@ public class UsuarioTest {
 	protected int id = 1;
 	protected String nombre = "nombre";
 	protected String email = "email";
-	protected String contraseña = "contraseña";
+	protected String contrasenya = "contrasenya";
 	protected String telefono = "111111111";
 	
 	@Before
@@ -20,7 +20,7 @@ public class UsuarioTest {
 		usuario.setId(id);
 		usuario.setNombre(nombre);
 		usuario.setEmail(email);
-		usuario.setContraseña(contraseña);
+		usuario.setContrasenya(contrasenya);
 		usuario.setTelefono(telefono);
 		
 	}
@@ -40,11 +40,11 @@ public class UsuarioTest {
 
 	@Test
 	public void testUsuarioStringStringStringString() {
-		Usuario newUsuario = new Usuario(id,nombre, email, contraseña, telefono);
+		Usuario newUsuario = new Usuario(id,nombre, email, contrasenya, telefono);
 		assertNotNull(newUsuario);
 		assertEquals(newUsuario.getNombre(), nombre);
 		assertEquals(newUsuario.getEmail(), email);
-		assertEquals(newUsuario.getContraseña(), contraseña);
+		assertEquals(newUsuario.getContrasenya(), contrasenya);
 		assertEquals(newUsuario.getTelefono(), telefono);
 	}
 
@@ -52,10 +52,10 @@ public class UsuarioTest {
 	public void testUsuario() {
 		Usuario newUsuario = new Usuario();
 		assertNotNull(newUsuario);
-		assertEquals(newUsuario.getNombre(), "Sin nombre");
-		assertEquals(newUsuario.getEmail(), "Sin email");
-		assertEquals(newUsuario.getContraseña(), "Sin contraseña");
-		assertEquals(newUsuario.getTelefono(), "000000000");
+		assertEquals(newUsuario.getNombre(), "");
+		assertEquals(newUsuario.getEmail(), "");
+		assertEquals(newUsuario.getContrasenya(), "");
+		assertEquals(newUsuario.getTelefono(), "");
 
 
 	}
@@ -88,16 +88,16 @@ public class UsuarioTest {
 	}
 
 	@Test
-	public void testGetContraseña() {
-		assertEquals(usuario.getContraseña(), contraseña);
+	public void testGetContrasenya() {
+		assertEquals(usuario.getContrasenya(), contrasenya);
 	}
 
 	@Test
-	public void testSetContraseña() {
-		String newContraseña = "contraseña2";
-		assertEquals(usuario.getContraseña(), contraseña);
-		usuario.setContraseña(newContraseña);
-		assertEquals(usuario.getContraseña(), newContraseña);
+	public void testSetContrasenya() {
+		String newContrasenya = "contrasenya2";
+		assertEquals(usuario.getContrasenya(), contrasenya);
+		usuario.setContrasenya(newContrasenya);
+		assertEquals(usuario.getContrasenya(), newContrasenya);
 	}
 
 	@Test
@@ -115,7 +115,7 @@ public class UsuarioTest {
 
 	@Test
 	public void testToString() {
-		String toString = "Usuario:" + nombre + ", email:" + email + ", contraseña:" + contraseña + ", telefono:"
+		String toString = "Usuario:" + nombre + ", email:" + email + ", contrasenya:" + contrasenya + ", telefono:"
 				+ telefono ;
 		System.out.println(toString);
 		System.out.println(usuario.toString());
