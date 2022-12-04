@@ -19,7 +19,7 @@ public class Carrito implements Serializable{
 		this.setFecha(fecha);
 		this.setElementos(elementos);
 		this.estado = estado;
-		this.usuario = usuario;
+		this.setUsuario(usuario);
 
 	}
 	

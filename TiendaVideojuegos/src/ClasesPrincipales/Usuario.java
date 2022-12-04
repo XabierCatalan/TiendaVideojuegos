@@ -4,26 +4,26 @@ public class Usuario {
 	protected int id;
 	protected String nombre;
 	protected String email;
-	protected String contraseña;
+	protected String contrasenya;
 	protected String telefono;
 	
 	
-	public Usuario(int id,String nombre, String email, String contraseña, String telefono) {
+	public Usuario(int id,String nombre, String email, String contrasenya, String telefono) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.email = email;
-		this.contraseña = contraseña;
+		this.contrasenya = contrasenya;
 		this.telefono = telefono;
 	}
 	
 	public Usuario() {
 		super();
 		this.id = 0;
-		this.nombre = "Sin nombre";
-		this.email = "Sin email";
-		this.contraseña = "Sin contrasenya";
-		this.telefono = "000000000";
+		this.nombre = "";
+		this.email = "";
+		this.contrasenya = "";
+		this.telefono = "";
 	}
 	
 	
@@ -52,12 +52,12 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getContrasenya() {
+		return contrasenya;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setContrasenya(String contraseña) {
+		this.contrasenya = contraseña;
 	}
 
 	public String getTelefono() {
@@ -70,8 +70,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario:" + nombre + ", email:" + email + ", contraseña:" + contraseña + ", telefono:"
-				+ telefono ;
+		return "Usuario:" + nombre + ", email:" + email + ", contrasenya:" + contrasenya + ", telefono:" + telefono ;
 	}
 	
 	
