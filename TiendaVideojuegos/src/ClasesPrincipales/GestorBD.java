@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 
 public class GestorBD {
@@ -474,7 +475,8 @@ public class GestorBD {
 			//Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
 			ResultSet rs = stmt.executeQuery(sql);		
 			
-			
+			Usuario usuario;
+			StringTokenizer tokenizer;
 			Carrito carrito;
 			
 			//Se recorre el ResultSet y se crean objetos Cliente
@@ -483,7 +485,15 @@ public class GestorBD {
 				carrito.setId(rs.getInt("ID"));
 				carrito.setFecha(rs.getDate("FECHA"));
 				carrito.setEstadoCarrito(EstadoCarrito.valueOf(rs.getString("ESTADOCARRITO")));
-				carrito.setUsuario(rs.getString("USUARIO"));
+				String u = rs.getString("USUARIO");
+				tokenizer = new StringTokenizer(u,";");
+				usuario= new Usuario();
+				usuario.setId(Integer.parseInt(tokenizer.nextToken()));
+				usuario.setNombre(tokenizer.nextToken());
+				usuario.setEmail(tokenizer.nextToken());
+				usuario.setContrasenya(tokenizer.nextToken());
+				usuario.setTelefono(tokenizer.nextToken());
+				carrito.setUsuario(usuario);
 			
 				
 			
@@ -607,6 +617,22 @@ public class GestorBD {
 			ex.printStackTrace();						
 		}		
 	}
+	
+	
+	public void borrarDatosCarrito() {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
+		     Statement stmt = con.createStatement()) {
+			//Se ejecuta la sentencia de borrado de datos
+			String sql = "DELETE FROM CARRITO;";			
+			int result = stmt.executeUpdate(sql);
+			
+			System.out.println(String.format("- Se han borrado %d carrito", result));
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}		
+	}	
 	
 	
 	
