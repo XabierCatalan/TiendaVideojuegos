@@ -13,29 +13,29 @@ public class TestCarrito {
 	protected Mando mando =new Mando(1,"mando",EstadoProducto.PRIMERA_MANO,5,Marca.PLAYSTATION);
 	
 	Carrito carrito;
-	protected String cliente = "0000 0000 0000 0001";
 	protected Date fecha = new Date();
 	protected ArrayList<Pagable> elementos = new ArrayList<Pagable>();
 	protected EstadoCarrito estado = EstadoCarrito.LISTO;
+	protected Usuario usuario = new Usuario(1,"xabi","xabier.catalan@opendeusto.es","1234","111111111");
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
 	
 	@Before
 	public void SetUp() {
 		carrito = new Carrito();
-		carrito.setCliente(cliente);
 		carrito.setFecha(fecha);
 		carrito.setElementos(elementos);
 		carrito.setEstadoCarrito(estado);
+		carrito.setUsuario(usuario);
 		
 	}
 	
 
 	@Test
 	public void testCarritoStringDateEstadoCarrito() {
-		Carrito newCarrito = new Carrito(cliente, fecha, elementos, estado);
+		Carrito newCarrito = new Carrito(fecha, elementos, estado, usuario);
 		assertNotNull(newCarrito);
-		assertEquals(newCarrito.getCliente(), cliente);
+		assertEquals(newCarrito.getUsuario(), usuario);
 		assertEquals(newCarrito.getElementos(), elementos);
 		assertEquals(newCarrito.getFecha(), fecha);
 		assertEquals(newCarrito.getEstadoCarrito(), estado);
@@ -45,7 +45,7 @@ public class TestCarrito {
 	public void testCarrito() {
 		Carrito newCarrito2 = new Carrito();
 		assertNotNull(newCarrito2);
-		assertEquals(newCarrito2.getCliente(), "0000 0000 0000 0000");
+		assertEquals(newCarrito2.getUsuario(), new Usuario());
 		assertEquals(newCarrito2.getElementos(), new ArrayList<Pagable>());
 		assertEquals(newCarrito2.getFecha(), new Date());
 		assertEquals(newCarrito2.getEstadoCarrito(), EstadoCarrito.PREPARACIÓN);
@@ -53,16 +53,16 @@ public class TestCarrito {
 	}
 
 	@Test
-	public void testGetCliente() {
-		assertEquals(carrito.getCliente(), cliente);
+	public void testGetUsuario() {
+		assertEquals(carrito.getUsuario(), usuario);
 	}
 
 	@Test
-	public void testSetCliente() {
-		String newCliente = "0000 0000 0000 0003";
-		assertEquals(carrito.getCliente(), cliente);
-		carrito.setCliente(newCliente);
-		assertEquals(carrito.getCliente(), newCliente);
+	public void testSetUsuario() {
+		Usuario newUsuario = new Usuario(2,"oscar","o.perez@opendeusto.es","4321","666666666");
+		assertEquals(carrito.getUsuario(), usuario);
+		carrito.setUsuario(newUsuario);
+		assertEquals(carrito.getUsuario(), newUsuario);
 	}
 
 	@Test
@@ -115,7 +115,7 @@ public class TestCarrito {
 		elementos.add(mando);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
-		String toString = "Pedido de " + cliente + ", " + sdf.format(fecha) + ", " + carrito.getPrecio() + " euros (" + estado + ")";
+		String toString = "Pedido de " + usuario.getNombre() + ", " + sdf.format(fecha) + ", " + carrito.getPrecio() + " euros (" + estado + ")";
 		System.out.println(toString);
 		System.out.println(carrito.toString());
 		assertEquals(carrito.toString(), toString);
