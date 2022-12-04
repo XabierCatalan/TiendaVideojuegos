@@ -252,71 +252,7 @@ public class TiendaGame implements Serializable{
 		}	
 	}
 	
-	public static List<Videojuego> initVideojuego() {
-		List<Videojuego> videojuegos = new ArrayList<>();
-		
-		Videojuego videojuego = new Videojuego();
-		videojuego.setNombre("GTAV");
-		videojuego.setAnyo(2003);
-		videojuego.setEstado(EstadoProducto.PRIMERA_MANO);
-		videojuego.setPrecio(65);
-		videojuegos.add(videojuego);
-		
-		videojuego = new Videojuego();
-		videojuego.setNombre("Pokemon");
-		videojuego.setAnyo(2007);
-		videojuego.setEstado(EstadoProducto.SEGUNDA_MANO);
-		videojuego.setPrecio(45);
-		videojuegos.add(videojuego);
-		
-		return videojuegos;
-		
-	}
 	
-	public static List<Consola> initConsola() {
-		List<Consola> consolas = new ArrayList<>();
-		
-		Consola consola = new Consola();
-		consola.setNombre("PS5");
-		consola.setMarca(Marca.PLAYSTATION);
-		consola.setEstado(EstadoProducto.PRIMERA_MANO);
-		consola.setPrecio(400);
-		consolas.add(consola);
-	
-		
-		consola = new Consola();
-		consola.setNombre("XBOX ONE");
-		consola.setMarca(Marca.XBOX);
-		consola.setEstado(EstadoProducto.SEGUNDA_MANO);
-		consola.setPrecio(200);
-		consolas.add(consola);
-		
-		return consolas;
-		
-	}
-	
-	public static List<Mando> initMando() {
-		List<Mando> mandos = new ArrayList<>();
-		
-		Mando mando = new Mando();
-		mando.setNombre("DualShock");
-		mando.setMarca(Marca.PLAYSTATION);
-		mando.setEstado(EstadoProducto.PRIMERA_MANO);
-		mando.setPrecio(35);
-		mandos.add(mando);
-		
-		mando = new Mando();
-		mando.setNombre("NintendoPad");
-		mando.setMarca(Marca.NINTENDO);
-		mando.setEstado(EstadoProducto.SEGUNDA_MANO);
-		mando.setPrecio(20);
-		mandos.add(mando);
-		
-		return mandos;
-		
-	
-	
-	}
 	
 	
 	
