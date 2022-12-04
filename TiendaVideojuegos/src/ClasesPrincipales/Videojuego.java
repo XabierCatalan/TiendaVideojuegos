@@ -21,7 +21,7 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 	
 	public Videojuego() {
 		super();
-		this.genero = genero.ACCIÓN;
+		this.genero = genero.ACCION;
 		this.estado = estado.PRIMERA_MANO;
 		this.setAnyo(0);
 		this.setPrecio(0);
@@ -74,7 +74,7 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 	
 	@Override
 	public String toString() {
-		return nombre + "(" + anyo +") (" + genero + ") (" + estado + ")" + precio + "eur";
+		return "Nombre:" + nombre + " Año:" + anyo +" Genero:" + genero + " Estado:" + estado + " Precio:" + precio + "eur";
 	}
 
 	
