@@ -200,40 +200,27 @@ public class TiendaGame implements Serializable{
 	
 	
 	public static void main(String[] args) {
-		//GestorBD gestorBD = new GestorBD();
+		GestorBD gestorBD = new GestorBD();
 		
-		//gestorBD.CrearBBDDVideojuego();
-		//gestorBD.CrearBBDDConsola();
-		//gestorBD.CrearBBDDMando();
 		
-		//List<Videojuego> videojuegos = initVideojuego();
-		//gestorBD.insertarDatosVideojuego(videojuegos.toArray(new Videojuego[videojuegos.size()]));
+		gestorBD.CrearBBDDVideojuego();
+		gestorBD.CrearBBDDConsola();
+		gestorBD.CrearBBDDMando();
 		
-		//List<Consola> consolas = initConsola();
-		//gestorBD.insertarDatosConsola(consolas.toArray(new Consola[consolas.size()]));
 		
-		//List<Mando> mandos = initMando();
-		//gestorBD.insertarDatosMando(mandos.toArray(new Mando[mandos.size()]));
+		gestorBD.insertarDatosVideojuego(LeerCSVvideojuego());
+		gestorBD.obtenerDatosVideojuegos();
 		
-		//videojuegos = gestorBD.obtenerDatosVideojuegos();
-		//printVideojuegos(videojuegos);
+		gestorBD.insertarDatosConsola(LeerCSVconsolas());
+		gestorBD.obtenerDatosConsolas();
 		
-		//consolas = gestorBD.obtenerDatosConsolas();
-		//printConsola(consolas);
+		gestorBD.insertarDatosMando(LeerCSVmandos());
+		gestorBD.obtenerDatosMandos();
 		
-		//mandos = gestorBD.obtenerDatosMandos();
-		//printMando(mandos);
 		
-		//gestorBD.borrarBBDDVideojuego();
-		//gestorBD.borrarBBDDConsola();
-		//gestorBD.borrarBBDDMando();
-		
-		System.out.println(LeerCSVvideojuego());
-		
-		System.out.println(LeerCSVmandos());
-		
-		System.out.println(LeerCSVconsolas());
-		
+		gestorBD.borrarBBDDVideojuego();
+		gestorBD.borrarBBDDConsola();
+		gestorBD.borrarBBDDMando();
 		
 		
 	}

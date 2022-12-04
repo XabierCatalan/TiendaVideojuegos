@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class GestorBD {
@@ -191,7 +192,7 @@ public class GestorBD {
 	}
 	
 	
-	public void insertarDatosVideojuego(Videojuego... videojuegos) {
+	public void insertarDatosVideojuego(List<Videojuego> videojuegos) {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_VIDEOJUEGO);
 		     Statement stmt = con.createStatement()) {
@@ -214,7 +215,7 @@ public class GestorBD {
 		}				
 	}
 	
-	public void insertarDatosConsola(Consola... consolas) {
+	public void insertarDatosConsola(List<Consola> consolas) {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CONSOLA);
 		     Statement stmt = con.createStatement()) {
@@ -237,7 +238,7 @@ public class GestorBD {
 		}				
 	}
 	
-	public void insertarDatosMando(Mando... mandos) {
+	public void insertarDatosMando(List<Mando> mandos) {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_MANDO);
 		     Statement stmt = con.createStatement()) {
