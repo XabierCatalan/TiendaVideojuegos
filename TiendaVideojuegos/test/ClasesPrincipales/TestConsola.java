@@ -25,7 +25,7 @@ public class TestConsola {
 	
 	@Test
 	public void testToString() {
-		String toString = nombre +"(" + marca + ", " + precio + ", " + estado + ")";
+		String toString = "Nombre:" + nombre +" Estado:" + estado + " Marca:" + marca + " Precio:" + precio + "eur" ;
 		System.out.println(toString);
 		System.out.println(consola.toString());
 		assertEquals(consola.toString(), toString);
