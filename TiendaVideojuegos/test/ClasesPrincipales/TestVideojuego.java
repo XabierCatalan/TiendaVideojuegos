@@ -10,7 +10,7 @@ public class TestVideojuego {
 	Videojuego videojuego;
 	protected int id = 0;
 	protected String nombre = "nombre";
-	protected Genero genero = Genero.ACCIÓN;
+	protected Genero genero = Genero.ACCION;
 	protected EstadoProducto estado = EstadoProducto.PRIMERA_MANO;
 	protected int anyo = 0;
 	protected double precio = 0;
@@ -52,7 +52,7 @@ public class TestVideojuego {
 		assertNotNull(newVideojuego2);
 		assertEquals(newVideojuego2.getNombre(), "Sin nombre");
 		assertEquals(newVideojuego2.getId(), 0,0);
-		assertEquals(newVideojuego2.getGenero(), genero.ACCIÓN);
+		assertEquals(newVideojuego2.getGenero(), genero.ACCION);
 		assertEquals(newVideojuego2.getEstado(), estado.PRIMERA_MANO);
 		assertEquals(newVideojuego2.getAnyo(), 0,0);
 		assertEquals(newVideojuego2.getPrecio(), 0,0);

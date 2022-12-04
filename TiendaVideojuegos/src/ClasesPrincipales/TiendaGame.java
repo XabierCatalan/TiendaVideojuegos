@@ -1,10 +1,14 @@
 package ClasesPrincipales;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 public class TiendaGame implements Serializable{
 	
@@ -63,6 +67,54 @@ public class TiendaGame implements Serializable{
 	
 	// GUARDAR DATOS Y CARGAR DATOS
 	
+	public static List<Videojuego> LeerCSVvideojuego() {
+		List<Videojuego> Videojuegos = new ArrayList<>();
+		Videojuego v;
+		
+		try (BufferedReader BR = new BufferedReader(new FileReader("Data/Videojuegos.csv"))) {
+			StringTokenizer tokenizer;
+			String linea = null;
+			int numLinea = 0;
+			
+			BR.readLine();
+			
+			int id = 0;
+			
+			
+			while ((linea = BR.readLine()) != null) {
+				v = new Videojuego();
+				tokenizer = new StringTokenizer(linea, ";");
+				
+				
+				v.setId(0);
+				id++;
+				v.setNombre(tokenizer.nextToken());
+				v.setGenero(Genero.valueOf(tokenizer.nextToken()));
+				v.setEstado(EstadoProducto.valueOf(tokenizer.nextToken()));
+				v.setAnyo(Integer.parseInt(tokenizer.nextToken()));
+				v.setPrecio(Double.parseDouble(tokenizer.nextToken()));
+				System.out.println(v);
+				
+				Videojuegos.add(v);
+			
+			}
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
+			e.printStackTrace();
+		}
+		
+		
+		return Videojuegos;
+	}
+	
+			
+			
+				
+			
 	public void guardarDatosVideojuegoCSV() {
 
 		try {
@@ -119,34 +171,40 @@ public class TiendaGame implements Serializable{
 		}
 	}
 	
+			
+		
+	
+	
 	public static void main(String[] args) {
-		GestorBD gestorBD = new GestorBD();
+		//GestorBD gestorBD = new GestorBD();
 		
-		gestorBD.CrearBBDDVideojuego();
-		gestorBD.CrearBBDDConsola();
-		gestorBD.CrearBBDDMando();
+		//gestorBD.CrearBBDDVideojuego();
+		//gestorBD.CrearBBDDConsola();
+		//gestorBD.CrearBBDDMando();
 		
-		List<Videojuego> videojuegos = initVideojuego();
-		gestorBD.insertarDatosVideojuego(videojuegos.toArray(new Videojuego[videojuegos.size()]));
+		//List<Videojuego> videojuegos = initVideojuego();
+		//gestorBD.insertarDatosVideojuego(videojuegos.toArray(new Videojuego[videojuegos.size()]));
 		
-		List<Consola> consolas = initConsola();
-		gestorBD.insertarDatosConsola(consolas.toArray(new Consola[consolas.size()]));
+		//List<Consola> consolas = initConsola();
+		//gestorBD.insertarDatosConsola(consolas.toArray(new Consola[consolas.size()]));
 		
-		List<Mando> mandos = initMando();
-		gestorBD.insertarDatosMando(mandos.toArray(new Mando[mandos.size()]));
+		//List<Mando> mandos = initMando();
+		//gestorBD.insertarDatosMando(mandos.toArray(new Mando[mandos.size()]));
 		
-		videojuegos = gestorBD.obtenerDatosVideojuegos();
-		printVideojuegos(videojuegos);
+		//videojuegos = gestorBD.obtenerDatosVideojuegos();
+		//printVideojuegos(videojuegos);
 		
-		consolas = gestorBD.obtenerDatosConsolas();
-		printConsola(consolas);
+		//consolas = gestorBD.obtenerDatosConsolas();
+		//printConsola(consolas);
 		
-		mandos = gestorBD.obtenerDatosMandos();
-		printMando(mandos);
+		//mandos = gestorBD.obtenerDatosMandos();
+		//printMando(mandos);
 		
-		gestorBD.borrarBBDDVideojuego();
-		gestorBD.borrarBBDDConsola();
-		gestorBD.borrarBBDDMando();
+		//gestorBD.borrarBBDDVideojuego();
+		//gestorBD.borrarBBDDConsola();
+		//gestorBD.borrarBBDDMando();
+		
+		System.out.println(LeerCSVvideojuego());
 		
 		
 		
