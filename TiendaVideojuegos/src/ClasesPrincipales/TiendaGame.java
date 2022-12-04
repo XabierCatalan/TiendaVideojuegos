@@ -219,6 +219,7 @@ public class TiendaGame implements Serializable{
 		gestorBD.obtenerDatosMandos();
 		
 		
+		
 		gestorBD.borrarBBDDVideojuego();
 		gestorBD.borrarBBDDConsola();
 		gestorBD.borrarBBDDMando();
