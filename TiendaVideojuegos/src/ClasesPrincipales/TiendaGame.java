@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -255,6 +256,7 @@ public class TiendaGame implements Serializable{
 			BR.readLine();
 			
 			int id = 0;
+			String fecha;
 			
 			
 			while ((linea = BR.readLine()) != null) {
@@ -264,10 +266,12 @@ public class TiendaGame implements Serializable{
 				
 				c.setId(0);
 				id++;
-				c.setFecha(tokenizer.nextToken());
-				c.setElementos(tokenizer.nextToken());
-				c.setContrasenya(tokenizer.nextToken());
-				c.setTelefono(tokenizer.nextToken());
+				fecha = tokenizer.nextToken();
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				//c.setFecha(sdf.format(fecha));
+				//c.setElementos(tokenizer.nextToken());
+				//c.setContrasenya(tokenizer.nextToken());
+				//c.setTelefono(tokenizer.nextToken());
 				
 				
 				Carritos.add(c);
