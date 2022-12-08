@@ -15,7 +15,7 @@ public class VentanaCrearCuenta extends JFrame {
 	protected JLabel telf;
 	protected JLabel nomb;
 	protected JTextField mail1;
-	protected JTextField contraseña1;
+	protected JPasswordField contraseña1;
 	protected JTextField telf1;
 	protected JTextField nomb1;
 	protected JLabel NC;
@@ -34,7 +34,7 @@ public class VentanaCrearCuenta extends JFrame {
 		NC = new JLabel("NUEVA CUENTA");
 		
 		mail1 = new JTextField("");
-		contraseña1 = new JTextField("");
+		contraseña1 = new JPasswordField("");
 		telf1 = new JTextField("");
 		nomb1 = new JTextField("");
 		

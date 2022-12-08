@@ -15,7 +15,7 @@ public class VentanaInicioSesion extends JFrame {
 	protected JLabel Mail;
 	protected JLabel Contraseña;
 	protected JTextField mail1;
-	protected JTextField contraseña1;
+	protected JPasswordField contraseña1;
 	protected JLabel IntroDatos;
 	
 	
@@ -33,7 +33,7 @@ public class VentanaInicioSesion extends JFrame {
 		Contraseña = new JLabel("Contraseña");
 		IntroDatos = new JLabel("Introduzca sus Datos");
 		mail1 = new JTextField("");
-		contraseña1 = new JTextField("");
+		contraseña1 = new JPasswordField("");
 		
 		
 		BorderLayout BL1 = new BorderLayout();
