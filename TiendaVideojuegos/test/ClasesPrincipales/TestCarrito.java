@@ -11,6 +11,7 @@ import org.junit.Test;
 
 public class TestCarrito {
 	protected Mando mando =new Mando(1,"mando",EstadoProducto.PRIMERA_MANO,5,Marca.PLAYSTATION);
+	protected Consola consola = new Consola(2,"Play",500.00,EstadoProducto.PRIMERA_MANO,Marca.PLAYSTATION);
 	
 	Carrito carrito;
 	protected int id = 0;
@@ -133,9 +134,10 @@ public class TestCarrito {
 	@Test
 	public void testToString() {
 		elementos.add(mando);
+		elementos.add(consola);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
-		String toString = "Pedido de " + usuario.getNombre() + ", " + sdf.format(fecha) + ", " + carrito.getPrecio() + " euros (" + estado + ")";
+		String toString = "Pedido de " + usuario.getNombre() + ", " + sdf.format(fecha) + ", " + carrito.getPrecio() + " euros (" + estado + ")   "  + elementos;;
 		System.out.println(toString);
 		System.out.println(carrito.toString());
 		assertEquals(carrito.toString(), toString);

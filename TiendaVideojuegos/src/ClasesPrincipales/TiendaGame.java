@@ -196,33 +196,122 @@ public class TiendaGame implements Serializable{
 		
 		
 		return Consolas;
-	}		
+	}	
+	
+	
+	public static List<Usuario> LeerCSVUsuarios() {
+		List<Usuario> Usuarios = new ArrayList<>();
+		Usuario u;
+		
+		try (BufferedReader BR = new BufferedReader(new FileReader("Data/usuarios.csv"))) {
+			StringTokenizer tokenizer;
+			String linea = null;
+			int numLinea = 0;
+			
+			BR.readLine();
+			
+			int id = 0;
+			
+			
+			while ((linea = BR.readLine()) != null) {
+				u = new Usuario();
+				tokenizer = new StringTokenizer(linea, ";");
+				
+				
+				u.setId(0);
+				id++;
+				u.setNombre(tokenizer.nextToken());
+				u.setEmail(tokenizer.nextToken());
+				u.setContrasenya(tokenizer.nextToken());
+				u.setTelefono(tokenizer.nextToken());
+				
+				
+				Usuarios.add(u);
+				
+			
+			}
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
+			e.printStackTrace();
+		}
+		
+		
+		return Usuarios;
+	}
+	
+	public static List<Carrito> LeerCSVCarritos() {
+		List<Carrito> Carritos = new ArrayList<>();
+		Carrito c;
+		
+		try (BufferedReader BR = new BufferedReader(new FileReader("Data/carrito.csv"))) {
+			StringTokenizer tokenizer;
+			String linea = null;
+			int numLinea = 0;
+			
+			BR.readLine();
+			
+			int id = 0;
+			
+			
+			while ((linea = BR.readLine()) != null) {
+				c = new Carrito();
+				tokenizer = new StringTokenizer(linea, ";");
+				
+				
+				c.setId(0);
+				id++;
+				c.setFecha(tokenizer.nextToken());
+				c.setElementos(tokenizer.nextToken());
+				c.setContrasenya(tokenizer.nextToken());
+				c.setTelefono(tokenizer.nextToken());
+				
+				
+				Carritos.add(c);
+				
+			
+			}
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
+			e.printStackTrace();
+		}
+		
+		
+		return Carritos;
+	}
 	
 	
 	public static void main(String[] args) {
-		GestorBD gestorBD = new GestorBD();
+		//GestorBD gestorBD = new GestorBD();
 		
 		
 		
-		gestorBD.CrearBBDDVideojuego();
-		gestorBD.CrearBBDDConsola();
-		gestorBD.CrearBBDDMando();
+		//gestorBD.CrearBBDDVideojuego();
+		//gestorBD.CrearBBDDConsola();
+		//gestorBD.CrearBBDDMando();
 		
 		
-		gestorBD.insertarDatosVideojuego(LeerCSVvideojuego());
-		gestorBD.obtenerDatosVideojuegos();
+		//gestorBD.insertarDatosVideojuego(LeerCSVvideojuego());
+		//gestorBD.obtenerDatosVideojuegos();
 		
-		gestorBD.insertarDatosConsola(LeerCSVconsolas());
-		gestorBD.obtenerDatosConsolas();
+		//gestorBD.insertarDatosConsola(LeerCSVconsolas());
+		//gestorBD.obtenerDatosConsolas();
 		
-		gestorBD.insertarDatosMando(LeerCSVmandos());
-		gestorBD.obtenerDatosMandos();
+		//gestorBD.insertarDatosMando(LeerCSVmandos());
+		//gestorBD.obtenerDatosMandos();
 		
 		
 		
-		gestorBD.borrarBBDDVideojuego();
-		gestorBD.borrarBBDDConsola();
-		gestorBD.borrarBBDDMando();
+		//gestorBD.borrarBBDDVideojuego();
+		//gestorBD.borrarBBDDConsola();
+		//gestorBD.borrarBBDDMando();
 		
 		
 	}

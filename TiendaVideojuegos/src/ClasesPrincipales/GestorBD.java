@@ -479,12 +479,15 @@ public class GestorBD {
 			StringTokenizer tokenizer;
 			Carrito carrito;
 			
+			
 			//Se recorre el ResultSet y se crean objetos Cliente
 			while (rs.next()) {
 				carrito= new Carrito();
 				carrito.setId(rs.getInt("ID"));
 				carrito.setFecha(rs.getDate("FECHA"));
+				carrito.setElementos(rs.getString("ELEMENTOS"));
 				carrito.setEstadoCarrito(EstadoCarrito.valueOf(rs.getString("ESTADOCARRITO")));
+				
 				String u = rs.getString("USUARIO");
 				tokenizer = new StringTokenizer(u,";");
 				usuario= new Usuario();

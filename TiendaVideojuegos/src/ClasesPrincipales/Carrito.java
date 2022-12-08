@@ -95,7 +95,7 @@ public class Carrito implements Serializable{
 	@Override
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		return "Pedido de " + usuario.getNombre() + ", " + sdf.format(fecha) + ", " + this.getPrecio() + " euros (" + estado + ")";
+		return "Pedido de " + usuario.getNombre() + ", " + sdf.format(fecha) + ", " + this.getPrecio() + " euros (" + estado + ")   "  + elementos;
 	}
 	
 }
