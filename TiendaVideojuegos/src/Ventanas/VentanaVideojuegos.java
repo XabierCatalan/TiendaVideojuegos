@@ -61,7 +61,7 @@ public class VentanaVideojuegos extends JFrame {
 		JP3.setLayout(new BorderLayout());
 		
 		JP3.add(carrito, BorderLayout.NORTH);
-		JP3.add(carrito, BorderLayout.SOUTH);
+		JP3.add(atras, BorderLayout.SOUTH);
 		
 		cp.add(JP3);
 		
