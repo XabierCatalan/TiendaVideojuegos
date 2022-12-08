@@ -85,9 +85,8 @@ public class VentanaMenuPrincipal extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				
-				
+				Main.vCM.setVisible(true);
 				dispose();
 			}
 		});
