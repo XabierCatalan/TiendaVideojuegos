@@ -478,6 +478,8 @@ public class GestorBD {
 			Usuario usuario;
 			StringTokenizer tokenizer;
 			Carrito carrito;
+			String elementos;
+			ArrayList<Pagable> p;
 			
 			
 			//Se recorre el ResultSet y se crean objetos Cliente
@@ -485,7 +487,18 @@ public class GestorBD {
 				carrito= new Carrito();
 				carrito.setId(rs.getInt("ID"));
 				carrito.setFecha(rs.getDate("FECHA"));
-				carrito.setElementos(rs.getString("ELEMENTOS"));
+				
+				
+				//elementos = rs.getString("ELEMENTOS");
+				//p = new ArrayList<Pagable>();
+				//String[] elementos2 = elementos.split(", ");
+				//for (String e : elementos2) {
+				//	p.add(null);
+				//}
+				
+				
+				
+				
 				carrito.setEstadoCarrito(EstadoCarrito.valueOf(rs.getString("ESTADOCARRITO")));
 				
 				String u = rs.getString("USUARIO");
@@ -496,6 +509,7 @@ public class GestorBD {
 				usuario.setEmail(tokenizer.nextToken());
 				usuario.setContrasenya(tokenizer.nextToken());
 				usuario.setTelefono(tokenizer.nextToken());
+				
 				carrito.setUsuario(usuario);
 			
 				
