@@ -17,7 +17,7 @@ public class VentanaMain extends JFrame{
 	
 	public VentanaMain() {
 		
-		
+		VentanaMain.this.setResizable(false);
 		Container cp = this.getContentPane();
 		ImageIcon imageIcon = new ImageIcon("game.png");
 		Image image = new ImageIcon("game.png").getImage();
