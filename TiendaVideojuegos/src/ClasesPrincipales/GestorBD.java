@@ -653,7 +653,33 @@ public class GestorBD {
 	
 	
 	
-	
+	// mira si el usuario con el mail y contraseña es valido
+	public String iniciarSesion(String mail, String pass) {
+		String msgError = "";
+		try (Connection con = DriverManager.getConnection(DATABASE_FILE_USUARIO);
+			     Statement stmt = con.createStatement()) {
+				//Se ejecuta la sentencia de borrado de datos
+				String sql = "SELECT ID FROM USUARIOS WHERE EMAIL='"+ mail +"' AND CONTRASEÑA='"+pass+"';";			
+				ResultSet rs = stmt.executeQuery(sql);
+				int size=0;
+				if (rs.next()) {
+					size++;
+					//he seleccionado la id por si hay que incluir el usuario en algún sitio del programa
+				}
+				
+				if(size==0) {
+					msgError = "Mail o contraseña incorrectos"; 
+				} else if(size==1) {
+					msgError = "datos de usuario correctos";
+				}
+				System.out.println(msgError);
+				return msgError;
+				} catch (Exception ex) {
+				System.err.println(String.format("* Error al iniciar sesion", ex.getMessage()));
+				ex.printStackTrace();						
+			}
+		return msgError;
+	}
 	
 
 }

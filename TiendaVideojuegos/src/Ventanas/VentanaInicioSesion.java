@@ -1,12 +1,21 @@
 package Ventanas;
 
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import Ventanas.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import ClasesPrincipales.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import ClasesPrincipales.GestorBD;
 
 public class VentanaInicioSesion extends JFrame {
 	
@@ -84,7 +93,11 @@ public class VentanaInicioSesion extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				//meter metodos de la base de datos que con el mail y contraseña te coja todo del usuario
+				String inMail = mail1.getText();
+				String inPass = contraseña1.getPassword().toString();
 				
+				GestorBD gestorBD = new GestorBD();
+				gestorBD.iniciarSesion(inMail,inPass);
 				Main.vMP.setVisible(true);
 				dispose();
 				
