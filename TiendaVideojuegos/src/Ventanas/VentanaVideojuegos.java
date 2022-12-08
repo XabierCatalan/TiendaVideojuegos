@@ -13,6 +13,9 @@ public class VentanaVideojuegos {
 	
 	protected JLabel filtros;
 	
-	protected JComboBox<E>
+	protected JComboBox<EstadoProducto> estado;
+	protected JComboBox<Genero> genero;
+	
+	protected JTable videojeugos;
 	
 }
