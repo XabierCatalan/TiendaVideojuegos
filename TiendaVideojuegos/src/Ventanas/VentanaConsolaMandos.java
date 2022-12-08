@@ -15,6 +15,10 @@ public class VentanaConsolaMandos extends JFrame {
 	
 	protected JTable tCM = new JTable ();
 	
+	//protected List<Consola> listaConsolas;
+	//protected List<Mando> listaMandos;
+	
+	
 	public VentanaConsolaMandos () {
 		this.setTitle("Consolas y Mandos");
 		this.setSize(1200, 800);

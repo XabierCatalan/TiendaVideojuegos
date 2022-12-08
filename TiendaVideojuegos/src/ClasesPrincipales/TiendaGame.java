@@ -295,7 +295,9 @@ public class TiendaGame implements Serializable{
 	public static void main(String[] args) {
 		//GestorBD gestorBD = new GestorBD();
 		
-		
+		//gestorBD.borrarBBDDVideojuego();
+		//gestorBD.borrarBBDDConsola();
+		//gestorBD.borrarBBDDMando();
 		
 		//gestorBD.CrearBBDDVideojuego();
 		//gestorBD.CrearBBDDConsola();
@@ -319,6 +321,7 @@ public class TiendaGame implements Serializable{
 		
 		
 	}
+	
 	
 	
 	private static void printVideojuegos(List<Videojuego> videojuegos) {
