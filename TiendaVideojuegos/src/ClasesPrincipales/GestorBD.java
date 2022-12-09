@@ -240,6 +240,31 @@ public class GestorBD {
 		}
 	}
 	
+	public void borrarBBDDUsuario() {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
+		     Statement stmt = con.createStatement()) {
+			
+	        String sql = "DROP TABLE IF EXISTS USUARIO";
+			
+	        //Se ejecuta la sentencia de creación de la tabla Estudiantes
+	        if (!stmt.execute(sql)) {
+	        	System.out.println("- Se ha borrado la tabla Usuario");
+	        }
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();			
+		}
+		
+		try {
+			//Se borra el fichero de la BBDD
+			Files.delete(Paths.get(DATABASE_FILE_USUARIO));
+			System.out.println("- Se ha borrado el fichero de la BBDD");
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar el archivo de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}
+	}
 	
 	public void insertarDatosVideojuego(List<Videojuego> videojuegos) {
 		//Se abre la conexión y se obtiene el Statement
@@ -325,6 +350,29 @@ public class GestorBD {
 					System.out.println(String.format(" - Carrito insertado: %s", c.toString()));
 				} else {
 					System.out.println(String.format(" - No se ha insertado el carrito: %s", c.toString()));
+				}
+			}			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}				
+	}
+	
+	public void insertarDatosUsuario(List<Usuario> usuarios) {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
+		     Statement stmt = con.createStatement()) {
+			//Se define la plantilla de la sentencia SQL
+			String sql = "INSERT INTO USUARIO ( NOMBRE, EMAIL, CONTRASEÑA, TELEFONO) VALUES ( '%s', '%s', '%s', '%s');";
+			
+			System.out.println("- Insertando carritos...");
+			
+			//Se recorren los clientes y se insertan uno a uno
+			for (Usuario u : usuarios) {
+				if (1 == stmt.executeUpdate(String.format(sql, u.getNombre(), u.getEmail(), u.getContrasenya(), u.getTelefono()))) {					
+					System.out.println(String.format(" - Usuario insertado: %s", u.toString()));
+				} else {
+					System.out.println(String.format(" - No se ha insertado el usuario: %s", u.toString()));
 				}
 			}			
 		} catch (Exception ex) {
@@ -645,6 +693,21 @@ public class GestorBD {
 			int result = stmt.executeUpdate(sql);
 			
 			System.out.println(String.format("- Se han borrado %d carrito", result));
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}		
+	}	
+	
+	public void borrarDatosUsuario() {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
+		     Statement stmt = con.createStatement()) {
+			//Se ejecuta la sentencia de borrado de datos
+			String sql = "DELETE FROM USUARIO;";			
+			int result = stmt.executeUpdate(sql);
+			
+			System.out.println(String.format("- Se han borrado %d usuario", result));
 		} catch (Exception ex) {
 			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();						

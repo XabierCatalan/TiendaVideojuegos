@@ -2,7 +2,12 @@ package Ventanas;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Vector;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 import ClasesPrincipales.*;
 
@@ -19,6 +24,9 @@ public class VentanaVideojuegos extends JFrame {
 	protected JTextField fecha;
 	
 	protected JTable videojuegos;
+	protected DefaultTableModel modeloDatosvideojuego;
+	
+	
 	
 	public VentanaVideojuegos() {
 		 
@@ -30,8 +38,8 @@ public class VentanaVideojuegos extends JFrame {
 		
 		filtros = new JLabel("FILTROS");
 		
-		estado = new JComboBox<>();
-		genero = new JComboBox<>();
+		estado = new JComboBox<>(EstadoProducto.values());
+		genero = new JComboBox<>(Genero.values());
 		
 		fecha = new JTextField();
 		
@@ -70,6 +78,23 @@ public class VentanaVideojuegos extends JFrame {
 		this.setSize(600, 400);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
+	}
+	
+	protected void initTablaVideojuegos() {
+		Vector<String> cabeceraVideojuegos = new Vector<String>(Arrays.asList("NOMBRE", "GENERO","ESTADO PRODUCTO","AÑO", "PRECIO"));
+		this.modeloDatosvideojuego = new DefaultTableModel(new Vector<Vector<Object>>(), cabeceraVideojuegos);
+		this.videojuegos = new JTable(this.modeloDatosvideojuego);
+		
+		}
+	
+	protected void cargarVideojuegos() {
+		this.modeloDatosvideojuego.setRowCount(0);
+		
+		ArrayList<Videojuego> v = Main.bd.obtenerDatosVideojuegos();
+		
+		for (Videojuego videojuego : v) {
+			this.modeloDatosvideojuego.addRow(new Object[] {videojuego.getId(), videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), videojuego.getPrecio()});
+		}
 	}
 	
 }

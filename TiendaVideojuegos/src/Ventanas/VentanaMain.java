@@ -18,6 +18,23 @@ public class VentanaMain extends JFrame{
 	
 	public VentanaMain() {
 		
+		Main.bd.borrarBBDDCarrito();
+		Main.bd.borrarBBDDConsola();
+		Main.bd.borrarBBDDMando();
+		Main.bd.borrarBBDDVideojuego();
+		Main.bd.borrarBBDDUsuario();
+		
+		Main.bd.CrearBBDDCarrito();
+		Main.bd.CrearBBDDConsola();
+		Main.bd.CrearBBDDMando();
+		Main.bd.CrearBBDDUsuario();
+		Main.bd.CrearBBDDVideojuego();
+		
+		Main.bd.insertarDatosConsola(Main.tg.LeerCSVconsolas());
+		Main.bd.insertarDatosMando(Main.tg.LeerCSVmandos());
+		Main.bd.insertarDatosVideojuego(Main.tg.LeerCSVvideojuego());
+		Main.bd.insertarDatosUsuario(Main.tg.LeerCSVUsuarios());
+		//Main.bd.insertarDatosCarrito(Main.tg.LeerCSVCarritos());
 
 		VentanaMain.this.setResizable(false);
 		Container cp = this.getContentPane();
