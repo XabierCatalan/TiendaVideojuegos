@@ -34,6 +34,8 @@ public class VentanaVideojuegos extends JFrame {
 	
 	
 	public VentanaVideojuegos() {
+		
+		this.cargarVideojuegos();
 		 
 		Container cp = this.getContentPane();
 		
@@ -48,7 +50,7 @@ public class VentanaVideojuegos extends JFrame {
 		
 		fecha = new JTextField();
 		
-		tV = new JTable();
+		
 		
 		cp.setLayout(new FlowLayout());
 		

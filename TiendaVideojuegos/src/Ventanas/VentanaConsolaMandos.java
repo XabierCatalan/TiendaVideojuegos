@@ -21,6 +21,7 @@ public class VentanaConsolaMandos extends JFrame {
 	
 	
 	
+	
 	public VentanaConsolaMandos () {
 		this.setTitle("Consolas y Mandos");
 		this.setSize(1200, 800);
