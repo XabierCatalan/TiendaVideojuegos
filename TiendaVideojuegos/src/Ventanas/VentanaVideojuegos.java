@@ -15,6 +15,7 @@ public class VentanaVideojuegos extends JFrame {
 	protected JButton carrito;
 	protected JButton atras;
 	protected JButton añadirCarrito;
+	protected JButton filtrar;
 	
 	protected JLabel filtros;
 	
@@ -42,6 +43,7 @@ public class VentanaVideojuegos extends JFrame {
 		carrito = new JButton("Carrito");
 		atras = new JButton("Atras");
 		añadirCarrito = new JButton("Añadir al Carrito");
+		filtrar = new JButton("Filtrar");
 		
 		filtros = new JLabel("FILTROS");
 		
@@ -57,7 +59,7 @@ public class VentanaVideojuegos extends JFrame {
 		cp.add(new JScrollPane(tV));
 		
 		JPanel JP1 = new JPanel();
-		JP1.setLayout(new GridLayout(5,1));
+		JP1.setLayout(new GridLayout(6,1));
 		
 		JPanel JP2 = new JPanel();
 		JP2.setLayout(new BorderLayout());
@@ -68,6 +70,7 @@ public class VentanaVideojuegos extends JFrame {
 		JP1.add(genero);
 		JP1.add(estado);
 		JP1.add(fecha);
+		JP1.add(filtrar);
 		JP1.add(JP2);
 		
 		cp.add(JP1);
@@ -76,13 +79,14 @@ public class VentanaVideojuegos extends JFrame {
 		JP3.setLayout(new BorderLayout());
 		
 		JP3.add(carrito, BorderLayout.NORTH);
+		JP3.add(añadirCarrito, BorderLayout.CENTER);
 		JP3.add(atras, BorderLayout.SOUTH);
 		
 		cp.add(JP3);
 		
 		
 		this.setVisible(false);
-		this.setSize(600, 400);
+		this.setSize(800, 400);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 	}
