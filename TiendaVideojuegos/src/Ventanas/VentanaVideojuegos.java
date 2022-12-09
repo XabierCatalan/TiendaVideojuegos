@@ -3,8 +3,8 @@ package Ventanas;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Vector;
+import java.util.List;
+
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -23,8 +23,13 @@ public class VentanaVideojuegos extends JFrame {
 	
 	protected JTextField fecha;
 	
-	protected JTable videojuegos;
-	protected DefaultTableModel modeloDatosvideojuego;
+	
+	protected DefaultTableModel mDV = new DefaultTableModel(
+			new Object [] {"Nombre", "Genero", "Estado","Año","Precio"},0
+			);
+	protected JTable tV = new JTable(mDV);
+	
+	protected List<Videojuego> listaVideojuego;
 	
 	
 	
@@ -43,11 +48,11 @@ public class VentanaVideojuegos extends JFrame {
 		
 		fecha = new JTextField();
 		
-		videojuegos = new JTable();
+		tV = new JTable();
 		
 		cp.setLayout(new FlowLayout());
 		
-		cp.add(videojuegos);
+		cp.add(new JScrollPane(tV));
 		
 		JPanel JP1 = new JPanel();
 		JP1.setLayout(new GridLayout(5,1));
@@ -80,20 +85,14 @@ public class VentanaVideojuegos extends JFrame {
 		
 	}
 	
-	protected void initTablaVideojuegos() {
-		Vector<String> cabeceraVideojuegos = new Vector<String>(Arrays.asList("NOMBRE", "GENERO","ESTADO PRODUCTO","AÑO", "PRECIO"));
-		this.modeloDatosvideojuego = new DefaultTableModel(new Vector<Vector<Object>>(), cabeceraVideojuegos);
-		this.videojuegos = new JTable(this.modeloDatosvideojuego);
-		
-		}
+	
 	
 	protected void cargarVideojuegos() {
-		this.modeloDatosvideojuego.setRowCount(0);
 		
-		ArrayList<Videojuego> v = Main.bd.obtenerDatosVideojuegos();
+		listaVideojuego = Main.bd.obtenerDatosVideojuegos();
 		
-		for (Videojuego videojuego : v) {
-			this.modeloDatosvideojuego.addRow(new Object[] {videojuego.getId(), videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), videojuego.getPrecio()});
+		for (Videojuego videojuego : listaVideojuego) {
+			this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), videojuego.getPrecio()});
 		}
 	}
 	
