@@ -2,6 +2,7 @@ package Ventanas;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -27,6 +28,8 @@ public class VentanaInicioSesion extends JFrame {
 	protected JPasswordField contraseña1;
 	protected JLabel IntroDatos;
 	
+	protected JLabel msgError;
+	
 	
 	
 	
@@ -43,6 +46,10 @@ public class VentanaInicioSesion extends JFrame {
 		IntroDatos = new JLabel("Introduzca sus Datos");
 		mail1 = new JTextField("");
 		contraseña1 = new JPasswordField("");
+		msgError = new JLabel("");
+		msgError.setForeground(Color.red);
+
+
 		
 		
 		BorderLayout BL1 = new BorderLayout();
@@ -57,6 +64,9 @@ public class VentanaInicioSesion extends JFrame {
 		JPanel JP4 = new JPanel(); //InicioSesion
 		JP4.setLayout(new FlowLayout());
 		
+		JPanel JPError = new JPanel();
+		JPError.setLayout(new FlowLayout());
+		
 		
 		
 		cp.setLayout(BL1);
@@ -70,6 +80,9 @@ public class VentanaInicioSesion extends JFrame {
 		JP2.add(mail1); //mail1
 		JP2.add(Contraseña); //Contraseña
 		JP2.add(contraseña1); //Contraseña1
+		
+		add(JPError, BL1.NORTH);
+		JPError.add(msgError); //error
 		
 		
 		add(JP4, BL1.SOUTH);
@@ -97,9 +110,13 @@ public class VentanaInicioSesion extends JFrame {
 				String inPass = contraseña1.getPassword().toString();
 				
 				GestorBD gestorBD = new GestorBD();
-				gestorBD.iniciarSesion(inMail,inPass);
-				Main.vMP.setVisible(true);
-				dispose();
+				String msg = gestorBD.iniciarSesion(inMail,inPass);
+				if(msg=="OK") {
+					Main.vMP.setVisible(true);
+					dispose();
+				} else {
+					msgError.setText(msg);
+				}
 				
 			}
 		});
