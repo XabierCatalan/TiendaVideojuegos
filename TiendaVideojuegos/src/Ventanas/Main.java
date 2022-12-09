@@ -11,6 +11,7 @@ public class Main {
 	static VentanaMenuPrincipal vMP = new VentanaMenuPrincipal();
 	static VentanaConsolaMandos vCM = new VentanaConsolaMandos();
 	static VentanaVideojuegos vV = new VentanaVideojuegos();
+	static VentanaCarrito vC = new VentanaCarrito();
 	static TiendaGame tg = new TiendaGame();
 	static GestorBD bd = new GestorBD();
 	

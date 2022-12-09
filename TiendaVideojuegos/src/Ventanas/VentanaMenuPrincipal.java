@@ -74,7 +74,7 @@ public class VentanaMenuPrincipal extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				Main.vC.setVisible(true);
 				dispose();
 			}
 		});
