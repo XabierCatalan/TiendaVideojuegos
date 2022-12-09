@@ -7,16 +7,21 @@ import java.util.Date;
 import ClasesPrincipales.Consola;
 
 public class Servicio implements Serializable,Pagable{
+	protected Usuario u;
 	protected TipoServicio tipo;
 	protected Date fecha1;
+	protected String Descrip;
 	
 	
 	
 	
-	public Servicio(TipoServicio tipo, Date fecha1) {
+	
+	public Servicio(TipoServicio tipo, Date fecha1, String Descrip, Usuario u) {
 		super();
 		this.tipo = tipo;
 		this.fecha1 = fecha1;
+		this.Descrip = Descrip;
+		this.u = u;
 		
 	}
 
@@ -24,6 +29,8 @@ public class Servicio implements Serializable,Pagable{
 		super();
 		this.tipo = TipoServicio.MANTENIMIENTO;
 		this.fecha1 = new Date();
+		this.Descrip = "";
+		this.u = new Usuario();
 		
 	}
 
@@ -42,11 +49,29 @@ public class Servicio implements Serializable,Pagable{
 	public void setFecha1(Date fecha1) {
 		this.fecha1 = fecha1;
 	}
+	
+	public String getDescrip() {
+		return Descrip;
+	}
+
+	public void setDescrip(String descrip) {
+		Descrip = descrip;
+	}
+	
+	
+
+	public Usuario getU() {
+		return u;
+	}
+
+	public void setU(Usuario u) {
+		this.u = u;
+	}
 
 	@Override
 	public String toString() {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
-		return "Tipo= " + tipo + ", (" + sdf1.format(fecha1) + ")";
+		return "Email: " + u.getEmail() + " Tipo:" + tipo + ", (" + sdf1.format(fecha1) + ")";
 	}
 
 	@Override

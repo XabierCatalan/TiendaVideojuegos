@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.crypto.dsig.Transform;
 
 import ClasesPrincipales.*;
 
@@ -22,7 +23,7 @@ public class VentanaVideojuegos extends JFrame {
 	protected JComboBox<EstadoProducto> estado;
 	protected JComboBox<Genero> genero;
 	
-	protected JTextField fecha;
+	protected JComboBox<Integer> fecha;
 	
 	
 	protected DefaultTableModel mDV = new DefaultTableModel(
@@ -50,8 +51,11 @@ public class VentanaVideojuegos extends JFrame {
 		estado = new JComboBox<>(EstadoProducto.values());
 		genero = new JComboBox<>(Genero.values());
 		
-		fecha = new JTextField();
+		fecha = new JComboBox<>();
 		
+		for (int i = 1970; i < 2024; i++) {
+			fecha.addItem(i);
+		};
 		
 		
 		cp.setLayout(new FlowLayout());
@@ -84,6 +88,49 @@ public class VentanaVideojuegos extends JFrame {
 		
 		cp.add(JP3);
 		
+		filtrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				EstadoProducto ep = EstadoProducto.valueOf(String.valueOf(estado.getSelectedItem()));
+				Genero g = Genero.valueOf(String.valueOf(genero.getSelectedItem()));
+				Integer a = Integer.parseInt(String.valueOf(fecha.getSelectedItem()));
+				filtrarVideojuego(ep, g, a);
+			}
+		});
+		
+		carrito.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+				dispose();
+				
+			}
+		});
+		
+		añadirCarrito.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		atras.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				cargarVideojuegos();
+				Main.vMP.setVisible(true);
+				dispose();
+			}
+		});
+		
 		
 		this.setVisible(false);
 		this.setSize(800, 400);
@@ -100,6 +147,26 @@ public class VentanaVideojuegos extends JFrame {
 		for (Videojuego videojuego : listaVideojuego) {
 			this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), videojuego.getPrecio()});
 		}
+	}
+	
+	protected void filtrarVideojuego(EstadoProducto ep, Genero g, Integer a) {
+		this.mDV.setRowCount(0);
+		
+		listaVideojuego = Main.bd.obtenerDatosVideojuegos();
+		
+		List<Videojuego> listaVideojuego2 = new ArrayList<>();
+		
+		for (Videojuego videojuego : listaVideojuego) {
+			if (videojuego.getAnyo() == a && videojuego.getEstado() == ep && videojuego.getGenero() == g) {
+				listaVideojuego2.add(videojuego);
+			}
+		}
+		
+		for (Videojuego videojuego : listaVideojuego2) {
+			this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), videojuego.getPrecio()});
+
+		}
+		
 	}
 	
 }
