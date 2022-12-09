@@ -19,6 +19,7 @@ public class VentanaCrearCuenta extends JFrame {
 	protected JTextField telf1;
 	protected JTextField nomb1;
 	protected JLabel NC;
+	protected JLabel msgError;
 	
 	public VentanaCrearCuenta() {
 		
@@ -32,6 +33,13 @@ public class VentanaCrearCuenta extends JFrame {
 		telf = new JLabel("Nº Telefono");
 		nomb = new JLabel("Nombre Cuenta");
 		NC = new JLabel("NUEVA CUENTA");
+		NC.setVerticalAlignment(JLabel.TOP);
+		NC.setHorizontalAlignment(JTextField.CENTER);
+		msgError = new JLabel("");
+		msgError.setHorizontalAlignment(JTextField.CENTER);
+
+		msgError.setForeground(Color.red);
+		
 		
 		mail1 = new JTextField("");
 		contraseña1 = new JPasswordField("");
@@ -39,10 +47,14 @@ public class VentanaCrearCuenta extends JFrame {
 		nomb1 = new JTextField("");
 		
 		cp.setLayout(new BorderLayout());
-		
+				
 		JPanel JP1 = new JPanel();
-		JP1.setLayout(new FlowLayout());
+		//JP1.setLayout(new FlowLayout());
+		JP1.setLayout(new GridLayout(2,1));
+
 		JP1.add(NC);
+		JP1.add(msgError);
+
 		cp.add(JP1 , BorderLayout.NORTH);
 		
 		JPanel JP2 = new JPanel();
@@ -83,9 +95,13 @@ public class VentanaCrearCuenta extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				//Meter metodo que cree una cuenta nueva con todo vacio excepto los datos
-				
-				Main.vMP.setVisible(true);
-				dispose();
+				if(true) {
+					msgError.setText("No creado");
+				}else {
+					Main.vMP.setVisible(true);
+					dispose();		
+				}
+
 				
 			}
 		});
