@@ -131,7 +131,7 @@ public class GestorBD {
 			if (!stmt.execute(sql)) {
 	        	System.out.println("- Se ha creado la tabla Carrito");}
 		}catch (Exception ex) {
-			System.err.println(String.format("* Error al crear la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al crear la BBDDCarrito: %s", ex.getMessage()));
 			ex.printStackTrace();
 		}
 	}
