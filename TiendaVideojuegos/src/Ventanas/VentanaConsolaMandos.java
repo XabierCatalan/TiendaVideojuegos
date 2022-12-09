@@ -27,6 +27,8 @@ public class VentanaConsolaMandos extends JFrame {
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setVisible(false);
 		
+		this.cargarTabla();
+		
 		JPanel pIzquierda = new JPanel();
 		pIzquierda.add( new JScrollPane( tCM ));
 		getContentPane().add( pIzquierda, BorderLayout.WEST );
