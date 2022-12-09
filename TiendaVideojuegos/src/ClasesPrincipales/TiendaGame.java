@@ -218,6 +218,7 @@ public class TiendaGame implements Serializable{
 				u = new Usuario();
 				tokenizer = new StringTokenizer(linea, ";");
 				
+				tokenizer.nextToken();
 				
 				u.setId(0);
 				id++;
