@@ -18,7 +18,7 @@ public class VentanaConsolaMandos extends JFrame {
 	
 	protected List<Consola> listaConsola;
 	protected List<Mando> listaMando;
-	protected List<Mando> prueba;
+	
 	
 	
 	
