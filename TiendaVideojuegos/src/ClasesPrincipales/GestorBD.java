@@ -841,8 +841,8 @@ public class GestorBD {
 				Statement stmt = con.createStatement()) {
 			String sql = "SELECT * FROM USUARIO;";			
 			ResultSet rs = stmt.executeQuery(sql);
-			
-			while (rs.next()) {				
+			boolean encontrado = false;
+			while (rs.next()) {			
 				// login usando mail y contraseña
 				if(mail.equals(rs.getString("EMAIL"))) {
 					//identificador de usuario encontrado
@@ -858,8 +858,12 @@ public class GestorBD {
 						u.setTelefono(rs.getString("TELEFONO"));
 						GestorBD.this.logedUser = u;
 					}
+					encontrado = true;
 					break;//como ha encontrado un usuario sale del while
 				}
+			}
+			if(!encontrado) {
+					msg = "El usuario indicado no existe";
 			}
 		}catch (Exception ex) {
 			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
