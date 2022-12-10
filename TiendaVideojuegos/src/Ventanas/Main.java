@@ -14,7 +14,7 @@ public class Main {
 	static VentanaConsolaMandos vCM = new VentanaConsolaMandos();
 	static VentanaVideojuegos vV = new VentanaVideojuegos();
 	static VentanaCarrito vC = new VentanaCarrito();
-	
+	static VentanaServicio vS = new VentanaServicio();
 	
 	public static void main(String[] args) {
 		vM.setVisible(true);

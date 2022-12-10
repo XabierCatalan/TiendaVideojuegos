@@ -112,7 +112,7 @@ public class VentanaMenuPrincipal extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				
-				
+				Main.vS.setVisible(true);
 				dispose();
 			}
 		});

@@ -8,8 +8,6 @@ import java.util.List;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.crypto.dsig.Transform;
-
 import ClasesPrincipales.*;
 
 public class VentanaVideojuegos extends JFrame {
@@ -135,6 +133,7 @@ public class VentanaVideojuegos extends JFrame {
 		this.setVisible(false);
 		this.setSize(800, 400);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setTitle("VENTANA VIDEOJEUGOS");
 		
 	}
 	
