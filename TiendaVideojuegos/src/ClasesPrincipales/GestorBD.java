@@ -26,6 +26,8 @@ public class GestorBD {
 	protected static final String CONNECTION_STRING_USUARIO= "jdbc:sqlite:" + DATABASE_FILE_USUARIO;
 	protected static final String CONNECTION_STRING_CARRITO = "jdbc:sqlite:" + DATABASE_FILE_CARRITO;
 	protected static final String CONNECTION_STRING_SERVICIO = "jdbc:sqlite:" + DATABASE_FILE_SERVICIO;
+	protected static Usuario logedUser = null;
+
 	
 	public GestorBD() {
 		try {
@@ -34,6 +36,10 @@ public class GestorBD {
 			System.err.println(String.format("* Error al cargar el driver de BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();
 		}
+	}
+	
+	public Usuario getLogedUser() {
+		return logedUser;
 	}
 	
 	public void CrearBBDDVideojuego() {
@@ -405,13 +411,14 @@ public class GestorBD {
 	}
 	
 	public void insertarDatosUsuario(List<Usuario> usuarios) {
+		System.out.println("insertarDatosUsuario");
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
 			String sql = "INSERT INTO USUARIO ( NOMBRE, EMAIL, CONTRASEÑA, TELEFONO) VALUES ( '%s', '%s', '%s', '%s');";
 			
-			System.out.println("- Insertando carritos...");
+			System.out.println("- Insertando usuarios...");
 			
 			//Se recorren los clientes y se insertan uno a uno
 			for (Usuario u : usuarios) {
@@ -424,7 +431,25 @@ public class GestorBD {
 		} catch (Exception ex) {
 			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();						
-		}				
+		}		
+		
+	}
+	
+	public void insertarDatosUsuario(Usuario u) {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
+				Statement stmt = con.createStatement()) {
+			//Se define la plantilla de la sentencia SQL
+			String sql = "INSERT INTO USUARIO ( NOMBRE, EMAIL, CONTRASEÑA, TELEFONO) VALUES ( '%s', '%s', '%s', '%s');";
+			if (1 == stmt.executeUpdate(String.format(sql, u.getNombre(), u.getEmail(), u.getContrasenya(), u.getTelefono()))) {					
+				System.out.println(String.format(" - Usuario insertado: %s", u.toString()));
+			} else {
+				System.out.println(String.format(" - No se ha insertado el usuario: %s", u.toString()));
+			}	
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}	
 	}
 	
 	public void insertarDatosServicioCSV(List<Servicio> servicio) {
@@ -737,7 +762,7 @@ public class GestorBD {
 			ex.printStackTrace();						
 		}		
 	}
-	
+		
 	public void borrarDatosMando() {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_MANDO);
@@ -807,31 +832,42 @@ public class GestorBD {
 	
 	// mira si el usuario con el mail y contraseña es valido
 	public String iniciarSesion(String mail, String pass) {
-		String msg= "";
-		try (Connection con = DriverManager.getConnection(DATABASE_FILE_USUARIO);
-			     Statement stmt = con.createStatement()) {
-				//Se ejecuta la sentencia de borrado de datos
-				String sql = "SELECT ID FROM USUARIOS WHERE EMAIL='"+ mail +"' AND CONTRASEÑA='"+pass+"';";			
-				ResultSet rs = stmt.executeQuery(sql);
-				int size=0;
-				if (rs.next()) {
-					size++;
-					//he seleccionado la id por si hay que incluir el usuario en algún sitio del programa
+		String msg= "iniciarSesion - error no gestionado";
+		if("".equals(mail) || "".equals(pass)) {
+			msg = "Por favor escribe usuario y contraseña";
+			return msg;
+		}
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
+				Statement stmt = con.createStatement()) {
+			String sql = "SELECT * FROM USUARIO;";			
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while (rs.next()) {				
+				// login usando mail y contraseña
+				if(mail.equals(rs.getString("EMAIL"))) {
+					//identificador de usuario encontrado
+					msg = "Contraseña incorrecta";
+					String cont = rs.getString("CONTRASEÑA");
+					if(pass.equals(rs.getString("CONTRASEÑA"))) {
+						msg = "OK";
+						Usuario u= new Usuario();
+						u.setEmail(rs.getString("EMAIL"));
+						u.setContrasenya(rs.getString("CONTRASEÑA"));
+						u.setId(rs.getInt("ID"));
+						u.setNombre(rs.getString("NOMBRE"));
+						u.setTelefono(rs.getString("TELEFONO"));
+						GestorBD.this.logedUser = u;
+					}
+					break;//como ha encontrado un usuario sale del while
 				}
-				
-				if(size==0) {
-					msg = "Mail o contraseña incorrectos"; 
-				} else if(size==1) {
-					msg = "OK";
-				}
-				System.out.println(msg);
-				return msg;
-				} catch (Exception ex) {
-				System.err.println(String.format("* Error al iniciar sesion", ex.getMessage()));
-				ex.printStackTrace();	
-				msg = "error al conectarse a la base de datos";
 			}
-		
+		}catch (Exception ex) {
+			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();	
+			msg = "error al conectarse a la base de datos";
+
+		}	
+		System.out.println(msg);
 		return msg;
 	}
 	

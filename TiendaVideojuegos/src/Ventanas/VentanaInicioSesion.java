@@ -107,7 +107,8 @@ public class VentanaInicioSesion extends JFrame {
 				
 				//meter metodos de la base de datos que con el mail y contraseña te coja todo del usuario
 				String inMail = mail1.getText();
-				String inPass = contraseña1.getPassword().toString();
+				String inPass = new String(contraseña1.getPassword());
+
 				
 				GestorBD gestorBD = new GestorBD();
 				String msg = gestorBD.iniciarSesion(inMail,inPass);
@@ -117,7 +118,6 @@ public class VentanaInicioSesion extends JFrame {
 				} else {
 					msgError.setText(msg);
 				}
-				
 			}
 		});
 		
