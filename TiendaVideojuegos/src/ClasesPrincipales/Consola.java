@@ -23,7 +23,7 @@ public class Consola extends Producto implements Serializable, Pagable {
 
 	public double getPrecio() {
 		if (this.estado == EstadoProducto.SEGUNDA_MANO) {
-			return precio / 1.25;
+			return precio;
 		}
 		return precio;
 	}
