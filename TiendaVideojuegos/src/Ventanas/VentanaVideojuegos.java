@@ -36,7 +36,21 @@ public class VentanaVideojuegos extends JFrame {
 	
 	public VentanaVideojuegos() {
 		
-		this.cargarVideojuegos();
+		
+		this.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				cargarVideojuegos();
+				cargarVideojuegos();
+			}
+			
+			
+				
+		});
+		
+		
 		 
 		Container cp = this.getContentPane();
 		

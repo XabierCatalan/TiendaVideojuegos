@@ -37,6 +37,19 @@ public class VentanaConsolaMandos extends JFrame {
 	
 	public VentanaConsolaMandos () {
 		
+		this.addWindowListener(new WindowAdapter() {
+			
+			@Override
+			public void windowOpened(WindowEvent e) {
+				// TODO Auto-generated method stub
+				cargarTabla();
+				cargarTabla();
+			}
+			
+			
+				
+		});
+		
 		Container cp = this.getContentPane();
 		
 		cp.setLayout(new FlowLayout());
@@ -58,7 +71,7 @@ public class VentanaConsolaMandos extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(false);
 		
-		this.cargarTabla();
+		
 		
 		JPanel pIzquierda = new JPanel();
 		pIzquierda.add( new JScrollPane( tCM ));

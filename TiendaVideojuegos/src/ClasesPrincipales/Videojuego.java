@@ -74,7 +74,7 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 	
 	@Override
 	public String toString() {
-		return "Nombre:" + nombre + " Año:" + anyo +" Genero:" + genero + " Estado:" + estado + " Precio:" + precio + "eur";
+		return String.format("Nombre:" + nombre + " Año:" + anyo +" Genero:" + genero + " Estado:" + estado + " Precio:" + "%.2f" + "eur", this.getPrecio());
 	}
 
 	

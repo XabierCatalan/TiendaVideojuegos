@@ -26,7 +26,7 @@ public class TestMando {
 
 	@Test
 	public void testToString() {
-		String toString = "Nombre:" + nombre + " Estado:" + estado + " Marca:"+ marca + " Precio:" + precio + "eur";
+		String toString = String.format("Nombre:" + nombre + " Estado:" + estado + " Marca:"+ marca + " Precio:" + "%.2f" + "eur", precio);
 		System.out.println(toString);
 		System.out.println(mando.toString());
 		assertEquals(mando.toString(), toString);
