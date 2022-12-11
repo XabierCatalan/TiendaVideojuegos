@@ -15,6 +15,7 @@ public class VentanaVideojuegos extends JFrame {
 	protected JButton atras;
 	protected JButton añadirCarrito;
 	protected JButton filtrar;
+	protected JButton sinFiltros;
 	
 	protected JLabel filtros;
 	
@@ -43,6 +44,7 @@ public class VentanaVideojuegos extends JFrame {
 		atras = new JButton("Atras");
 		añadirCarrito = new JButton("Añadir al Carrito");
 		filtrar = new JButton("Filtrar");
+		sinFiltros = new JButton("Quitar Filtros");
 		
 		filtros = new JLabel("FILTROS");
 		
@@ -63,28 +65,28 @@ public class VentanaVideojuegos extends JFrame {
 		JPanel JP1 = new JPanel();
 		JP1.setLayout(new GridLayout(6,1));
 		
-		JPanel JP2 = new JPanel();
-		JP2.setLayout(new BorderLayout());
 		
-		JP2.add(añadirCarrito, BorderLayout.SOUTH);
+		
+		
 		
 		JP1.add(filtros);
 		JP1.add(genero);
 		JP1.add(estado);
 		JP1.add(fecha);
 		JP1.add(filtrar);
-		JP1.add(JP2);
+		JP1.add(sinFiltros);
+		
 		
 		cp.add(JP1);
 		
-		JPanel JP3 = new JPanel();
-		JP3.setLayout(new BorderLayout());
+		JPanel JP2 = new JPanel();
+		JP2.setLayout(new BorderLayout());
 		
-		JP3.add(carrito, BorderLayout.NORTH);
-		JP3.add(añadirCarrito, BorderLayout.CENTER);
-		JP3.add(atras, BorderLayout.SOUTH);
+		JP2.add(carrito, BorderLayout.NORTH);
+		JP2.add(añadirCarrito, BorderLayout.CENTER);
+		JP2.add(atras, BorderLayout.SOUTH);
 		
-		cp.add(JP3);
+		cp.add(JP2);
 		
 		filtrar.addActionListener(new ActionListener() {
 			
@@ -129,6 +131,15 @@ public class VentanaVideojuegos extends JFrame {
 			}
 		});
 		
+		sinFiltros.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				cargarVideojuegos();
+			}
+		});
+		
 		
 		this.setVisible(false);
 		this.setSize(800, 400);
@@ -142,6 +153,9 @@ public class VentanaVideojuegos extends JFrame {
 	protected void cargarVideojuegos() {
 		
 		listaVideojuego = Main.bd.obtenerDatosVideojuegos();
+		while (mDV.getRowCount() > 0) {
+			mDV.removeRow( 0 );
+		}
 		
 		for (Videojuego videojuego : listaVideojuego) {
 			this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), videojuego.getPrecio()});
