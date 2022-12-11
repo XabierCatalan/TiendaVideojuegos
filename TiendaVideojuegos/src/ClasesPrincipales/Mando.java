@@ -41,7 +41,7 @@ public class Mando extends Producto implements Serializable,Pagable {
 	@Override
 	public double getPrecio() {
 	if(this.getEstado()== estado.SEGUNDA_MANO) {
-		return precio ;
+		return precio / 3;
 		
 	}else {
 		return precio;

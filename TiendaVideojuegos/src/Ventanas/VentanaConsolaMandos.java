@@ -151,10 +151,18 @@ public class VentanaConsolaMandos extends JFrame {
 		}
 		
 		for (Consola consola : listaConsola) {
-			mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), consola.getPrecio() } );
+			if(consola.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), consola.getPrecio()  } );
+			}else {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), consola.getPrecio() * 1.25  } );
+			}
 		}
 		for (Mando mando : listaMando) {
-			mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), mando.getPrecio() } );
+			if(mando.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), mando.getPrecio()  } );
+			}else {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), mando.getPrecio() * 3  } );
+			}
 		}
 		
 		
@@ -184,10 +192,18 @@ public class VentanaConsolaMandos extends JFrame {
 		}
 		
 		for (Consola consola : listaConsola2) {
-			mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), consola.getPrecio() } );
+			if(consola.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), consola.getPrecio()  } );
+			}else {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), consola.getPrecio() * 1.25  } );
+			} 
 		}
 		for (Mando mando : listaMando2) {
-			mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), mando.getPrecio() } );
+			if(mando.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), mando.getPrecio()  } );
+			}else {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), mando.getPrecio() * 3  } );
+			}
 		}
 		
 		
