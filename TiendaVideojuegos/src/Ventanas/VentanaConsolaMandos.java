@@ -55,7 +55,7 @@ public class VentanaConsolaMandos extends JFrame {
 		
 		this.setTitle("Consolas y Mandos");
 		this.setSize(800, 400);
-		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(false);
 		
 		this.cargarTabla();

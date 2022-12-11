@@ -110,7 +110,7 @@ public class VentanaCrearCuenta extends JFrame {
 		
 		this.setTitle("CrearCuenta");
 		this.setSize(600, 200);
-		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(false);
 		
 	}
