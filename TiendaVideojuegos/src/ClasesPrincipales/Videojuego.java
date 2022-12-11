@@ -64,7 +64,7 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 	@Override
 	public double getPrecio() {
 	if(this.getEstado()== estado.SEGUNDA_MANO) {
-		return precio / 3;
+		return precio ;
 		
 	}else {
 		return precio;
