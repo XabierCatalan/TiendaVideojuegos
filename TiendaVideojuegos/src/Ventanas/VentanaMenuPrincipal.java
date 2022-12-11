@@ -25,7 +25,7 @@ public class VentanaMenuPrincipal extends JFrame{
 		mn = new JLabel("MENU PRINCIPAL");
 		
 		comVideojuego = new JButton("COMPRAR VIDEOJUEGOS");
-		comConsola = new JButton("COMPRAR CONSOLAS");
+		comConsola = new JButton("COMPRAR CONSOLAS Y MANDOS");
 		calcPrecioVentas = new JButton("CALCULAR PRECIO VENTAS");
 		gestReparaciones = new JButton("GESTION DE REPARACIONES");
 		
