@@ -165,16 +165,16 @@ public class VentanaConsolaMandos extends JFrame {
 		
 		for (Consola consola : listaConsola) {
 			if(consola.getEstado()==EstadoProducto.PRIMERA_MANO) {
-				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), consola.getPrecio()  } );
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio())  } );
 			}else {
-				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), consola.getPrecio() * 1.25  } );
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio() * 1.25)  } );
 			}
 		}
 		for (Mando mando : listaMando) {
 			if(mando.getEstado()==EstadoProducto.PRIMERA_MANO) {
-				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), mando.getPrecio()  } );
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio())  } );
 			}else {
-				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), mando.getPrecio() * 3  } );
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio() * 3)  } );
 			}
 		}
 		
@@ -206,16 +206,16 @@ public class VentanaConsolaMandos extends JFrame {
 		
 		for (Consola consola : listaConsola2) {
 			if(consola.getEstado()==EstadoProducto.PRIMERA_MANO) {
-				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), consola.getPrecio()  } );
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio())  } );
 			}else {
-				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), consola.getPrecio() * 1.25  } );
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio() * 1.25)  } );
 			} 
 		}
 		for (Mando mando : listaMando2) {
 			if(mando.getEstado()==EstadoProducto.PRIMERA_MANO) {
-				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), mando.getPrecio()  } );
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio())  } );
 			}else {
-				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), mando.getPrecio() * 3  } );
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio() * 3)  } );
 			}
 		}
 		
