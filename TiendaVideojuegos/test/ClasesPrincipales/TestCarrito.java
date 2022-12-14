@@ -53,7 +53,7 @@ public class TestCarrito {
 		assertEquals(newCarrito2.getFecha(), new Date());
 		assertEquals(newCarrito2.getElementos(), new ArrayList<Pagable>());
 		assertEquals(newCarrito2.getEstadoCarrito(), EstadoCarrito.PREPARACIÓN);
-		//assertEquals(newCarrito2.getUsuario(), new Usuario());
+		assertEquals(newCarrito2.getUsuario(), new Usuario());
 		
 	}
 	

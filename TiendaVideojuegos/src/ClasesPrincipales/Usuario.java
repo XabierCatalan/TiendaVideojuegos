@@ -73,6 +73,13 @@ public class Usuario {
 		return nombre + ";" + email + ";" + contrasenya + ";" + telefono ;
 	}
 	
+	public boolean equals(Object o) {
+		if(o != null && o instanceof Usuario) {
+			return this.nombre.equals(((Usuario)o).nombre);
+		}
+		return false;
+		
+	}
 	
 	
 	
