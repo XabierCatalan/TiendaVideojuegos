@@ -38,7 +38,7 @@ import java.util.logging.SimpleFormatter;
  */
 
 public class GestorLog {
-	private static String logFilePath = "./default.log";
+	private static String logFilePath = "./log/default.log";
 	private static FileInputStream logProp = null;
 	private static Handler logHandler = new Handler() {
         public void publish(LogRecord record) {
