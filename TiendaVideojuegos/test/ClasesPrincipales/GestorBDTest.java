@@ -1,0 +1,29 @@
+package ClasesPrincipales;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class GestorBDTest {
+
+	@Test
+	public void testIniciarSesion() {
+		//prueba 1 usuario no existe
+		String inMail = "prueba";
+		String inPass = "1234";
+		GestorBD gestorBD = new GestorBD();
+		String msg = gestorBD.iniciarSesion(inMail,inPass);
+		System.out.println(msg);
+		assertEquals("El usuario indicado no existe", msg);
+		
+		// prueba 2 usuario correcto
+		inMail = "unai.gonzalez@opendeusto.es";
+		inPass = "1121";
+		msg = gestorBD.iniciarSesion(inMail,inPass);
+		assertEquals("OK", msg);
+
+		//prueba 3 usuario guardado en GestorDB
+		assertEquals("unai.gonzalez@opendeusto.es", gestorBD.logedUser.getEmail());
+	}
+
+}

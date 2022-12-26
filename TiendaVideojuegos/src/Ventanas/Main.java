@@ -18,7 +18,6 @@ public class Main {
 	static VentanaVideojuegos vV = new VentanaVideojuegos();
 	static VentanaCarrito vC = new VentanaCarrito();
 	static VentanaServicio vS = new VentanaServicio();
-    private static final Logger LOG = Logger.getLogger("file.txt");
     
 	public static void main(String[] args) {
 		
