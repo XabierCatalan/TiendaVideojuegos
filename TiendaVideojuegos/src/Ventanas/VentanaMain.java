@@ -1,10 +1,16 @@
 package Ventanas;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import ClasesPrincipales.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 
 
@@ -12,12 +18,8 @@ public class VentanaMain extends JFrame{
 	protected JButton botonIniciarSesion;
 	protected JButton botonCrearCuenta;
 	protected JButton botonEntrarTienda;
-
-	
-	
 	
 	public VentanaMain() {
-		
 		
 		//Main.bd.insertarDatosCarrito(Main.tg.LeerCSVCarritos());
 

@@ -10,9 +10,11 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
-
+import java.util.logging.Logger;
 
 public class GestorBD {
+    private static final Logger LOG = Logger.getLogger(GestorBD.class.getName());
+
 	protected static final String DRIVER_NAME = "org.sqlite.JDBC";
 	protected static final String DATABASE_FILE_VIDEOJUEGO = "db/databasevideojuego.db";
 	protected static final String DATABASE_FILE_CONSOLA = "db/databaseconsola.db";
@@ -849,6 +851,7 @@ public class GestorBD {
 					msg = "Contraseña incorrecta";
 					String cont = rs.getString("CONTRASEÑA");
 					if(pass.equals(rs.getString("CONTRASEÑA"))) {
+						GestorLog.info("OK - nombre de usuario y contraseña correctos");
 						msg = "OK";
 						Usuario u= new Usuario();
 						u.setEmail(rs.getString("EMAIL"));
@@ -857,6 +860,7 @@ public class GestorBD {
 						u.setNombre(rs.getString("NOMBRE"));
 						u.setTelefono(rs.getString("TELEFONO"));
 						GestorBD.this.logedUser = u;
+						GestorLog.info("usaurio guardado en GestorDB");
 					}
 					encontrado = true;
 					break;//como ha encontrado un usuario sale del while
@@ -864,14 +868,14 @@ public class GestorBD {
 			}
 			if(!encontrado) {
 					msg = "El usuario indicado no existe";
+					GestorLog.warning(msg);
 			}
 		}catch (Exception ex) {
 			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();	
 			msg = "error al conectarse a la base de datos";
-
+			GestorLog.warning(msg);
 		}	
-		System.out.println(msg);
 		return msg;
 	}
 	

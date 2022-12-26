@@ -17,6 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import ClasesPrincipales.GestorBD;
+import ClasesPrincipales.GestorLog;
 
 public class VentanaInicioSesion extends JFrame {
 	
@@ -48,9 +49,6 @@ public class VentanaInicioSesion extends JFrame {
 		contraseña1 = new JPasswordField("");
 		msgError = new JLabel("");
 		msgError.setForeground(Color.red);
-
-
-		
 		
 		BorderLayout BL1 = new BorderLayout();
 		
@@ -59,7 +57,6 @@ public class VentanaInicioSesion extends JFrame {
 		
 		JPanel JP2 = new JPanel(); //IntroDatos , Mail , mail1, Contraseña, contraseña1
 		JP2.setLayout(new GridLayout(2,2));
-		
 		
 		JPanel JP4 = new JPanel(); //InicioSesion
 		JP4.setLayout(new FlowLayout());
@@ -105,10 +102,9 @@ public class VentanaInicioSesion extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				//meter metodos de la base de datos que con el mail y contraseña te coja todo del usuario
 				String inMail = mail1.getText();
 				String inPass = new String(contraseña1.getPassword());
-
+				
 				
 				GestorBD gestorBD = new GestorBD();
 				String msg = gestorBD.iniciarSesion(inMail,inPass);
@@ -116,6 +112,7 @@ public class VentanaInicioSesion extends JFrame {
 					Main.vMP.setVisible(true);
 					dispose();
 				} else {
+					
 					msgError.setText(msg);
 				}
 			}

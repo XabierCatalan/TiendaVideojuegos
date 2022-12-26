@@ -1,10 +1,18 @@
 package Ventanas;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import ClasesPrincipales.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import ClasesPrincipales.GestorBD;
 
 public class VentanaMenuPrincipal extends JFrame{
 	
@@ -63,6 +71,8 @@ public class VentanaMenuPrincipal extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				GestorBD ges = new GestorBD();
+				System.out.println(ges.getLogedUser());
 				Main.vM.setVisible(true);
 				dispose();
 				
