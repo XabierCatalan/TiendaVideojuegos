@@ -95,12 +95,27 @@ public class VentanaCrearCuenta extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				//Meter metodo que cree una cuenta nueva con todo vacio excepto los datos
-				if(true) {
-					msgError.setText("No creado");
-				}else {
+//				if(true) {
+				GestorBD gestorBD = new GestorBD();
+				String mail = mail1.getText();
+				String pass = new String(contraseña1.getPassword());
+				String tel = telf1.getText(); 
+				String nombre = nomb1.getText();
+				System.out.println(nombre+mail+pass+tel);
+				String msg = gestorBD.crearCuenta(nombre,mail,pass,tel);
+				if(msg=="OK") {
+					GestorLog.fine("usuario nuevo creado");
 					Main.vMP.setVisible(true);
-					dispose();		
+					dispose();
+				} else {
+					msgError.setText(msg);
+					GestorLog.warning(msg);
 				}
+				
+//				}else {
+//					Main.vMP.setVisible(true);
+//					dispose();		
+//				}
 
 				
 			}

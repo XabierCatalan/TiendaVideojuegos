@@ -840,7 +840,7 @@ public class GestorBD {
 			return msg;
 		}
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
-				Statement stmt = con.createStatement()) {
+			Statement stmt = con.createStatement()) {
 			String sql = "SELECT * FROM USUARIO;";			
 			ResultSet rs = stmt.executeQuery(sql);
 			boolean encontrado = false;
@@ -871,7 +871,7 @@ public class GestorBD {
 					GestorLog.warning(msg);
 			}
 		}catch (Exception ex) {
-			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al consultar datos de la BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();	
 			msg = "error al conectarse a la base de datos";
 			GestorLog.warning(msg);
@@ -879,5 +879,32 @@ public class GestorBD {
 		return msg;
 	}
 	
+
+	public String crearCuenta(String nombre,String mail, String pass,String tel) {
+		
+		String msg = "crearCuenta - error no gestionado";
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
+			Statement stmt = con.createStatement()) {
+			String sql = "INSERT INTO USUARIO (NOMBRE,EMAIL,CONTRASEÑA,TELEFONO) VALUES (  "+nombre+","+mail+","+pass+","+tel+" );";
+			
+			stmt.executeUpdate(sql);
+			//con.commit();
+			Usuario u= new Usuario();
+			u.setEmail(			mail);
+			u.setContrasenya(	pass);
+			u.setNombre(		nombre);
+			u.setTelefono(		tel);
+			GestorBD.this.logedUser = u;
+
+			msg="OK";
+			
+		}catch (Exception ex) {
+			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();	
+			msg = "error al conectarse a la base de datos";
+			GestorLog.warning(msg);
+		}
+		return msg;
+	}
 
 }

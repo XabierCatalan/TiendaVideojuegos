@@ -8,6 +8,7 @@ public class GestorBDTest {
 
 	@Test
 	public void testIniciarSesion() {
+		System.out.println("### testIniciarSesion");
 		//prueba 1 usuario no existe
 		String inMail = "prueba";
 		String inPass = "1234";
@@ -24,6 +25,17 @@ public class GestorBDTest {
 
 		//prueba 3 usuario guardado en GestorDB
 		assertEquals("unai.gonzalez@opendeusto.es", gestorBD.logedUser.getEmail());
+	}
+	
+	@Test
+	public void crearCuenta() {
+		System.out.println("### crearCuenta");
+		// prueba 1 crear usuario
+		GestorBD gestorBD = new GestorBD();
+		gestorBD.crearCuenta("1234","1234","1234","1234");
+		//gestorBD.iniciarSesion(null, null);
+		System.out.println(gestorBD.logedUser);
+		assertEquals("1234", gestorBD.logedUser.getEmail());
 	}
 
 }
