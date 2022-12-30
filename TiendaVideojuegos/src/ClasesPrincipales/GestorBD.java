@@ -15,19 +15,24 @@ import java.util.logging.Logger;
 public class GestorBD {
     private static final Logger LOG = Logger.getLogger(GestorBD.class.getName());
 
-	protected static final String DRIVER_NAME = "org.sqlite.JDBC";
+	protected static final String DRIVER_NAME = "org.sqlite.JDBC";	
+	
+	protected static final String DATABASE_FILE_PRODUCTO = "db/databaseproducto.db";
 	protected static final String DATABASE_FILE_VIDEOJUEGO = "db/databasevideojuego.db";
 	protected static final String DATABASE_FILE_CONSOLA = "db/databaseconsola.db";
 	protected static final String DATABASE_FILE_MANDO = "db/databasemando.db";
 	protected static final String DATABASE_FILE_USUARIO = "db/databaseusuario.db";
 	protected static final String DATABASE_FILE_CARRITO = "db/databasecarrito.db";
 	protected static final String DATABASE_FILE_SERVICIO = "db/databaseservicio.db";
+	
+	protected static final String CONNECTION_STRING_PRODUCTO = "jdbc:sqlite:" + DATABASE_FILE_PRODUCTO;
 	protected static final String CONNECTION_STRING_VIDEOJUEGO = "jdbc:sqlite:" + DATABASE_FILE_VIDEOJUEGO;
 	protected static final String CONNECTION_STRING_CONSOLA = "jdbc:sqlite:" + DATABASE_FILE_CONSOLA;
 	protected static final String CONNECTION_STRING_MANDO= "jdbc:sqlite:" + DATABASE_FILE_MANDO;
 	protected static final String CONNECTION_STRING_USUARIO= "jdbc:sqlite:" + DATABASE_FILE_USUARIO;
 	protected static final String CONNECTION_STRING_CARRITO = "jdbc:sqlite:" + DATABASE_FILE_CARRITO;
 	protected static final String CONNECTION_STRING_SERVICIO = "jdbc:sqlite:" + DATABASE_FILE_SERVICIO;
+	
 	protected static Usuario logedUser = null;
 
 	
@@ -42,6 +47,25 @@ public class GestorBD {
 	
 	public Usuario getLogedUser() {
 		return logedUser;
+	}
+	
+	
+	public void CrearBBDDProducto() {
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTO);
+			 Statement stmt = con.createStatement()) {
+			
+			String sql = "CREATE TABLE IF NOT EXISTS PRODUCTO (\n"
+					+ " ID_P INTEGER PRIMARY KEY AUTOINCREMENT, \n"
+					+ " NOMBRE_P TEXT NOT NULL,\n"
+					+ " TP ENUM NOT NULL\n"
+					+ ");";
+					
+			if (!stmt.execute(sql)) {
+	        	System.out.println("- Se ha creado la tabla Producto");}
+		}catch (Exception ex) {
+			System.err.println(String.format("* Error al crear la BBDDProducto: %s", ex.getMessage()));
+			ex.printStackTrace();
+		}
 	}
 	
 	public void CrearBBDDVideojuego() {
