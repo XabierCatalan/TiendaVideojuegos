@@ -9,6 +9,7 @@ public class TestMando {
 	Mando mando;
 	protected int id = 0;
 	protected String nombre = "nombre";
+	protected TipoProducto tp = TipoProducto.MANDO;
 	protected EstadoProducto estado = EstadoProducto.PRIMERA_MANO;
 	protected double precio = 0;
 	protected Marca marca = Marca.NINTENDO;
@@ -18,6 +19,7 @@ public class TestMando {
 	mando = new Mando();
 	mando.setNombre(nombre);
 	mando.setId(id);
+	mando.setTp(tp);
 	mando.setEstado(estado);
 	mando.setPrecio(precio);
 	mando.setMarca(marca);
@@ -34,10 +36,12 @@ public class TestMando {
 
 	@Test
 	public void testMandoIntStringEstadoProductoDoubleMarca() {
-		Mando newMando = new Mando(id,nombre,estado,precio,marca);
+		Mando newMando = new Mando(id,nombre,tp,estado,precio,marca);
 		assertNotNull(newMando);
 		assertEquals(newMando.getNombre(), nombre);
 		assertEquals(newMando.getId(), id,0);
+		assertEquals(newMando.getTp(), tp);
+		
 		assertEquals(newMando.getEstado(), estado);
 		assertEquals(newMando.getPrecio(), precio,0);
 		assertEquals(newMando.getMarca(), marca);
@@ -50,6 +54,7 @@ public class TestMando {
 		assertNotNull(newMando2);
 		assertEquals(newMando2.getNombre(), "Sin nombre");
 		assertEquals(newMando2.getId(), 0,0);
+		assertEquals(newMando2.getTp(), TipoProducto.VIDEOJUEGO);
 		assertEquals(newMando2.getEstado(), estado.PRIMERA_MANO);
 		assertEquals(newMando2.getPrecio(), 0,0);
 		assertEquals(newMando2.getMarca(), marca.PLAYSTATION);

@@ -9,6 +9,7 @@ public class TestConsola {
 	Consola consola;
 	protected int id = 0;
 	protected String nombre = "nombre";
+	protected TipoProducto tp = TipoProducto.CONSOLA;
 	protected double precio=0;
 	protected EstadoProducto estado = EstadoProducto.PRIMERA_MANO;
 	protected Marca marca = Marca.NINTENDO;
@@ -18,6 +19,7 @@ public class TestConsola {
 	consola = new Consola();
 	consola.setNombre(nombre);
 	consola.setId(id);
+	consola.setTp(tp);
 	consola.setEstado(estado);
 	consola.setPrecio(precio);
 	consola.setMarca(marca);
@@ -33,10 +35,11 @@ public class TestConsola {
 
 	@Test
 	public void testConsolaIntStringDoubleEstadoProductoMarca() {
-		Consola newConsola = new Consola(id,nombre,precio,estado,marca);
+		Consola newConsola = new Consola(id,nombre,tp,precio,estado,marca);
 		assertNotNull(newConsola);
 		assertEquals(newConsola.getNombre(), nombre);
 		assertEquals(newConsola.getId(), id,0);
+		assertEquals(newConsola.getTp(), tp);
 		assertEquals(newConsola.getEstado(), estado);
 		assertEquals(newConsola.getPrecio(), precio,0);
 		assertEquals(newConsola.getMarca(), marca);
@@ -48,6 +51,7 @@ public class TestConsola {
 		assertNotNull(newConsola2);
 		assertEquals(newConsola2.getNombre(), "Sin nombre");
 		assertEquals(newConsola2.getId(), 0,0);
+		assertEquals(newConsola2.getTp(), TipoProducto.VIDEOJUEGO);
 		assertEquals(newConsola2.getEstado(), estado.PRIMERA_MANO);
 		assertEquals(newConsola2.getPrecio(), 0,0);
 		assertEquals(newConsola2.getMarca(), marca.PLAYSTATION);	}
