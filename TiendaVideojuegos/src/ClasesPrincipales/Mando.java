@@ -9,8 +9,8 @@ public class Mando extends Producto implements Serializable,Pagable {
 	protected double precio;
 	protected Marca marca;
 	
-	public Mando(int id, String nombre, EstadoProducto estado, double precio, Marca marca) {
-		super(id, nombre);
+	public Mando(int id, String nombre, TipoProducto tp, EstadoProducto estado, double precio, Marca marca) {
+		super(id, nombre, tp);
 		this.estado = estado;
 		this.precio = precio;
 		this.marca = marca;
