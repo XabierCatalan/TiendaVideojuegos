@@ -158,7 +158,7 @@ public class GestorBD {
 					+ " FECHA DATE NOT NULL,\n"
 					+ " ELEMENTOS ARRAYLIST<PAGABLE> NOT NULL, \n"
 					+ " ESTADOCARRITO ENUM NOT NULL,\n"
-					+ " TEXT EMAIL NOT NULL,\n"
+					+ " EMAIL TEXT NOT NULL,\n"
 					+ " "
 					+ ");";
 					
@@ -175,10 +175,10 @@ public class GestorBD {
 			 Statement stmt = con.createStatement()) {
 			
 			String sql = "CREATE TABLE IF NOT EXISTS SERVICIO (\n"
-					+ " USUARIO USUARIO PRIMARY KEY , \n"
+					+ " TEXT EMAIL PRIMARY KEY , \n"
 					+ " TIPOSERVICIO ENUM NOT NULL,\n"
 					+ " FECHA DATE NOT NULL, \n"
-					+ " DESCRIP STRING\n"
+					+ " DESCRIP TEXT\n"
 					+ ");";
 					
 			if (!stmt.execute(sql)) {
