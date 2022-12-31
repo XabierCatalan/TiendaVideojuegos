@@ -7,8 +7,8 @@ public class Consola extends Producto implements Serializable, Pagable {
 	protected EstadoProducto estado;
 	protected Marca marca;
 	
-	public Consola(int id, String nombre, double precio, EstadoProducto estado, Marca marca) {
-		super(id, nombre);
+	public Consola(int id, String nombre, TipoProducto tp, double precio, EstadoProducto estado, Marca marca) {
+		super(id, nombre, tp);
 		this.setPrecio(precio);
 		this.estado = estado;
 		this.marca = marca;

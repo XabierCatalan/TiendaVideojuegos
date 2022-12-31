@@ -9,19 +9,22 @@ public class TestProducto {
 	Producto producto;
  protected String nombre = "nombre1";
  protected int id = 0;
+ protected TipoProducto tp = TipoProducto.CONSOLA;
  
  @Before
  public void SetUp() {
 	 producto = new Producto();
 	 producto.setId(id);
 	 producto.setNombre(nombre);
+	 producto.setTp(tp);
  }
 	@Test
 	public void testProductoIntString() {
-		Producto newProducto = new Producto(id, nombre);
+		Producto newProducto = new Producto(id, nombre, tp);
 		assertNotNull(newProducto);
 		assertEquals(newProducto.getId(), id,0);
 		assertEquals(newProducto.getNombre(), nombre);
+		assertEquals(newProducto.getTp(), tp);
 	}
 
 	@Test
@@ -30,6 +33,7 @@ public class TestProducto {
 		assertNotNull(newProducto2);
 		assertEquals(newProducto2.getNombre(), "Sin nombre");
 		assertEquals(newProducto2.getId(), 0,0);
+		assertEquals(newProducto2.getTp(), TipoProducto.VIDEOJUEGO);
 		
 	}
 
@@ -58,6 +62,20 @@ public class TestProducto {
 		producto.setNombre(newNombre);
 		assertEquals(producto.getNombre(), newNombre);
 	}
+	
+	@Test
+	public void testGetTp() {
+		assertEquals(producto.getTp(), tp);
+	}
+	
+	@Test
+	public void testSetTp() {
+		TipoProducto newTipo = TipoProducto.MANDO;
+		assertEquals(producto.getTp(),tp);
+		producto.setTp(newTipo);
+		assertEquals(producto.getTp(), newTipo);
+	}
+	
 
 	@Test
 	public void testToString() {

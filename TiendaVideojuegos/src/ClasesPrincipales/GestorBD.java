@@ -15,19 +15,24 @@ import java.util.logging.Logger;
 public class GestorBD {
     private static final Logger LOG = Logger.getLogger(GestorBD.class.getName());
 
-	protected static final String DRIVER_NAME = "org.sqlite.JDBC";
+	protected static final String DRIVER_NAME = "org.sqlite.JDBC";	
+	
+	protected static final String DATABASE_FILE_PRODUCTO = "db/databaseproducto.db";
 	protected static final String DATABASE_FILE_VIDEOJUEGO = "db/databasevideojuego.db";
 	protected static final String DATABASE_FILE_CONSOLA = "db/databaseconsola.db";
 	protected static final String DATABASE_FILE_MANDO = "db/databasemando.db";
 	protected static final String DATABASE_FILE_USUARIO = "db/databaseusuario.db";
 	protected static final String DATABASE_FILE_CARRITO = "db/databasecarrito.db";
 	protected static final String DATABASE_FILE_SERVICIO = "db/databaseservicio.db";
+	
+	protected static final String CONNECTION_STRING_PRODUCTO = "jdbc:sqlite:" + DATABASE_FILE_PRODUCTO;
 	protected static final String CONNECTION_STRING_VIDEOJUEGO = "jdbc:sqlite:" + DATABASE_FILE_VIDEOJUEGO;
 	protected static final String CONNECTION_STRING_CONSOLA = "jdbc:sqlite:" + DATABASE_FILE_CONSOLA;
 	protected static final String CONNECTION_STRING_MANDO= "jdbc:sqlite:" + DATABASE_FILE_MANDO;
 	protected static final String CONNECTION_STRING_USUARIO= "jdbc:sqlite:" + DATABASE_FILE_USUARIO;
 	protected static final String CONNECTION_STRING_CARRITO = "jdbc:sqlite:" + DATABASE_FILE_CARRITO;
 	protected static final String CONNECTION_STRING_SERVICIO = "jdbc:sqlite:" + DATABASE_FILE_SERVICIO;
+	
 	protected static Usuario logedUser = null;
 
 	
@@ -42,6 +47,25 @@ public class GestorBD {
 	
 	public Usuario getLogedUser() {
 		return logedUser;
+	}
+	
+	
+	public void CrearBBDDProducto() {
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTO);
+			 Statement stmt = con.createStatement()) {
+			
+			String sql = "CREATE TABLE IF NOT EXISTS PRODUCTO (\n"
+					+ " ID_P INTEGER PRIMARY KEY AUTOINCREMENT, \n"
+					+ " NOMBRE_P TEXT NOT NULL,\n"
+					+ " TP ENUM NOT NULL\n"
+					+ ");";
+					
+			if (!stmt.execute(sql)) {
+	        	System.out.println("- Se ha creado la tabla Producto");}
+		}catch (Exception ex) {
+			System.err.println(String.format("* Error al crear la BBDDProducto: %s", ex.getMessage()));
+			ex.printStackTrace();
+		}
 	}
 	
 	public void CrearBBDDVideojuego() {
@@ -165,6 +189,32 @@ public class GestorBD {
 		}
 	}
 	
+	public void borrarBBDDProducto() {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTO);
+		     Statement stmt = con.createStatement()) {
+			
+	        String sql = "DROP TABLE IF EXISTS PRODUCTO";
+			
+	        //Se ejecuta la sentencia de creación de la tabla Estudiantes
+	        if (!stmt.execute(sql)) {
+	        	System.out.println("- Se ha borrado la tabla Producto");
+	        }
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar la BBDDProducto: %s", ex.getMessage()));
+			ex.printStackTrace();			
+		}
+		
+		try {
+			//Se borra el fichero de la BBDD
+			Files.delete(Paths.get(DATABASE_FILE_PRODUCTO));
+			System.out.println("- Se ha borrado el fichero de la BBDDProducto");
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar el archivo de la BBDDProducto: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}
+	}
+	
 	public void borrarBBDDVideojuego() {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_VIDEOJUEGO);
@@ -177,16 +227,16 @@ public class GestorBD {
 	        	System.out.println("- Se ha borrado la tabla Videojuego");
 	        }
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar la BBDDVideojuego: %s", ex.getMessage()));
 			ex.printStackTrace();			
 		}
 		
 		try {
 			//Se borra el fichero de la BBDD
 			Files.delete(Paths.get(DATABASE_FILE_VIDEOJUEGO));
-			System.out.println("- Se ha borrado el fichero de la BBDD");
+			System.out.println("- Se ha borrado el fichero de la BBDDVideojuego");
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar el archivo de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar el archivo de la BBDDVideojuego: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}
 	}
@@ -203,16 +253,16 @@ public class GestorBD {
 	        	System.out.println("- Se ha borrado la tabla Consola");
 	        }
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar la BBDDConsola: %s", ex.getMessage()));
 			ex.printStackTrace();			
 		}
 		
 		try {
 			//Se borra el fichero de la BBDD
 			Files.delete(Paths.get(DATABASE_FILE_CONSOLA));
-			System.out.println("- Se ha borrado el fichero de la BBDD");
+			System.out.println("- Se ha borrado el fichero de la BBDDConsola");
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar el archivo de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar el archivo de la BBDDConsola: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}
 	}
@@ -229,16 +279,16 @@ public class GestorBD {
 	        	System.out.println("- Se ha borrado la tabla Mando");
 	        }
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar la BBDDMando: %s", ex.getMessage()));
 			ex.printStackTrace();			
 		}
 		
 		try {
 			//Se borra el fichero de la BBDD
 			Files.delete(Paths.get(DATABASE_FILE_MANDO));
-			System.out.println("- Se ha borrado el fichero de la BBDD");
+			System.out.println("- Se ha borrado el fichero de la BBDDMando");
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar el archivo de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar el archivo de la BBDDMando: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}
 	}
@@ -255,16 +305,16 @@ public class GestorBD {
 	        	System.out.println("- Se ha borrado la tabla Carrito");
 	        }
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar la BBDDCarrito: %s", ex.getMessage()));
 			ex.printStackTrace();			
 		}
 		
 		try {
 			//Se borra el fichero de la BBDD
 			Files.delete(Paths.get(DATABASE_FILE_CARRITO));
-			System.out.println("- Se ha borrado el fichero de la BBDD");
+			System.out.println("- Se ha borrado el fichero de la BBDDCarrito");
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar el archivo de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar el archivo de la BBDDCarrito: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}
 	}
@@ -281,16 +331,16 @@ public class GestorBD {
 	        	System.out.println("- Se ha borrado la tabla Usuario");
 	        }
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar la BBDDUsuario: %s", ex.getMessage()));
 			ex.printStackTrace();			
 		}
 		
 		try {
 			//Se borra el fichero de la BBDD
 			Files.delete(Paths.get(DATABASE_FILE_USUARIO));
-			System.out.println("- Se ha borrado el fichero de la BBDD");
+			System.out.println("- Se ha borrado el fichero de la BBDDUsuario");
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar el archivo de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar el archivo de la BBDDUsuario: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}
 	}
@@ -307,18 +357,41 @@ public class GestorBD {
 	        	System.out.println("- Se ha borrado la tabla Servicio");
 	        }
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar la BBDDServicio: %s", ex.getMessage()));
 			ex.printStackTrace();			
 		}
 		
 		try {
 			//Se borra el fichero de la BBDD
 			Files.delete(Paths.get(DATABASE_FILE_SERVICIO));
-			System.out.println("- Se ha borrado el fichero de la BBDD");
+			System.out.println("- Se ha borrado el fichero de la BBDDServicio");
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar el archivo de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar el archivo de la BBDDServicio: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}
+	}
+	
+	public void insertarDatosProducto(List<Producto> productos) {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTO);
+		     Statement stmt = con.createStatement()) {
+			//Se define la plantilla de la sentencia SQL
+			String sql = "INSERT INTO PRODUCTO ( NOMBRE, TP) VALUES ( '%s', '%s');";
+			
+			System.out.println("- Insertando productos...");
+			
+			//Se recorren los clientes y se insertan uno a uno
+			for (Producto c : productos) {
+				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.getTp()))) {					
+					System.out.println(String.format(" - Producto insertado: %s", c.toString()));
+				} else {
+					System.out.println(String.format(" - No se ha insertado el producto: %s", c.toString()));
+				}
+			}			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al insertar datos de la BBDDProducto: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}				
 	}
 	
 	public void insertarDatosVideojuego(List<Videojuego> videojuegos) {
@@ -496,6 +569,46 @@ public class GestorBD {
 			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}				
+	}
+	
+	public ArrayList<Producto> obtenerDatosProducto() {
+		ArrayList<Producto> productos = new ArrayList<>();
+		
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTO);
+		     Statement stmt = con.createStatement()) {
+			String sql = "SELECT * FROM PRODUCTO WHERE ID >= 0";
+	//		System.out.println(sql);
+			
+			//Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
+			ResultSet rs = stmt.executeQuery(sql);		
+			
+			
+			Producto producto;
+			
+			//Se recorre el ResultSet y se crean objetos Cliente
+			while (rs.next()) {
+				producto = new Producto();
+				producto.setId(rs.getInt("ID"));
+				producto.setNombre(rs.getString("NOMBRE"));
+				producto.setTp(TipoProducto.valueOf(rs.getString("TP")));
+				
+				
+				
+				//Se inserta cada nuevo cliente en la lista de clientes
+				productos.add(producto);
+			}
+			
+			//Se cierra el ResultSet
+			rs.close();
+			
+			System.out.println(String.format("- Se han recuperado %d productos...", productos.size()));			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al obtener datos de la BBDDProducto: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}		
+		
+		return productos;
 	}
 	
 	
@@ -694,6 +807,21 @@ public class GestorBD {
 		}		
 		
 		return carritos;
+	}
+	
+	public void borrarDatosProducto() {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTO);
+		     Statement stmt = con.createStatement()) {
+			//Se ejecuta la sentencia de borrado de datos
+			String sql = "DELETE FROM PRODUCTO;";			
+			int result = stmt.executeUpdate(sql);
+			
+			System.out.println(String.format("- Se han borrado %d producto", result));
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar datos de la BBDDProducto: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}		
 	}
 	
 	public void borrarDatosVideojuego() {

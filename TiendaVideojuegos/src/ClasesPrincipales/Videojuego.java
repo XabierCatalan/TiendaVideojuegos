@@ -11,8 +11,8 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 	
 	
 
-	public Videojuego(int id, String nombre, Genero genero, EstadoProducto estado, int anyo, double precio) {
-		super(id, nombre);
+	public Videojuego(int id, String nombre, TipoProducto tp, Genero genero, EstadoProducto estado, int anyo, double precio) {
+		super(id, nombre,tp);
 		this.genero = genero;
 		this.estado = estado;
 		this.setAnyo(anyo);

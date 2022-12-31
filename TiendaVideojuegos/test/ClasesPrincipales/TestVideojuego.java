@@ -10,6 +10,7 @@ public class TestVideojuego {
 	Videojuego videojuego;
 	protected int id = 0;
 	protected String nombre = "nombre";
+	protected TipoProducto tp = TipoProducto.VIDEOJUEGO;
 	protected Genero genero = Genero.ACCION;
 	protected EstadoProducto estado = EstadoProducto.PRIMERA_MANO;
 	protected int anyo = 0;
@@ -20,6 +21,7 @@ public class TestVideojuego {
 		videojuego = new Videojuego();
 		videojuego.setId(id);
 		videojuego.setNombre(nombre);
+		videojuego.setTp(tp);
 		videojuego.setGenero(genero);
 		videojuego.setEstado(estado);
 		videojuego.setAnyo(anyo);
@@ -36,10 +38,11 @@ public class TestVideojuego {
 
 	@Test
 	public void testVideojuegoIntStringGeneroEstadoProductoIntDouble() {
-		Videojuego newVideojuego = new Videojuego(id,nombre,genero,estado,anyo,precio);
+		Videojuego newVideojuego = new Videojuego(id,nombre,tp,genero,estado,anyo,precio);
 		assertNotNull(newVideojuego);
 		assertEquals(newVideojuego.getNombre(), nombre);
 		assertEquals(newVideojuego.getId(), id,0);
+		assertEquals(newVideojuego.getTp(), tp);
 		assertEquals(newVideojuego.getGenero(), genero);
 		assertEquals(newVideojuego.getEstado(), estado);
 		assertEquals(newVideojuego.getAnyo(), anyo,0);
@@ -52,6 +55,7 @@ public class TestVideojuego {
 		assertNotNull(newVideojuego2);
 		assertEquals(newVideojuego2.getNombre(), "Sin nombre");
 		assertEquals(newVideojuego2.getId(), 0,0);
+		assertEquals(newVideojuego2.getTp(), TipoProducto.VIDEOJUEGO);
 		assertEquals(newVideojuego2.getGenero(), genero.ACCION);
 		assertEquals(newVideojuego2.getEstado(), estado.PRIMERA_MANO);
 		assertEquals(newVideojuego2.getAnyo(), 0,0);
