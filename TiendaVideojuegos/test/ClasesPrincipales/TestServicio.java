@@ -16,7 +16,7 @@ public class TestServicio {
 	protected TipoServicio tipo = TipoServicio.MANTENIMIENTO;
 	protected Date fecha = new Date();
 	protected String Descrip = "jnd";
-	protected Usuario u = new Usuario(1, "o", "o@gmail", "o.cont", "678866438");
+	protected String email = "o.perez@opendeusto.es";
 	
 	
 	@Before
@@ -25,17 +25,17 @@ public class TestServicio {
 		servicio.setFecha1(fecha);
 		servicio.setTipo(tipo);
 		servicio.setDescrip(Descrip);
-		servicio.setU(u);
+		servicio.setEmail(email);
 	}
 
 	@Test
 	public void testServicioTipoServicioDate() {
-		Servicio newServicio = new Servicio(tipo,fecha,Descrip,u);
+		Servicio newServicio = new Servicio(tipo,fecha,Descrip,email);
 		assertNotNull(newServicio);
 		assertEquals(newServicio.getTipo(), tipo);
 		assertEquals(newServicio.getFecha1(), fecha);
 		assertEquals(newServicio.getDescrip(), Descrip);
-		assertEquals(newServicio.getU(), u);
+		assertEquals(newServicio.getEmail(), email);
 	}
 
 	@Test
@@ -45,7 +45,7 @@ public class TestServicio {
 		assertEquals(newServicio2.getTipo(), TipoServicio.MANTENIMIENTO);
 		assertEquals(newServicio2.getFecha1(), new Date());
 		assertEquals(newServicio2.getDescrip(), "");
-		//assertEquals(newServicio2.getU(), new Usuario(0,"","","",""));
+		assertEquals(newServicio2.getEmail(), "Sin email");
 	}
 
 	@Test
@@ -85,15 +85,15 @@ public class TestServicio {
 		assertEquals(servicio.getDescrip(), s);
 	}
 	
-	public void testGetUsuario() {
-		assertEquals(servicio.getU(), u);
+	public void testGetEmail() {
+		assertEquals(servicio.getEmail(), email);
 	}
 	
-	public void testSetU() {
-		Usuario s = new Usuario();
-		assertEquals(servicio.getU(), u);
-		servicio.setU(u);
-		assertEquals(servicio.getU(), s);
+	public void testSetEmail() {
+		String newEmail = "o.perez@opendeusto.com";
+		assertEquals(servicio.getEmail(), email);
+		servicio.setEmail(newEmail);
+		assertEquals(servicio.getEmail(), email);
 	}
 	
 
@@ -101,7 +101,7 @@ public class TestServicio {
 	public void testToString() {
 		SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
 		
-		String toString = "Email: " + u.getEmail() + " Tipo:" + tipo + ", (" + sdf1.format(fecha) + ")";
+		String toString = "Email: " + email + " Tipo:" + tipo + ", (" + sdf1.format(fecha) + ")";
 		System.out.println(toString);
 		System.out.println(servicio.toString());
 		assertEquals(servicio.toString(), toString);
