@@ -286,6 +286,41 @@ public class GestorBD {
 		
 		return videojuegos;
 	}
+	
+	public void borrarDatosVideojuego() {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_VIDEOJUEGO);
+		     Statement stmt = con.createStatement()) {
+			//Se ejecuta la sentencia de borrado de datos
+			String sql = "DELETE FROM VIDEOJUEGO;";			
+			int result = stmt.executeUpdate(sql);
+			
+			System.out.println(String.format("- Se han borrado %d videojuego", result));
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}		
+	}	
+	
+	public void actualizarNombreVideojuego(Videojuego videojuego, String newNombre) {
+		//Se abre la conexiÃ³n y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_VIDEOJUEGO);
+		     Statement stmt = con.createStatement()) {
+			//Se ejecuta la sentencia de borrado de datos
+			String sql = "UPDATE VIDEOJUEGO SET NOMBRE = '%s' WHERE ID = %d;";
+	
+			
+			int result = stmt.executeUpdate(String.format(sql, newNombre, videojuego.getId()));
+	
+			System.out.println(String.format("- Se ha actulizado %d videojuego", result));
+			
+			//	System.out.println();
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error actualizando datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}		
+	}
+	
 	// MANDOS:
 	
 	public void CrearBBDDMando() {
@@ -398,6 +433,22 @@ public class GestorBD {
 		
 		return mandos;
 	}
+	
+	public void borrarDatosMando() {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_MANDO);
+		     Statement stmt = con.createStatement()) {
+			//Se ejecuta la sentencia de borrado de datos
+			String sql = "DELETE FROM MANDO;";			
+			int result = stmt.executeUpdate(sql);
+			
+			System.out.println(String.format("- Se han borrado %d mando", result));
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}		
+	}	
+	
 	// CONSOLAS:
 	
 	public void CrearBBDDConsola() {
@@ -510,6 +561,23 @@ public class GestorBD {
 		
 		return consolas;
 	}
+	
+	public void borrarDatosConsola() {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CONSOLA);
+		     Statement stmt = con.createStatement()) {
+			//Se ejecuta la sentencia de borrado de datos
+			String sql = "DELETE FROM CONSOLA;";			
+			int result = stmt.executeUpdate(sql);
+			
+			System.out.println(String.format("- Se han borrado %d consola", result));
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}		
+	}	
+	
+	
 	// USUARIOS:
 	
 	public void CrearBBDDUsuario() {
@@ -581,6 +649,63 @@ public class GestorBD {
 		}		
 		
 	}
+	
+	public ArrayList<Usuario> obtenerDatosUsuario() {
+		ArrayList<Usuario> usuarios = new ArrayList<>();
+		
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
+		     Statement stmt = con.createStatement()) {
+			String sql = "SELECT * FROM USUARIO WHERE ID >= 0";
+	//		System.out.println(sql);
+			
+			//Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
+			ResultSet rs = stmt.executeQuery(sql);		
+			
+			
+			Usuario usuario;
+			
+			//Se recorre el ResultSet y se crean objetos Cliente
+			while (rs.next()) {
+				usuario= new Usuario();
+				usuario.setId(rs.getInt("ID"));
+				usuario.setNombre(rs.getString("NOMBRE"));
+				usuario.setEmail(rs.getString("EMAIL"));
+				usuario.setContrasenya(rs.getString("CONTRASEÑA"));
+				usuario.setTelefono(rs.getString("TELEFONO"));
+				
+			
+				
+				//Se inserta cada nuevo cliente en la lista de clientes
+				usuarios.add(usuario);
+			}
+			
+			//Se cierra el ResultSet
+			rs.close();
+			
+			System.out.println(String.format("- Se han recuperado %d consolas...", usuarios.size()));			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}		
+		
+		return usuarios;
+	}
+	
+	public void borrarDatosUsuario() {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
+		     Statement stmt = con.createStatement()) {
+			//Se ejecuta la sentencia de borrado de datos
+			String sql = "DELETE FROM USUARIO;";			
+			int result = stmt.executeUpdate(sql);
+			
+			System.out.println(String.format("- Se han borrado %d usuario", result));
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}		
+	}	
 	// SERVICIOS:
 	
 	public void CrearBBDDServicio() {
@@ -602,7 +727,7 @@ public class GestorBD {
 		}
 	}
 	
-	public void borrarBBDDUservicio() {
+	public void borrarBBDDServicio() {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_SERVICIO);
 		     Statement stmt = con.createStatement()) {
@@ -810,6 +935,21 @@ public class GestorBD {
 		return carritos;
 	}
 	
+	public void borrarDatosCarrito() {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
+		     Statement stmt = con.createStatement()) {
+			//Se ejecuta la sentencia de borrado de datos
+			String sql = "DELETE FROM CARRITO;";			
+			int result = stmt.executeUpdate(sql);
+			
+			System.out.println(String.format("- Se han borrado %d carrito", result));
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}		
+	}	
+	
 		
 	
 	
@@ -871,56 +1011,13 @@ public class GestorBD {
 	
 	
 	
-	public void borrarDatosVideojuego() {
-		//Se abre la conexión y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_VIDEOJUEGO);
-		     Statement stmt = con.createStatement()) {
-			//Se ejecuta la sentencia de borrado de datos
-			String sql = "DELETE FROM VIDEOJUEGO;";			
-			int result = stmt.executeUpdate(sql);
-			
-			System.out.println(String.format("- Se han borrado %d videojuego", result));
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}		
-	}	
-	
-	public void actualizarNombreVideojuego(Videojuego videojuego, String newNombre) {
-		//Se abre la conexiÃ³n y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_VIDEOJUEGO);
-		     Statement stmt = con.createStatement()) {
-			//Se ejecuta la sentencia de borrado de datos
-			String sql = "UPDATE VIDEOJUEGO SET NOMBRE = '%s' WHERE ID = %d;";
-	
-			
-			int result = stmt.executeUpdate(String.format(sql, newNombre, videojuego.getId()));
-	
-			System.out.println(String.format("- Se ha actulizado %d videojuego", result));
-			
-			//	System.out.println();
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error actualizando datos de la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}		
-	}
 	
 	
 	
-	public void borrarDatosConsola() {
-		//Se abre la conexión y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CONSOLA);
-		     Statement stmt = con.createStatement()) {
-			//Se ejecuta la sentencia de borrado de datos
-			String sql = "DELETE FROM CONSOLA;";			
-			int result = stmt.executeUpdate(sql);
-			
-			System.out.println(String.format("- Se han borrado %d consola", result));
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}		
-	}	
+	
+	
+	
+	
 	
 	public void actualizarNombreConsola(Consola consola, String newNombre) {
 		//Se abre la conexiÃ³n y se obtiene el Statement
@@ -941,20 +1038,7 @@ public class GestorBD {
 		}		
 	}
 		
-	public void borrarDatosMando() {
-		//Se abre la conexión y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_MANDO);
-		     Statement stmt = con.createStatement()) {
-			//Se ejecuta la sentencia de borrado de datos
-			String sql = "DELETE FROM MANDO;";			
-			int result = stmt.executeUpdate(sql);
-			
-			System.out.println(String.format("- Se han borrado %d mando", result));
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}		
-	}	
+	
 	
 	public void actualizarNombreMando(Mando mando, String newNombre) {
 		//Se abre la conexiÃ³n y se obtiene el Statement
@@ -976,35 +1060,14 @@ public class GestorBD {
 	}
 	
 	
-	public void borrarDatosCarrito() {
-		//Se abre la conexión y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
-		     Statement stmt = con.createStatement()) {
-			//Se ejecuta la sentencia de borrado de datos
-			String sql = "DELETE FROM CARRITO;";			
-			int result = stmt.executeUpdate(sql);
-			
-			System.out.println(String.format("- Se han borrado %d carrito", result));
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}		
-	}	
 	
-	public void borrarDatosUsuario() {
-		//Se abre la conexión y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
-		     Statement stmt = con.createStatement()) {
-			//Se ejecuta la sentencia de borrado de datos
-			String sql = "DELETE FROM USUARIO;";			
-			int result = stmt.executeUpdate(sql);
-			
-			System.out.println(String.format("- Se han borrado %d usuario", result));
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}		
-	}	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
