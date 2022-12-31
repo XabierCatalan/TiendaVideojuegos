@@ -75,7 +75,7 @@ public class Usuario {
 	
 	public boolean equals(Object o) {
 		if(o != null && o instanceof Usuario) {
-			return this.email.equals(((Usuario)o).email);
+			return this.nombre.equals(((Usuario)o).nombre);
 		}
 		return false;
 		

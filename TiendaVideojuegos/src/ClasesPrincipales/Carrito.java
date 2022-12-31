@@ -12,16 +12,16 @@ public class Carrito implements Serializable{
 	protected Date fecha;
 	protected ArrayList<Pagable> elementos;
 	protected EstadoCarrito estado;
-	protected String email;
+	protected Usuario usuario;
 
 	
-	public Carrito(int id, Date fecha, ArrayList<Pagable> elementos, EstadoCarrito estado, String email) {
+	public Carrito(int id, Date fecha, ArrayList<Pagable> elementos, EstadoCarrito estado, Usuario usuario) {
 		super();
 		this.setId(id);
 		this.setFecha(fecha);
 		this.setElementos(elementos);
 		this.estado = estado;
-		this.setEmail(email);
+		this.setUsuario(usuario);
 
 	}
 	
@@ -31,7 +31,7 @@ public class Carrito implements Serializable{
 		this.fecha = new Date();
 		this.elementos = new ArrayList<Pagable>();
 		this.estado = EstadoCarrito.PREPARACIÓN;
-		this.email = "Sin email";
+		this.usuario = new Usuario();
 	}
 
 
@@ -70,12 +70,12 @@ public class Carrito implements Serializable{
 	
 	
 
-	public String getEmail() {
-		return email;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	
@@ -98,7 +98,7 @@ public class Carrito implements Serializable{
 	@Override
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		return "Pedido de " + email + ", " + sdf.format(fecha) + ", " + this.getPrecio() + " euros (" + estado + ")   "  + elementos;
+		return "Pedido de " + usuario.getNombre() + ", " + sdf.format(fecha) + ", " + this.getPrecio() + " euros (" + estado + ")   "  + elementos;
 	}
 	
 }

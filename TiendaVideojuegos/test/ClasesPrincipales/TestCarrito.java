@@ -18,7 +18,7 @@ public class TestCarrito {
 	protected Date fecha = new Date();
 	protected ArrayList<Pagable> elementos = new ArrayList<Pagable>();
 	protected EstadoCarrito estado = EstadoCarrito.LISTO;
-	protected String email = "o.perez@opendesuto.es";
+	protected Usuario usuario = new Usuario(1,"xabi","xabier.catalan@opendeusto.es","1234","111111111");
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
 	
@@ -29,17 +29,17 @@ public class TestCarrito {
 		carrito.setFecha(fecha);
 		carrito.setElementos(elementos);
 		carrito.setEstadoCarrito(estado);
-		carrito.setEmail(email);
+		carrito.setUsuario(usuario);
 		
 	}
 	
 
 	@Test
 	public void testCarritoStringDateEstadoCarrito() {
-		Carrito newCarrito = new Carrito(id,fecha, elementos, estado, email);
+		Carrito newCarrito = new Carrito(id,fecha, elementos, estado, usuario);
 		assertNotNull(newCarrito);
 		assertEquals(newCarrito.getId(), id);
-		assertEquals(newCarrito.getEmail(), email);
+		assertEquals(newCarrito.getUsuario(), usuario);
 		assertEquals(newCarrito.getElementos(), elementos);
 		assertEquals(newCarrito.getFecha(), fecha);
 		assertEquals(newCarrito.getEstadoCarrito(), estado);
@@ -53,7 +53,7 @@ public class TestCarrito {
 		assertEquals(newCarrito2.getFecha(), new Date());
 		assertEquals(newCarrito2.getElementos(), new ArrayList<Pagable>());
 		assertEquals(newCarrito2.getEstadoCarrito(), EstadoCarrito.PREPARACIÓN);
-		assertEquals(newCarrito2.getEmail(), "Sin email");
+		assertEquals(newCarrito2.getUsuario(), new Usuario());
 		
 	}
 	
@@ -74,16 +74,16 @@ public class TestCarrito {
 	
 
 	@Test
-	public void testGetEmail() {
-		assertEquals(carrito.getEmail(), email);
+	public void testGetUsuario() {
+		assertEquals(carrito.getUsuario(), usuario);
 	}
 
 	@Test
-	public void testSetEmail() {
-		String newEmail = "o.perez@opendeusto.com";
-		assertEquals(carrito.getEmail(), email);
-		carrito.setEmail(newEmail);
-		assertEquals(carrito.getEmail(), newEmail);
+	public void testSetUsuario() {
+		Usuario newUsuario = new Usuario(2,"oscar","o.perez@opendeusto.es","4321","666666666");
+		assertEquals(carrito.getUsuario(), usuario);
+		carrito.setUsuario(newUsuario);
+		assertEquals(carrito.getUsuario(), newUsuario);
 	}
 
 	@Test
@@ -137,7 +137,7 @@ public class TestCarrito {
 		elementos.add(consola);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
-		String toString = "Pedido de " + email + ", " + sdf.format(fecha) + ", " + carrito.getPrecio() + " euros (" + estado + ")   "  + elementos;;
+		String toString = "Pedido de " + usuario.getNombre() + ", " + sdf.format(fecha) + ", " + carrito.getPrecio() + " euros (" + estado + ")   "  + elementos;;
 		System.out.println(toString);
 		System.out.println(carrito.toString());
 		assertEquals(carrito.toString(), toString);
