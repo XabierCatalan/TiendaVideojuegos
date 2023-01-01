@@ -748,7 +748,7 @@ public class GestorBD {
 			
 			//Se recorren los clientes y se insertan uno a uno
 			for (Servicio s : servicio) {
-				if (1 == stmt.executeUpdate(String.format(sql, s.getEmail(), s.getTipo(), s.getFecha1(), s.getDescrip()))) {					
+				if (1 == stmt.executeUpdate(String.format(sql, s.getU(), s.getTipo(), s.getFecha1(), s.getDescrip()))) {					
 					System.out.println(String.format(" - Usuario insertado: %s", s.toString()));
 				} else {
 					System.out.println(String.format(" - No se ha insertado el servicio: %s", s.toString()));
@@ -771,7 +771,7 @@ public class GestorBD {
 			
 			//Se recorren los clientes y se insertan uno a uno
 			
-			stmt.executeUpdate(String.format(sql, s.getEmail(), s.getTipo(), s.getFecha1(), s.getDescrip()));					
+			stmt.executeUpdate(String.format(sql, s.getU(), s.getTipo(), s.getFecha1(), s.getDescrip()));					
 			System.out.println(String.format(" - Usuario insertado: %s", s.toString()));
 							
 		} catch (Exception ex) {
@@ -839,7 +839,7 @@ public class GestorBD {
 			
 			//Se recorren los clientes y se insertan uno a uno
 			for (Carrito c : carritos) {
-				if (1 == stmt.executeUpdate(String.format(sql, c.getFecha(), c.getElementos(), c.getEstadoCarrito(), c.getEmail()))) {					
+				if (1 == stmt.executeUpdate(String.format(sql, c.getFecha(), c.getElementos(), c.getEstadoCarrito(), c.getUsuario()))) {					
 					System.out.println(String.format(" - Carrito insertado: %s", c.toString()));
 				} else {
 					System.out.println(String.format(" - No se ha insertado el carrito: %s", c.toString()));
@@ -875,7 +875,7 @@ public class GestorBD {
 				carrito= new Carrito();
 				carrito.setId(rs.getInt("ID"));
 				carrito.setFecha(rs.getDate("FECHA"));
-				carrito.setEmail(rs.getEmail("EMAIL"));
+				carrito.setUsuario(rs.get("USUARIO"));
 				
 				//elementos = rs.getString("ELEMENTOS");
 				//p = new ArrayList<Pagable>();
@@ -1091,3 +1091,5 @@ public class GestorBD {
 	}
 
 }
+
+// OTROS METODOS
