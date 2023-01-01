@@ -1047,6 +1047,7 @@ public class GestorBD {
 				int id = rs.getInt("ID");
 				Date fecha = rs.getDate("FECHA");
 	
+				ArrayList<Pagable> Pagables = ObtenerPagablesPorArrayDeProductos(ObtenerProductosConIDCarrito(id));
 				
 				Usuario usuario = buscarUsuarioPorEmail( emailUsuario );
 				EstadoCarrito estado = EstadoCarrito.valueOf(rs.getString("ESTADOCARRITO"));
@@ -1056,7 +1057,7 @@ public class GestorBD {
 				carrito.setId(id);
 				carrito.setFecha(fecha);
 				
-				carrito.setElementos(null);
+				carrito.setElementos(Pagables);
 				
 				carrito.setUsuario(usuario);
 				carrito.setEstadoCarrito(estado);
