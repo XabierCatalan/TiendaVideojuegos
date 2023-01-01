@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
@@ -569,8 +570,9 @@ public class GestorBD {
 			 Statement stmt = con.createStatement()) {
 			
 			String sql = "CREATE TABLE IF NOT EXISTS USUARIO (\n"
+					+ " ID INTEGER PRIMARY KEY AUTOINCREMENT, \\n"
 					+ " NOMBRE TEXT NOT NULL,\n"
-					+ " EMAIL TEXT NOT NULL PRIMARY KEY,\n"
+					+ " EMAIL TEXT NOT NULL,\n"
 					+ " CONTRASEÑA TEXT NOT NULL,\n"
 					+ " TELEFONO TEXT NOT NULL\n"
 					+ ");";
@@ -790,8 +792,7 @@ public class GestorBD {
 					+ " FECHA DATE NOT NULL,\n"
 					+ " ELEMENTOS ARRAYLIST<PAGABLE> NOT NULL, \n"
 					+ " ESTADOCARRITO ENUM NOT NULL,\n"
-					+ " EMAIL TEXT NOT NULL\n"
-					+ " FOREIGN KEY(EMAIL) REFERENCES USUARIO(EMAIL)"
+					+ " USUARIO STRING NOT NULL\n"
 					+ ");";
 					
 			if (!stmt.execute(sql)) {
@@ -933,86 +934,9 @@ public class GestorBD {
 			ex.printStackTrace();						
 		}		
 	}	
-	
 		
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	
+	//OTROS METODOS
 	
 	
 	// mira si el usuario con el mail y contraseña es valido
@@ -1089,7 +1013,64 @@ public class GestorBD {
 		}
 		return msg;
 	}
+	
+	
+	
+	public List<Carrito> buscarCarritosDeUsuario( String emailUsuario ) {
+		ArrayList<Carrito> l = new ArrayList<>();
+		String sql = "select ID,FECHA,ESTADOCARRITO,USUARIO from CARRITO where USUARIO = '" + emailUsuario + "'";
+		try {
+			log( Level.INFO, "Lanzada consulta a base de datos: " + sql, null );
+			ResultSet rs = statement.executeQuery( sql );
+			while (rs.next()) {
+				int id = rs.getInt("ID");
+				Date fecha = rs.getDate("FECHA");
+	
+				
+				Usuario usuario = buscarUsuarioPorEmail( emailUsuario );
+				
+				
+				Foto foto = new Foto( codigo, usuario, categoria, fecha, ruta );
+				l.add( carrito );
+			}
+			rs.close();
+		} catch (SQLException e) {
+			lastError = e;
+			log( Level.SEVERE, "Error en búsqueda de base de datos: " + sql, e );
+		}
+		return l;
+	}
+	
+	
+	public Usuario buscarUsuarioPorEmail(String email) {
+		String sql = "select * from usuario where nick = '" + nick + "'";
+		try {
+			// Ahorro de tiempo - si está en el mapa no se busca en bd
+			if (mapaUsuarios.containsKey( nick )) {
+				return mapaUsuarios.get( nick );
+			}
+			// Si no lo leemos de base de datos
+			log( Level.INFO, "Lanzada consulta a base de datos: " + sql, null );
+			ResultSet rs = statement.executeQuery( sql );
+			if (rs.next()) {
+				Usuario usuario = new Usuario(
+					rs.getInt("codigo"), rs.getInt("nivel"), rs.getString("nick"), rs.getInt("numFotos") );
+				rs.close();
+				mapaUsuarios.put( usuario.getNick(), usuario );
+				return usuario;
+			} else {
+				rs.close();
+				return null;
+			}
+		} catch (SQLException e) {
+			lastError = e;
+			log( Level.SEVERE, "Error en búsqueda de base de datos: " + sql, e );
+			return null;
+		}
+	}
 
 }
 
-// OTROS METODOS
+
+
+
