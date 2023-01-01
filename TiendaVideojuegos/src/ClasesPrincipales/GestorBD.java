@@ -302,24 +302,8 @@ public class GestorBD {
 		}		
 	}	
 	
-	public void actualizarNombreVideojuego(Videojuego videojuego, String newNombre) {
-		//Se abre la conexiÃ³n y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_VIDEOJUEGO);
-		     Statement stmt = con.createStatement()) {
-			//Se ejecuta la sentencia de borrado de datos
-			String sql = "UPDATE VIDEOJUEGO SET NOMBRE = '%s' WHERE ID = %d;";
 	
-			
-			int result = stmt.executeUpdate(String.format(sql, newNombre, videojuego.getId()));
 	
-			System.out.println(String.format("- Se ha actulizado %d videojuego", result));
-			
-			//	System.out.println();
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error actualizando datos de la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}		
-	}
 	
 	// MANDOS:
 	
@@ -1019,45 +1003,6 @@ public class GestorBD {
 	
 	
 	
-	public void actualizarNombreConsola(Consola consola, String newNombre) {
-		//Se abre la conexiÃ³n y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CONSOLA);
-		     Statement stmt = con.createStatement()) {
-			//Se ejecuta la sentencia de borrado de datos
-			String sql = "UPDATE CONSOLA SET NOMBRE = '%s' WHERE ID = %d;";
-	
-			
-			int result = stmt.executeUpdate(String.format(sql, newNombre, consola.getId()));
-	
-			System.out.println(String.format("- Se ha actulizado %d consola", result));
-			
-			//	System.out.println();
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error actualizando datos de la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}		
-	}
-		
-	
-	
-	public void actualizarNombreMando(Mando mando, String newNombre) {
-		//Se abre la conexiÃ³n y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_MANDO);
-		     Statement stmt = con.createStatement()) {
-			//Se ejecuta la sentencia de borrado de datos
-			String sql = "UPDATE MANDO SET NOMBRE = '%s' WHERE ID = %d;";
-	
-			
-			int result = stmt.executeUpdate(String.format(sql, newNombre, mando.getId()));
-	
-			System.out.println(String.format("- Se ha actulizado %d mando", result));
-			
-			//	System.out.println();
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error actualizando datos de la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}		
-	}
 	
 	
 	
@@ -1066,8 +1011,7 @@ public class GestorBD {
 	
 	
 	
-	
-	
+
 	
 	
 	
