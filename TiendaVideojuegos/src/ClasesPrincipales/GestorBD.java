@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
@@ -164,6 +165,8 @@ public class GestorBD {
 		
 		return productos;
 	}
+	
+	
 	
 	public void borrarDatosProducto() {
 		//Se abre la conexión y se obtiene el Statement
@@ -1106,22 +1109,160 @@ public class GestorBD {
 	
 	//ProductosCarrito
 	
-	public void CrearBBDDProductoCarrito() {
+	public void CrearBBDDProductosCarrito() {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTOSCARRITO);
 			 Statement stmt = con.createStatement()) {
 			
 			String sql = "CREATE TABLE IF NOT EXISTS PRODUCTOSCARRITO (\n"
-					+ " ID_P INTEGER PRIMARY KEY AUTOINCREMENT, \n"
-					+ " NOMBRE_P TEXT NOT NULL,\n"
-					+ " TP ENUM NOT NULL\n"
+					+ " ID_C INTEGER NOT NULL, \n"
+					+ " ID_P INTEGER NOT NULL,\n"
+					+ " PRIMARY KEY(ID_C,ID_P)\n"
+					+ " FOREIGN KEY(ID_C) REFERENCES CARRITO(ID) ON DELETE ON CASCADE \n"
+					+ " FOREIGN KEY(ID_P) REFERENCES PRODUCTO(ID_P) \n"
 					+ ");";
 					
 			if (!stmt.execute(sql)) {
-	        	System.out.println("- Se ha creado la tabla Producto");}
+	        	System.out.println("- Se ha creado la tabla ProductosCarrito");}
 		}catch (Exception ex) {
-			System.err.println(String.format("* Error al crear la BBDDProducto: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al crear la BBDDProductosCarrito: %s", ex.getMessage()));
 			ex.printStackTrace();
 		}
+	}
+	
+	public void borrarBBDDProductosCarrito() {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTOSCARRITO);
+		     Statement stmt = con.createStatement()) {
+			
+	        String sql = "DROP TABLE IF EXISTS PRODUCTOSCARRITO";
+			
+	        //Se ejecuta la sentencia de creación de la tabla Estudiantes
+	        if (!stmt.execute(sql)) {
+	        	System.out.println("- Se ha borrado la tabla ProductosCarrito");
+	        }
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar la BBDDProductosCarrito: %s", ex.getMessage()));
+			ex.printStackTrace();			
+		}
+		
+		try {
+			//Se borra el fichero de la BBDD
+			Files.delete(Paths.get(DATABASE_FILE_PRODUCTOSCARRITO));
+			System.out.println("- Se ha borrado el fichero de la BBDDProductosCarrito");
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar el archivo de la BBDDProductosCarrito: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}
+	}
+	
+	public ArrayList<Producto> ObtenerProductosConIDCarrito(int id) {
+		ArrayList<Producto> productos = new ArrayList<>();
+		
+		// obtener datos de la tabla producto para comparar los id
+		ArrayList<Producto> p = obtenerDatosProducto();
+		
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTOSCARRITO);
+			 Statement stmt = con.createStatement()) {
+			
+			String sql = "select ID_P from PRODUCTOSCARRITO where ID_C = " + id ;
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			while (rs.next()) {
+				int id_p = rs.getInt("ID_P");
+				
+				for (Producto producto : p) {
+					if (producto.getId() == id_p) {
+						productos.add(producto);
+					}
+				}
+				
+				}
+			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al borrar el archivo de la BBDDProductosCarrito: %s", ex.getMessage()));
+			ex.printStackTrace();	
+		}
+		return productos;
+		
+	}
+	
+	public ArrayList<Pagable> ObtenerPagablesPorArrayDeProductos (ArrayList<Producto> productos) {
+		ArrayList<Pagable> pagables = new ArrayList<>();
+		for (Producto p : productos) {
+			if (p.tp == TipoProducto.VIDEOJUEGO) {
+				try(Connection con = DriverManager.getConnection(CONNECTION_STRING_VIDEOJUEGO);
+					Statement stmt = con.createStatement()) {
+					
+					Videojuego v = new Videojuego();
+					
+					String sql = "select * from VIDEOJUEGO where nombre = ' " + p.getNombre() + " '";
+					ResultSet rs = stmt.executeQuery(sql);
+					
+					v.setId(p.getId());
+					v.setNombre(rs.getString("NOMBRE"));
+					v.setGenero(Genero.valueOf(rs.getString("GENERO")));
+					v.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
+					v.setAnyo(rs.getInt("ANYO"));
+					v.setPrecio(rs.getDouble("PRECIO"));
+					
+					pagables.add(v);
+					
+				} catch (Exception ex) {
+					System.err.println(String.format("* Error al borrar el archivo de la BBDDProductosCarrito: %s", ex.getMessage()));
+					ex.printStackTrace();	
+				}
+			
+				
+			} else if (p.tp == TipoProducto.MANDO){
+				try(Connection con = DriverManager.getConnection(CONNECTION_STRING_MANDO);
+					Statement stmt = con.createStatement()) {
+					
+					Mando m = new Mando();
+					
+					String sql = "select * from MANDO where nombre = ' " + p.getNombre() + " '";
+					ResultSet rs = stmt.executeQuery(sql);
+					
+					m.setId(p.getId());
+					m.setNombre(rs.getString("NOMBRE"));
+					m.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
+					m.setPrecio(rs.getDouble("PRECIO"));
+					m.setMarca(Marca.valueOf(rs.getString("MARCA")));
+					
+					pagables.add(m);
+					
+				} catch (Exception ex) {
+					System.err.println(String.format("* Error al borrar el archivo de la BBDDProductosCarrito: %s", ex.getMessage()));
+					ex.printStackTrace();	
+				} 
+					
+				
+			} else {
+				try(Connection con = DriverManager.getConnection(CONNECTION_STRING_CONSOLA);
+					Statement stmt = con.createStatement()) {
+					
+					Consola c = new Consola();
+					
+					String sql = "select * from CONSOLA where nombre = ' " + p.getNombre() + " '";
+					ResultSet rs = stmt.executeQuery(sql);
+					
+					c.setId(p.getId());
+					c.setNombre(rs.getString("NOMBRE"));
+					c.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
+					c.setPrecio(rs.getDouble("PRECIO"));
+					c.setMarca(Marca.valueOf(rs.getString("MARCA")));
+					
+					pagables.add(c);
+					
+				} catch (Exception ex) {
+					System.err.println(String.format("* Error al borrar el archivo de la BBDDProductosCarrito: %s", ex.getMessage()));
+					ex.printStackTrace();	
+				} 
+			}
+			
+			}
+		
+		return pagables;
+		
 	}
 	
 	
