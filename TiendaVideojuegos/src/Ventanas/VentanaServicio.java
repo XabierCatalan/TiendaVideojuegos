@@ -79,6 +79,16 @@ public class VentanaServicio extends JFrame{
 		
 		cp.add(JP5, BorderLayout.SOUTH);
 		
+		atras.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Main.vMP.setVisible(true);
+				dispose();
+				
+			}
+		});
+		
 		
 		
 		

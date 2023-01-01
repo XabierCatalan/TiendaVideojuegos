@@ -26,6 +26,9 @@ public class GestorBD {
 	protected static final String DATABASE_FILE_CARRITO = "db/databasecarrito.db";
 	protected static final String DATABASE_FILE_SERVICIO = "db/databaseservicio.db";
 	
+	//Productos_carrito
+	protected static final String DATABASE_FILE_PRODUCTOSCARRITO = "db/databaseproductoscarrito.db";
+	
 	protected static final String CONNECTION_STRING_PRODUCTO = "jdbc:sqlite:" + DATABASE_FILE_PRODUCTO;
 	protected static final String CONNECTION_STRING_VIDEOJUEGO = "jdbc:sqlite:" + DATABASE_FILE_VIDEOJUEGO;
 	protected static final String CONNECTION_STRING_CONSOLA = "jdbc:sqlite:" + DATABASE_FILE_CONSOLA;
@@ -33,6 +36,9 @@ public class GestorBD {
 	protected static final String CONNECTION_STRING_USUARIO= "jdbc:sqlite:" + DATABASE_FILE_USUARIO;
 	protected static final String CONNECTION_STRING_CARRITO = "jdbc:sqlite:" + DATABASE_FILE_CARRITO;
 	protected static final String CONNECTION_STRING_SERVICIO = "jdbc:sqlite:" + DATABASE_FILE_SERVICIO;
+	
+	//Productos_carrito
+	protected static final String CONNECTION_STRING_PRODUCTOSCARRITO = "jdbc:sqlite:" + DATABASE_FILE_PRODUCTOSCARRITO;
 	
 	protected static Usuario logedUser = null;
 
@@ -1018,57 +1024,112 @@ public class GestorBD {
 	
 	public List<Carrito> buscarCarritosDeUsuario( String emailUsuario ) {
 		ArrayList<Carrito> l = new ArrayList<>();
-		String sql = "select ID,FECHA,ESTADOCARRITO,USUARIO from CARRITO where USUARIO = '" + emailUsuario + "'";
-		try {
-			log( Level.INFO, "Lanzada consulta a base de datos: " + sql, null );
-			ResultSet rs = statement.executeQuery( sql );
+		
+		
+		//"select ID,FECHA,ESTADOCARRITO,USUARIO from CARRITO where USUARIO = '" + emailUsuario + "'"; EL QUE TENIAMOS
+		
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
+			Statement stmt = con.createStatement()) {
+			
+			String sql = "select ID,FECHA,ESTADOCARRITO,USUARIO from CARRITO where C.USUARIO =  ' " + buscarUsuarioPorEmail(emailUsuario) + "'";
+			
+			ResultSet rs = stmt.executeQuery( sql );
+			
+			Carrito carrito;
+			
 			while (rs.next()) {
+				
+				carrito = new Carrito();
+				
 				int id = rs.getInt("ID");
 				Date fecha = rs.getDate("FECHA");
 	
 				
 				Usuario usuario = buscarUsuarioPorEmail( emailUsuario );
+				EstadoCarrito estado = EstadoCarrito.valueOf(rs.getString("ESTADOCARRITO"));
 				
+				//Foto foto = new Foto( codigo, usuario, categoria, fecha, ruta );
 				
-				Foto foto = new Foto( codigo, usuario, categoria, fecha, ruta );
+				carrito.setId(id);
+				carrito.setFecha(fecha);
+				
+				carrito.setElementos(null);
+				
+				carrito.setUsuario(usuario);
+				carrito.setEstadoCarrito(estado);
+				
 				l.add( carrito );
 			}
 			rs.close();
-		} catch (SQLException e) {
-			lastError = e;
-			log( Level.SEVERE, "Error en búsqueda de base de datos: " + sql, e );
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
 		}
 		return l;
 	}
 	
 	
 	public Usuario buscarUsuarioPorEmail(String email) {
-		String sql = "select * from usuario where nick = '" + nick + "'";
-		try {
+		
+		Usuario usuario = new Usuario();
+		
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
+			 Statement stmt = con.createStatement()) {
 			// Ahorro de tiempo - si está en el mapa no se busca en bd
-			if (mapaUsuarios.containsKey( nick )) {
-				return mapaUsuarios.get( nick );
-			}
+			//if (mapaUsuarios.containsKey( nick )) {
+			//	return mapaUsuarios.get( nick );
+			//}
 			// Si no lo leemos de base de datos
-			log( Level.INFO, "Lanzada consulta a base de datos: " + sql, null );
-			ResultSet rs = statement.executeQuery( sql );
-			if (rs.next()) {
-				Usuario usuario = new Usuario(
-					rs.getInt("codigo"), rs.getInt("nivel"), rs.getString("nick"), rs.getInt("numFotos") );
-				rs.close();
-				mapaUsuarios.put( usuario.getNick(), usuario );
-				return usuario;
-			} else {
-				rs.close();
-				return null;
-			}
-		} catch (SQLException e) {
-			lastError = e;
-			log( Level.SEVERE, "Error en búsqueda de base de datos: " + sql, e );
-			return null;
+			
+			String sql = "select * from USUARIO where EMAIL = '" + email + "'";
+			
+			ResultSet rs = stmt.executeQuery(sql);
+			
+				usuario = new Usuario();
+				usuario.setId(rs.getInt("ID"));
+				usuario.setNombre(rs.getString("NOMBRE"));
+				usuario.setEmail(rs.getString("EMAIL"));
+				usuario.setContrasenya(rs.getString("CONTRASEÑA"));
+				usuario.setTelefono(rs.getString("TELEFONO"));
+			
+			
+			
+			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
 		}
+		
+		return usuario;
 	}
 
+	
+	//ProductosCarrito
+	
+	public void CrearBBDDProductoCarrito() {
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTOSCARRITO);
+			 Statement stmt = con.createStatement()) {
+			
+			String sql = "CREATE TABLE IF NOT EXISTS PRODUCTOSCARRITO (\n"
+					+ " ID_P INTEGER PRIMARY KEY AUTOINCREMENT, \n"
+					+ " NOMBRE_P TEXT NOT NULL,\n"
+					+ " TP ENUM NOT NULL\n"
+					+ ");";
+					
+			if (!stmt.execute(sql)) {
+	        	System.out.println("- Se ha creado la tabla Producto");}
+		}catch (Exception ex) {
+			System.err.println(String.format("* Error al crear la BBDDProducto: %s", ex.getMessage()));
+			ex.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
 }
 
 
