@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,6 +101,32 @@ public class VentanaConsolaMandos extends JFrame {
 		pBotones.add(botonAtras, BorderLayout.SOUTH);
 		
 		cp.add(pBotones);
+		
+		TableCellRenderer render = (table , value, isSelected, hasFocus, row, column) -> {
+			JLabel l = new JLabel();
+			
+			String valor = (String) table.getValueAt(row, 2);
+			
+			if (Marca.NINTENDO == Marca.valueOf(valor)) {
+				
+				l.setIcon(new ImageIcon("NINTENDO.png"));
+				
+			} else if (Marca.PLAYSTATION == Marca.valueOf(valor)) {
+				
+				l.setIcon(new ImageIcon("PS.png"));
+				
+			} else {
+				l.setIcon(new ImageIcon("XBOX.png"));
+			}
+			
+			return l;
+
+		};
+		
+		
+		
+		
+		tCM.setDefaultRenderer(Object.class, render);
 		
 		
 		botonAtras.addActionListener(new ActionListener() {
