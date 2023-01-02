@@ -7,12 +7,13 @@ import org.junit.Test;
 
 public class TestConsola {
 	Consola consola;
-	protected int id = 0;
+	protected int id = 10;
 	protected String nombre = "nombre";
 	protected TipoProducto tp = TipoProducto.CONSOLA;
 	protected double precio=0;
 	protected EstadoProducto estado = EstadoProducto.PRIMERA_MANO;
 	protected Marca marca = Marca.NINTENDO;
+	protected int id_c = 1;
 	
 	@Before
 	public void SetUp() {
@@ -23,6 +24,7 @@ public class TestConsola {
 	consola.setEstado(estado);
 	consola.setPrecio(precio);
 	consola.setMarca(marca);
+	consola.setId_c(id_c);
 	}
 	
 	@Test
@@ -35,7 +37,7 @@ public class TestConsola {
 
 	@Test
 	public void testConsolaIntStringDoubleEstadoProductoMarca() {
-		Consola newConsola = new Consola(id,nombre,tp,precio,estado,marca);
+		Consola newConsola = new Consola(id,nombre,tp,precio,estado,marca,id_c);
 		assertNotNull(newConsola);
 		assertEquals(newConsola.getNombre(), nombre);
 		assertEquals(newConsola.getId(), id,0);
@@ -43,6 +45,7 @@ public class TestConsola {
 		assertEquals(newConsola.getEstado(), estado);
 		assertEquals(newConsola.getPrecio(), precio,0);
 		assertEquals(newConsola.getMarca(), marca);
+		assertEquals(newConsola.getId_c(), id_c,0);
 				}
 
 	@Test
@@ -54,7 +57,9 @@ public class TestConsola {
 		assertEquals(newConsola2.getTp(), TipoProducto.VIDEOJUEGO);
 		assertEquals(newConsola2.getEstado(), estado.PRIMERA_MANO);
 		assertEquals(newConsola2.getPrecio(), 0,0);
-		assertEquals(newConsola2.getMarca(), marca.PLAYSTATION);	}
+		assertEquals(newConsola2.getMarca(), marca.PLAYSTATION);
+		assertEquals(newConsola2.getId_c(), 1,0);
+		}
 
 	@Test
 	public void testGetPrecio() {
@@ -91,5 +96,22 @@ public class TestConsola {
 		assertEquals(consola.getMarca(), marca);
 		consola.setMarca(newMarca);
 		assertEquals(consola.getMarca(), newMarca);	}
+	
+	@Test
+	public void testGetId_c() {
+		assertEquals(consola.getId_c(), id_c,0);
+	}
+
+	@Test
+	public void testSetId_c() {
+		Integer newId_c = 3;
+		assertEquals(consola.getId_c(), id_c,0);
+		consola.setId_c(newId_c);
+		assertEquals(consola.getId_c(), newId_c,0);
+	}
+	
+	
 
 }
+
+

@@ -6,12 +6,14 @@ public class Consola extends Producto implements Serializable, Pagable {
 	protected double precio;
 	protected EstadoProducto estado;
 	protected Marca marca;
+	protected int id_c;
 	
-	public Consola(int id, String nombre, TipoProducto tp, double precio, EstadoProducto estado, Marca marca) {
+	public Consola(int id, String nombre, TipoProducto tp, double precio, EstadoProducto estado, Marca marca, int id_c) {
 		super(id, nombre, tp);
 		this.setPrecio(precio);
 		this.estado = estado;
 		this.marca = marca;
+		this.id_c= id_c;
 	}
 	
 	public Consola() {
@@ -19,6 +21,7 @@ public class Consola extends Producto implements Serializable, Pagable {
 		this.precio = 0;
 		this.estado = EstadoProducto.PRIMERA_MANO;
 		this.marca = Marca.PLAYSTATION;
+		this.id_c = 1;
 	}
 
 	public double getPrecio() {
@@ -47,6 +50,15 @@ public class Consola extends Producto implements Serializable, Pagable {
 
 	public void setMarca(Marca marca) {
 		this.marca = marca;
+	}
+	
+	
+	public int getId_c() {
+		return id_c;
+	}
+
+	public void setId_c(int id_c) {
+		this.id_c = id_c;
 	}
 
 	@Override
