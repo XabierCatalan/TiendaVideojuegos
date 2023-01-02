@@ -579,7 +579,7 @@ public class GestorBD {
 			 Statement stmt = con.createStatement()) {
 			
 			String sql = "CREATE TABLE IF NOT EXISTS USUARIO (\n"
-					+ " ID INTEGER PRIMARY KEY AUTOINCREMENT, \\n"
+					+ " ID INTEGER PRIMARY KEY AUTOINCREMENT, \n"
 					+ " NOMBRE TEXT NOT NULL,\n"
 					+ " EMAIL TEXT NOT NULL,\n"
 					+ " CONTRASEÑA TEXT NOT NULL,\n"
@@ -799,7 +799,6 @@ public class GestorBD {
 			String sql = "CREATE TABLE IF NOT EXISTS CARRITO (\n"
 					+ " ID INTEGER PRIMARY KEY AUTOINCREMENT, \n"
 					+ " FECHA DATE NOT NULL,\n"
-					+ " ELEMENTOS ARRAYLIST<PAGABLE> NOT NULL, \n"
 					+ " ESTADOCARRITO ENUM NOT NULL,\n"
 					+ " USUARIO STRING NOT NULL\n"
 					+ ");";
