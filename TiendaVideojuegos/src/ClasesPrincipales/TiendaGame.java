@@ -79,7 +79,7 @@ public class TiendaGame implements Serializable{
 			
 			BR.readLine();
 			
-			int id = 0;
+			int id_v = 0;
 			
 			
 			while ((linea = BR.readLine()) != null) {
@@ -87,13 +87,15 @@ public class TiendaGame implements Serializable{
 				tokenizer = new StringTokenizer(linea, ";");
 				
 				
-				v.setId(0);
-				id++;
+				v.setId_v(0);
+				id_v++;
 				v.setNombre(tokenizer.nextToken());
 				v.setGenero(Genero.valueOf(tokenizer.nextToken()));
 				v.setEstado(EstadoProducto.valueOf(tokenizer.nextToken()));
 				v.setAnyo(Integer.parseInt(tokenizer.nextToken()));
 				v.setPrecio(Double.parseDouble(tokenizer.nextToken()));
+				v.setId(Integer.parseInt(tokenizer.nextToken()));
+				v.setTp(TipoProducto.valueOf(tokenizer.nextToken()));
 				
 				
 				Videojuegos.add(v);
@@ -123,7 +125,7 @@ public class TiendaGame implements Serializable{
 			
 			BR.readLine();
 			
-			int id = 0;
+			int id_m = 0;
 			
 			
 			while ((linea = BR.readLine()) != null) {
@@ -131,12 +133,14 @@ public class TiendaGame implements Serializable{
 				tokenizer = new StringTokenizer(linea, ";");
 				
 				
-				m.setId(0);
-				id++;
+				m.setId_m(0);
+				id_m++;
 				m.setNombre(tokenizer.nextToken());
 				m.setEstado(EstadoProducto.valueOf(tokenizer.nextToken()));
 				m.setPrecio(Double.parseDouble(tokenizer.nextToken()));
 				m.setMarca(Marca.valueOf(tokenizer.nextToken()));
+				m.setId(Integer.parseInt(tokenizer.nextToken()));
+				m.setTp(TipoProducto.valueOf(tokenizer.nextToken()));
 				
 				Mandos.add(m);
 				
@@ -166,7 +170,7 @@ public class TiendaGame implements Serializable{
 			
 			BR.readLine();
 			
-			int id = 0;
+			int id_c = 0;
 			
 			
 			while ((linea = BR.readLine()) != null) {
@@ -174,12 +178,14 @@ public class TiendaGame implements Serializable{
 				tokenizer = new StringTokenizer(linea, ";");
 				
 				
-				c.setId(0);
-				id++;
+				c.setId_c(0);
+				id_c++;
 				c.setNombre(tokenizer.nextToken());
 				c.setEstado(EstadoProducto.valueOf(tokenizer.nextToken()));
 				c.setPrecio(Double.parseDouble(tokenizer.nextToken()));
 				c.setMarca(Marca.valueOf(tokenizer.nextToken()));
+				c.setId(Integer.parseInt(tokenizer.nextToken()));
+				c.setTp(TipoProducto.valueOf(tokenizer.nextToken()));
 				
 				
 				Consolas.add(c);
