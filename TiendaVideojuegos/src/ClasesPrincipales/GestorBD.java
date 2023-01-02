@@ -876,8 +876,8 @@ public class GestorBD {
 			Usuario usuario;
 			StringTokenizer tokenizer;
 			Carrito carrito;
-			String elementos;
-			ArrayList<Pagable> p;
+			
+			
 			
 			
 			//Se recorre el ResultSet y se crean objetos Cliente
@@ -885,18 +885,9 @@ public class GestorBD {
 				carrito= new Carrito();
 				carrito.setId(rs.getInt("ID"));
 				carrito.setFecha(rs.getDate("FECHA"));
-				carrito.setUsuario(rs.get("USUARIO"));
+				carrito.setElementos(ObtenerPagablesPorArrayDeProductos(ObtenerProductosConIDCarrito(rs.getInt("ID"))));
 				
-				//elementos = rs.getString("ELEMENTOS");
-				//p = new ArrayList<Pagable>();
-				//String[] elementos2 = elementos.split(", ");
-				//for (String e : elementos2) {
-				//	p.add(null);
-				//}
-				
-				
-				
-				
+						
 				carrito.setEstadoCarrito(EstadoCarrito.valueOf(rs.getString("ESTADOCARRITO")));
 				
 				String u = rs.getString("USUARIO");
@@ -908,7 +899,7 @@ public class GestorBD {
 				usuario.setContrasenya(tokenizer.nextToken());
 				usuario.setTelefono(tokenizer.nextToken());
 				
-				carrito.setEmail(usuario);
+				carrito.setUsuario(usuario);
 			
 				
 			
@@ -1034,7 +1025,7 @@ public class GestorBD {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
 			Statement stmt = con.createStatement()) {
 			
-			String sql = "select ID,FECHA,ESTADOCARRITO,USUARIO from CARRITO where C.USUARIO =  ' " + buscarUsuarioPorEmail(emailUsuario) + "'";
+			String sql = "select ID,FECHA,ESTADOCARRITO,USUARIO from CARRITO where USUARIO =  ' " + buscarUsuarioPorEmail(emailUsuario) + "'";
 			
 			ResultSet rs = stmt.executeQuery( sql );
 			
@@ -1052,7 +1043,7 @@ public class GestorBD {
 				Usuario usuario = buscarUsuarioPorEmail( emailUsuario );
 				EstadoCarrito estado = EstadoCarrito.valueOf(rs.getString("ESTADOCARRITO"));
 				
-				//Foto foto = new Foto( codigo, usuario, categoria, fecha, ruta );
+				
 				
 				carrito.setId(id);
 				carrito.setFecha(fecha);
