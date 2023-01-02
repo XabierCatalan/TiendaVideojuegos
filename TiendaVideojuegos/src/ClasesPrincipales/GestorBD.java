@@ -195,7 +195,8 @@ public class GestorBD {
 					+ " ESTADOPRODUCTO ENUM NOT NULL,\n"
 					+ " ANYO INTEGER NOT NULL,\n"
 					+ " PRECIO DOUBLE NOT NULL,\n"
-					+ " ID_P INTEGER NOT NULL\n"
+					+ " ID_P INTEGER NOT NULL,\n"
+					+ " TP ENUM NOT NULL\n"
 					+ ");";
 					
 			if (!stmt.execute(sql)) {
@@ -237,20 +238,20 @@ public class GestorBD {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_VIDEOJUEGO);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO VIDEOJUEGO ( NOMBRE, GENERO, ESTADOPRODUCTO, ANYO, PRECIO, ID_P) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s');";
+			String sql = "INSERT INTO VIDEOJUEGO ( NOMBRE, GENERO, ESTADOPRODUCTO, ANYO, PRECIO, ID_P, TP) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s', '%s');";
 			
 			System.out.println("- Insertando videojuegos...");
 			
 			//Se recorren los clientes y se insertan uno a uno
 			for (Videojuego c : videojuegos) {
-				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.getGenero(), c.getEstado(), c.getAnyo(),  c.getPrecio(), c.getId()))) {					
+				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.getGenero(), c.getEstado(), c.getAnyo(),  c.getPrecio(), c.getId(), c.getTp()))) {					
 					System.out.println(String.format(" - Videojuego insertado: %s", c.toString()));
 				} else {
 					System.out.println(String.format(" - No se ha insertado el videojuego: %s", c.toString()));
 				}
 			}			
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al insertar datos de la BBDDVideojuego: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}				
 	}
@@ -280,6 +281,7 @@ public class GestorBD {
 				videojuego.setAnyo(rs.getInt("ANYO"));
 				videojuego.setPrecio(rs.getDouble("PRECIO"));
 				videojuego.setId(rs.getInt("ID_P"));
+				videojuego.setTp(TipoProducto.valueOf(rs.getString("TP")));
 			
 				
 				//Se inserta cada nuevo cliente en la lista de clientes
@@ -291,7 +293,7 @@ public class GestorBD {
 			
 			System.out.println(String.format("- Se han recuperado %d videojuegos...", videojuegos.size()));			
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al obtener datos de la BBDDVideojuego: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}		
 		
@@ -328,13 +330,14 @@ public class GestorBD {
 					+ "ESTADOPRODUCTO ENUM NOT NULL,\n"
 					+ "PRECIO DOUBLE NOT NULL,\n"
 					+ "MARCA ENUM NOT NULL,\n"
-					+ "ID_P INTEGER NOT NULL\n"
+					+ "ID_P INTEGER NOT NULL,\n"
+					+ " TP ENUM NOT NULL\n"
 					+ ");";
 					
 			if (!stmt.execute(sql)) {
 	        	System.out.println("- Se ha creado la tabla Mando");}
 		}catch (Exception ex) {
-			System.err.println(String.format("* Error al crear la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al crear la BBDDMando: %s", ex.getMessage()));
 			ex.printStackTrace();
 		}
 	}
@@ -370,20 +373,20 @@ public class GestorBD {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_MANDO);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO MANDO ( NOMBRE, ESTADOPRODUCTO, PRECIO, MARCA, ID_P) VALUES ( '%s', '%s', '%s', '%s', '%s');";
+			String sql = "INSERT INTO MANDO ( NOMBRE, ESTADOPRODUCTO, PRECIO, MARCA, ID_P, TP) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s');";
 			
 			System.out.println("- Insertando mandos...");
 			
 			//Se recorren los clientes y se insertan uno a uno
 			for (Mando c : mandos) {
-				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.getEstado(), c.getPrecio(),  c.getMarca(), c.getId()))) {					
+				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.getEstado(), c.getPrecio(),  c.getMarca(), c.getId(), c.getTp()))) {					
 					System.out.println(String.format(" - mando insertado: %s", c.toString()));
 				} else {
 					System.out.println(String.format(" - No se ha insertado el mando: %s", c.toString()));
 				}
 			}			
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al insertar datos de la BBDDMando: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}				
 	}
@@ -412,6 +415,7 @@ public class GestorBD {
 				mando.setPrecio(rs.getDouble("PRECIO"));
 				mando.setMarca(Marca.valueOf(rs.getString("MARCA")));
 				mando.setId(rs.getInt("ID_P"));
+				mando.setTp(TipoProducto.valueOf(rs.getString("TP")));
 			
 				
 				//Se inserta cada nuevo cliente en la lista de clientes
@@ -423,7 +427,7 @@ public class GestorBD {
 			
 			System.out.println(String.format("- Se han recuperado %d mandos...", mandos.size()));			
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al obtener datos de la BBDDMando: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}		
 		
@@ -440,7 +444,7 @@ public class GestorBD {
 			
 			System.out.println(String.format("- Se han borrado %d mando", result));
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar datos de la BBDDMando: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}		
 	}	
@@ -457,13 +461,14 @@ public class GestorBD {
 					+ "ESTADOPRODUCTO ENUM NOT NULL,\n"
 					+ "PRECIO DOUBLE NOT NULL,\n"
 					+ "MARCA ENUM NOT NULL,\n"
-					+ "ID_P INTEGER NOT NULL\n"
+					+ "ID_P INTEGER NOT NULL,\n"
+					+ " TP ENUM NOT NULL\n"
 					+ ");";
 					
 			if (!stmt.execute(sql)) {
 	        	System.out.println("- Se ha creado la tabla Consola");}
 		}catch (Exception ex) {
-			System.err.println(String.format("* Error al crear la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al crear la BBDDConsola: %s", ex.getMessage()));
 			ex.printStackTrace();
 		}
 	}
@@ -499,20 +504,20 @@ public class GestorBD {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CONSOLA);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO CONSOLA ( NOMBRE, ESTADOPRODUCTO, PRECIO, MARCA, ID_P) VALUES ( '%s', '%s', '%s', '%s','%s');";
+			String sql = "INSERT INTO CONSOLA ( NOMBRE, ESTADOPRODUCTO, PRECIO, MARCA, ID_P, TP) VALUES ( '%s', '%s', '%s', '%s','%s', '%s');";
 			
 			System.out.println("- Insertando consolas...");
 			
 			//Se recorren los clientes y se insertan uno a uno
 			for (Consola c : consolas) {
-				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.getEstado(), c.getPrecio(),  c.getMarca(), c.getId()))) {					
+				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.getEstado(), c.getPrecio(),  c.getMarca(), c.getId(), c.getTp()))) {					
 					System.out.println(String.format(" - consola insertada: %s", c.toString()));
 				} else {
 					System.out.println(String.format(" - No se ha insertado la consola: %s", c.toString()));
 				}
 			}			
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al insertar datos de la BBDDConsola: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}				
 	}
@@ -541,6 +546,7 @@ public class GestorBD {
 				consola.setPrecio(rs.getDouble("PRECIO"));
 				consola.setMarca(Marca.valueOf(rs.getString("MARCA")));
 				consola.setId(rs.getInt("ID_P"));
+				consola.setTp(TipoProducto.valueOf(rs.getString("TP")));
 			
 				
 				//Se inserta cada nuevo cliente en la lista de clientes
@@ -552,7 +558,7 @@ public class GestorBD {
 			
 			System.out.println(String.format("- Se han recuperado %d consolas...", consolas.size()));			
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al obtener datos de la BBDDConsola: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}		
 		
@@ -569,7 +575,7 @@ public class GestorBD {
 			
 			System.out.println(String.format("- Se han borrado %d consola", result));
 		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar datos de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al borrar datos de la BBDDConsola: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}		
 	}	
