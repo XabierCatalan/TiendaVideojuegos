@@ -189,12 +189,13 @@ public class GestorBD {
 			 Statement stmt = con.createStatement()) {
 			
 			String sql = "CREATE TABLE IF NOT EXISTS VIDEOJUEGO (\n"
-					+ " ID INTEGER PRIMARY KEY AUTOINCREMENT, \n"
+					+ " ID_V INTEGER PRIMARY KEY AUTOINCREMENT, \n"
 					+ " NOMBRE TEXT NOT NULL,\n"
 					+ " GENERO ENUM NOT NULL, \n"
-					+ "ESTADOPRODUCTO ENUM NOT NULL,\n"
-					+ "ANYO INTEGER NOT NULL,\n"
-					+ "PRECIO DOUBLE NOT NULL\n"
+					+ " ESTADOPRODUCTO ENUM NOT NULL,\n"
+					+ " ANYO INTEGER NOT NULL,\n"
+					+ " PRECIO DOUBLE NOT NULL,\n"
+					+ " ID_P INTEGER NOT NULL\n"
 					+ ");";
 					
 			if (!stmt.execute(sql)) {
@@ -236,13 +237,13 @@ public class GestorBD {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_VIDEOJUEGO);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO VIDEOJUEGO ( NOMBRE, GENERO, ESTADOPRODUCTO, ANYO, PRECIO) VALUES ( '%s', '%s', '%s', '%s', '%s');";
+			String sql = "INSERT INTO VIDEOJUEGO ( NOMBRE, GENERO, ESTADOPRODUCTO, ANYO, PRECIO, ID_P) VALUES ( '%s', '%s', '%s', '%s', '%s', '%s');";
 			
 			System.out.println("- Insertando videojuegos...");
 			
 			//Se recorren los clientes y se insertan uno a uno
 			for (Videojuego c : videojuegos) {
-				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.getGenero(), c.getEstado(), c.getAnyo(),  c.getPrecio()))) {					
+				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.getGenero(), c.getEstado(), c.getAnyo(),  c.getPrecio(), c.getId()))) {					
 					System.out.println(String.format(" - Videojuego insertado: %s", c.toString()));
 				} else {
 					System.out.println(String.format(" - No se ha insertado el videojuego: %s", c.toString()));
@@ -260,7 +261,7 @@ public class GestorBD {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_VIDEOJUEGO);
 		     Statement stmt = con.createStatement()) {
-			String sql = "SELECT * FROM VIDEOJUEGO WHERE ID >= 0";
+			String sql = "SELECT * FROM VIDEOJUEGO WHERE ID_V >= 0";
 	//		System.out.println(sql);
 			
 			//Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
@@ -272,13 +273,13 @@ public class GestorBD {
 			//Se recorre el ResultSet y se crean objetos Cliente
 			while (rs.next()) {
 				videojuego= new Videojuego();
-				videojuego.setId(rs.getInt("ID"));
+				videojuego.setId_v(rs.getInt("ID_V"));
 				videojuego.setNombre(rs.getString("NOMBRE"));
 				videojuego.setGenero(Genero.valueOf(rs.getString("GENERO")));
 				videojuego.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
 				videojuego.setAnyo(rs.getInt("ANYO"));
 				videojuego.setPrecio(rs.getDouble("PRECIO"));
-				
+				videojuego.setId(rs.getInt("ID_P"));
 			
 				
 				//Se inserta cada nuevo cliente en la lista de clientes
@@ -322,11 +323,12 @@ public class GestorBD {
 			 Statement stmt = con.createStatement()) {
 			
 			String sql = "CREATE TABLE IF NOT EXISTS MANDO (\n"
-					+ " ID INTEGER PRIMARY KEY AUTOINCREMENT, \n"
+					+ " ID_M INTEGER PRIMARY KEY AUTOINCREMENT, \n"
 					+ " NOMBRE TEXT NOT NULL,\n"
 					+ "ESTADOPRODUCTO ENUM NOT NULL,\n"
 					+ "PRECIO DOUBLE NOT NULL,\n"
-					+ "MARCA ENUM NOT NULL\n"
+					+ "MARCA ENUM NOT NULL,\n"
+					+ "ID_P INTEGER NOT NULL\n"
 					+ ");";
 					
 			if (!stmt.execute(sql)) {
@@ -368,13 +370,13 @@ public class GestorBD {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_MANDO);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO MANDO ( NOMBRE, ESTADOPRODUCTO, PRECIO, MARCA) VALUES ( '%s', '%s', '%s', '%s');";
+			String sql = "INSERT INTO MANDO ( NOMBRE, ESTADOPRODUCTO, PRECIO, MARCA, ID_P) VALUES ( '%s', '%s', '%s', '%s', '%s');";
 			
 			System.out.println("- Insertando mandos...");
 			
 			//Se recorren los clientes y se insertan uno a uno
 			for (Mando c : mandos) {
-				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.getEstado(), c.getPrecio(),  c.getMarca()))) {					
+				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.getEstado(), c.getPrecio(),  c.getMarca(), c.getId()))) {					
 					System.out.println(String.format(" - mando insertado: %s", c.toString()));
 				} else {
 					System.out.println(String.format(" - No se ha insertado el mando: %s", c.toString()));
@@ -392,7 +394,7 @@ public class GestorBD {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_MANDO);
 		     Statement stmt = con.createStatement()) {
-			String sql = "SELECT * FROM MANDO WHERE ID >= 0";
+			String sql = "SELECT * FROM MANDO WHERE ID_M >= 0";
 	//		System.out.println(sql);
 			
 			//Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
@@ -404,12 +406,12 @@ public class GestorBD {
 			//Se recorre el ResultSet y se crean objetos Cliente
 			while (rs.next()) {
 				mando= new Mando();
-				mando.setId(rs.getInt("ID"));
+				mando.setId_m(rs.getInt("ID_M"));
 				mando.setNombre(rs.getString("NOMBRE"));
 				mando.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
 				mando.setPrecio(rs.getDouble("PRECIO"));
 				mando.setMarca(Marca.valueOf(rs.getString("MARCA")));
-				
+				mando.setId(rs.getInt("ID_P"));
 			
 				
 				//Se inserta cada nuevo cliente en la lista de clientes
@@ -450,11 +452,12 @@ public class GestorBD {
 			 Statement stmt = con.createStatement()) {
 			
 			String sql = "CREATE TABLE IF NOT EXISTS CONSOLA (\n"
-					+ " ID INTEGER PRIMARY KEY AUTOINCREMENT, \n"
+					+ " ID_C INTEGER PRIMARY KEY AUTOINCREMENT, \n"
 					+ " NOMBRE TEXT NOT NULL,\n"
 					+ "ESTADOPRODUCTO ENUM NOT NULL,\n"
 					+ "PRECIO DOUBLE NOT NULL,\n"
-					+ "MARCA ENUM NOT NULL\n"
+					+ "MARCA ENUM NOT NULL,\n"
+					+ "ID_P INTEGER NOT NULL\n"
 					+ ");";
 					
 			if (!stmt.execute(sql)) {
@@ -496,13 +499,13 @@ public class GestorBD {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CONSOLA);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO CONSOLA ( NOMBRE, ESTADOPRODUCTO, PRECIO, MARCA) VALUES ( '%s', '%s', '%s', '%s');";
+			String sql = "INSERT INTO CONSOLA ( NOMBRE, ESTADOPRODUCTO, PRECIO, MARCA, ID_P) VALUES ( '%s', '%s', '%s', '%s','%s');";
 			
 			System.out.println("- Insertando consolas...");
 			
 			//Se recorren los clientes y se insertan uno a uno
 			for (Consola c : consolas) {
-				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.getEstado(), c.getPrecio(),  c.getMarca()))) {					
+				if (1 == stmt.executeUpdate(String.format(sql, c.getNombre(), c.getEstado(), c.getPrecio(),  c.getMarca(), c.getId()))) {					
 					System.out.println(String.format(" - consola insertada: %s", c.toString()));
 				} else {
 					System.out.println(String.format(" - No se ha insertado la consola: %s", c.toString()));
@@ -532,12 +535,12 @@ public class GestorBD {
 			//Se recorre el ResultSet y se crean objetos Cliente
 			while (rs.next()) {
 				consola= new Consola();
-				consola.setId(rs.getInt("ID"));
+				consola.setId_c(rs.getInt("ID_C"));
 				consola.setNombre(rs.getString("NOMBRE"));
 				consola.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
 				consola.setPrecio(rs.getDouble("PRECIO"));
 				consola.setMarca(Marca.valueOf(rs.getString("MARCA")));
-				
+				consola.setId(rs.getInt("ID_P"));
 			
 				
 				//Se inserta cada nuevo cliente en la lista de clientes
@@ -1186,15 +1189,16 @@ public class GestorBD {
 					
 					Videojuego v = new Videojuego();
 					
-					String sql = "select * from VIDEOJUEGO where nombre = ' " + p.getNombre() + " '";
+					String sql = "select * from VIDEOJUEGO where nombre = ' " + p.getId() + " '";
 					ResultSet rs = stmt.executeQuery(sql);
 					
-					v.setId(p.getId());
+					v.setId_v(rs.getInt("ID_V"));
 					v.setNombre(rs.getString("NOMBRE"));
 					v.setGenero(Genero.valueOf(rs.getString("GENERO")));
 					v.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
 					v.setAnyo(rs.getInt("ANYO"));
 					v.setPrecio(rs.getDouble("PRECIO"));
+					v.setId(p.getId());
 					
 					pagables.add(v);
 					
@@ -1210,14 +1214,15 @@ public class GestorBD {
 					
 					Mando m = new Mando();
 					
-					String sql = "select * from MANDO where nombre = ' " + p.getNombre() + " '";
+					String sql = "select * from MANDO where nombre = ' " + p.getId() + " '";
 					ResultSet rs = stmt.executeQuery(sql);
 					
-					m.setId(p.getId());
+					m.setId_m(rs.getInt("ID_M"));
 					m.setNombre(rs.getString("NOMBRE"));
 					m.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
 					m.setPrecio(rs.getDouble("PRECIO"));
 					m.setMarca(Marca.valueOf(rs.getString("MARCA")));
+					m.setId(p.getId());
 					
 					pagables.add(m);
 					
@@ -1233,14 +1238,15 @@ public class GestorBD {
 					
 					Consola c = new Consola();
 					
-					String sql = "select * from CONSOLA where nombre = ' " + p.getNombre() + " '";
+					String sql = "select * from CONSOLA where nombre = ' " + p.getId() + " '";
 					ResultSet rs = stmt.executeQuery(sql);
 					
-					c.setId(p.getId());
+					c.setId_c(rs.getInt("ID_C"));
 					c.setNombre(rs.getString("NOMBRE"));
 					c.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
 					c.setPrecio(rs.getDouble("PRECIO"));
 					c.setMarca(Marca.valueOf(rs.getString("MARCA")));
+					c.setId(p.getId());
 					
 					pagables.add(c);
 					
