@@ -7,12 +7,13 @@ import org.junit.Test;
 
 public class TestMando {
 	Mando mando;
-	protected int id = 0;
+	protected int id = 8;
 	protected String nombre = "nombre";
 	protected TipoProducto tp = TipoProducto.MANDO;
 	protected EstadoProducto estado = EstadoProducto.PRIMERA_MANO;
 	protected double precio = 0;
 	protected Marca marca = Marca.NINTENDO;
+	protected int id_m = 4;
 	
 	@Before
 	public void SetUp() {
@@ -23,6 +24,7 @@ public class TestMando {
 	mando.setEstado(estado);
 	mando.setPrecio(precio);
 	mando.setMarca(marca);
+	mando.setId_m(id_m);
 	
 	}
 
@@ -36,7 +38,7 @@ public class TestMando {
 
 	@Test
 	public void testMandoIntStringEstadoProductoDoubleMarca() {
-		Mando newMando = new Mando(id,nombre,tp,estado,precio,marca);
+		Mando newMando = new Mando(id,nombre,tp,estado,precio,marca,id_m);
 		assertNotNull(newMando);
 		assertEquals(newMando.getNombre(), nombre);
 		assertEquals(newMando.getId(), id,0);
@@ -45,6 +47,7 @@ public class TestMando {
 		assertEquals(newMando.getEstado(), estado);
 		assertEquals(newMando.getPrecio(), precio,0);
 		assertEquals(newMando.getMarca(), marca);
+		assertEquals(newMando.getId_m(), id_m,0);
 			
 	}
 
@@ -58,6 +61,7 @@ public class TestMando {
 		assertEquals(newMando2.getEstado(), estado.PRIMERA_MANO);
 		assertEquals(newMando2.getPrecio(), 0,0);
 		assertEquals(newMando2.getMarca(), marca.PLAYSTATION);
+		assertEquals(newMando2.getId_m(), 1,0);
 	}
 
 	@Test
@@ -97,6 +101,19 @@ public class TestMando {
 		assertEquals(mando.getMarca(), marca);
 		mando.setMarca(newMarca);
 		assertEquals(mando.getMarca(), newMarca);
+	}
+	
+	@Test
+	public void testGetId_m() {
+		assertEquals(mando.getId_m(), id_m,0);
+	}
+
+	@Test
+	public void testSetId_m() {
+		Integer newId_m = 3;
+		assertEquals(mando.getId_m(), id_m,0);
+		mando.setId_m(newId_m);
+		assertEquals(mando.getId_m(), newId_m,0);
 	}
 
 }

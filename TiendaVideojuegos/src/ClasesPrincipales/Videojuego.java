@@ -7,16 +7,18 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 	protected EstadoProducto estado;
 	protected int anyo;
 	protected double precio;
+	protected int id_v;
 	
 	
 	
 
-	public Videojuego(int id, String nombre, TipoProducto tp, Genero genero, EstadoProducto estado, int anyo, double precio) {
+	public Videojuego(int id, String nombre, TipoProducto tp, Genero genero, EstadoProducto estado, int anyo, double precio, int id_v) {
 		super(id, nombre,tp);
 		this.genero = genero;
 		this.estado = estado;
 		this.setAnyo(anyo);
 		this.setPrecio(precio);
+		this.id_v = id_v;
 	}
 	
 	public Videojuego() {
@@ -25,6 +27,7 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 		this.estado = estado.PRIMERA_MANO;
 		this.setAnyo(0);
 		this.setPrecio(0);
+		this.id_v = 1;
 	}
 	
 	
@@ -63,15 +66,23 @@ public class Videojuego extends Producto implements Serializable,Pagable {
 	
 	@Override
 	public double getPrecio() {
-	if(this.getEstado()== estado.SEGUNDA_MANO) {
+		if(this.getEstado()== estado.SEGUNDA_MANO) {
 		return precio / 3;
 		
-	}else {
-		return precio;
+		}else {
+			return precio;
+		}
 	}
-}
 	
 	
+	public int getId_v() {
+		return id_v;
+	}
+
+	public void setId_v(int id_v) {
+		this.id_v = id_v;
+	}
+
 	@Override
 	public String toString() {
 		return String.format("Nombre:" + nombre + " Año:" + anyo +" Genero:" + genero + " Estado:" + estado + " Precio:" + "%.2f" + "eur", this.getPrecio());

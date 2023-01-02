@@ -8,13 +8,14 @@ import org.junit.Test;
 public class TestVideojuego {
 	
 	Videojuego videojuego;
-	protected int id = 0;
+	protected int id = 12;
 	protected String nombre = "nombre";
 	protected TipoProducto tp = TipoProducto.VIDEOJUEGO;
 	protected Genero genero = Genero.ACCION;
 	protected EstadoProducto estado = EstadoProducto.PRIMERA_MANO;
 	protected int anyo = 0;
 	protected double precio = 0;
+	protected int id_v = 7;
 	
 	@Before
 	public void SetUp() {
@@ -26,6 +27,7 @@ public class TestVideojuego {
 		videojuego.setEstado(estado);
 		videojuego.setAnyo(anyo);
 		videojuego.setPrecio(precio);
+		videojuego.setId_v(id_v);
 	}
  
 	@Test
@@ -38,7 +40,7 @@ public class TestVideojuego {
 
 	@Test
 	public void testVideojuegoIntStringGeneroEstadoProductoIntDouble() {
-		Videojuego newVideojuego = new Videojuego(id,nombre,tp,genero,estado,anyo,precio);
+		Videojuego newVideojuego = new Videojuego(id,nombre,tp,genero,estado,anyo,precio,id_v);
 		assertNotNull(newVideojuego);
 		assertEquals(newVideojuego.getNombre(), nombre);
 		assertEquals(newVideojuego.getId(), id,0);
@@ -47,6 +49,7 @@ public class TestVideojuego {
 		assertEquals(newVideojuego.getEstado(), estado);
 		assertEquals(newVideojuego.getAnyo(), anyo,0);
 		assertEquals(newVideojuego.getPrecio(), precio,0);
+		assertEquals(newVideojuego.getId_v(), id_v,0);
 	}
 
 	@Test
@@ -60,6 +63,7 @@ public class TestVideojuego {
 		assertEquals(newVideojuego2.getEstado(), estado.PRIMERA_MANO);
 		assertEquals(newVideojuego2.getAnyo(), 0,0);
 		assertEquals(newVideojuego2.getPrecio(), 0,0);
+		assertEquals(newVideojuego2.getId_v(), 1,0);
 		
 		
 		
@@ -116,6 +120,19 @@ public class TestVideojuego {
 	@Test
 	public void testGetPrecio() {
 		assertEquals(videojuego.getPrecio(), precio,0);
+	}
+	
+	@Test
+	public void testGetId_v() {
+		assertEquals(videojuego.getId_v(), id_v,0);
+	}
+
+	@Test
+	public void testSetId_v() {
+		Integer newId_v = 3;
+		assertEquals(videojuego.getId_v(), id_v,0);
+		videojuego.setId_v(newId_v);
+		assertEquals(videojuego.getId_v(), newId_v,0);
 	}
 
 }

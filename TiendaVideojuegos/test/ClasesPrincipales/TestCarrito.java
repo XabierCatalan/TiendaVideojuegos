@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class TestCarrito {
-	protected Mando mando =new Mando(1,"mando",TipoProducto.MANDO,EstadoProducto.PRIMERA_MANO,5,Marca.PLAYSTATION);
-	protected Consola consola = new Consola(2,"Play",TipoProducto.CONSOLA,500.00,EstadoProducto.PRIMERA_MANO,Marca.PLAYSTATION);
+	protected Mando mando =new Mando(1,"mando",TipoProducto.MANDO,EstadoProducto.PRIMERA_MANO,5,Marca.PLAYSTATION,6);
+	protected Consola consola = new Consola(2,"Play",TipoProducto.CONSOLA,500.00,EstadoProducto.PRIMERA_MANO,Marca.PLAYSTATION,9);
 	
 	Carrito carrito;
 	protected int id = 0;
