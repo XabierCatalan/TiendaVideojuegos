@@ -25,7 +25,7 @@ public class VentanaConsolaMandos extends JFrame {
 	protected JComboBox<Marca> comboMarca;
 	
 	protected DefaultTableModel mCM = new DefaultTableModel (
-			new Object[] { "Nombre", "Marca", "Estado" ,"Precio" }, 0
+			new Object[] { "Nombre", "Marca", "Estado" ,"Precio","Tipo Producto" }, 0
 			);
 	
 	protected JTable tCM = new JTable (mCM);
@@ -102,31 +102,31 @@ public class VentanaConsolaMandos extends JFrame {
 		
 		cp.add(pBotones);
 		
-		TableCellRenderer render = (table , value, isSelected, hasFocus, row, column) -> {
-			JLabel l = new JLabel();
+		//TableCellRenderer render = (table , value, isSelected, hasFocus, row, column) -> {
+			//JLabel l = new JLabel();
 			
-			String valor = (String) table.getValueAt(row, 2);
+			//Marca valor = (Marca) table.getValueAt(row, 1);
 			
-			if (Marca.NINTENDO == Marca.valueOf(valor)) {
+			//if (Marca.NINTENDO == valor) {
 				
-				l.setIcon(new ImageIcon("NINTENDO.png"));
+				//l.setIcon(new ImageIcon("NINTENDO.png"));
 				
-			} else if (Marca.PLAYSTATION == Marca.valueOf(valor)) {
+			//} else if (Marca.PLAYSTATION == valor) {
 				
-				l.setIcon(new ImageIcon("PS.png"));
+				//l.setIcon(new ImageIcon("PS.png"));
 				
-			} else {
-				l.setIcon(new ImageIcon("XBOX.png"));
-			}
+			//} else {
+			//	l.setIcon(new ImageIcon("XBOX.png"));
+			//}
 			
-			return l;
+			//return l;
 
-		};
+		//};
 		
 		
 		
 		
-		tCM.setDefaultRenderer(Object.class, render);
+		//tCM.setDefaultRenderer(Object.class, render);
 		
 		
 		botonAtras.addActionListener(new ActionListener() {
@@ -192,16 +192,16 @@ public class VentanaConsolaMandos extends JFrame {
 		
 		for (Consola consola : listaConsola) {
 			if(consola.getEstado()==EstadoProducto.PRIMERA_MANO) {
-				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio())  } );
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio()), consola.getTp() } );
 			}else {
-				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio() * 1.25)  } );
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio() * 1.25), consola.getTp() } );
 			}
 		}
 		for (Mando mando : listaMando) {
 			if(mando.getEstado()==EstadoProducto.PRIMERA_MANO) {
-				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio())  } );
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio()), mando.getTp()  } );
 			}else {
-				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio() * 3)  } );
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio() * 3), mando.getTp() } );
 			}
 		}
 		
@@ -233,16 +233,16 @@ public class VentanaConsolaMandos extends JFrame {
 		
 		for (Consola consola : listaConsola2) {
 			if(consola.getEstado()==EstadoProducto.PRIMERA_MANO) {
-				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio())  } );
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio()), consola.getTp() } );
 			}else {
-				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio() * 1.25)  } );
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio() * 1.25), consola.getTp() } );
 			} 
 		}
 		for (Mando mando : listaMando2) {
 			if(mando.getEstado()==EstadoProducto.PRIMERA_MANO) {
-				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio())  } );
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio()), mando.getTp()  } );
 			}else {
-				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio() * 3)  } );
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio() * 3), mando.getTp() } );
 			}
 		}
 		
