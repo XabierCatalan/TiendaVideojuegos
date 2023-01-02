@@ -523,7 +523,7 @@ public class GestorBD {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CONSOLA);
 		     Statement stmt = con.createStatement()) {
-			String sql = "SELECT * FROM CONSOLA WHERE ID >= 0";
+			String sql = "SELECT * FROM CONSOLA WHERE ID_C >= 0";
 	//		System.out.println(sql);
 			
 			//Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
