@@ -160,7 +160,7 @@ public class VentanaVideojuegos extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle("VENTANA VIDEOJEUGOS");
 		
-		tV.getDe
+		
 		
 	}
 	
