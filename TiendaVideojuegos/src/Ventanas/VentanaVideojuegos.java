@@ -14,7 +14,6 @@ public class VentanaVideojuegos extends JFrame {
 	protected JButton carrito;
 	protected JButton atras;
 	protected JButton añadirCarrito;
-	protected JButton filtrar;
 	protected JButton sinFiltros;
 	
 	protected JLabel filtros;
@@ -57,7 +56,6 @@ public class VentanaVideojuegos extends JFrame {
 		carrito = new JButton("Carrito");
 		atras = new JButton("Atras");
 		añadirCarrito = new JButton("Añadir al Carrito");
-		filtrar = new JButton("Filtrar");
 		sinFiltros = new JButton("Quitar Filtros");
 		
 		filtros = new JLabel("FILTROS");
@@ -104,13 +102,7 @@ public class VentanaVideojuegos extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				for (EstadoProducto ep : EstadoProducto.values()) {
-					if (estado.getSelectedItem() == ep.toString()) {
-						filtrarVideojuegoPorEstado(ep);
-					}
-				}
-				
-				
+				filtrarTodo();
 			}
 		});
 		
@@ -119,11 +111,7 @@ public class VentanaVideojuegos extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				for (Genero g : Genero.values()) {
-					if (genero.getSelectedItem() == g.toString()) {
-						filtrarVideojuegoPorGenero(g);
-					}
-				}
+				filtrarTodo();
 				
 			}
 		});
@@ -133,23 +121,13 @@ public class VentanaVideojuegos extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				for (int i = 1970; i < 2024; i++) {
-					if (fecha.getSelectedItem() == "ELIGE UN AÑO") {
-						
-					}else {
-						Integer a = Integer.parseInt(String.valueOf(fecha.getSelectedItem()));
-						if (a == i) {
-							filtrarVideojuegoPorAnyo(i);
-						}
-					}
-						
-					
-					
-				}
+				filtrarTodo();
 				
 			}
 		});
 		
+		
+			
 	
 			
 		cp.setLayout(new FlowLayout());
@@ -167,7 +145,6 @@ public class VentanaVideojuegos extends JFrame {
 		JP1.add(genero);
 		JP1.add(estado);
 		JP1.add(fecha);
-		JP1.add(filtrar);
 		JP1.add(sinFiltros);
 		
 		
@@ -182,17 +159,7 @@ public class VentanaVideojuegos extends JFrame {
 		
 		cp.add(JP2);
 		
-		filtrar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				EstadoProducto ep = EstadoProducto.valueOf(String.valueOf(estado.getSelectedItem()));
-				Genero g = Genero.valueOf(String.valueOf(genero.getSelectedItem()));
-				Integer a = Integer.parseInt(String.valueOf(fecha.getSelectedItem()));
-				filtrarVideojuego(ep, g, a);
-			}
-		});
+		
 		
 		carrito.addActionListener(new ActionListener() {
 			
@@ -219,7 +186,6 @@ public class VentanaVideojuegos extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				cargarVideojuegos();
 				Main.vMP.setVisible(true);
 				dispose();
 			}
@@ -230,7 +196,7 @@ public class VentanaVideojuegos extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				cargarVideojuegos();
+				quitarFiltros();
 			}
 		});
 		
@@ -361,7 +327,170 @@ public class VentanaVideojuegos extends JFrame {
 		
 	}
 	
+	protected void filtrarVideojuegoPorEstadoYGenero(EstadoProducto ep, Genero g) {
+		this.mDV.setRowCount(0);
+		
+		listaVideojuego = Main.bd.obtenerDatosVideojuegos();
+		
+		List<Videojuego> listaVideojuego2 = new ArrayList<>();
+		
+		for (Videojuego videojuego : listaVideojuego) {
+			if (videojuego.getEstado() == ep && videojuego.getGenero() == g) {
+				listaVideojuego2.add(videojuego);
+			}
+		}
+		
+		for (Videojuego videojuego : listaVideojuego2) {
+			if(videojuego.getEstado()== EstadoProducto.PRIMERA_MANO) {
+				this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
+			}else {
+				this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
+			}
+		
+		}
+		
+		
+	}
+	
+	protected void filtrarVideojuegoPorEstadoYAnyo(EstadoProducto ep, Integer a) {
+		this.mDV.setRowCount(0);
+		
+		listaVideojuego = Main.bd.obtenerDatosVideojuegos();
+		
+		List<Videojuego> listaVideojuego2 = new ArrayList<>();
+		
+		for (Videojuego videojuego : listaVideojuego) {
+			if (videojuego.getEstado() == ep && videojuego.getAnyo() == a ) {
+				listaVideojuego2.add(videojuego);
+			}
+		}
+		
+		for (Videojuego videojuego : listaVideojuego2) {
+			if(videojuego.getEstado()== EstadoProducto.PRIMERA_MANO) {
+				this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
+			}else {
+				this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
+			}
+		
+		}
+		
+		
+	}
+	
+	protected void filtrarVideojuegoPorGeneroYAnyo(Genero g, Integer a) {
+		this.mDV.setRowCount(0);
+		
+		listaVideojuego = Main.bd.obtenerDatosVideojuegos();
+		
+		List<Videojuego> listaVideojuego2 = new ArrayList<>();
+		
+		for (Videojuego videojuego : listaVideojuego) {
+			if (videojuego.getGenero() == g && videojuego.getAnyo() == a ) {
+				listaVideojuego2.add(videojuego);
+			}
+		}
+		
+		for (Videojuego videojuego : listaVideojuego2) {
+			if(videojuego.getEstado()== EstadoProducto.PRIMERA_MANO) {
+				this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
+			}else {
+				this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
+			}
+		
+		}
+		
+		
+	}
+	
+	protected void filtrarTodo() {
+		if (estado.getSelectedItem() == "SIN FILTROS" && genero.getSelectedItem() == "SIN FILTROS" && fecha.getSelectedItem() == "ELIGE UN AÑO") {
+			cargarVideojuegos();
+		}else if(genero.getSelectedItem() == "SIN FILTROS" && fecha.getSelectedItem() == "ELIGE UN AÑO") {
+			for (EstadoProducto ep : EstadoProducto.values()) {
+				if (estado.getSelectedItem() == ep.toString()) {
+					filtrarVideojuegoPorEstado(ep);
+				}
+			}
+		
+		
+		}else if(estado.getSelectedItem() == "SIN FILTROS" && fecha.getSelectedItem() == "ELIGE UN AÑO") {
+			for (Genero g : Genero.values()) {
+				if (genero.getSelectedItem() == g.toString()) {
+					filtrarVideojuegoPorGenero(g);
+				}
+			}
+			
+		}else if(estado.getSelectedItem() == "SIN FILTROS" && genero.getSelectedItem() == "SIN FILTROS") {
+			for (int i = 1970; i < 2024; i++) {
+				Integer a = Integer.parseInt(String.valueOf(fecha.getSelectedItem()));
+				if (a == i) {
+					filtrarVideojuegoPorAnyo(i);
+				}
+			}
+			
+		}else if(fecha.getSelectedItem() == "ELIGE UN AÑO") {
+			for (EstadoProducto ep : EstadoProducto.values()) {
+				for (Genero g : Genero.values()) {
+					if (estado.getSelectedItem() == ep.toString() && genero.getSelectedItem() == g.toString()) {
+						filtrarVideojuegoPorEstadoYGenero(ep, g);
+					}
+				}
+				
+			}
+			
+		}else if(genero.getSelectedItem() == "SIN FILTROS") {
+			for (EstadoProducto ep : EstadoProducto.values()) {
+				for (int i = 1970; i < 2024; i++) {
+					Integer a = Integer.parseInt(String.valueOf(fecha.getSelectedItem()));
+					if (a == i && estado.getSelectedItem() == ep.toString()) {
+						filtrarVideojuegoPorEstadoYAnyo(ep, a);
+					}
+				}
+			}
+			
+		}else if(estado.getSelectedItem() == "SIN FILTROS") {
+			for (Genero g : Genero.values()) {
+				for (int i = 1970; i < 2024; i++) {
+					Integer a = Integer.parseInt(String.valueOf(fecha.getSelectedItem()));
+					if (a == i && genero.getSelectedItem() == g.toString()) {
+						filtrarVideojuegoPorGeneroYAnyo(g, a);
+					}
+				}
+			}
+			
+		}else {
+			for (EstadoProducto ep : EstadoProducto.values()) {
+				for (Genero g : Genero.values()) {
+					for (int i = 1970; i < 2024; i++) {
+						Integer a = Integer.parseInt(String.valueOf(fecha.getSelectedItem()));
+						if (a == i && genero.getSelectedItem() == g.toString() && estado.getSelectedItem() == ep.toString()) {
+							filtrarVideojuego(ep, g, a);
+						}
+					}
+				}
+			}
+			
+			
+		}
+		
+		
+	}
 	
 	
-	
+	protected void quitarFiltros() {
+		cargarVideojuegos();
+		
+		estado.setSelectedItem("SIN FILTROS");
+		genero.setSelectedItem("SIN FILTROS");
+		fecha.setSelectedItem("ELIGE UN AÑO");
+	}
+		
 }
+	
+	
+	
+	
+	
+	
+	
+
