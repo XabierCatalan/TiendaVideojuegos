@@ -105,43 +105,7 @@ public class VentanaConsolaMandos extends JFrame {
 		TableCellRenderer render = (table , value, isSelected, hasFocus, row, column) -> {
 			JLabel l = new JLabel();
 			
-			Marca valores = (Marca) table.getValueAt(row, 1);
 			
-			String valor = valores.toString();
-			
-			Object v = table.getValueAt(row, column);
-			
-			if (Marca.NINTENDO == valores) {
-				
-				if (column == 1) {
-				
-				l.setIcon(new ImageIcon("NINTENDO.png"));
-				
-				} else {
-					value = v.toString();
-				}
-
-			} else if (Marca.PLAYSTATION == valores) {
-				
-				if (column == 1) {
-					
-					l.setIcon(new ImageIcon("PS.png"));
-					
-					} else {
-						value = v.toString();
-					}
-				
-			} else {
-				
-				if (column == 1) {
-					
-					l.setIcon(new ImageIcon("XBOX.png"));
-					
-					} else {
-						value = v.toString();
-					}
-				
-			}
 			
 			return l;
 
