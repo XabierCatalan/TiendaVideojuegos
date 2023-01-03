@@ -96,6 +96,60 @@ public class VentanaVideojuegos extends JFrame {
 		estado.setSelectedItem("SIN FILTROS");
 		fecha.setSelectedItem("ELIGE UN AÑO");
 		
+		
+		//filtros automaticos
+		
+		estado.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				for (EstadoProducto ep : EstadoProducto.values()) {
+					if (estado.getSelectedItem() == ep.toString()) {
+						filtrarVideojuegoPorEstado(ep);
+					}
+				}
+				
+				
+			}
+		});
+		
+		genero.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				for (Genero g : Genero.values()) {
+					if (genero.getSelectedItem() == g.toString()) {
+						filtrarVideojuegoPorGenero(g);
+					}
+				}
+				
+			}
+		});
+		
+		fecha.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				for (int i = 1970; i < 2024; i++) {
+					if (fecha.getSelectedItem() == "ELIGE UN AÑO") {
+						
+					}else {
+						Integer a = Integer.parseInt(String.valueOf(fecha.getSelectedItem()));
+						if (a == i) {
+							filtrarVideojuegoPorAnyo(i);
+						}
+					}
+						
+					
+					
+				}
+				
+			}
+		});
+		
 	
 			
 		cp.setLayout(new FlowLayout());
@@ -231,5 +285,83 @@ public class VentanaVideojuegos extends JFrame {
 		}
 		
 	}
+	
+	protected void filtrarVideojuegoPorEstado(EstadoProducto ep) {
+		this.mDV.setRowCount(0);
+		
+		listaVideojuego = Main.bd.obtenerDatosVideojuegos();
+		
+		List<Videojuego> listaVideojuego2 = new ArrayList<>();
+		
+		for (Videojuego videojuego : listaVideojuego) {
+			if (videojuego.getEstado() == ep) {
+				listaVideojuego2.add(videojuego);
+			}
+		}
+		
+		for (Videojuego videojuego : listaVideojuego2) {
+			if(videojuego.getEstado()== EstadoProducto.PRIMERA_MANO) {
+				this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
+			}else {
+				this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
+			}
+		
+		}
+		
+		
+	}
+	
+	protected void filtrarVideojuegoPorGenero(Genero g) {
+		this.mDV.setRowCount(0);
+		
+		listaVideojuego = Main.bd.obtenerDatosVideojuegos();
+		
+		List<Videojuego> listaVideojuego2 = new ArrayList<>();
+		
+		for (Videojuego videojuego : listaVideojuego) {
+			if (videojuego.getGenero() == g) {
+				listaVideojuego2.add(videojuego);
+			}
+		}
+		
+		for (Videojuego videojuego : listaVideojuego2) {
+			if(videojuego.getEstado()== EstadoProducto.PRIMERA_MANO) {
+				this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
+			}else {
+				this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
+			}
+		
+		}
+		
+		
+	}
+	
+	protected void filtrarVideojuegoPorAnyo(Integer a) {
+		this.mDV.setRowCount(0);
+		
+		listaVideojuego = Main.bd.obtenerDatosVideojuegos();
+		
+		List<Videojuego> listaVideojuego2 = new ArrayList<>();
+		
+		for (Videojuego videojuego : listaVideojuego) {
+			if (videojuego.getAnyo() == a) {
+				listaVideojuego2.add(videojuego);
+			}
+		}
+		
+		for (Videojuego videojuego : listaVideojuego2) {
+			if(videojuego.getEstado()== EstadoProducto.PRIMERA_MANO) {
+				this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
+			}else {
+				this.mDV.addRow(new Object[] {videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
+			}
+		
+		}
+		
+		
+	}
+	
+	
+	
 	
 }
