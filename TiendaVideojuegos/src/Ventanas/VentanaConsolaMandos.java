@@ -3,6 +3,7 @@ package Ventanas;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
@@ -102,20 +103,21 @@ public class VentanaConsolaMandos extends JFrame {
 		
 		cp.add(pBotones);
 		
-		TableCellRenderer render = (table , value, isSelected, hasFocus, row, column) -> {
-			JLabel l = new JLabel();
-			
-			
-			
-			return l;
+		tCM.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 
-		};
-		
-		
-		
-		
-		tCM.setDefaultRenderer(Object.class, render);
-		
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+					boolean hasFocus, int row, int column) {
+					Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+					JLabel l = (Jabel) c;
+				// TODO Auto-generated method stub
+				return c;
+				
+			}
+			
+			
+			
+		});
 		
 		botonAtras.addActionListener(new ActionListener() {
 			
