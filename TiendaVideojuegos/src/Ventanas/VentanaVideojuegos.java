@@ -19,10 +19,10 @@ public class VentanaVideojuegos extends JFrame {
 	
 	protected JLabel filtros;
 	
-	protected JComboBox<EstadoProducto> estado;
-	protected JComboBox<Genero> genero;
+	protected JComboBox<String> estado;
+	protected JComboBox<String> genero;
 	
-	protected JComboBox<Integer> fecha;
+	protected JComboBox<String> fecha;
 	
 	
 	protected DefaultTableModel mDV = new DefaultTableModel(
@@ -62,16 +62,42 @@ public class VentanaVideojuegos extends JFrame {
 		
 		filtros = new JLabel("FILTROS");
 		
-		estado = new JComboBox<>(EstadoProducto.values());
-		genero = new JComboBox<>(Genero.values());
+		estado = new JComboBox<>();
+		estado.addItem("SIN FILTROS");
+		for (EstadoProducto ep : EstadoProducto.values()) {
+			
+			estado.addItem(ep.toString());
+			
+		}
+		
+		genero = new JComboBox<>();
+		genero.addItem("SIN FILTROS");
+		for (Genero gen : Genero.values()) {
+			
+			genero.addItem(gen.toString());
+			
+		}
+		
+
+		
+		
+	
 		
 		fecha = new JComboBox<>();
+		fecha.addItem("ELIGE UN AÑO");
 		
 		for (int i = 1970; i < 2024; i++) {
-			fecha.addItem(i);
+			fecha.addItem(String.valueOf(i));
 		};
 		
 		
+		// para definir el campo elegido por defecto
+		genero.setSelectedItem("SIN FILTROS");
+		estado.setSelectedItem("SIN FILTROS");
+		fecha.setSelectedItem("ELIGE UN AÑO");
+		
+	
+			
 		cp.setLayout(new FlowLayout());
 		
 		cp.add(new JScrollPane(tV));

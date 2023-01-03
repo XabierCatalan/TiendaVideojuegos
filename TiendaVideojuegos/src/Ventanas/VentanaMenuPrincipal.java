@@ -97,6 +97,9 @@ public class VentanaMenuPrincipal extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				
 				Main.vV.setVisible(true);
+				Main.vV.genero.setSelectedItem("SIN FILTROS");
+				Main.vV.estado.setSelectedItem("SIN FILTROS");
+				Main.vV.fecha.setSelectedItem("ELIGE UN AÑO");
 				dispose();
 			}
 		});
