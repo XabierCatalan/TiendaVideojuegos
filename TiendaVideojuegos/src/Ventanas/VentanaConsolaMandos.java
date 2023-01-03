@@ -102,31 +102,55 @@ public class VentanaConsolaMandos extends JFrame {
 		
 		cp.add(pBotones);
 		
-		//TableCellRenderer render = (table , value, isSelected, hasFocus, row, column) -> {
-			//JLabel l = new JLabel();
+		TableCellRenderer render = (table , value, isSelected, hasFocus, row, column) -> {
+			JLabel l = new JLabel();
 			
-			//Marca valor = (Marca) table.getValueAt(row, 1);
+			Marca valores = (Marca) table.getValueAt(row, 1);
 			
-			//if (Marca.NINTENDO == valor) {
-				
-				//l.setIcon(new ImageIcon("NINTENDO.png"));
-				
-			//} else if (Marca.PLAYSTATION == valor) {
-				
-				//l.setIcon(new ImageIcon("PS.png"));
-				
-			//} else {
-			//	l.setIcon(new ImageIcon("XBOX.png"));
-			//}
+			String valor = valores.toString();
 			
-			//return l;
+			Object v = table.getValueAt(row, column);
+			
+			if (Marca.NINTENDO == valores) {
+				
+				if (column == 1) {
+				
+				l.setIcon(new ImageIcon("NINTENDO.png"));
+				
+				} else {
+					value = v.toString();
+				}
 
-		//};
+			} else if (Marca.PLAYSTATION == valores) {
+				
+				if (column == 1) {
+					
+					l.setIcon(new ImageIcon("PS.png"));
+					
+					} else {
+						value = v.toString();
+					}
+				
+			} else {
+				
+				if (column == 1) {
+					
+					l.setIcon(new ImageIcon("XBOX.png"));
+					
+					} else {
+						value = v.toString();
+					}
+				
+			}
+			
+			return l;
+
+		};
 		
 		
 		
 		
-		//tCM.setDefaultRenderer(Object.class, render);
+		tCM.setDefaultRenderer(Object.class, render);
 		
 		
 		botonAtras.addActionListener(new ActionListener() {
