@@ -1002,16 +1002,19 @@ public class GestorBD {
 		String msg = "crearCuenta - error no gestionado";
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
 			Statement stmt = con.createStatement()) {
-			String sql = "INSERT INTO USUARIO (NOMBRE,EMAIL,CONTRASEÑA,TELEFONO) VALUES (  "+nombre+","+mail+","+pass+","+tel+" );";
+			String sql = "INSERT INTO USUARIO (NOMBRE,EMAIL,CONTRASEÑA,TELEFONO) VALUES (  '"+nombre+"','"+mail+"','"+pass+"','"+tel+"' );";
 			
-			stmt.executeUpdate(sql);
+			
 			//con.commit();
 			Usuario u= new Usuario();
-			u.setEmail(			mail);
-			u.setContrasenya(	pass);
-			u.setNombre(		nombre);
-			u.setTelefono(		tel);
+			u.setEmail(mail);
+			u.setContrasenya(pass);
+			u.setNombre(nombre);
+			u.setTelefono(tel);
 			GestorBD.this.logedUser = u;
+			
+			//stmt.executeUpdate(sql);
+			stmt.executeUpdate(String.format(sql, u.getNombre(), u.getEmail(), u.getContrasenya(), u.getTelefono()));
 
 			msg="OK";
 			
@@ -1023,6 +1026,7 @@ public class GestorBD {
 		}
 		return msg;
 	}
+	
 	
 	
 	
@@ -1188,7 +1192,7 @@ public class GestorBD {
 				ex.printStackTrace();		
 			}
 			
-			//Se recorren los clientes y se insertan uno a uno
+			
 					
 		} catch (Exception ex) {
 			System.err.println(String.format("* Error al insertar datos de la BBDDProductosCarrito: %s", ex.getMessage()));
