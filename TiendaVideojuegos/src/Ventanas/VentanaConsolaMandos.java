@@ -175,18 +175,20 @@ public class VentanaConsolaMandos extends JFrame {
 					
 					
 					
-					if (marcas == Marca.NINTENDO ) {
-						
+					if (marcas == Marca.NINTENDO && column == 1 ) {
 						l.setIcon(new ImageIcon("NINTENDO.png"));
-						
-						
-					} else if (marcas == Marca.XBOX) {
-						
-						l.setIcon(new ImageIcon("XBOX.png"));
-						
+					} else if (marcas == Marca.XBOX && column == 1) {
+						l.setIcon(new ImageIcon("XBOX1.png"));
+					} else if (marcas == Marca.PLAYSTATION && column == 1) {
+						l.setIcon(new ImageIcon("PS.png"));
 					} else {
-						
-						 
+						l.setIcon(null);
+					}
+					
+					if (isSelected == true) {
+						l.setBackground(Color.BLUE);
+					} else {
+						l.setBackground(Color.WHITE);
 					}
 					
 					
