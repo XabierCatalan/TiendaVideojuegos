@@ -109,8 +109,35 @@ public class VentanaConsolaMandos extends JFrame {
 			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
 					boolean hasFocus, int row, int column) {
 					Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-					JLabel l = (Jabel) c;
-				// TODO Auto-generated method stub
+					JLabel l = (JLabel) c;
+					
+					if (isSelected == true ) {
+						l.setBackground(Color.BLUE);
+						
+					} else {
+						l.setBackground(Color.WHITE);
+					}
+					
+					Marca marcas = (Marca) table.getValueAt(row, 1);
+					
+					
+					
+					if (marcas == Marca.NINTENDO ) {
+						
+						l.setIcon(new ImageIcon("NINTENDO.png"));
+						
+						
+					} else if (marcas == Marca.XBOX) {
+						
+						l.setIcon(new ImageIcon("XBOX.png"));
+						
+					} else {
+						
+						 
+					}
+					
+					
+					
 				return c;
 				
 			}
