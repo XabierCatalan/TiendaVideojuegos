@@ -113,6 +113,9 @@ public class VentanaMenuPrincipal extends JFrame{
 				// TODO Auto-generated method stub
 				
 				Main.vCM.setVisible(true);
+				Main.vCM.estado.setSelectedItem("SIN FILTROS");
+				Main.vCM.marca.setSelectedItem("SIN FILTROS");
+				Main.vCM.tipoProducto.setSelectedItem("SIN FILTROS");
 				dispose();
 			}
 		});

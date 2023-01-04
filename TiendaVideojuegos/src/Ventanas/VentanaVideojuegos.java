@@ -478,7 +478,6 @@ public class VentanaVideojuegos extends JFrame {
 	
 	
 	protected void quitarFiltros() {
-		cargarVideojuegos();
 		
 		estado.setSelectedItem("SIN FILTROS");
 		genero.setSelectedItem("SIN FILTROS");

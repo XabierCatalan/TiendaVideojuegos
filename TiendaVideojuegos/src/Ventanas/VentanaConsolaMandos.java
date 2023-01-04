@@ -16,14 +16,14 @@ public class VentanaConsolaMandos extends JFrame {
 	protected JButton botonCarrito;
 	protected JButton botonAtras;
 	protected JButton botonAnyadirCarrito;
-	protected JButton botonFiltrar;
 	protected JButton botonSinFiltros;
 	
 	
 	protected JLabel labelFiltros;
 	
-	protected JComboBox<EstadoProducto> comboEstado;
-	protected JComboBox<Marca> comboMarca;
+	protected JComboBox<String> estado;
+	protected JComboBox<String> marca;
+	protected JComboBox<String> tipoProducto;
 	
 	protected DefaultTableModel mCM = new DefaultTableModel (
 			new Object[] { "Nombre", "Marca", "Estado" ,"Precio","Tipo Producto" }, 0
@@ -59,14 +59,69 @@ public class VentanaConsolaMandos extends JFrame {
 		botonAnyadirCarrito = new JButton("Añadir al carrito");
 		botonAtras = new JButton("Atras");
 		botonCarrito = new JButton("Carrito");
-		botonFiltrar = new JButton("Filtrar");
 		botonSinFiltros = new JButton("Quitar Filtros");
 		
 		
 		labelFiltros = new JLabel("FILTROS");
 		
-		comboEstado = new JComboBox<>(EstadoProducto.values());
-		comboMarca = new JComboBox<>(Marca.values());
+		estado = new JComboBox<>();
+		estado.addItem("SIN FILTROS");
+		for (EstadoProducto ep : EstadoProducto.values()) {
+			
+			estado.addItem(ep.toString());
+			
+		}
+		
+		marca = new JComboBox<>();
+		marca.addItem("SIN FILTROS");
+		for (Marca m : Marca.values()) {
+			
+			marca.addItem(m.toString());
+			
+		}
+		
+		tipoProducto = new JComboBox<>();
+		tipoProducto.addItem("SIN FILTROS");
+		for (TipoProducto tp : TipoProducto.values()) {
+			
+			tipoProducto.addItem(tp.toString());
+			
+		}
+		
+		// para definir el campo elegido por defecto
+		
+		estado.setSelectedItem("SIN FILTROS");
+		marca.setSelectedItem("SIN FILTROS");
+		tipoProducto.setSelectedItem("SIN FILTROS");
+		
+		//filtros automaticos
+		
+		estado.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				filtrarTodo();
+			}
+		});
+		
+		marca.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				filtrarTodo();
+			}
+		});
+		
+		tipoProducto.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				filtrarTodo();
+			}
+		});
 		
 		this.setTitle("Consolas y Mandos");
 		this.setSize(800, 400);
@@ -89,9 +144,9 @@ public class VentanaConsolaMandos extends JFrame {
 		pBotones.setLayout(new BorderLayout());
 		
 		pFiltros.add(labelFiltros);
-		pFiltros.add(comboMarca);
-		pFiltros.add(comboEstado);
-		pFiltros.add(botonFiltrar);
+		pFiltros.add(marca);
+		pFiltros.add(estado);
+		pFiltros.add(tipoProducto);
 		pFiltros.add(botonSinFiltros);
 		
 		
@@ -161,7 +216,7 @@ public class VentanaConsolaMandos extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				cargarTabla();
+				quitarFiltros();
 			}});
 		
 		botonCarrito.addActionListener(new ActionListener() {
@@ -183,17 +238,7 @@ public class VentanaConsolaMandos extends JFrame {
 			}
 		});
 		
-		botonFiltrar.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				EstadoProducto ep = EstadoProducto.valueOf(String.valueOf(comboEstado.getSelectedItem()));
-				Marca m = Marca.valueOf(String.valueOf(comboMarca.getSelectedItem()));
-				filtrarProductos(m , ep);
-				
-			}
-		});
+		
 			
 				
 	}
@@ -225,10 +270,8 @@ public class VentanaConsolaMandos extends JFrame {
 		
 	}
 	
-	private void filtrarProductos(Marca m,EstadoProducto ep) {
-		while (mCM.getRowCount() > 0) {
-			mCM.removeRow( 0 );
-		}
+	private void filtrarProductosPorMarcaYEstado(Marca m,EstadoProducto ep) {
+		this.mCM.setRowCount(0);
 		
 		listaConsola = Main.bd.obtenerDatosConsolas();
 		listaMando = Main.bd.obtenerDatosMandos();
@@ -265,5 +308,320 @@ public class VentanaConsolaMandos extends JFrame {
 		
 		
 	}
+	
+	private void filtrarProductosPorMarcaYTp(Marca m,TipoProducto tp) {
+		this.mCM.setRowCount(0);
+		
+		listaConsola = Main.bd.obtenerDatosConsolas();
+		listaMando = Main.bd.obtenerDatosMandos();
+		
+		List<Consola> listaConsola2 = new ArrayList<>();
+		List<Mando> listaMando2 = new ArrayList<>();
+		
+		for (Consola consola : listaConsola) {
+			if (consola.getTp() == tp && consola.getMarca() == m) {
+				listaConsola2.add(consola);
+			}
+		}
+		
+		for (Mando mando : listaMando) {
+			if (mando.getTp() == tp && mando.getMarca() == m) {
+				listaMando2.add(mando);
+			}
+		}
+		
+		for (Consola consola : listaConsola2) {
+			if(consola.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio()), consola.getTp() } );
+			}else {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio() * 1.25), consola.getTp() } );
+			} 
+		}
+		for (Mando mando : listaMando2) {
+			if(mando.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio()), mando.getTp()  } );
+			}else {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio() * 3), mando.getTp() } );
+			}
+		}
+		
+		
+	}
+	
+	private void filtrarProductosPorTpYEstado(TipoProducto tp,EstadoProducto ep) {
+		this.mCM.setRowCount(0);
+		
+		listaConsola = Main.bd.obtenerDatosConsolas();
+		listaMando = Main.bd.obtenerDatosMandos();
+		
+		List<Consola> listaConsola2 = new ArrayList<>();
+		List<Mando> listaMando2 = new ArrayList<>();
+		
+		for (Consola consola : listaConsola) {
+			if (consola.getEstado() == ep && consola.getTp() == tp) {
+				listaConsola2.add(consola);
+			}
+		}
+		
+		for (Mando mando : listaMando) {
+			if (mando.getEstado() == ep && mando.getTp() == tp) {
+				listaMando2.add(mando);
+			}
+		}
+		
+		for (Consola consola : listaConsola2) {
+			if(consola.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio()), consola.getTp() } );
+			}else {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio() * 1.25), consola.getTp() } );
+			} 
+		}
+		for (Mando mando : listaMando2) {
+			if(mando.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio()), mando.getTp()  } );
+			}else {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio() * 3), mando.getTp() } );
+			}
+		}
+		
+		
+	}
+	
+	private void filtrarProductosPorMarca(Marca m) {
+		this.mCM.setRowCount(0);
+		
+		listaConsola = Main.bd.obtenerDatosConsolas();
+		listaMando = Main.bd.obtenerDatosMandos();
+		
+		List<Consola> listaConsola2 = new ArrayList<>();
+		List<Mando> listaMando2 = new ArrayList<>();
+		
+		for (Consola consola : listaConsola) {
+			if (consola.getMarca() == m) {
+				listaConsola2.add(consola);
+			}
+		}
+		
+		for (Mando mando : listaMando) {
+			if (mando.getMarca() == m) {
+				listaMando2.add(mando);
+			}
+		}
+		
+		for (Consola consola : listaConsola2) {
+			if(consola.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio()), consola.getTp() } );
+			}else {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio() * 1.25), consola.getTp() } );
+			} 
+		}
+		for (Mando mando : listaMando2) {
+			if(mando.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio()), mando.getTp()  } );
+			}else {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio() * 3), mando.getTp() } );
+			}
+		}
+		
+		
+	}
+	
+	private void filtrarProductosPorEstado(EstadoProducto ep) {
+		this.mCM.setRowCount(0);
+		
+		listaConsola = Main.bd.obtenerDatosConsolas();
+		listaMando = Main.bd.obtenerDatosMandos();
+		
+		List<Consola> listaConsola2 = new ArrayList<>();
+		List<Mando> listaMando2 = new ArrayList<>();
+		
+		for (Consola consola : listaConsola) {
+			if (consola.getEstado() == ep) {
+				listaConsola2.add(consola);
+			}
+		}
+		
+		for (Mando mando : listaMando) {
+			if (mando.getEstado() == ep) {
+				listaMando2.add(mando);
+			}
+		}
+		
+		for (Consola consola : listaConsola2) {
+			if(consola.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio()), consola.getTp() } );
+			}else {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio() * 1.25), consola.getTp() } );
+			} 
+		}
+		for (Mando mando : listaMando2) {
+			if(mando.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio()), mando.getTp()  } );
+			}else {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio() * 3), mando.getTp() } );
+			}
+		}
+		
+		
+	}
+	
+	private void filtrarProductosPorTp(TipoProducto tp) {
+		this.mCM.setRowCount(0);
+		
+		listaConsola = Main.bd.obtenerDatosConsolas();
+		listaMando = Main.bd.obtenerDatosMandos();
+		
+		List<Consola> listaConsola2 = new ArrayList<>();
+		List<Mando> listaMando2 = new ArrayList<>();
+		
+		for (Consola consola : listaConsola) {
+			if (consola.getTp() == tp) {
+				listaConsola2.add(consola);
+			}
+		}
+		
+		for (Mando mando : listaMando) {
+			if (mando.getTp() == tp) {
+				listaMando2.add(mando);
+			}
+		}
+		
+		for (Consola consola : listaConsola2) {
+			if(consola.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio()), consola.getTp() } );
+			}else {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio() * 1.25), consola.getTp() } );
+			} 
+		}
+		for (Mando mando : listaMando2) {
+			if(mando.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio()), mando.getTp()  } );
+			}else {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio() * 3), mando.getTp() } );
+			}
+		}
+		
+		
+	}
+	
+	private void filtrarProductos(Marca m, EstadoProducto ep, TipoProducto tp) {
+		this.mCM.setRowCount(0);
+		
+		listaConsola = Main.bd.obtenerDatosConsolas();
+		listaMando = Main.bd.obtenerDatosMandos();
+		
+		List<Consola> listaConsola2 = new ArrayList<>();
+		List<Mando> listaMando2 = new ArrayList<>();
+		
+		for (Consola consola : listaConsola) {
+			if (consola.getMarca() == m && consola.getEstado() == ep && consola.getTp() == tp) {
+				listaConsola2.add(consola);
+			}
+		}
+		
+		for (Mando mando : listaMando) {
+			if (mando.getMarca() == m && mando.getEstado() == ep && mando.getTp() == tp) {
+				listaMando2.add(mando);
+			}
+		}
+		
+		for (Consola consola : listaConsola2) {
+			if(consola.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio()), consola.getTp() } );
+			}else {
+				mCM.addRow( new Object[] { consola.getNombre(), consola.getMarca(), consola.getEstado(), String.format("%.2f",consola.getPrecio() * 1.25), consola.getTp() } );
+			} 
+		}
+		for (Mando mando : listaMando2) {
+			if(mando.getEstado()==EstadoProducto.PRIMERA_MANO) {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio()), mando.getTp()  } );
+			}else {
+				mCM.addRow( new Object[] { mando.getNombre(), mando.getMarca(), mando.getEstado(), String.format("%.2f",mando.getPrecio() * 3), mando.getTp() } );
+			}
+		}
+		
+		
+	}
+	
+	protected void filtrarTodo() {
+		if (estado.getSelectedItem() == "SIN FILTROS" && marca.getSelectedItem() == "SIN FILTROS" && tipoProducto.getSelectedItem() == "SIN FILTROS") {
+			cargarTabla();
+		}else if(marca.getSelectedItem() == "SIN FILTROS" && tipoProducto.getSelectedItem() == "SIN FILTROS") {
+			for (EstadoProducto ep : EstadoProducto.values()) {
+				if (estado.getSelectedItem() == ep.toString()) {
+					filtrarProductosPorEstado(ep);;
+				}
+			}
+		
+		
+		}else if(estado.getSelectedItem() == "SIN FILTROS" && tipoProducto.getSelectedItem() == "SIN FILTROS") {
+			for (Marca m : Marca.values()) {
+				if (marca.getSelectedItem() == m.toString()) {
+					filtrarProductosPorMarca(m);
+				}
+			}
+			
+		}else if(estado.getSelectedItem() == "SIN FILTROS" && marca.getSelectedItem() == "SIN FILTROS") {
+			for (TipoProducto tp : TipoProducto.values()) {
+				if (tipoProducto.getSelectedItem() == tp.toString()) {
+					filtrarProductosPorTp(tp);
+				}
+			}
+			
+		}else if(tipoProducto.getSelectedItem() == "SIN FILTROS") {
+			for (EstadoProducto ep : EstadoProducto.values()) {
+				for (Marca m : Marca.values()) {
+					if (estado.getSelectedItem() == ep.toString() && marca.getSelectedItem() == m.toString()) {
+						filtrarProductosPorMarcaYEstado(m, ep);
+					}
+				}
+				
+			}
+			
+		}else if(marca.getSelectedItem() == "SIN FILTROS") {
+			for (EstadoProducto ep : EstadoProducto.values()) {
+				for (TipoProducto tp : TipoProducto.values()) {
+					if (estado.getSelectedItem() == ep.toString() && tipoProducto.getSelectedItem() == tp.toString()) {
+						filtrarProductosPorTpYEstado(tp, ep);
+					}
+				}
+				
+			}
+			
+		}else if(estado.getSelectedItem() == "SIN FILTROS") {
+			for (Marca m : Marca.values()) {
+				for (TipoProducto tp : TipoProducto.values()) {
+					if (marca.getSelectedItem() == m.toString() && tipoProducto.getSelectedItem() == tp.toString()) {
+						filtrarProductosPorMarcaYTp(m, tp);
+					}
+				}
+				
+			}
+			
+		}else {
+			for (EstadoProducto ep : EstadoProducto.values()) {
+				for (Marca m : Marca.values()) {
+					for (TipoProducto tp : TipoProducto.values()) {
+						if (tipoProducto.getSelectedItem() == tp.toString() && marca.getSelectedItem() == m.toString() && estado.getSelectedItem() == ep.toString()) {
+							filtrarProductos(m, ep, tp);
+						}
+					}
+				}
+			}
+			
+			
+		}
+		
+		
+	}
+	protected void quitarFiltros() {
+		
+		estado.setSelectedItem("SIN FILTROS");
+		marca.setSelectedItem("SIN FILTROS");
+		tipoProducto.setSelectedItem("SIN FILTROS");
+		
+	}
+	
+	
 
 }
