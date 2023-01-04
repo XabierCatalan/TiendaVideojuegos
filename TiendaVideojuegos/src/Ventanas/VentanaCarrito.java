@@ -39,7 +39,7 @@ public class VentanaCarrito extends JFrame{
 		
 		DLM = new DefaultListModel<>();
 		
-		DLM.add(0, new Mando());;
+		
 		
 		pagables = new JList<>(DLM);
 		
@@ -95,6 +95,34 @@ public class VentanaCarrito extends JFrame{
 		JP1.add(JP6, BorderLayout.SOUTH);
 		
 		cp.add(JP1);
+		
+		Atras.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Main.vMP.setVisible(true);
+				dispose();
+				
+			}
+		});
+		
+		BorrarDelCarro.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		ConfirmarPedido.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		
 		this.setTitle("Carrito");

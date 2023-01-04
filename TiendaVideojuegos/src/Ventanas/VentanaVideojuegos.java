@@ -166,7 +166,7 @@ public class VentanaVideojuegos extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				Main.vC.setVisible(true);
 				dispose();
 				
 			}
@@ -176,7 +176,8 @@ public class VentanaVideojuegos extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
+				
 				
 			}
 		});
