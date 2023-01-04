@@ -1,6 +1,8 @@
 package ClasesPrincipales;
 
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
@@ -108,7 +110,7 @@ public class GestorBD {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTO);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO PRODUCTO ( NOMBRE, TP) VALUES ( '%s', '%s');";
+			String sql = "INSERT INTO PRODUCTO ( NOMBRE_P, TP) VALUES ( '%s', '%s');";
 			
 			System.out.println("- Insertando productos...");
 			
@@ -1114,9 +1116,9 @@ public class GestorBD {
 			 Statement stmt = con.createStatement()) {
 			
 			String sql = "CREATE TABLE IF NOT EXISTS PRODUCTOSCARRITO (\n"
+					+ " ID_CP INTEGER PRIMARY KEY AUTOINCREMENT, \n"
 					+ " ID_C INTEGER NOT NULL, \n"
-					+ " ID_P INTEGER NOT NULL,\n"
-					+ " PRIMARY KEY(ID_C,ID_P)\n"
+					+ " ID_P INTEGER NOT NULL \n"
 					+ " FOREIGN KEY(ID_C) REFERENCES CARRITO(ID) ON DELETE ON CASCADE \n"
 					+ " FOREIGN KEY(ID_P) REFERENCES PRODUCTO(ID_P) \n"
 					+ ");";
@@ -1154,6 +1156,49 @@ public class GestorBD {
 			ex.printStackTrace();						
 		}
 	}
+	
+	public void insertarDatosProductoCarrito(List<Producto> productos) {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTOSCARRITO);
+		     Statement stmt = con.createStatement()) {
+			//Se define la plantilla de la sentencia SQL
+			String sql = "INSERT INTO PRODUCTOSCARRITO ( ID_C, ID_P) VALUES ( '%s', '%s');";
+			
+			System.out.println("- Insertando productos...");
+			
+			try (BufferedReader BR = new BufferedReader(new FileReader("Data/CarritoProducto.csv"))){
+				StringTokenizer tokenizer;
+				String linea = null;
+				
+				BR.readLine();
+				
+				while ((linea = BR.readLine()) != null) {
+					tokenizer = new StringTokenizer(linea, ";");
+					
+					if (1 == stmt.executeUpdate(String.format(sql, tokenizer.nextToken(), tokenizer.nextToken()))) {
+						System.out.println(String.format(" - ProductoCarrito insertado: %s"));
+
+					} else {
+						System.out.println(String.format(" - No se ha insertado el productos_carrto: %s"));
+						}
+				}
+				
+			} catch (Exception ex) {
+				System.err.println(String.format("* Error al insertar datos de la BBDDProductosCarrito: %s", ex.getMessage()));
+				ex.printStackTrace();		
+			}
+			
+			//Se recorren los clientes y se insertan uno a uno
+					
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al insertar datos de la BBDDProductosCarrito: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}				
+	}
+	
+	
+	
+	
 	
 	public ArrayList<Producto> ObtenerProductosConIDCarrito(int id) {
 		ArrayList<Producto> productos = new ArrayList<>();

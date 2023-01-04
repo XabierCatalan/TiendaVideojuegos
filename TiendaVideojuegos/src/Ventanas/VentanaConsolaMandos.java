@@ -166,12 +166,6 @@ public class VentanaConsolaMandos extends JFrame {
 					Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 					JLabel l = (JLabel) c;
 					
-					if (isSelected == true ) {
-						l.setBackground(Color.BLUE);
-						
-					} else {
-						l.setBackground(Color.WHITE);
-					}
 					
 					Marca marcas = (Marca) table.getValueAt(row, 1);
 					
