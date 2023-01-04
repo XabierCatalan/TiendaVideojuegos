@@ -83,8 +83,12 @@ public class VentanaConsolaMandos extends JFrame {
 		tipoProducto = new JComboBox<>();
 		tipoProducto.addItem("SIN FILTROS");
 		for (TipoProducto tp : TipoProducto.values()) {
+			if (tp == TipoProducto.VIDEOJUEGO) {
+				
+			}else {
+				tipoProducto.addItem(tp.toString());
+			}
 			
-			tipoProducto.addItem(tp.toString());
 			
 		}
 		
