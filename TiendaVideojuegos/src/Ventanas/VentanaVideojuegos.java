@@ -30,7 +30,7 @@ public class VentanaVideojuegos extends JFrame {
 	
 	
 	protected DefaultTableModel mDV = new DefaultTableModel(
-			new Object [] {"ID", "Nombre", "Genero", "Estado","Año","Precio","AÑADIR"},0
+			new Object [] {"ID", "Nombre", "Genero", "Estado","Año","Precio"," "},0
 			) {
 		@Override
 		public boolean isCellEditable(int row, int column) {
@@ -157,11 +157,38 @@ public class VentanaVideojuegos extends JFrame {
 					Main.vC.DLM.addElement(v);
 					System.out.println("Se ha añadido al carrito el videojuego");
 					JOptionPane.showMessageDialog(null, "Se ha añadido al carrito el videojuego");
+					
+					//System.out.println(Main.vC.DLM);
+					
+					//for (int i = 0; i < Main.vC.DLM.getSize(); i++) {
+					//	Videojuego v =  Main.vC.DLM.getElementAt(i);
+					//	double x +=  Main.vC.DLM.getElementAt(i);
+					//}
+					
+					//double precio = Double.parseDouble(Main.vC.precio2.getText());  
+					//double newPrecio = precio + v.getPrecio();
+					//String p = String.valueOf(newPrecio);
+					//Main.vC.precio2.setText(p);
+					
+						
+					}
 				}
 				
 				
+				
+				
 			}
-		});
+		);
+		
+		tV.setRowHeight(20); // determina la altura de las celdas
+		
+		tV.getColumnModel().getColumn(0).setPreferredWidth(35);
+		tV.getColumnModel().getColumn(1).setPreferredWidth(90);
+		tV.getColumnModel().getColumn(2).setPreferredWidth(95);
+		tV.getColumnModel().getColumn(3).setPreferredWidth(130);
+		tV.getColumnModel().getColumn(4).setPreferredWidth(55);
+		tV.getColumnModel().getColumn(5).setPreferredWidth(55);
+		tV.getColumnModel().getColumn(6).setPreferredWidth(35);
 		
 		
 		
@@ -229,6 +256,8 @@ public class VentanaVideojuegos extends JFrame {
 		JP2.add(atras, BorderLayout.SOUTH);
 		
 		cp.add(JP2);
+		
+		
 		
 		
 		

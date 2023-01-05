@@ -35,7 +35,7 @@ public class VentanaCarrito extends JFrame{
 		
 		precio = new JLabel("PRECIO:");
 		
-		precio2 = new JTextField("");
+		precio2 = new JTextField("0.0");
 		
 		DLM = new DefaultListModel<>();
 		
@@ -126,6 +126,8 @@ public class VentanaCarrito extends JFrame{
 				
 			}
 		});
+		
+		
 		
 		
 		this.setTitle("Carrito");
