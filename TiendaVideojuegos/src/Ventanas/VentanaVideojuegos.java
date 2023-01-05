@@ -7,6 +7,7 @@ import java.util.List;
 
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import ClasesPrincipales.*;
 
@@ -25,7 +26,7 @@ public class VentanaVideojuegos extends JFrame {
 	
 	
 	protected DefaultTableModel mDV = new DefaultTableModel(
-			new Object [] {"ID", "Nombre", "Genero", "Estado","Año","Precio","Añadir"},0
+			new Object [] {"ID", "Nombre", "Genero", "Estado","Año","Precio","AÑADIR"},0
 			);
 	protected JTable tV = new JTable(mDV);
 	
@@ -94,6 +95,27 @@ public class VentanaVideojuegos extends JFrame {
 		estado.setSelectedItem("SIN FILTROS");
 		fecha.setSelectedItem("ELIGE UN AÑO");
 		
+		tV.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+					boolean hasFocus, int row, int column) {
+				// TODO Auto-generated method stub
+				Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+				JLabel l = (JLabel) c;
+				
+				if (column == 6) {
+					l.setIcon(new ImageIcon("mas.png"));
+				} else {
+					l.setIcon(null);
+				}
+				
+				
+				return c;
+			}
+			
+			
+		});
 		
 		//filtros automaticos
 		

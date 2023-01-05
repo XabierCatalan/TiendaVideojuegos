@@ -302,6 +302,44 @@ public class GestorBD {
 		return videojuegos;
 	}
 	
+public Videojuego buscarVideojuegoPorID_P(int id_P) {
+		
+		Videojuego v = new Videojuego();
+		
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_VIDEOJUEGO);
+			 Statement stmt = con.createStatement()) {
+			// Ahorro de tiempo - si está en el mapa no se busca en bd
+			//if (mapaUsuarios.containsKey( nick )) {
+			//	return mapaUsuarios.get( nick );
+			//}
+			// Si no lo leemos de base de datos
+			
+			String sql = "select * from VIDEOJUEGO where ID_P = " + id_P + ";";
+			
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			v.setId_v(rs.getInt("ID_V"));
+			v.setNombre(rs.getString("NOMBRE"));
+			v.setGenero(Genero.valueOf(rs.getString("GENERO")));
+			v.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
+			v.setAnyo(rs.getInt("ANYO"));
+			v.setPrecio(rs.getDouble("PRECIO"));
+			v.setId(rs.getInt(id_P));
+			v.setTp(TipoProducto.valueOf(rs.getString("TP")));
+			
+			
+			
+			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}
+		
+		return v;
+	}
+	
+	
+	
 	public void borrarDatosVideojuego() {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_VIDEOJUEGO);
@@ -436,6 +474,41 @@ public class GestorBD {
 		return mandos;
 	}
 	
+	public Mando buscarMandoPorID_P(int id_P) {
+		
+		Mando m = new Mando();
+		
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_MANDO);
+			 Statement stmt = con.createStatement()) {
+			// Ahorro de tiempo - si está en el mapa no se busca en bd
+			//if (mapaUsuarios.containsKey( nick )) {
+			//	return mapaUsuarios.get( nick );
+			//}
+			// Si no lo leemos de base de datos
+			
+			String sql = "select * from MANDO where ID_P = " + id_P + ";";
+			
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			m.setId_m(rs.getInt("ID_M"));
+			m.setNombre(rs.getString("NOMBRE"));
+			m.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
+			m.setPrecio(rs.getDouble("PRECIO"));
+			m.setMarca(Marca.valueOf(rs.getString("MARCA")));
+			m.setId(rs.getInt("ID_P"));
+			m.setTp(TipoProducto.valueOf(rs.getString("TP")));
+			
+			
+			
+			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}
+		
+		return m;
+	}
+	
 	public void borrarDatosMando() {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_MANDO);
@@ -565,6 +638,41 @@ public class GestorBD {
 		}		
 		
 		return consolas;
+	}
+	
+	public Consola buscarConsolaPorID_P(int id_P) {
+		
+		Consola c = new Consola();
+		
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CONSOLA);
+			 Statement stmt = con.createStatement()) {
+			// Ahorro de tiempo - si está en el mapa no se busca en bd
+			//if (mapaUsuarios.containsKey( nick )) {
+			//	return mapaUsuarios.get( nick );
+			//}
+			// Si no lo leemos de base de datos
+			
+			String sql = "select * from CONSOLA where ID_P = " + id_P + ";";
+			
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			c.setId_c(rs.getInt("ID_M"));
+			c.setNombre(rs.getString("NOMBRE"));
+			c.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
+			c.setPrecio(rs.getDouble("PRECIO"));
+			c.setMarca(Marca.valueOf(rs.getString("MARCA")));
+			c.setId(rs.getInt("ID_P"));
+			c.setTp(TipoProducto.valueOf(rs.getString("TP")));
+			
+			
+			
+			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}
+		
+		return c;
 	}
 	
 	public void borrarDatosConsola() {
