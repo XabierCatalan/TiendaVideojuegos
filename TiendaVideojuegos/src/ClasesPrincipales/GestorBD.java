@@ -324,7 +324,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			v.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
 			v.setAnyo(rs.getInt("ANYO"));
 			v.setPrecio(rs.getDouble("PRECIO"));
-			v.setId(rs.getInt(id_P));
+			v.setId(rs.getInt("ID_P"));
 			v.setTp(TipoProducto.valueOf(rs.getString("TP")));
 			
 			
