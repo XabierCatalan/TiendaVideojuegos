@@ -106,15 +106,40 @@ public class VentanaVideojuegos extends JFrame {
 				
 				if (column == 6) {
 					l.setIcon(new ImageIcon("mas.png"));
+					l.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 				} else {
 					l.setIcon(null);
 				}
+				
+				if (isSelected == true && column != 6) {
+					l.setBackground(Color.BLUE);
+				} else {
+					l.setBackground(Color.WHITE);
+				}
+				
 				
 				
 				return c;
 			}
 			
 			
+		});
+		
+		tV.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				int fila = tV.rowAtPoint(e.getPoint());
+				int columna = tV.columnAtPoint(e.getPoint());
+				
+				if (columna == 6) {
+					int r = (int) tV.getValueAt(fila, 0);
+					
+					//Videojuego v = 
+				}
+				
+				
+			}
 		});
 		
 		//filtros automaticos
@@ -506,6 +531,14 @@ public class VentanaVideojuegos extends JFrame {
 		genero.setSelectedItem("SIN FILTROS");
 		fecha.setSelectedItem("ELIGE UN AÑO");
 	}
+
+
+
+	
+
+
+
+	
 		
 }
 	
