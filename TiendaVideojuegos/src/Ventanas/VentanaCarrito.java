@@ -42,6 +42,7 @@ public class VentanaCarrito extends JFrame{
 		
 		
 		pagables = new JList<>(DLM);
+		pagables.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
 		JScrollPane ScrollPagables = new JScrollPane(pagables);
 		
@@ -111,7 +112,9 @@ public class VentanaCarrito extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				Pagable seleccionado = pagables.getSelectedValue();			
+				DLM.removeElement(seleccionado);
+
 			}
 		});
 		
