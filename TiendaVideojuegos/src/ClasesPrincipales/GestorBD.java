@@ -656,7 +656,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			
 			ResultSet rs = stmt.executeQuery(sql);
 			
-			c.setId_c(rs.getInt("ID_M"));
+			c.setId_c(rs.getInt("ID_C"));
 			c.setNombre(rs.getString("NOMBRE"));
 			c.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
 			c.setPrecio(rs.getDouble("PRECIO"));
