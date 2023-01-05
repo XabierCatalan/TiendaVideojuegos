@@ -230,12 +230,12 @@ public class VentanaConsolaMandos extends JFrame {
 						int id_p = (int) tCM.getValueAt(fila, 0);
 						Main.vC.DLM.addElement(Main.bd.buscarConsolaPorID_P(id_p));
 						System.out.println("Se ha añadido una consola al carrito");
+						JOptionPane.showMessageDialog(null, "Se ha añadido al carrito la consola");
 						
 					} else if (tCM.getValueAt(fila, 5) == TipoProducto.MANDO) {
 						int id_p = (int) tCM.getValueAt(fila, 0);
 						Main.vC.DLM.addElement(Main.bd.buscarMandoPorID_P(id_p));
-						System.out.println("Se ha añadido un mando al carrito");
-						
+						JOptionPane.showMessageDialog(null, "Se ha añadido al carrito el mando");						
 					}
 				}
 				
