@@ -26,7 +26,7 @@ public class VentanaConsolaMandos extends JFrame {
 	protected JComboBox<String> tipoProducto;
 	
 	protected DefaultTableModel mCM = new DefaultTableModel (
-			new Object[] { "Id","Nombre", "Marca", "Estado" ,"Precio","Tipo Producto", "Añadir" }, 0
+			new Object[] { "Id","Nombre", "Marca", "Estado" ,"Precio","Tipo", "" }, 0
 			);
 	
 	protected JTable tCM = new JTable (mCM);
@@ -278,6 +278,22 @@ public class VentanaConsolaMandos extends JFrame {
 				
 			}
 		});
+		
+		
+		
+		// Ajustes de la tabla tCM
+		tCM.getTableHeader().setReorderingAllowed(false); // no permite que se cambien de orden las columnas
+		
+		tCM.setRowHeight(20); // determina la altura de las celdas
+		
+		tCM.getColumnModel().getColumn(0).setPreferredWidth(35);
+		tCM.getColumnModel().getColumn(1).setPreferredWidth(140);
+		tCM.getColumnModel().getColumn(2).setPreferredWidth(95);
+		tCM.getColumnModel().getColumn(3).setPreferredWidth(120);
+		tCM.getColumnModel().getColumn(4).setPreferredWidth(55);
+		tCM.getColumnModel().getColumn(5).setPreferredWidth(85);
+		tCM.getColumnModel().getColumn(6).setPreferredWidth(35);
+		
 		
 		
 			
