@@ -32,7 +32,7 @@ public class TestVideojuego {
  
 	@Test
 	public void testToString() {
-		String toString = String.format("Nombre:" + nombre + " Año:" + anyo +" Genero:" + genero + " Estado:" + estado + " Precio:" + "%.2f" + "eur", precio);
+		String toString = String.format(nombre + " (" + estado + ") " + "%.2f" + "eur", precio);
 		System.out.println(toString);
 		System.out.println(videojuego.toString());
 		assertEquals(videojuego.toString(), toString);
