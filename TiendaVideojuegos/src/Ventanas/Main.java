@@ -21,7 +21,7 @@ public class Main {
     
 	public static void main(String[] args) {
 		
-		GestorLog.fine("##### Comienza el programas #####");
+		GestorLog.fine("##### Comienza el programa #####");
 		
 		vM.setVisible(true);
 		bd.borrarBBDDCarrito();
