@@ -221,16 +221,20 @@ public class VentanaConsolaMandos extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				int fila = tCM.rowAtPoint(getLocation(e.getPoint()));
+				int fila = tCM.rowAtPoint(e.getPoint());
 				int columna = tCM.columnAtPoint(e.getPoint());
 				
 				if(columna == 6) {
 					// funciones del boton
-					if (tCM.getValueAt(fila, 5) == "CONSOLA") {
+					if (tCM.getValueAt(fila, 5) == TipoProducto.CONSOLA) {
 						int id_p = (int) tCM.getValueAt(fila, 0);
+						Main.vC.DLM.addElement(Main.bd.buscarConsolaPorID_P(id_p));
+						System.out.println("Se ha añadido una consola al carrito");
 						
-					} else if (tCM.getValueAt(fila, 5) == "MANDO") {
+					} else if (tCM.getValueAt(fila, 5) == TipoProducto.MANDO) {
 						int id_p = (int) tCM.getValueAt(fila, 0);
+						Main.vC.DLM.addElement(Main.bd.buscarMandoPorID_P(id_p));
+						System.out.println("Se ha añadido un mando al carrito");
 						
 					}
 				}
