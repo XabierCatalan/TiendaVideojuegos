@@ -131,11 +131,15 @@ public class VentanaVideojuegos extends JFrame {
 				// TODO Auto-generated method stub
 				int fila = tV.rowAtPoint(e.getPoint());
 				int columna = tV.columnAtPoint(e.getPoint());
+				System.out.println(fila);
+				System.out.println(columna);
 				
 				if (columna == 6) {
 					int r = (int) tV.getValueAt(fila, 0);
 					
-					//Videojuego v = 
+					Videojuego v = Main.bd.buscarVideojuegoPorID_P(r);
+					Main.vC.DLM.addElement(v);
+					System.out.println("Se ha añadido al carrito el videojuego");
 				}
 				
 				
