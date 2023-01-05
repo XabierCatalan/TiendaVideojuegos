@@ -322,8 +322,14 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			v.setNombre(rs.getString("NOMBRE"));
 			v.setGenero(Genero.valueOf(rs.getString("GENERO")));
 			v.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
+			if (EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")) == EstadoProducto.SEGUNDA_MANO) {
+				double prec = rs.getDouble("PRECIO") * 3;
+				v.setPrecio(prec);
+			} else {
+				v.setPrecio(rs.getDouble("PRECIO"));
+			}
 			v.setAnyo(rs.getInt("ANYO"));
-			v.setPrecio(rs.getDouble("PRECIO"));
+			
 			v.setId(rs.getInt("ID_P"));
 			v.setTp(TipoProducto.valueOf(rs.getString("TP")));
 			
@@ -493,7 +499,12 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			m.setId_m(rs.getInt("ID_M"));
 			m.setNombre(rs.getString("NOMBRE"));
 			m.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
-			m.setPrecio(rs.getDouble("PRECIO"));
+			if (EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")) == EstadoProducto.SEGUNDA_MANO) {
+				double prec = rs.getDouble("PRECIO") * 3;
+				m.setPrecio(prec);
+			} else {
+				m.setPrecio(rs.getDouble("PRECIO"));
+			}
 			m.setMarca(Marca.valueOf(rs.getString("MARCA")));
 			m.setId(rs.getInt("ID_P"));
 			m.setTp(TipoProducto.valueOf(rs.getString("TP")));
@@ -659,7 +670,12 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			c.setId_c(rs.getInt("ID_C"));
 			c.setNombre(rs.getString("NOMBRE"));
 			c.setEstado(EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")));
-			c.setPrecio(rs.getDouble("PRECIO"));
+			if (EstadoProducto.valueOf(rs.getString("ESTADOPRODUCTO")) == EstadoProducto.SEGUNDA_MANO) {
+				double prec = rs.getDouble("PRECIO") * 1.25;
+				c.setPrecio(prec);
+			} else {
+				c.setPrecio(rs.getDouble("PRECIO"));
+			}
 			c.setMarca(Marca.valueOf(rs.getString("MARCA")));
 			c.setId(rs.getInt("ID_P"));
 			c.setTp(TipoProducto.valueOf(rs.getString("TP")));
