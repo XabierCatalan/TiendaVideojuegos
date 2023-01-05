@@ -3,12 +3,16 @@ package Ventanas;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.EventObject;
 import java.util.List;
 
 
 import javax.swing.*;
+import javax.swing.event.CellEditorListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
+
 import ClasesPrincipales.*;
 
 public class VentanaVideojuegos extends JFrame {
@@ -27,7 +31,12 @@ public class VentanaVideojuegos extends JFrame {
 	
 	protected DefaultTableModel mDV = new DefaultTableModel(
 			new Object [] {"ID", "Nombre", "Genero", "Estado","Año","Precio","AÑADIR"},0
-			);
+			) {
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		}
+	};
 	protected JTable tV = new JTable(mDV);
 	
 	protected List<Videojuego> listaVideojuego;
@@ -113,11 +122,10 @@ public class VentanaVideojuegos extends JFrame {
 				
 				if (isSelected == true && column != 6) {
 					l.setBackground(Color.BLUE);
-					l.setForeground(Color.WHITE);
 				} else {
 					l.setBackground(Color.WHITE);
-					l.setForeground(Color.BLACK);
 				}
+				
 				
 				
 				
@@ -126,6 +134,11 @@ public class VentanaVideojuegos extends JFrame {
 			
 			
 		});
+		
+		
+		
+		tV.getTableHeader().setReorderingAllowed(false);
+		
 		
 		tV.addMouseListener(new MouseAdapter() {
 			@Override
@@ -149,6 +162,9 @@ public class VentanaVideojuegos extends JFrame {
 				
 			}
 		});
+		
+		
+		
 		
 		//filtros automaticos
 		
@@ -261,6 +277,7 @@ public class VentanaVideojuegos extends JFrame {
 		this.setSize(800, 400);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle("VENTANA VIDEOJEUGOS");
+		this.setResizable(false);
 		
 		
 		
