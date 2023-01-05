@@ -126,7 +126,7 @@ public class VentanaConsolaMandos extends JFrame {
 		});
 		
 		this.setTitle("Consolas y Mandos");
-		this.setSize(900, 500);
+		this.setSize(800, 400);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(false);
 		
@@ -276,7 +276,21 @@ public class VentanaConsolaMandos extends JFrame {
 		tCM.setRowHeight(20); 
 		
 		// determina la ancgura de cada columna
+		//tCM.getColumnModel().getColumn(0).setMinWidth(35);
+		//tCM.getColumnModel().getColumn(1).setMinWidth(140);
+		//tCM.getColumnModel().getColumn(2).setMinWidth(95);
+		//tCM.getColumnModel().getColumn(3).setMinWidth(120);
+		//tCM.getColumnModel().getColumn(4).setMinWidth(55);
+		//tCM.getColumnModel().getColumn(5).setMinWidth(85);
+		//tCM.getColumnModel().getColumn(6).setMinWidth(35);
 		
+		//tCM.getColumnModel().getColumn(0).setMaxWidth(35);
+		//tCM.getColumnModel().getColumn(1).setMaxWidth(140);
+		//tCM.getColumnModel().getColumn(2).setMaxWidth(95);
+		//tCM.getColumnModel().getColumn(3).setMaxWidth(120);
+		//tCM.getColumnModel().getColumn(4).setMaxWidth(55);
+		//tCM.getColumnModel().getColumn(5).setMaxWidth(85);
+		//tCM.getColumnModel().getColumn(6).setMaxWidth(35);
 		
 		
 		
