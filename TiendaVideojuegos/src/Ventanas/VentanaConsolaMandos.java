@@ -15,7 +15,6 @@ import ClasesPrincipales.*;
 public class VentanaConsolaMandos extends JFrame {
 	protected JButton botonCarrito;
 	protected JButton botonAtras;
-	protected JButton botonAnyadirCarrito;
 	protected JButton botonSinFiltros;
 	
 	
@@ -56,7 +55,6 @@ public class VentanaConsolaMandos extends JFrame {
 		
 		cp.setLayout(new FlowLayout());
 		
-		botonAnyadirCarrito = new JButton("Añadir al carrito");
 		botonAtras = new JButton("Atras");
 		botonCarrito = new JButton("Carrito");
 		botonSinFiltros = new JButton("Quitar Filtros");
@@ -128,15 +126,15 @@ public class VentanaConsolaMandos extends JFrame {
 		});
 		
 		this.setTitle("Consolas y Mandos");
-		this.setSize(800, 400);
+		this.setSize(900, 500);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(false);
 		
 		
 		
 		JPanel pIzquierda = new JPanel();
-		pIzquierda.add( new JScrollPane( tCM ));
-		cp.add( pIzquierda, BorderLayout.WEST );
+		pIzquierda.add( new JScrollPane( tCM ), BorderLayout.CENTER );
+		cp.add(pIzquierda, BorderLayout.WEST);
 		
 		
 		
@@ -157,7 +155,6 @@ public class VentanaConsolaMandos extends JFrame {
 		cp.add(pFiltros);
 		
 		pBotones.add(botonCarrito, BorderLayout.NORTH);
-		pBotones.add(botonAnyadirCarrito, BorderLayout.CENTER);
 		pBotones.add(botonAtras, BorderLayout.SOUTH);
 		
 		cp.add(pBotones);
@@ -270,21 +267,18 @@ public class VentanaConsolaMandos extends JFrame {
 			}
 		});
 		
-		botonAnyadirCarrito.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		
 		
 		
 		// Ajustes de la tabla tCM
 		tCM.getTableHeader().setReorderingAllowed(false); // no permite que se cambien de orden las columnas
 		
-		tCM.setRowHeight(20); // determina la altura de las celdas
+		// determina la altura de las celdas
+		tCM.setRowHeight(20); 
+		
+		// determina la ancgura de cada columna
+		
+		
+		
 		
 		tCM.getColumnModel().getColumn(0).setPreferredWidth(35);
 		tCM.getColumnModel().getColumn(1).setPreferredWidth(140);
@@ -293,6 +287,7 @@ public class VentanaConsolaMandos extends JFrame {
 		tCM.getColumnModel().getColumn(4).setPreferredWidth(55);
 		tCM.getColumnModel().getColumn(5).setPreferredWidth(85);
 		tCM.getColumnModel().getColumn(6).setPreferredWidth(35);
+		
 		
 		
 		
