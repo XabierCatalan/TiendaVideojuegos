@@ -113,8 +113,10 @@ public class VentanaVideojuegos extends JFrame {
 				
 				if (isSelected == true && column != 6) {
 					l.setBackground(Color.BLUE);
+					l.setForeground(Color.WHITE);
 				} else {
 					l.setBackground(Color.WHITE);
+					l.setForeground(Color.BLACK);
 				}
 				
 				
