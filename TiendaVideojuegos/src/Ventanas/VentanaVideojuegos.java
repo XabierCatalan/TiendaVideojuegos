@@ -25,7 +25,7 @@ public class VentanaVideojuegos extends JFrame {
 	
 	
 	protected DefaultTableModel mDV = new DefaultTableModel(
-			new Object [] {"ID", "Nombre", "Genero", "Estado","Año","Precio"},0
+			new Object [] {"ID", "Nombre", "Genero", "Estado","Año","Precio","Añadir"},0
 			);
 	protected JTable tV = new JTable(mDV);
 	
@@ -222,9 +222,9 @@ public class VentanaVideojuegos extends JFrame {
 		
 		for (Videojuego videojuego : listaVideojuego) {
 			if(videojuego.getEstado()== EstadoProducto.PRIMERA_MANO) {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(), videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
+				this.mDV.addRow(new Object[] {videojuego.getId(), videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
 			}else {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(), videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
+				this.mDV.addRow(new Object[] {videojuego.getId(), videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
 			}
 		}
 	}
@@ -244,9 +244,9 @@ public class VentanaVideojuegos extends JFrame {
 		
 		for (Videojuego videojuego : listaVideojuego2) {
 			if(videojuego.getEstado()== EstadoProducto.PRIMERA_MANO) {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
+				this.mDV.addRow(new Object[] {videojuego.getId(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
 			}else {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
+				this.mDV.addRow(new Object[] {videojuego.getId(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
 			}
 		
 		}
@@ -268,9 +268,9 @@ public class VentanaVideojuegos extends JFrame {
 		
 		for (Videojuego videojuego : listaVideojuego2) {
 			if(videojuego.getEstado()== EstadoProducto.PRIMERA_MANO) {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
+				this.mDV.addRow(new Object[] {videojuego.getId(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
 			}else {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
+				this.mDV.addRow(new Object[] {videojuego.getId(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
 			}
 		
 		}
@@ -293,9 +293,9 @@ public class VentanaVideojuegos extends JFrame {
 		
 		for (Videojuego videojuego : listaVideojuego2) {
 			if(videojuego.getEstado()== EstadoProducto.PRIMERA_MANO) {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
+				this.mDV.addRow(new Object[] {videojuego.getId(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
 			}else {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
+				this.mDV.addRow(new Object[] {videojuego.getId(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
 			}
 		
 		}
@@ -318,9 +318,9 @@ public class VentanaVideojuegos extends JFrame {
 		
 		for (Videojuego videojuego : listaVideojuego2) {
 			if(videojuego.getEstado()== EstadoProducto.PRIMERA_MANO) {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
+				this.mDV.addRow(new Object[] {videojuego.getId(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
 			}else {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
+				this.mDV.addRow(new Object[] {videojuego.getId(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
 			}
 		
 		}
@@ -343,9 +343,9 @@ public class VentanaVideojuegos extends JFrame {
 		
 		for (Videojuego videojuego : listaVideojuego2) {
 			if(videojuego.getEstado()== EstadoProducto.PRIMERA_MANO) {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
+				this.mDV.addRow(new Object[] {videojuego.getId(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
 			}else {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
+				this.mDV.addRow(new Object[] {videojuego.getId(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
 			}
 		
 		}
@@ -368,9 +368,9 @@ public class VentanaVideojuegos extends JFrame {
 		
 		for (Videojuego videojuego : listaVideojuego2) {
 			if(videojuego.getEstado()== EstadoProducto.PRIMERA_MANO) {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
+				this.mDV.addRow(new Object[] {videojuego.getId(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio())});
 			}else {
-				this.mDV.addRow(new Object[] {videojuego.getId_v(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
+				this.mDV.addRow(new Object[] {videojuego.getId(),videojuego.getNombre(), videojuego.getGenero(), videojuego.getEstado(), videojuego.getAnyo(), String.format("%.2f",videojuego.getPrecio() * 3)});
 			}
 		
 		}
