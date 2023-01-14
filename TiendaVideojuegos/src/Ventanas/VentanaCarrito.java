@@ -33,7 +33,7 @@ public class VentanaCarrito extends JFrame{
 		ConfirmarPedido = new JButton("CONFIRMAR PEDIDO");
 		
 		
-		precio = new JLabel("PRECIO:");
+		precio = new JLabel("PRECIO TOTAL:");
 		
 		precio2 = new JTextField("0.0");
 		

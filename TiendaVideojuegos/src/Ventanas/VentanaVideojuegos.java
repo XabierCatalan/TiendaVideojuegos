@@ -18,7 +18,7 @@ import ClasesPrincipales.*;
 public class VentanaVideojuegos extends JFrame {
 	protected JButton carrito;
 	protected JButton atras;
-	protected JButton añadirCarrito;
+	
 	protected JButton sinFiltros;
 	
 	protected JLabel filtros;
@@ -65,7 +65,7 @@ public class VentanaVideojuegos extends JFrame {
 		
 		carrito = new JButton("Carrito");
 		atras = new JButton("Atras");
-		añadirCarrito = new JButton("Añadir al Carrito");
+		
 		sinFiltros = new JButton("Quitar Filtros");
 		
 		filtros = new JLabel("FILTROS");
@@ -160,15 +160,15 @@ public class VentanaVideojuegos extends JFrame {
 					
 					//System.out.println(Main.vC.DLM);
 					
-					//for (int i = 0; i < Main.vC.DLM.getSize(); i++) {
-					//	Videojuego v =  Main.vC.DLM.getElementAt(i);
-					//	double x +=  Main.vC.DLM.getElementAt(i);
-					//}
+//					for (int i = 0; i < Main.vC.DLM.getSize(); i++) {
+//						Videojuego v =  Main.vC.DLM.getElementAt(i);
+//						double x   Main.vC.DLM.getElementAt(i);
+//					}
 					
-					//double precio = Double.parseDouble(Main.vC.precio2.getText());  
-					//double newPrecio = precio + v.getPrecio();
-					//String p = String.valueOf(newPrecio);
-					//Main.vC.precio2.setText(p);
+					double precio = Double.parseDouble(Main.vC.precio2.getText());  
+					double newPrecio = precio + v.getPrecio();
+					String p = String.valueOf(newPrecio);
+					Main.vC.precio2.setText(p);
 					
 						
 					}
@@ -252,7 +252,7 @@ public class VentanaVideojuegos extends JFrame {
 		JP2.setLayout(new BorderLayout());
 		
 		JP2.add(carrito, BorderLayout.NORTH);
-		JP2.add(añadirCarrito, BorderLayout.CENTER);
+		
 		JP2.add(atras, BorderLayout.SOUTH);
 		
 		cp.add(JP2);
@@ -272,15 +272,7 @@ public class VentanaVideojuegos extends JFrame {
 			}
 		});
 		
-		añadirCarrito.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-			}
-		});
+		
 		
 		atras.addActionListener(new ActionListener() {
 			
