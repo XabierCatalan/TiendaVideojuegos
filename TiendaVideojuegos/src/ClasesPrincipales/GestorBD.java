@@ -977,18 +977,41 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO CARRITO ( FECHA, ELEMENTOS, ESTADOCARRITO, USUARIO) VALUES ( '%s', '%s', '%s', '%s');";
+			String sql = "INSERT INTO CARRITO ( FECHA, ELEMENTOS, USUARIO) VALUES ( '%s', '%s', '%s');";
 			
 			System.out.println("- Insertando carritos...");
 			
 			//Se recorren los clientes y se insertan uno a uno
 			for (Carrito c : carritos) {
-				if (1 == stmt.executeUpdate(String.format(sql, c.getFecha(), c.getElementos(), c.getEstadoCarrito(), c.getUsuario()))) {					
+				if (1 == stmt.executeUpdate(String.format(sql, c.getFecha(), c.getEstadoCarrito(), c.getUsuario()))) {					
 					System.out.println(String.format(" - Carrito insertado: %s", c.toString()));
 				} else {
 					System.out.println(String.format(" - No se ha insertado el carrito: %s", c.toString()));
 				}
 			}			
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}				
+	}
+	
+	public void insertarCarritoUnico( Carrito c) {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
+		     Statement stmt = con.createStatement()) {
+			//Se define la plantilla de la sentencia SQL
+			String sql = "INSERT INTO CARRITO ( FECHA, ELEMENTOS, USUARIO) VALUES ( '%s', '%s', '%s');";
+			
+			System.out.println("- Insertando carritos...");
+			
+			//Se recorren los clientes y se insertan uno a uno
+			
+				if (1 == stmt.executeUpdate(String.format(sql, c.getFecha(), c.getEstadoCarrito(), c.getUsuario()))) {					
+					System.out.println(String.format(" - Carrito insertado: %s", c.toString()));
+				} else {
+					System.out.println(String.format(" - No se ha insertado el carrito: %s", c.toString()));
+				}
+						
 		} catch (Exception ex) {
 			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();						
@@ -1285,7 +1308,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		}
 	}
 	
-	public void insertarDatosProductoCarrito(List<Producto> productos) {
+	public void insertarDatosProductoCarrito() {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTOSCARRITO);
 		     Statement stmt = con.createStatement()) {
@@ -1324,6 +1347,34 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		}				
 	}
 	
+	public void insertarDatosProductoCarritoUnico(Carrito c) {
+		//Se abre la conexión y se obtiene el Statement
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTOSCARRITO);
+		     Statement stmt = con.createStatement()) {
+			//Se define la plantilla de la sentencia SQL
+			String sql = "INSERT INTO PRODUCTOSCARRITO ( ID_C, ID_P) VALUES ( '%s', '%s');";
+			
+			System.out.println("- Insertando productos de un carrito...");
+			
+			
+			for (Pagable p : c.getElementos()) {
+				
+				Producto prod = (Producto) p;
+				
+				if (1 == stmt.executeUpdate(String.format(sql, c.getId(), prod.getId()))) {
+					System.out.println(String.format(" - ProductoCarrito insertado: %s"));
+
+				} else {
+					System.out.println(String.format(" - No se ha insertado el productos_carrto: %s"));
+					}
+			}
+				
+			} catch (Exception ex) {
+			System.err.println(String.format("* Error al insertar datos de la BBDDProductosCarrito: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}				
+	
+	}
 	
 	
 	

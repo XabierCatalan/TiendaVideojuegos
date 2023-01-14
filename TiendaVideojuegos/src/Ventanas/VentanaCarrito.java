@@ -55,7 +55,7 @@ public class VentanaCarrito extends JFrame{
 		p = new ArrayList<>();
 		Date date = new Date();
 		
-		c = new Carrito(WIDTH, date, p, EstadoCarrito.PREPARACIÓN, null);
+		c = new Carrito(0, date, p, EstadoCarrito.PREPARACIÓN, null);
 		
 		
 		pagables = new JList<>(DLM);
@@ -146,8 +146,11 @@ public class VentanaCarrito extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
+				ArrayList<Carrito> carritos = Main.bd.obtenerDatosCarritos();
+				int id_C = carritos.get(carritos.size()-1).getId() + 1;
+				c.setId(id_C);
+				Main.bd.insertarCarritoUnico(c);
+				Main.bd.insertarDatosProductoCarritoUnico(c);
 			}
 		});
 		
