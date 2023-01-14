@@ -18,6 +18,7 @@ public class Main {
 	static VentanaVideojuegos vV = new VentanaVideojuegos();
 	static VentanaCarrito vC = new VentanaCarrito();
 	static VentanaServicio vS = new VentanaServicio();
+	static VentanaGestionPedidos vGP = new VentanaGestionPedidos();
     
 	public static void main(String[] args) {
 		
