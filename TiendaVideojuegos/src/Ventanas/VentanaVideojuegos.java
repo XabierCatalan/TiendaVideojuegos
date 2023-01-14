@@ -155,6 +155,7 @@ public class VentanaVideojuegos extends JFrame {
 					Videojuego v = Main.bd.buscarVideojuegoPorID_P(id_p);
 					
 					Main.vC.DLM.addElement(v);
+					Main.vC.p.add(v);
 					System.out.println("Se ha añadido al carrito el videojuego");
 					JOptionPane.showMessageDialog(null, "Se ha añadido al carrito el videojuego");
 					

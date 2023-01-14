@@ -108,6 +108,7 @@ public class VentanaCrearCuenta extends JFrame {
 				if(msg=="OK") {
 					GestorLog.fine("usuario nuevo creado");
 					Main.vMP.setVisible(true);
+					Main.vC.c.setUsuario(Main.bd.buscarUsuarioPorEmail(mail));
 					dispose();
 				} else {
 					msgError.setText(msg);
