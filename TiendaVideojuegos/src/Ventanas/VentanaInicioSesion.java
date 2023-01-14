@@ -109,9 +109,16 @@ public class VentanaInicioSesion extends JFrame {
 				GestorBD gestorBD = new GestorBD();
 				String msg = gestorBD.iniciarSesion(inMail,inPass);
 				if(msg=="OK") {
-					Main.vMP.setVisible(true);
-					Main.vC.c.setUsuario(Main.bd.buscarUsuarioPorEmail(inMail));
-					dispose();
+					if(Main.administradores.contains(inMail)) {
+						Main.vGP.setVisible(true);
+						dispose();
+						
+					}else {
+						Main.vMP.setVisible(true);
+						Main.vC.c.setUsuario(Main.bd.buscarUsuarioPorEmail(inMail));
+						dispose();
+					}
+					
 				} else {
 					
 					msgError.setText(msg);
