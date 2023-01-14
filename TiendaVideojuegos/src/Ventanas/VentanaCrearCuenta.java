@@ -109,6 +109,7 @@ public class VentanaCrearCuenta extends JFrame {
 					GestorLog.fine("usuario nuevo creado");
 					Main.vMP.setVisible(true);
 					Main.vC.c.setUsuario(Main.bd.buscarUsuarioPorEmail(mail));
+					System.out.println("se ha metido como usuario del carrito " + Main.bd.buscarUsuarioPorEmail(mail));
 					dispose();
 				} else {
 					msgError.setText(msg);

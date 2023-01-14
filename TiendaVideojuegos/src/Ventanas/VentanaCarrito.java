@@ -151,6 +151,7 @@ public class VentanaCarrito extends JFrame{
 				c.setId(id_C);
 				Main.bd.insertarCarritoUnico(c);
 				Main.bd.insertarDatosProductoCarritoUnico(c);
+				System.out.println("Insertando pedido en la base de datos tabla carrito y carritoProducto");
 			}
 		});
 		

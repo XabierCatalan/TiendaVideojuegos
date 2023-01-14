@@ -21,6 +21,7 @@ public class Main {
 	static VentanaCarrito vC = new VentanaCarrito();
 	static VentanaServicio vS = new VentanaServicio();
 	static VentanaGestionPedidos vGP = new VentanaGestionPedidos();
+	static calcularPrecioVentas cPV = new calcularPrecioVentas();
 	static List<String> administradores;
     
 	public static void main(String[] args) {
@@ -33,17 +34,25 @@ public class Main {
 		bd.borrarBBDDMando();
 		bd.borrarBBDDVideojuego();
 		bd.borrarBBDDUsuario();
+		bd.borrarBBDDProducto();
+		bd.borrarBBDDProductosCarrito();
+		
 		
 		bd.CrearBBDDCarrito();
 		bd.CrearBBDDConsola();
 		bd.CrearBBDDMando();
 		bd.CrearBBDDUsuario();
 		bd.CrearBBDDVideojuego();
+		bd.CrearBBDDProducto();
+		bd.CrearBBDDProductosCarrito();
 		
 		bd.insertarDatosConsola(Main.tg.LeerCSVconsolas());
 		bd.insertarDatosMando(Main.tg.LeerCSVmandos());
 		bd.insertarDatosVideojuego(Main.tg.LeerCSVvideojuego());
 		bd.insertarDatosUsuario(Main.tg.LeerCSVUsuarios());
+		bd.insertarDatosCarrito(null);  //meter los metodos de leer del csv en los 2
+		bd.insertarDatosProducto(null);
+		bd.insertarDatosProductoCarrito(); //bacio porque lo lee directamente del csv
 		
 		administradores = new ArrayList<>(Main.tg.LeerCSVAdministradores());
 		

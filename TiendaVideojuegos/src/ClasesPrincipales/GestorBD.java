@@ -1308,7 +1308,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		}
 	}
 	
-	public void insertarDatosProductoCarrito() {
+	public void insertarDatosProductoCarrito() { 
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTOSCARRITO);
 		     Statement stmt = con.createStatement()) {
@@ -1326,6 +1326,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 				while ((linea = BR.readLine()) != null) {
 					tokenizer = new StringTokenizer(linea, ";");
 					
+				
 					if (1 == stmt.executeUpdate(String.format(sql, tokenizer.nextToken(), tokenizer.nextToken()))) {
 						System.out.println(String.format(" - ProductoCarrito insertado: %s"));
 
