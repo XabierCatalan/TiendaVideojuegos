@@ -2,6 +2,10 @@ package Ventanas;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+
 import javax.swing.*;
 
 
@@ -20,6 +24,9 @@ public class VentanaCarrito extends JFrame{
 	
 	protected JList<Pagable> pagables;
 	protected DefaultListModel<Pagable> DLM;
+	
+	protected ArrayList<Pagable> p;
+	protected Carrito c;
 
 
 
@@ -39,6 +46,16 @@ public class VentanaCarrito extends JFrame{
 		
 		DLM = new DefaultListModel<>();
 		
+//		protected int id;
+//		protected Date fecha;
+//		protected ArrayList<Pagable> elementos;
+//		protected EstadoCarrito estado;
+//		protected Usuario usuario;
+		
+		p = new ArrayList<>();
+		
+		
+		c = new Carrito(WIDTH, null, p, EstadoCarrito.PREPARACIÓN, null);
 		
 		
 		pagables = new JList<>(DLM);
@@ -114,6 +131,10 @@ public class VentanaCarrito extends JFrame{
 				// TODO Auto-generated method stub
 				Pagable seleccionado = pagables.getSelectedValue();			
 				DLM.removeElement(seleccionado);
+				if(p.contains(seleccionado)) {
+					
+				}
+				
 
 			}
 		});
