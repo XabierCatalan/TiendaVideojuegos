@@ -280,7 +280,7 @@ public class TiendaGame implements Serializable{
 			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
 			e.printStackTrace();
 		}
-		System.out.println(administradores);
+		
 		
 		
 		return administradores;
