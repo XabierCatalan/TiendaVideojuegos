@@ -50,8 +50,8 @@ public class Main {
 		bd.insertarDatosMando(Main.tg.LeerCSVmandos());
 		bd.insertarDatosVideojuego(Main.tg.LeerCSVvideojuego());
 		bd.insertarDatosUsuario(Main.tg.LeerCSVUsuarios());
-		bd.insertarDatosCarrito(null);  //meter los metodos de leer del csv en los 2
-		bd.insertarDatosProducto(null);
+		//bd.insertarDatosCarrito(null);  //meter los metodos de leer del csv en los 2
+		//bd.insertarDatosProducto(null);
 		bd.insertarDatosProductoCarrito(); //bacio porque lo lee directamente del csv
 		
 		administradores = new ArrayList<>(Main.tg.LeerCSVAdministradores());
