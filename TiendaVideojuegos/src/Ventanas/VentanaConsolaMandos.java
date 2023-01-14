@@ -229,8 +229,9 @@ public class VentanaConsolaMandos extends JFrame {
 						System.out.println("Se ha añadido una consola al carrito");
 						JOptionPane.showMessageDialog(null, "Se ha añadido al carrito la consola");
 						
-						double precio = Double.parseDouble(Main.vC.precio2.getText());  
-						double newPrecio = precio + v.getPrecio();
+						double precioC = Main.bd.buscarConsolaPorID_P(id_p).getPrecio();
+						double precio = Double.parseDouble(Main.vC.precio2.getText()); 
+						double newPrecio = precio + precioC;
 						String p = String.valueOf(newPrecio);
 						Main.vC.precio2.setText(p);
 						
@@ -239,10 +240,12 @@ public class VentanaConsolaMandos extends JFrame {
 						Main.vC.DLM.addElement(Main.bd.buscarMandoPorID_P(id_p));
 						JOptionPane.showMessageDialog(null, "Se ha añadido al carrito el mando");
 						
-						double precio = Double.parseDouble(Main.vC.precio2.getText());  
-						double newPrecio = precio + v.getPrecio();
+						double precioC = Main.bd.buscarMandoPorID_P(id_p).getPrecio();
+						double precio = Double.parseDouble(Main.vC.precio2.getText()); 
+						double newPrecio = precio + precioC;
 						String p = String.valueOf(newPrecio);
 						Main.vC.precio2.setText(p);
+						
 					}
 				}
 				
