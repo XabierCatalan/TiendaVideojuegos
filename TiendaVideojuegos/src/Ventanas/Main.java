@@ -1,5 +1,7 @@
 package Ventanas;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import ClasesPrincipales.GestorBD;
@@ -19,6 +21,7 @@ public class Main {
 	static VentanaCarrito vC = new VentanaCarrito();
 	static VentanaServicio vS = new VentanaServicio();
 	static VentanaGestionPedidos vGP = new VentanaGestionPedidos();
+	static List<String> administradores;
     
 	public static void main(String[] args) {
 		
@@ -41,6 +44,8 @@ public class Main {
 		bd.insertarDatosMando(Main.tg.LeerCSVmandos());
 		bd.insertarDatosVideojuego(Main.tg.LeerCSVvideojuego());
 		bd.insertarDatosUsuario(Main.tg.LeerCSVUsuarios());
+		
+		administradores = new ArrayList<>(Main.tg.LeerCSVAdministradores());
 		
 		
 

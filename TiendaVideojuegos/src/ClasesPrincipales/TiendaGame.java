@@ -250,6 +250,43 @@ public class TiendaGame implements Serializable{
 		return Usuarios;
 	}
 	
+	
+	public static List<String> LeerCSVAdministradores() {
+		List<String> administradores = new ArrayList<>();
+		
+		try (BufferedReader BR = new BufferedReader(new FileReader("Data/Administradores.csv"))) {
+			StringTokenizer tokenizer;
+			String linea = null;
+			int numLinea = 0;
+			
+			BR.readLine();
+			
+			int id = 0;
+			
+			
+			while ((linea = BR.readLine()) != null) {
+				
+				tokenizer = new StringTokenizer(linea, ";");
+				
+				administradores.add(tokenizer.nextToken());
+				
+			
+			}
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
+			e.printStackTrace();
+		}
+		System.out.println(administradores);
+		
+		
+		return administradores;
+		
+	}
+	
 	public static List<Carrito> LeerCSVCarritos() {
 		List<Carrito> Carritos = new ArrayList<>();
 		Carrito c;
