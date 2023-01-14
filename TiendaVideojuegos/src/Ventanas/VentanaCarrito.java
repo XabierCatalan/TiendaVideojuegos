@@ -53,9 +53,9 @@ public class VentanaCarrito extends JFrame{
 //		protected Usuario usuario;
 		
 		p = new ArrayList<>();
+		Date date = new Date();
 		
-		
-		c = new Carrito(WIDTH, null, p, EstadoCarrito.PREPARACIÓN, null);
+		c = new Carrito(WIDTH, date, p, EstadoCarrito.PREPARACIÓN, null);
 		
 		
 		pagables = new JList<>(DLM);
@@ -131,8 +131,11 @@ public class VentanaCarrito extends JFrame{
 				// TODO Auto-generated method stub
 				Pagable seleccionado = pagables.getSelectedValue();			
 				DLM.removeElement(seleccionado);
-				if(p.contains(seleccionado)) {
-					
+				
+				for (Pagable pagable : p) {
+					if (p.contains(seleccionado)) {
+						p.remove(pagable);
+					}
 				}
 				
 
@@ -143,7 +146,7 @@ public class VentanaCarrito extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				
 			}
 		});
