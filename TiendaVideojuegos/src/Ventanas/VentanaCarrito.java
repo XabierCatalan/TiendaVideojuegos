@@ -56,7 +56,7 @@ public class VentanaCarrito extends JFrame{
 		
 		Date date = new Date();
 		
-		c = new Carrito(0, date, null, EstadoCarrito.PREPARACIÓN, null);
+		c = new Carrito(0, date, null, EstadoCarrito.PREPARACION, null);
 		
 		pagables = new JList<>(DLM);
 		pagables.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
