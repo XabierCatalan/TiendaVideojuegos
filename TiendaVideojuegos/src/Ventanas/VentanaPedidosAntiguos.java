@@ -2,6 +2,8 @@ package Ventanas;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,6 +19,8 @@ public class VentanaPedidosAntiguos extends JFrame{
 	
 	protected JList<Pagable> pagables;
 	protected DefaultListModel<Pagable> modeloPagables;
+	
+	protected List<Carrito> listaCarrito;
 	
 	public VentanaPedidosAntiguos() {
 		
