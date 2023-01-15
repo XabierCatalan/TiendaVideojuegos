@@ -54,6 +54,12 @@ public class VentanaMain extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Main.vCC.setVisible(true);
+				Main.vCC.mail1.setText("");
+				Main.vCC.telf1.setText("");
+				Main.vCC.nomb1.setText("");
+				Main.vCC.contraseña1.setText("");
+			    
+				
 				dispose();
 			}
 		});
