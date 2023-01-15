@@ -296,12 +296,17 @@ public class TiendaGame implements Serializable{
 	
 	public static void EscribirCSVUsuarios(String mail, String nombre, String contraseña, String tel) {
 		
-		try (BufferedWriter BW = new BufferedWriter(new FileWriter("Data/usuarios.csv"))) {
+		try (BufferedWriter BW = new BufferedWriter(new FileWriter("Data/usuarios.csv"));
+			BufferedReader BR = new BufferedReader(new FileReader("Data/usuarios.csv"))) {
 			
-			BW.newLine();
-			BW.write(nombre + ";" + mail + ";" + contraseña + ";" + tel);
+			String linea = null;
+			if ((linea = BR.readLine()) != null) {
+				BW.newLine();
+				BW.write(nombre + ";" + mail + ";" + contraseña + ";" + tel);
+				
+				BW.flush();
+			}
 			
-			BW.flush();
 			
 			
 		}catch(Exception e) {
