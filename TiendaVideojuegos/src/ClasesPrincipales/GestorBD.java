@@ -1040,7 +1040,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			ResultSet rs = stmt.executeQuery(sql);		
 			
 			Usuario usuario;
-			StringTokenizer tokenizer;
+			
 			Carrito carrito;
 			
 			
@@ -1352,7 +1352,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTOSCARRITO);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO PRODUCTOSCARRITO ( ID_C, ID_P) VALUES ( '%s', '%s');";
+			String sql = "INSERT INTO PRODUCTOSCARRITO ( ID_C, ID_P) VALUES ( '%d', '%d');";
 			
 			System.out.println("- Insertando productos...");
 			
