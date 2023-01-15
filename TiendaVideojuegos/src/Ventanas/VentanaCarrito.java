@@ -58,7 +58,6 @@ public class VentanaCarrito extends JFrame{
 		
 		c = new Carrito(0, date, null, EstadoCarrito.PREPARACIÓN, null);
 		
-		
 		pagables = new JList<>(DLM);
 		pagables.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		
@@ -131,15 +130,31 @@ public class VentanaCarrito extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Pagable seleccionado = pagables.getSelectedValue();	
-				String precio = precio2.getText() - seleccionado.getPrecio();
-				
-				DLM.removeElement(seleccionado);
-				
-		
-				
-
+				Producto p = (Producto) seleccionado;
+				if (p.getTp() == TipoProducto.VIDEOJUEGO) {
+					
+					Videojuego v = (Videojuego) p;
+					double precio3 =  Double.parseDouble(precio2.getText()) - v.getPrecio();
+					DLM.removeElement(seleccionado);
+					precio2.setText(String.valueOf(precio3));
+					
+				} else if (p.getTp() == TipoProducto.CONSOLA) {
+					
+					Consola c = (Consola) p;
+					double precio3 =  Double.parseDouble(precio2.getText()) - c.getPrecio();
+					DLM.removeElement(seleccionado);
+					precio2.setText(String.valueOf(precio3));
+					
+				} else {
+					
+					Mando m = (Mando) p;
+					double precio3 =  Double.parseDouble(precio2.getText()) - m.getPrecio();
+					DLM.removeElement(seleccionado);
+					precio2.setText(String.valueOf(precio3));
 			}
-		});
+			
+		}
+	});
 		
 		ConfirmarPedido.addActionListener(new ActionListener() {
 			
