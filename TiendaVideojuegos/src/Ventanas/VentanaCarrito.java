@@ -130,10 +130,12 @@ public class VentanaCarrito extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				Pagable seleccionado = pagables.getSelectedValue();			
+				Pagable seleccionado = pagables.getSelectedValue();	
+				String precio = precio2.getText() - seleccionado.getPrecio();
+				
 				DLM.removeElement(seleccionado);
 				
-				
+		
 				
 
 			}
