@@ -1,9 +1,11 @@
 package ClasesPrincipales;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -290,6 +292,28 @@ public class TiendaGame implements Serializable{
 		
 		
 		return Usuarios;
+	}
+	
+	public static void EscribirCSVUsuarios(String mail, String nombre, String contraseña, String tel) {
+		
+		try (BufferedWriter BW = new BufferedWriter(new FileWriter("Data/usuarios.csv"));
+			BufferedReader BR = new BufferedReader(new FileReader("Data/usuarios.csv"))) {
+			
+			String linea = null;
+			if ((linea = BR.readLine()) != null) {
+				BW.newLine();
+				BW.write(nombre + ";" + mail + ";" + contraseña + ";" + tel);
+				
+				BW.flush();
+			}
+			
+			
+			
+		}catch(Exception e) {
+			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
+			e.printStackTrace();
+		}
+		
 	}
 	
 	

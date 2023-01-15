@@ -111,6 +111,7 @@ public class VentanaCrearCuenta extends JFrame {
 					Main.vC.c.setUsuario(Main.bd.buscarUsuarioPorEmail(mail));
 					System.out.println("se ha metido como usuario del carrito " + Main.bd.buscarUsuarioPorEmail(mail));
 					dispose();
+					Main.tg.EscribirCSVUsuarios(mail, nombre, pass, tel);
 				} else {
 					msgError.setText(msg);
 					GestorLog.warning(msg);
