@@ -1057,7 +1057,6 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 				String fecha = rs.getString("FECHA");
 				Date fechaFormateada = sdf.parse(fecha);
 				
-				System.out.println(fechaFormateada);
 				
 				carrito.setFecha(fechaFormateada);
 				carrito.setElementos(ObtenerPagablesPorArrayDeProductos(ObtenerProductosConIDCarrito(rs.getInt("ID"))));
@@ -1234,7 +1233,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
 			Statement stmt = con.createStatement()) {
 			
-			String sql = "select * from CARRITO where USUARIO =  ' " + emailUsuario + "'";
+			String sql = "select * from CARRITO where USUARIO =  '" + emailUsuario + "'";
 			
 			ResultSet rs = stmt.executeQuery( sql );
 			
@@ -1245,7 +1244,12 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 				carrito = new Carrito();
 				
 				int id = rs.getInt("ID");
-				Date fecha = rs.getDate("FECHA");
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				
+				String fecha = rs.getString("FECHA");
+				Date fechaFormateada = sdf.parse(fecha);
+				
+				
 	
 				ArrayList<Pagable> Pagables = ObtenerPagablesPorArrayDeProductos(ObtenerProductosConIDCarrito(id));
 				
@@ -1255,13 +1259,14 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 				
 				
 				carrito.setId(id);
-				carrito.setFecha(fecha);
+				carrito.setFecha(fechaFormateada);
 				
 				carrito.setElementos(Pagables);
 				
 				carrito.setUsuario(usuario);
 				carrito.setEstadoCarrito(estado);
 				
+				System.out.println(carrito);
 				l.add( carrito );
 			}
 			rs.close();
@@ -1269,6 +1274,8 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();						
 		}
+		System.out.println(l);
+		
 		return l;
 	}
 	

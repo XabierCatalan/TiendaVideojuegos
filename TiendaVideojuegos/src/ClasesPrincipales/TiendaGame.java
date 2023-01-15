@@ -87,12 +87,13 @@ public class TiendaGame implements Serializable{
 			int id = 0;
 			
 			
+			
 			while ((linea = BR.readLine()) != null) {
 				p = new Producto();
 				tokenizer = new StringTokenizer(linea, ";");
 				
 				
-				p.setId(0);
+				p.setId(id);
 				id++;
 				p.setNombre(tokenizer.nextToken());
 				p.setTp(TipoProducto.valueOf(tokenizer.nextToken()));
@@ -134,7 +135,7 @@ public class TiendaGame implements Serializable{
 				tokenizer = new StringTokenizer(linea, ";");
 				
 				
-				v.setId_v(0);
+				v.setId_v(id_v);
 				id_v++;
 				v.setNombre(tokenizer.nextToken());
 				v.setGenero(Genero.valueOf(tokenizer.nextToken()));
@@ -180,7 +181,7 @@ public class TiendaGame implements Serializable{
 				tokenizer = new StringTokenizer(linea, ";");
 				
 				
-				m.setId_m(0);
+				m.setId_m(id_m);
 				id_m++;
 				m.setNombre(tokenizer.nextToken());
 				m.setEstado(EstadoProducto.valueOf(tokenizer.nextToken()));
@@ -225,7 +226,7 @@ public class TiendaGame implements Serializable{
 				tokenizer = new StringTokenizer(linea, ";");
 				
 				
-				c.setId_c(0);
+				c.setId_c(id_c);
 				id_c++;
 				c.setNombre(tokenizer.nextToken());
 				c.setEstado(EstadoProducto.valueOf(tokenizer.nextToken()));
@@ -272,7 +273,7 @@ public class TiendaGame implements Serializable{
 				tokenizer = new StringTokenizer(linea, ";");
 				
 				
-				u.setId(0);
+				u.setId(id);
 				id++;
 				u.setNombre(tokenizer.nextToken());
 				u.setEmail(tokenizer.nextToken());
@@ -328,7 +329,7 @@ public class TiendaGame implements Serializable{
 			
 			BR.readLine();
 			
-			int id = 0;
+			
 			
 			
 			while ((linea = BR.readLine()) != null) {

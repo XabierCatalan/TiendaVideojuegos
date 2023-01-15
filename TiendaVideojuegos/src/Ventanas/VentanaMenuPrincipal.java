@@ -21,7 +21,7 @@ public class VentanaMenuPrincipal extends JFrame{
 	protected JButton comVideojuego;
 	protected JButton comConsola;
 	protected JButton calcPrecioVentas;
-	protected JButton gestReparaciones;
+	protected JButton pedidosAntiguos;
 	
 	protected JButton atras;
 	protected JButton carrito;
@@ -35,7 +35,7 @@ public class VentanaMenuPrincipal extends JFrame{
 		comVideojuego = new JButton("COMPRAR VIDEOJUEGOS");
 		comConsola = new JButton("COMPRAR CONSOLAS Y MANDOS");
 		calcPrecioVentas = new JButton("CALCULAR PRECIO VENTAS");
-		gestReparaciones = new JButton("GESTION DE REPARACIONES");
+		pedidosAntiguos = new JButton("PEDIDOS ANTIGUOS");
 		
 		atras = new JButton("Atras");
 		carrito = new JButton("Carrito");
@@ -61,7 +61,7 @@ public class VentanaMenuPrincipal extends JFrame{
 		JP2.add(JP3);
 		JP2.add(comVideojuego);
 		JP2.add(comConsola);
-		JP2.add(gestReparaciones);
+		JP2.add(pedidosAntiguos);
 		JP2.add(calcPrecioVentas);
 		
 		cp.add(JP1 , BorderLayout.NORTH);
@@ -122,7 +122,7 @@ public class VentanaMenuPrincipal extends JFrame{
 		
 		
 		
-		gestReparaciones.addActionListener(new ActionListener() {
+		pedidosAntiguos.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
