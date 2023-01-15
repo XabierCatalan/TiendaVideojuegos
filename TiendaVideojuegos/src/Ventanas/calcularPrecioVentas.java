@@ -73,7 +73,7 @@ public class calcularPrecioVentas extends JFrame{
 		this.setVisible(false);
 		this.setSize(800, 400);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setTitle("Calcular Pracio Ventas");
+		this.setTitle("Calcular Precio Ventas");
 		this.setResizable(false);
 	}
 }
