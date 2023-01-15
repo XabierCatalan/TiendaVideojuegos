@@ -3,6 +3,7 @@ package Ventanas;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 
@@ -25,7 +26,7 @@ public class VentanaCarrito extends JFrame{
 	protected JList<Pagable> pagables;
 	protected DefaultListModel<Pagable> DLM;
 	
-	protected ArrayList<Pagable> p;
+	
 	protected Carrito c;
 
 
@@ -52,10 +53,10 @@ public class VentanaCarrito extends JFrame{
 //		protected EstadoCarrito estado;
 //		protected Usuario usuario;
 		
-		p = new ArrayList<>();
+		
 		Date date = new Date();
 		
-		c = new Carrito(0, date, p, EstadoCarrito.PREPARACIÓN, null);
+		c = new Carrito(0, date, null, EstadoCarrito.PREPARACIÓN, null);
 		
 		
 		pagables = new JList<>(DLM);
@@ -132,11 +133,7 @@ public class VentanaCarrito extends JFrame{
 				Pagable seleccionado = pagables.getSelectedValue();			
 				DLM.removeElement(seleccionado);
 				
-				for (Pagable pagable : p) {
-					if (p.contains(seleccionado)) {
-						p.remove(pagable);
-					}
-				}
+				
 				
 
 			}
@@ -146,12 +143,22 @@ public class VentanaCarrito extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
+				c.setElementos(Collections.list(DLM.elements()));
+				
 				ArrayList<Carrito> carritos = Main.bd.obtenerDatosCarritos();
 				int id_C = carritos.get(carritos.size()-1).getId() + 1;
 				c.setId(id_C);
 				Main.bd.insertarCarritoUnico(c);
 				Main.bd.insertarDatosProductoCarritoUnico(c);
 				System.out.println("Insertando pedido en la base de datos tabla carrito y carritoProducto");
+				
+				
+				DLM.removeAllElements();
+				
+				
+				Main.vMP.setVisible(true);
+				dispose();
 			}
 		});
 		

@@ -1056,16 +1056,10 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 						
 				carrito.setEstadoCarrito(EstadoCarrito.valueOf(rs.getString("ESTADOCARRITO")));
 				
-				String u = rs.getString("USUARIO");
-				tokenizer = new StringTokenizer(u,";");
-				usuario= new Usuario();
-				usuario.setId(Integer.parseInt(tokenizer.nextToken()));
-				usuario.setNombre(tokenizer.nextToken());
-				usuario.setEmail(tokenizer.nextToken());
-				usuario.setContrasenya(tokenizer.nextToken());
-				usuario.setTelefono(tokenizer.nextToken());
+				Usuario u = buscarUsuarioPorEmail(rs.getString("USUARIO"));
 				
-				carrito.setUsuario(usuario);
+				
+				carrito.setUsuario(u);
 			
 				
 			
