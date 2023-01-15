@@ -30,7 +30,7 @@ public class Carrito implements Serializable{
 		this.id = 0;
 		this.fecha = new Date();
 		this.elementos = new ArrayList<Pagable>();
-		this.estado = EstadoCarrito.PREPARACIÓN;
+		this.estado = EstadoCarrito.PREPARACION;
 		this.usuario = new Usuario();
 	}
 

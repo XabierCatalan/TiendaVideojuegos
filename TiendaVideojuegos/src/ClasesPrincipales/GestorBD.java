@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -134,7 +135,7 @@ public class GestorBD {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTO);
 		     Statement stmt = con.createStatement()) {
-			String sql = "SELECT * FROM PRODUCTO WHERE ID >= 0";
+			String sql = "SELECT * FROM PRODUCTO WHERE ID_P >= 0";
 	//		System.out.println(sql);
 			
 			//Se ejecuta la sentencia y se obtiene el ResultSet con los resutlados
@@ -146,8 +147,8 @@ public class GestorBD {
 			//Se recorre el ResultSet y se crean objetos Cliente
 			while (rs.next()) {
 				producto = new Producto();
-				producto.setId(rs.getInt("ID"));
-				producto.setNombre(rs.getString("NOMBRE"));
+				producto.setId(rs.getInt("ID_P"));
+				producto.setNombre(rs.getString("NOMBRE_P"));
 				producto.setTp(TipoProducto.valueOf(rs.getString("TP")));
 				
 				
@@ -977,7 +978,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO CARRITO ( FECHA, ELEMENTOS, USUARIO) VALUES ( '%s', '%s', '%s');";
+			String sql = "INSERT INTO CARRITO ( FECHA, ESTADOCARRITO, USUARIO) VALUES ( '%s', '%s', '%s');";
 			
 			System.out.println("- Insertando carritos...");
 			
@@ -985,10 +986,10 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 				String linea;
 				while ((linea = br.readLine()) != null) {
 					String[] campos = linea.split(";");
-					if (1 == stmt.executeUpdate(String.format(sql, campos[0], EstadoCarrito.valueOf(campos[1]), buscarUsuarioPorEmail(campos[2])))) {	//no sabemos si hay que poner el string en su valor real				
-						System.out.println(String.format(" - Carrito insertado: %s"));
+					if (1 == stmt.executeUpdate(String.format(sql, campos[0],campos[1], campos[2]))) {	//no sabemos si hay que poner el string en su valor real				
+						System.out.println(" - Carrito insertado:");
 					} else {
-						System.out.println(String.format(" - No se ha insertado el carrito: %s"));
+						System.out.println(" - No se ha insertado el carrito: ");
 					}
 				}
 				
@@ -1050,7 +1051,14 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			while (rs.next()) {
 				carrito= new Carrito();
 				carrito.setId(rs.getInt("ID"));
-				carrito.setFecha(rs.getDate("FECHA"));
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				
+				String fecha = rs.getString("FECHA");
+//				Date fechaFormateada = sdf.parse(fecha);
+				
+				System.out.println(fecha);
+				
+//				carrito.setFecha(rs.getDate("FECHA"));
 				carrito.setElementos(ObtenerPagablesPorArrayDeProductos(ObtenerProductosConIDCarrito(rs.getInt("ID"))));
 				
 						
@@ -1225,7 +1233,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
 			Statement stmt = con.createStatement()) {
 			
-			String sql = "select ID,FECHA,ESTADOCARRITO,USUARIO from CARRITO where USUARIO =  ' " + buscarUsuarioPorEmail(emailUsuario) + "'";
+			String sql = "select * from CARRITO where USUARIO =  ' " + emailUsuario + "'";
 			
 			ResultSet rs = stmt.executeQuery( sql );
 			
@@ -1352,7 +1360,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_PRODUCTOSCARRITO);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO PRODUCTOSCARRITO ( ID_C, ID_P) VALUES ( '%d', '%d');";
+			String sql = "INSERT INTO PRODUCTOSCARRITO ( ID_C, ID_P) VALUES ( '%s', '%s');";
 			
 			System.out.println("- Insertando productos...");
 			
@@ -1367,10 +1375,10 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 					
 				
 					if (1 == stmt.executeUpdate(String.format(sql, tokenizer.nextToken(), tokenizer.nextToken()))) {
-						System.out.println(String.format(" - ProductoCarrito insertado: %s"));
+						System.out.println(" - ProductoCarrito insertado: ");
 
 					} else {
-						System.out.println(String.format(" - No se ha insertado el productos_carrto: %s"));
+						System.out.println(" - No se ha insertado el productos_carrito: ");
 						}
 				}
 				
@@ -1459,7 +1467,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 					
 					Videojuego v = new Videojuego();
 					
-					String sql = "select * from VIDEOJUEGO where nombre = ' " + p.getId() + " '";
+					String sql = "select * from VIDEOJUEGO where ID_P = ' " + p.getId() + " '";
 					ResultSet rs = stmt.executeQuery(sql);
 					
 					v.setId_v(rs.getInt("ID_V"));
@@ -1484,7 +1492,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 					
 					Mando m = new Mando();
 					
-					String sql = "select * from MANDO where nombre = ' " + p.getId() + " '";
+					String sql = "select * from MANDO where ID_P = ' " + p.getId() + " '";
 					ResultSet rs = stmt.executeQuery(sql);
 					
 					m.setId_m(rs.getInt("ID_M"));
@@ -1508,7 +1516,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 					
 					Consola c = new Consola();
 					
-					String sql = "select * from CONSOLA where nombre = ' " + p.getId() + " '";
+					String sql = "select * from CONSOLA where ID_P = ' " + p.getId() + " '";
 					ResultSet rs = stmt.executeQuery(sql);
 					
 					c.setId_c(rs.getInt("ID_C"));

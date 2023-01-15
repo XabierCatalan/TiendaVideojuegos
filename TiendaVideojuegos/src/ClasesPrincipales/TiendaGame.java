@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import Ventanas.Main;
+import Ventanas.VentanaPedidosAntiguos;
+
 public class TiendaGame implements Serializable{
 	
 	protected ArrayList<Carrito> carritos;
@@ -351,6 +354,8 @@ public class TiendaGame implements Serializable{
 		
 	}
 	
+	
+	
 //	public static List<Carrito> LeerCSVCarritos() {
 //		List<Carrito> Carritos = new ArrayList<>();
 //		Carrito c;
@@ -376,9 +381,9 @@ public class TiendaGame implements Serializable{
 //				fecha = tokenizer.nextToken();
 //				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 //				c.setFecha(sdf.format(fecha));
-//				//c.setElementos(tokenizer.nextToken());
-//				//c.setContrasenya(tokenizer.nextToken());
-//				//c.setTelefono(tokenizer.nextToken());
+//				
+//				c.setEstadoCarrito(tokenizer.nextToken());
+//				c.setUsuario();
 //				
 //				
 //				Carritos.add(c);

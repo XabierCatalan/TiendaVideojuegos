@@ -116,7 +116,7 @@ public class VentanaInicioSesion extends JFrame {
 					}else {
 						Main.vMP.setVisible(true);
 						Main.vC.c.setUsuario(Main.bd.buscarUsuarioPorEmail(inMail));
-						Main.vPA.listaCarrito = Main.bd.buscarCarritosDeUsuario(inMail);
+						Main.vPA.listaCarrito = Main.bd.obtenerDatosCarritos();
 						System.out.println("Se ha iniciado sesion con la cuenta " + Main.bd.buscarUsuarioPorEmail(inMail));
 						dispose();
 					}
