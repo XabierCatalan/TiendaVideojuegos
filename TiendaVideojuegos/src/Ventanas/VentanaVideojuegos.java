@@ -299,7 +299,7 @@ public class VentanaVideojuegos extends JFrame {
 		
 		
 		this.setVisible(false);
-		this.setSize(800, 400);
+		this.setSize(800, 500);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setTitle("VENTANA VIDEOJEUGOS");
 		this.setResizable(false);

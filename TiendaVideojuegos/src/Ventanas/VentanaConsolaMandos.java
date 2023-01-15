@@ -126,9 +126,10 @@ public class VentanaConsolaMandos extends JFrame {
 		});
 		
 		this.setTitle("Consolas y Mandos");
-		this.setSize(800, 400);
+		this.setSize(800, 500);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(false);
+		this.setResizable(false);
 		
 		
 		
