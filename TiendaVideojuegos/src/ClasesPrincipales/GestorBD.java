@@ -1011,13 +1011,12 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO CARRITO ( FECHA, ELEMENTOS, USUARIO) VALUES ( '%s', '%s', '%s');";
+			String sql = "INSERT INTO CARRITO ( FECHA, ESTADOCARRITO, USUARIO) VALUES ( '%s', '%s', '%s');";
 			
-			System.out.println("- Insertando carritos...");
+			System.out.println("- Insertando carrito...");
 			
-			//Se recorren los clientes y se insertan uno a uno
 			
-				if (1 == stmt.executeUpdate(String.format(sql, c.getFecha(), c.getEstadoCarrito(), c.getUsuario()))) {					
+				if (1 == stmt.executeUpdate(String.format(sql, c.getFecha(), c.getEstadoCarrito(), c.getUsuario().getEmail()))) {					
 					System.out.println(String.format(" - Carrito insertado: %s", c.toString()));
 				} else {
 					System.out.println(String.format(" - No se ha insertado el carrito: %s", c.toString()));
@@ -1418,10 +1417,10 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 				Producto prod = (Producto) p;
 				
 				if (1 == stmt.executeUpdate(String.format(sql, c.getId(), prod.getId()))) {
-					System.out.println(String.format(" - ProductoCarrito insertado: %s"));
+					System.out.println(" - ProductoCarrito insertado: ");
 
 				} else {
-					System.out.println(String.format(" - No se ha insertado el productos_carrto: %s"));
+					System.out.println(" - No se ha insertado el productos_carrto: ");
 					}
 			}
 				
