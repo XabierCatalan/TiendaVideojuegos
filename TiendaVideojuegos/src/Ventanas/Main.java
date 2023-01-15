@@ -22,6 +22,7 @@ public class Main {
 	static VentanaServicio vS = new VentanaServicio();
 	static VentanaGestionPedidos vGP = new VentanaGestionPedidos();
 	static calcularPrecioVentas cPV = new calcularPrecioVentas();
+	static VentanaPedidosAntiguos vPA = new VentanaPedidosAntiguos();
 	static List<String> administradores;
     
 	public static void main(String[] args) {
