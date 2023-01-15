@@ -16,6 +16,9 @@ public class calcularPrecioVentas extends JFrame{
 		protected JButton atras;
 		protected JSlider slider;
 		protected JTextField textovalor;
+		
+		protected DefaultListModel<Pagable> DLM;
+		protected JList<Pagable> Lista;
 	
 	public calcularPrecioVentas() {
 		
