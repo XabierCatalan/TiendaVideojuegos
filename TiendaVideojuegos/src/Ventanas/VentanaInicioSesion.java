@@ -120,8 +120,16 @@ public class VentanaInicioSesion extends JFrame {
 						dispose();
 					}
 					
-				} else {
+				} else if (msg == "Contraseña incorrecta"){
 					
+					msgError.setText(msg);
+					contraseña1.setText("");
+					
+				} else if (msg == "El usuario indicado no existe") {
+					msgError.setText(msg);
+					mail1.setText("");
+					contraseña1.setText("");
+				}else {
 					msgError.setText(msg);
 				}
 			}
