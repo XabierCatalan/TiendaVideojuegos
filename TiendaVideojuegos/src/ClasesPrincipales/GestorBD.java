@@ -972,7 +972,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		}
 	}
 	
-	public void insertarDatosCarrito(List<Carrito> carritos) {
+	public void insertarDatosCarrito() {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
 		     Statement stmt = con.createStatement()) {
@@ -981,14 +981,23 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			
 			System.out.println("- Insertando carritos...");
 			
-			//Se recorren los clientes y se insertan uno a uno
-			for (Carrito c : carritos) {
-				if (1 == stmt.executeUpdate(String.format(sql, c.getFecha(), c.getEstadoCarrito(), c.getUsuario()))) {					
-					System.out.println(String.format(" - Carrito insertado: %s", c.toString()));
-				} else {
-					System.out.println(String.format(" - No se ha insertado el carrito: %s", c.toString()));
+			try(BufferedReader br = new BufferedReader(new FileReader("Data/carrito.csv"))) {
+				String linea;
+				while ((linea = br.readLine()) != null) {
+					String[] campos = linea.split(";");
+					if (1 == stmt.executeUpdate(String.format(sql, campos[0], EstadoCarrito.valueOf(campos[1]), buscarUsuarioPorEmail(campos[2])))) {	//no sabemos si hay que poner el string en su valor real				
+						System.out.println(String.format(" - Carrito insertado: %s"));
+					} else {
+						System.out.println(String.format(" - No se ha insertado el carrito: %s"));
+					}
 				}
-			}			
+				
+			} catch (Exception e) {
+				System.err.println("error al cargar los datos del csv");
+				e.printStackTrace();
+			}
+			
+					
 		} catch (Exception ex) {
 			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();						

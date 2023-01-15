@@ -68,6 +68,48 @@ public class TiendaGame implements Serializable{
 	
 	// GUARDAR DATOS Y CARGAR DATOS
 	
+	public static List<Producto> LeerCSVProductos() {
+		List<Producto> productos = new ArrayList<>();
+		Producto p;
+		
+		try (BufferedReader BR = new BufferedReader(new FileReader("Data/Producto.csv"))) {
+			StringTokenizer tokenizer;
+			String linea = null;
+			int numLinea = 0;
+			
+			BR.readLine();
+			
+			int id = 0;
+			
+			
+			while ((linea = BR.readLine()) != null) {
+				p = new Producto();
+				tokenizer = new StringTokenizer(linea, ";");
+				
+				
+				p.setId(0);
+				id++;
+				p.setNombre(tokenizer.nextToken());
+				p.setTp(TipoProducto.valueOf(tokenizer.nextToken()));
+				
+				
+				productos.add(p);
+				
+			
+			}
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
+			e.printStackTrace();
+		}
+		
+		
+		return productos;
+	}
+	
 	public static List<Videojuego> LeerCSVvideojuego() {
 		List<Videojuego> Videojuegos = new ArrayList<>();
 		Videojuego v;
@@ -287,52 +329,52 @@ public class TiendaGame implements Serializable{
 		
 	}
 	
-	public static List<Carrito> LeerCSVCarritos() {
-		List<Carrito> Carritos = new ArrayList<>();
-		Carrito c;
-		
-		try (BufferedReader BR = new BufferedReader(new FileReader("Data/carrito.csv"))) {
-			StringTokenizer tokenizer;
-			String linea = null;
-			int numLinea = 0;
-			
-			BR.readLine();
-			
-			int id = 0;
-			String fecha;
-			
-			
-			while ((linea = BR.readLine()) != null) {
-				c = new Carrito();
-				tokenizer = new StringTokenizer(linea, ";");
-				
-				
-				c.setId(0);
-				id++;
-				fecha = tokenizer.nextToken();
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-				//c.setFecha(sdf.format(fecha));
-				//c.setElementos(tokenizer.nextToken());
-				//c.setContrasenya(tokenizer.nextToken());
-				//c.setTelefono(tokenizer.nextToken());
-				
-				
-				Carritos.add(c);
-				
-			
-			}
-			
-			
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
-			e.printStackTrace();
-		}
-		
-		
-		return Carritos;
-	}
+//	public static List<Carrito> LeerCSVCarritos() {
+//		List<Carrito> Carritos = new ArrayList<>();
+//		Carrito c;
+//		
+//		try (BufferedReader BR = new BufferedReader(new FileReader("Data/carrito.csv"))) {
+//			StringTokenizer tokenizer;
+//			String linea = null;
+//			int numLinea = 0;
+//			
+//			BR.readLine();
+//			
+//			int id = 0;
+//			String fecha;
+//			
+//			
+//			while ((linea = BR.readLine()) != null) {
+//				c = new Carrito();
+//				tokenizer = new StringTokenizer(linea, ";");
+//				
+//				
+//				c.setId(0);
+//				id++;
+//				fecha = tokenizer.nextToken();
+//				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+//				c.setFecha(sdf.format(fecha));
+//				//c.setElementos(tokenizer.nextToken());
+//				//c.setContrasenya(tokenizer.nextToken());
+//				//c.setTelefono(tokenizer.nextToken());
+//				
+//				
+//				Carritos.add(c);
+//				
+//			
+//			}
+//			
+//			
+//			
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		return Carritos;
+//	}
 	
 	
 	public static void main(String[] args) {
