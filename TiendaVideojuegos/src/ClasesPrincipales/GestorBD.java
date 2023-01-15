@@ -978,15 +978,16 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO CARRITO ( FECHA, ESTADOCARRITO, USUARIO) VALUES ( '%s', '%s', '%s');";
+			String sql = "INSERT INTO CARRITO (FECHA,ESTADOCARRITO,USUARIO) VALUES ('%s','%s','%s');";
 			
 			System.out.println("- Insertando carritos...");
 			
 			try(BufferedReader br = new BufferedReader(new FileReader("Data/carrito.csv"))) {
 				String linea;
+				br.readLine();
 				while ((linea = br.readLine()) != null) {
 					String[] campos = linea.split(";");
-					if (1 == stmt.executeUpdate(String.format(sql, campos[0],campos[1], campos[2]))) {	//no sabemos si hay que poner el string en su valor real				
+					if (1 == stmt.executeUpdate(String.format(sql, campos[0], campos[1], campos[2]))) {	//no sabemos si hay que poner el string en su valor real				
 						System.out.println(" - Carrito insertado:");
 					} else {
 						System.out.println(" - No se ha insertado el carrito: ");
@@ -1054,11 +1055,11 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 				
 				String fecha = rs.getString("FECHA");
-//				Date fechaFormateada = sdf.parse(fecha);
+				Date fechaFormateada = sdf.parse(fecha);
 				
-				System.out.println(fecha);
+				System.out.println(fechaFormateada);
 				
-//				carrito.setFecha(rs.getDate("FECHA"));
+				carrito.setFecha(fechaFormateada);
 				carrito.setElementos(ObtenerPagablesPorArrayDeProductos(ObtenerProductosConIDCarrito(rs.getInt("ID"))));
 				
 						
