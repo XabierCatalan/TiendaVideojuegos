@@ -1147,35 +1147,71 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 	}
 	
 
+		
 	public String crearCuenta(String nombre,String mail, String pass,String tel) {
 		
 		String msg = "crearCuenta - error no gestionado";
+		
+		if("".equals(mail) || "".equals(pass) || "".equals(nombre) || "".equals(tel)) {
+			msg = "Por favor rellene todos los datos";
+			return msg;
+		}
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
-			Statement stmt = con.createStatement()) {
-			String sql = "INSERT INTO USUARIO (NOMBRE,EMAIL,CONTRASEÑA,TELEFONO) VALUES (  '"+nombre+"','"+mail+"','"+pass+"','"+tel+"' );";
+				Statement stmt = con.createStatement()) {
 			
+			String sql = "SELECT * FROM USUARIO;";			
+			ResultSet rs = stmt.executeQuery(sql);
+			boolean encontrado = false;
+			while (rs.next()) {
+				
+				if(mail.equals(rs.getString("EMAIL"))) {
+					encontrado = true;
+					break;
+				}
+			}
 			
-			//con.commit();
-			Usuario u= new Usuario();
-			u.setEmail(mail);
-			u.setContrasenya(pass);
-			u.setNombre(nombre);
-			u.setTelefono(tel);
-			GestorBD.this.logedUser = u;
-			
-			//stmt.executeUpdate(sql);
-			stmt.executeUpdate(String.format(sql, u.getNombre(), u.getEmail(), u.getContrasenya(), u.getTelefono()));
+			if(encontrado) {
+				msg = "Este email ya tiene una cuenta asociada, por favor intente con otro";
+			} else {
+				try (Connection con1 = DriverManager.getConnection(CONNECTION_STRING_USUARIO);
+						Statement stmt1 = con.createStatement()){
+					
+					String sql1 = "INSERT INTO USUARIO (NOMBRE,EMAIL,CONTRASEÑA,TELEFONO) VALUES (  '"+nombre+"','"+mail+"','"+pass+"','"+tel+"' );";
+					
+					
+					//con.commit();
+					Usuario u= new Usuario();
+					u.setEmail(mail);
+					u.setContrasenya(pass);
+					u.setNombre(nombre);
+					u.setTelefono(tel);
+					GestorBD.this.logedUser = u;
+					
+					//stmt.executeUpdate(sql1);
+					stmt.executeUpdate(String.format(sql1, u.getNombre(), u.getEmail(), u.getContrasenya(), u.getTelefono()));
 
-			msg="OK";
+					msg="OK";
+					
+				}catch(Exception ex) {
+					System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+					ex.printStackTrace();	
+					msg = "error al conectarse a la base de datos";
+					GestorLog.warning(msg);
+				}
+			}
+			
 			
 		}catch (Exception ex) {
-			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
+			System.err.println(String.format("* Error al buscar datos de la BBDD: %s", ex.getMessage()));
 			ex.printStackTrace();	
 			msg = "error al conectarse a la base de datos";
 			GestorLog.warning(msg);
 		}
 		return msg;
 	}
+	
+	
+	
 	
 	
 	
