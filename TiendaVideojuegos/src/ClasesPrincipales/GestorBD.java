@@ -1056,16 +1056,10 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 						
 				carrito.setEstadoCarrito(EstadoCarrito.valueOf(rs.getString("ESTADOCARRITO")));
 				
-				String u = rs.getString("USUARIO");
-				tokenizer = new StringTokenizer(u,";");
-				usuario= new Usuario();
-				usuario.setId(Integer.parseInt(tokenizer.nextToken()));
-				usuario.setNombre(tokenizer.nextToken());
-				usuario.setEmail(tokenizer.nextToken());
-				usuario.setContrasenya(tokenizer.nextToken());
-				usuario.setTelefono(tokenizer.nextToken());
+				Usuario u = buscarUsuarioPorEmail(rs.getString("USUARIO"));
 				
-				carrito.setUsuario(usuario);
+				
+				carrito.setUsuario(u);
 			
 				
 			
@@ -1278,8 +1272,8 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			String sql = "CREATE TABLE IF NOT EXISTS PRODUCTOSCARRITO (\n"
 					+ " ID_CP INTEGER PRIMARY KEY AUTOINCREMENT, \n"
 					+ " ID_C INTEGER NOT NULL, \n"
-					+ " ID_P INTEGER NOT NULL \n"
-					+ " FOREIGN KEY(ID_C) REFERENCES CARRITO(ID) ON DELETE ON CASCADE \n"
+					+ " ID_P INTEGER NOT NULL, \n"
+					+ " FOREIGN KEY(ID_C) REFERENCES CARRITO(ID) ON DELETE CASCADE, \n"
 					+ " FOREIGN KEY(ID_P) REFERENCES PRODUCTO(ID_P) \n"
 					+ ");";
 					
