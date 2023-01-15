@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import ClasesPrincipales.*;
@@ -76,7 +77,40 @@ public class VentanaPedidosAntiguos extends JFrame{
 		pArriba.add(botonAtras, BorderLayout.WEST);
 		cp.add(pArriba, BorderLayout.NORTH);
 		
-		
+		tP.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
+			
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+					boolean hasFocus, int row, int column) {
+					Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+					JLabel l = (JLabel) c;
+					
+					EstadoCarrito estado = (EstadoCarrito) table.getValueAt(row, 2);
+					
+					if (estado == EstadoCarrito.PREPARACION) {
+						l.setBackground(Color.GREEN);
+						l.setForeground(Color.BLACK);	
+						
+					} else if (estado == EstadoCarrito.LISTO){
+						l.setBackground(Color.YELLOW);
+						l.setForeground(Color.BLACK);	
+						
+					} else if (estado == EstadoCarrito.RECOGIDO) {
+						l.setBackground(Color.RED);
+						l.setForeground(Color.WHITE);	
+						
+					}
+					
+					if(isSelected == true){
+						
+					}
+					
+					
+					
+					
+					return c;
+			}
+		});
 		
 		
 		tP.getTableHeader().setReorderingAllowed(false);
