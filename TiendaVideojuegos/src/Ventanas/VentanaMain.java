@@ -42,7 +42,10 @@ public class VentanaMain extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Main.vIS.setVisible(true);
-				VentanaMain.this.setVisible(false);
+				Main.vIS.mail1.setText("");
+				Main.vIS.contraseña1.setText("");
+				dispose();
+				
 				
 			}
 		});
@@ -51,7 +54,7 @@ public class VentanaMain extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Main.vCC.setVisible(true);
-				VentanaMain.this.setVisible(false);
+				dispose();
 			}
 		});
 		
@@ -59,7 +62,7 @@ public class VentanaMain extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Main.vMP.setVisible(true);
-				VentanaMain.this.setVisible(false);
+				dispose();
 			}
 		});
 		
