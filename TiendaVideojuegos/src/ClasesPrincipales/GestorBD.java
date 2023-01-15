@@ -1279,6 +1279,64 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 	}
 	
 	
+	public Carrito buscarCarritoPorId(int id , String mail ) {
+		
+		
+		Carrito carrito = new Carrito();
+		
+		
+		//"select ID,FECHA,ESTADOCARRITO,USUARIO from CARRITO where USUARIO = '" + emailUsuario + "'"; EL QUE TENIAMOS
+		
+		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
+			Statement stmt = con.createStatement()) {
+			
+			String sql = "select * from CARRITO where ID =" + id ;
+			
+			ResultSet rs = stmt.executeQuery( sql );
+			
+			
+			
+			
+				
+				
+				
+				int id1 = rs.getInt("ID");
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				
+				String fecha = rs.getString("FECHA");
+				Date fechaFormateada = sdf.parse(fecha);
+				
+				
+	
+				ArrayList<Pagable> Pagables = ObtenerPagablesPorArrayDeProductos(ObtenerProductosConIDCarrito(id));
+				
+				Usuario usuario = buscarUsuarioPorEmail( mail );
+				EstadoCarrito estado = EstadoCarrito.valueOf(rs.getString("ESTADOCARRITO"));
+				
+				
+				
+				carrito.setId(id1);
+				carrito.setFecha(fechaFormateada);
+				
+				carrito.setElementos(Pagables);
+				
+				carrito.setUsuario(usuario);
+				carrito.setEstadoCarrito(estado);
+				
+				
+				
+			
+				rs.close();
+		} catch (Exception ex) {
+			System.err.println(String.format("* Error al obtener datos de la BBDD: %s", ex.getMessage()));
+			ex.printStackTrace();						
+		}
+		
+		
+		return carrito;
+	}
+	
+	
 	public Usuario buscarUsuarioPorEmail(String email) {
 		
 		Usuario usuario = new Usuario();

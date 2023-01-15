@@ -102,6 +102,14 @@ public class VentanaPedidosAntiguos extends JFrame{
 					}
 					
 					if(isSelected == true){
+						int id = (int) table.getValueAt(row, 0);
+						String mail = (String) table.getValueAt(row, 3);
+						
+						modeloPagables.removeAllElements();
+						for (Pagable pagable : Main.bd.buscarCarritoPorId(id, mail).getElementos()) {
+							modeloPagables.addElement(pagable);
+							
+						}
 						
 						
 					}
@@ -140,6 +148,22 @@ public class VentanaPedidosAntiguos extends JFrame{
 		}
 		
 		for (Carrito carrito : listaCarrito) {
+			for (Pagable pagable : carrito.getElementos()) {
+				Producto p = (Producto) pagable;
+				if(p.getTp() == TipoProducto.MANDO) {
+					
+					Mando m = (Mando) p;
+					
+					if(m.getEstado() == EstadoProducto.PRIMERA_MANO) {
+						
+					}else {
+						
+					}
+					
+				}
+			
+				
+			}
 			mP.addRow( new Object[] { carrito.getId(), sdf.format(carrito.getFecha()), carrito.getEstadoCarrito(), carrito.getUsuario().getEmail(), String.format("%.2f €",carrito.getPrecio()) } );
 			
 		}
