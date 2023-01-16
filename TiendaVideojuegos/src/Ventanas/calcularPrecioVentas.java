@@ -60,22 +60,34 @@ public class calcularPrecioVentas extends JFrame{
 		
 		JP1.setLayout(new BorderLayout());
 		
-		
+		//panel de arriba
 		JPanel JP2 = new JPanel();
 		JP2.setLayout(new BorderLayout());
 		
-		JP2.add(atras, BorderLayout.NORTH);
-		JP2.add(slider, BorderLayout.CENTER);
-		JP2.add(textovalor, BorderLayout.SOUTH);
-		JP2.add(buscar,BorderLayout.EAST);
+		JP2.add(atras, BorderLayout.WEST);
 		
+		//panel izq
 		JPanel JP3 = new JPanel();
-		JP3.setLayout(new FlowLayout());
-		JP3.add(ScrollPane);
+		JP3.setLayout(new BorderLayout());
+		
+		JP3.add(slider, BorderLayout.CENTER);
+		JP3.add(textovalor, BorderLayout.SOUTH);
+		
+		//PANEL DE ABAJO
+		JPanel JP4 = new JPanel();
+		JP4.setLayout(new BorderLayout());
+		JP4.add(buscar,BorderLayout.EAST);
 		
 		
-		JP1.add(JP2, BorderLayout.WEST);
-		JP1.add(JP3, BorderLayout.CENTER);
+		JPanel JP5 = new JPanel();
+		JP5.setLayout(new FlowLayout());
+		JP5.add(ScrollPane);
+		
+		
+		JP1.add(JP2, BorderLayout.NORTH);
+		JP1.add(JP3, BorderLayout.WEST);
+		JP1.add(JP4, BorderLayout.SOUTH);
+		JP1.add(JP5, BorderLayout.CENTER);
 		cp.add(JP1);
 		
 		atras.addActionListener(new ActionListener() {
@@ -104,9 +116,9 @@ public class calcularPrecioVentas extends JFrame{
 				List<Producto> productos = Main.bd.obtenerDatosProducto();
 				System.out.println(productos);
 				List<List<Producto>> p = combinacionesPorPrecio(productos, java.lang.Double.parseDouble(textovalor.getText()));
-//				for (List<Producto> list : p) {
-//					DLM.addElement(list);
-//				}
+				for (List<Producto> list : p) {
+					DLM.addElement(list);
+				}
 				
 			}
 		});
@@ -134,27 +146,45 @@ public class calcularPrecioVentas extends JFrame{
 		} else {
 			for (Producto producto : productos) {
 				temporal.add(producto);
+				
+				
+				
 				if(producto.getTp() == TipoProducto.VIDEOJUEGO) {
-					Videojuego v = Main.bd.buscarVideojuegoPorID_P(producto.getId());
-					System.out.println(v);
+					List<Videojuego> lista = Main.bd.obtenerDatosVideojuegos();
+					for (Videojuego v : lista) {
+						if (v.getId() == producto.getId()) {
+							comb(productosFinal, productos, dinerico, actual + v.getPrecio(), temporal);
+						}
+					}
+					//System.out.println(v);
 					//comb(productosFinal, productos, dinerico, actual + v.getPrecio(), temporal);
-					//temporal.remove(temporal.size()-1);
+					
 					
 				} else if (producto.getTp() == TipoProducto.CONSOLA) {
-					Consola c = Main.bd.buscarConsolaPorID_P(producto.getId());
-					System.out.println(c);
+					List<Consola> lista = Main.bd.obtenerDatosConsolas();
+					for (Consola c : lista) {
+						if (c.getId() == producto.getId()) {
+							comb(productosFinal, productos, dinerico, actual + c.getPrecio(), temporal);
+						}
+					}
 					//comb(productosFinal, productos, dinerico, actual + c.getPrecio(), temporal);
-					//temporal.remove(temporal.size()-1);
+					
 					
 					
 				} else {
-					Mando m = Main.bd.buscarMandoPorID_P(producto.getId());
-					System.out.println(m);
+					List<Mando> lista = Main.bd.obtenerDatosMandos();
+					for (Mando m : lista) {
+						if (m.getId() == producto.getId()) {
+							comb(productosFinal, productos, dinerico, actual + m.getPrecio(), temporal);
+						}
+					}
 					//comb(productosFinal, productos, dinerico, actual + m.getPrecio(), temporal);
-					//temporal.remove(temporal.size()-1);
+					
 					
 					
 				}
+				
+				temporal.remove(temporal.size()-1);
 			}
 		}
 		
