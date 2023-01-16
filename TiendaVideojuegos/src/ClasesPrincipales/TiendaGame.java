@@ -318,6 +318,53 @@ public class TiendaGame implements Serializable{
 		
 	}
 	
+	public static void EscribirCarrito(Carrito c) {
+		
+		try (BufferedWriter BW = new BufferedWriter(new FileWriter("Data/carrito.csv",true));
+			BufferedReader BR = new BufferedReader(new FileReader("Data/carrito.csv"))) {
+			
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			
+				BW.write(sdf.format(c.getFecha()) + ";" + c.getEstadoCarrito() + ";" + c.getUsuario().getEmail() );
+				BW.newLine();
+				
+				BW.flush();
+			
+			
+			
+			
+		}catch(Exception e) {
+			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void EscribirCarritoProducto(Carrito c) {
+		
+		try (BufferedWriter BW = new BufferedWriter(new FileWriter("Data/CarritoProducto.csv",true));
+			BufferedReader BR = new BufferedReader(new FileReader("Data/CarritoProducto.csv"))) {
+			
+				for (Pagable pagable : c.getElementos()) {
+					Producto p  = (Producto) pagable;
+					BW.write(c.getId() + ";" + p.getId());
+					BW.newLine();
+					
+				}
+			
+				
+				BW.flush();
+			
+			
+			
+			
+		}catch(Exception e) {
+			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
+			e.printStackTrace();
+		}
+		
+	}
+	
 	
 	public static List<String> LeerCSVAdministradores() {
 		List<String> administradores = new ArrayList<>();

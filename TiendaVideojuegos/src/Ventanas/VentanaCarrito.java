@@ -170,6 +170,8 @@ public class VentanaCarrito extends JFrame{
 				Main.bd.insertarDatosProductoCarritoUnico(c);
 				System.out.println("Insertando pedido en la base de datos tabla carrito y carritoProducto");
 				
+				Main.tg.EscribirCarrito(c);
+				Main.tg.EscribirCarritoProducto(c);
 				
 				DLM.removeAllElements();
 				
