@@ -113,8 +113,9 @@ public class calcularPrecioVentas extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				DLM.removeAllElements();
 				List<Producto> productos = Main.bd.obtenerDatosProducto();
-				System.out.println(productos);
+				//System.out.println(productos);
 				List<List<Producto>> p = combinacionesPorPrecio(productos, java.lang.Double.parseDouble(textovalor.getText()));
 				for (List<Producto> list : p) {
 					DLM.addElement(list);
@@ -146,43 +147,30 @@ public class calcularPrecioVentas extends JFrame{
 		} else {
 			for (Producto producto : productos) {
 				temporal.add(producto);
-				
-				
-				
+				//temporal.add(producto);
 				if(producto.getTp() == TipoProducto.VIDEOJUEGO) {
-					List<Videojuego> lista = Main.bd.obtenerDatosVideojuegos();
-					for (Videojuego v : lista) {
-						if (v.getId() == producto.getId()) {
-							comb(productosFinal, productos, dinerico, actual + v.getPrecio(), temporal);
-						}
-					}
-					//System.out.println(v);
-					//comb(productosFinal, productos, dinerico, actual + v.getPrecio(), temporal);
+					Videojuego v = Main.bd.buscarVideojuegoPorID_P(producto.getId());
+					System.out.println(v);
+					comb(productosFinal, productos, dinerico, actual + v.getPrecio(), temporal);
 					
 					
 				} else if (producto.getTp() == TipoProducto.CONSOLA) {
-					List<Consola> lista = Main.bd.obtenerDatosConsolas();
-					for (Consola c : lista) {
-						if (c.getId() == producto.getId()) {
-							comb(productosFinal, productos, dinerico, actual + c.getPrecio(), temporal);
-						}
-					}
-					//comb(productosFinal, productos, dinerico, actual + c.getPrecio(), temporal);
+					Consola c = Main.bd.buscarConsolaPorID_P(producto.getId());
+					System.out.println(c);
+					comb(productosFinal, productos, dinerico, actual + c.getPrecio(), temporal);
+						
+				
 					
 					
 					
 				} else {
-					List<Mando> lista = Main.bd.obtenerDatosMandos();
-					for (Mando m : lista) {
-						if (m.getId() == producto.getId()) {
-							comb(productosFinal, productos, dinerico, actual + m.getPrecio(), temporal);
-						}
+					Mando m = Main.bd.buscarMandoPorID_P(producto.getId());
+					System.out.println(m);
+					comb(productosFinal, productos, dinerico, actual + m.getPrecio(), temporal);
+						
+					
+					
 					}
-					//comb(productosFinal, productos, dinerico, actual + m.getPrecio(), temporal);
-					
-					
-					
-				}
 				
 				temporal.remove(temporal.size()-1);
 			}
