@@ -134,56 +134,56 @@ public class calcularPrecioVentas extends JFrame{
 	}
 	
 	public static void comb (List<List<Producto>> productosFinal, List<Producto> productos, 
-			double dinerico, double actual, List<Producto> temporal ) {
+			double dinerico, List<Producto> temporal ) {
 		
-		if (dinerico < 0) {
-			return;
-		} else if (actual > dinerico) {
+		//Si el dinero del que disponemos en negativo se para 
+		
+		 if (0 >= dinerico) {
 			temporal.remove(temporal.size()-1);
-			temporal.sort((Producto p1, Producto p2) -> Integer.compare(p1.getId(), p2.getId()));
-			if (!productosFinal.contains(temporal)) {
-				productosFinal.add(temporal);
-			}
-		} else {
-			for (Producto producto : productos) {
-				temporal.add(producto);
-				//temporal.add(producto);
-				if(producto.getTp() == TipoProducto.VIDEOJUEGO) {
-					Videojuego v = Main.bd.buscarVideojuegoPorID_P(producto.getId());
-					System.out.println(v);
-					comb(productosFinal, productos, dinerico, actual + v.getPrecio(), temporal);
-					
-					
-				} else if (producto.getTp() == TipoProducto.CONSOLA) {
-					Consola c = Main.bd.buscarConsolaPorID_P(producto.getId());
-					System.out.println(c);
-					comb(productosFinal, productos, dinerico, actual + c.getPrecio(), temporal);
-						
+			
+			if (temporal.size() > 0) {
+				temporal.sort((Producto p1, Producto p2) -> Integer.compare(p1.getId(), p2.getId()));
 				
+				if (!productosFinal.contains(temporal)) {
+					productosFinal.add(temporal);
+				}
+			}
+			
+			
+		} else {
+			for (Producto p : productos) {
+				temporal.add(p);
+				
+				if (p.getTp() == TipoProducto.MANDO) {
+					Mando m = Main.bd.buscarMandoPorID_P(p.getId());
+					double d = dinerico;
 					
-					
-					
-				} else {
-					Mando m = Main.bd.buscarMandoPorID_P(producto.getId());
-					System.out.println(m);
-					comb(productosFinal, productos, dinerico, actual + m.getPrecio(), temporal);
-						
-					
-					
-					}
+					System.out.println(d +","+ temporal);
+					comb(productosFinal, productos, dinerico - m.getPrecio(), temporal);
+				}  // else if (p.getTp() == TipoProducto.CONSOLA) {
+//					Consola c = Main.bd.buscarConsolaPorID_P(p.getId());
+//					comb(productosFinal, productos, dinerico - c.getPrecio(), temporal);
+//				} else {
+//					Videojuego v = Main.bd.buscarVideojuegoPorID_P(p.getId());
+//					comb(productosFinal, productos, dinerico - v.getPrecio(), temporal);
+//				}
 				
 				temporal.remove(temporal.size()-1);
+				
 			}
+			
 		}
+		
+		
 		
 	}
 	
 	public static List<List<Producto>> combinacionesPorPrecio (List<Producto> productos, double dinerico) {
 		List<List<Producto>> resultado = new ArrayList<>();
 		
-		double actual = 0;
 		
-		comb(resultado, productos, dinerico, actual, new ArrayList<>());
+		
+		comb(resultado, productos, dinerico, new ArrayList<Producto>());
 		
 		return resultado;
 	}
