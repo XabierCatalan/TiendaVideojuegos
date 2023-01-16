@@ -1542,6 +1542,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 					v.setAnyo(rs.getInt("ANYO"));
 					v.setPrecio(rs.getDouble("PRECIO"));
 					v.setId(p.getId());
+					v.setTp(TipoProducto.valueOf(rs.getString("TP")));
 					
 					pagables.add(v);
 					
@@ -1566,6 +1567,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 					m.setPrecio(rs.getDouble("PRECIO"));
 					m.setMarca(Marca.valueOf(rs.getString("MARCA")));
 					m.setId(p.getId());
+					m.setTp(TipoProducto.valueOf(rs.getString("TP")));
 					
 					pagables.add(m);
 					
@@ -1590,6 +1592,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 					c.setPrecio(rs.getDouble("PRECIO"));
 					c.setMarca(Marca.valueOf(rs.getString("MARCA")));
 					c.setId(p.getId());
+					c.setTp(TipoProducto.valueOf(rs.getString("TP")));
 					
 					pagables.add(c);
 					

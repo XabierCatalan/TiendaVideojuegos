@@ -152,12 +152,12 @@ public class VentanaPedidosAntiguos extends JFrame{
 			ArrayList<Pagable> pag = new ArrayList<>();
 			for (Pagable pagable : carrito.getElementos()) {
 				Producto p = (Producto) pagable;
-				
+				System.err.println(p + " - " + p.getTp());
 				if(p.getTp() == TipoProducto.MANDO) {
 					
 					Mando m = (Mando) p;
 					if(m.getEstado() == EstadoProducto.SEGUNDA_MANO) {
-						m.setPrecio(m.getPrecio() * 3);
+						m.setPrecio(m.getPrecio() * 3 * 3);
 						
 						Pagable pa = (Pagable) m;
 						
@@ -173,7 +173,7 @@ public class VentanaPedidosAntiguos extends JFrame{
 					Consola c = (Consola) p;
 					
 					if(c.getEstado() == EstadoProducto.SEGUNDA_MANO) {
-						c.setPrecio(c.getPrecio() * 1.25);
+						c.setPrecio(c.getPrecio() * 1.25 * 1.25);
 						
 						Pagable pa = (Pagable) c;
 						pag.add(pa);
@@ -186,7 +186,7 @@ public class VentanaPedidosAntiguos extends JFrame{
 					Videojuego v = (Videojuego) p;
 					
 					if(v.getEstado() == EstadoProducto.SEGUNDA_MANO) {
-						v.setPrecio(v.getPrecio() * 3);
+						v.setPrecio(v.getPrecio() * 3 * 3);
 						
 						Pagable pa = (Pagable) v;
 						pag.add(pa);
