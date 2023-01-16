@@ -18,7 +18,12 @@ public class VentanaPedidosAntiguos extends JFrame{
 	
 	protected DefaultTableModel mP = new DefaultTableModel (
 			new Object[] {"Id", "Fecha","Estado", "Email", "Precio"}, 0
-			);
+			){
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		}
+	};
 	
 	protected JTable tP = new JTable (mP);
 	
@@ -108,7 +113,49 @@ public class VentanaPedidosAntiguos extends JFrame{
 						
 						modeloPagables.removeAllElements();
 						for (Pagable pagable : Main.bd.buscarCarritoPorId(id, mail).getElementos()) {
-							modeloPagables.addElement(pagable);
+//							modeloPagables.addElement(pagable);
+							Producto p = (Producto) pagable;
+							if(p.getTp() == TipoProducto.MANDO) {
+								
+								Mando m = (Mando) p;
+								if(m.getEstado() == EstadoProducto.SEGUNDA_MANO) {
+									m.setPrecio(m.getPrecio() * 3 * 3);
+									
+									Pagable pa = (Pagable) m;
+									
+									modeloPagables.addElement(pa);
+									
+								}else {
+									Pagable pa = (Pagable) m;
+									modeloPagables.addElement(pa);
+								}
+								
+							}else if(p.getTp() == TipoProducto.CONSOLA) {
+								
+								Consola co = (Consola) p;
+								
+								if(co.getEstado() == EstadoProducto.SEGUNDA_MANO) {
+									co.setPrecio(co.getPrecio() * 1.25 * 1.25);
+									
+									Pagable pa = (Pagable) co;
+									modeloPagables.addElement(pa);
+								}else {
+									Pagable pa = (Pagable) co;
+									modeloPagables.addElement(pa);
+								}
+							}else if(p.getTp() == TipoProducto.VIDEOJUEGO){
+								
+								Videojuego v = (Videojuego) p;
+								
+								if(v.getEstado() == EstadoProducto.SEGUNDA_MANO) {
+									v.setPrecio(v.getPrecio() * 3 * 3);
+									
+									Pagable pa = (Pagable) v;
+									modeloPagables.addElement(pa);
+								}else {
+									Pagable pa = (Pagable) v;
+									modeloPagables.addElement(pa);
+								}
 							
 						}
 						
@@ -118,8 +165,10 @@ public class VentanaPedidosAntiguos extends JFrame{
 					
 					
 					
+						
+					}
 					return c;
-			}
+			}		
 		});
 		
 		
@@ -152,7 +201,6 @@ public class VentanaPedidosAntiguos extends JFrame{
 			ArrayList<Pagable> pag = new ArrayList<>();
 			for (Pagable pagable : carrito.getElementos()) {
 				Producto p = (Producto) pagable;
-				System.err.println(p + " - " + p.getTp());
 				if(p.getTp() == TipoProducto.MANDO) {
 					
 					Mando m = (Mando) p;

@@ -26,7 +26,12 @@ public class VentanaConsolaMandos extends JFrame {
 	
 	protected DefaultTableModel mCM = new DefaultTableModel (
 			new Object[] { "Id","Nombre", "Marca", "Estado" ,"Precio","Tipo", "" }, 0
-			);
+			){
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		}
+	};
 	
 	protected JTable tCM = new JTable (mCM);
 	

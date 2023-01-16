@@ -1012,11 +1012,12 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
 			String sql = "INSERT INTO CARRITO ( FECHA, ESTADOCARRITO, USUARIO) VALUES ( '%s', '%s', '%s');";
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			
 			System.out.println("- Insertando carrito...");
 			
 			
-				if (1 == stmt.executeUpdate(String.format(sql, c.getFecha(), c.getEstadoCarrito(), c.getUsuario().getEmail()))) {					
+				if (1 == stmt.executeUpdate(String.format(sql, sdf.format(c.getFecha()), c.getEstadoCarrito(), c.getUsuario().getEmail()))) {					
 					System.out.println(String.format(" - Carrito insertado: %s", c.toString()));
 				} else {
 					System.out.println(String.format(" - No se ha insertado el carrito: %s", c.toString()));
@@ -1466,6 +1467,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		     Statement stmt = con.createStatement()) {
 			//Se define la plantilla de la sentencia SQL
 			String sql = "INSERT INTO PRODUCTOSCARRITO ( ID_C, ID_P) VALUES ( '%s', '%s');";
+			
 			
 			System.out.println("- Insertando productos de un carrito...");
 			
