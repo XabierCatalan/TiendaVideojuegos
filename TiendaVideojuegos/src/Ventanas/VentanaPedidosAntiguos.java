@@ -3,6 +3,7 @@ package Ventanas;
 import java.awt.*;
 import java.awt.event.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
@@ -148,22 +149,57 @@ public class VentanaPedidosAntiguos extends JFrame{
 		}
 		
 		for (Carrito carrito : listaCarrito) {
+			ArrayList<Pagable> pag = new ArrayList<>();
 			for (Pagable pagable : carrito.getElementos()) {
 				Producto p = (Producto) pagable;
+				
 				if(p.getTp() == TipoProducto.MANDO) {
 					
 					Mando m = (Mando) p;
-					
-					if(m.getEstado() == EstadoProducto.PRIMERA_MANO) {
+					if(m.getEstado() == EstadoProducto.SEGUNDA_MANO) {
+						m.setPrecio(m.getPrecio() * 3);
+						
+						Pagable pa = (Pagable) m;
+						
+						pag.add(pa);
 						
 					}else {
-						
+						Pagable pa = (Pagable) m;
+						pag.add(pa);
 					}
 					
+				}else if(p.getTp() == TipoProducto.CONSOLA) {
+					
+					Consola c = (Consola) p;
+					
+					if(c.getEstado() == EstadoProducto.SEGUNDA_MANO) {
+						c.setPrecio(c.getPrecio() * 1.25);
+						
+						Pagable pa = (Pagable) c;
+						pag.add(pa);
+					}else {
+						Pagable pa = (Pagable) c;
+						pag.add(pa);
+					}
+				}else if(p.getTp() == TipoProducto.VIDEOJUEGO){
+					
+					Videojuego v = (Videojuego) p;
+					
+					if(v.getEstado() == EstadoProducto.SEGUNDA_MANO) {
+						v.setPrecio(v.getPrecio() * 3);
+						
+						Pagable pa = (Pagable) v;
+						pag.add(pa);
+					}else {
+						Pagable pa = (Pagable) v;
+						pag.add(pa);
+					}
 				}
 			
 				
 			}
+			carrito.setElementos(pag);
+			
 			mP.addRow( new Object[] { carrito.getId(), sdf.format(carrito.getFecha()), carrito.getEstadoCarrito(), carrito.getUsuario().getEmail(), String.format("%.2f €",carrito.getPrecio()) } );
 			
 		}
