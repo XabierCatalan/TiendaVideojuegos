@@ -130,29 +130,40 @@ public class VentanaCarrito extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
+				
+				
 				Pagable seleccionado = pagables.getSelectedValue();	
 				Producto p = (Producto) seleccionado;
-				if (p.getTp() == TipoProducto.VIDEOJUEGO) {
+				
+				if(seleccionado != null) {
 					
-					Videojuego v = (Videojuego) p;
-					double precio3 =  Double.parseDouble(precio2.getText()) - v.getPrecio();
-					DLM.removeElement(seleccionado);
-					precio2.setText(String.valueOf(precio3));
+					if (p.getTp() == TipoProducto.VIDEOJUEGO) {
+						
+						Videojuego v = (Videojuego) p;
+						double precio3 =  Double.parseDouble(precio2.getText()) - v.getPrecio();
+						DLM.removeElement(seleccionado);
+						precio2.setText(String.valueOf(precio3));
+						
+					} else if (p.getTp() == TipoProducto.CONSOLA) {
+						
+						Consola c = (Consola) p;
+						double precio3 =  Double.parseDouble(precio2.getText()) - c.getPrecio();
+						DLM.removeElement(seleccionado);
+						precio2.setText(String.valueOf(precio3));
+						
+					} else {
+						
+						Mando m = (Mando) p;
+						double precio3 =  Double.parseDouble(precio2.getText()) - m.getPrecio();
+						DLM.removeElement(seleccionado);
+						precio2.setText(String.valueOf(precio3));
+				}
 					
-				} else if (p.getTp() == TipoProducto.CONSOLA) {
-					
-					Consola c = (Consola) p;
-					double precio3 =  Double.parseDouble(precio2.getText()) - c.getPrecio();
-					DLM.removeElement(seleccionado);
-					precio2.setText(String.valueOf(precio3));
-					
-				} else {
-					
-					Mando m = (Mando) p;
-					double precio3 =  Double.parseDouble(precio2.getText()) - m.getPrecio();
-					DLM.removeElement(seleccionado);
-					precio2.setText(String.valueOf(precio3));
+			}else {
+				JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun elemento de la lista", "Error", JOptionPane.ERROR_MESSAGE);
 			}
+				
 			
 		}
 	});
@@ -181,6 +192,7 @@ public class VentanaCarrito extends JFrame{
 				
 				
 				Main.vMP.setVisible(true);
+				Main.vPA.cargarTabla(Main.mail);
 				dispose();
 			}
 		});

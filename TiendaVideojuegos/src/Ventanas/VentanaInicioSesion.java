@@ -118,6 +118,7 @@ public class VentanaInicioSesion extends JFrame {
 						Main.vC.c.setUsuario(Main.bd.buscarUsuarioPorEmail(inMail));
 						Main.vPA.cargarTabla(inMail);;
 						System.out.println("Se ha iniciado sesion con la cuenta " + Main.bd.buscarUsuarioPorEmail(inMail));
+						Main.mail = inMail;
 						dispose();
 					}
 					

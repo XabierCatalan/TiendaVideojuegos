@@ -24,6 +24,7 @@ public class Main {
 	static calcularPrecioVentas cPV = new calcularPrecioVentas();
 	static VentanaPedidosAntiguos vPA = new VentanaPedidosAntiguos();
 	static List<String> administradores;
+	static String mail;
     
 	public static void main(String[] args) {
 		
