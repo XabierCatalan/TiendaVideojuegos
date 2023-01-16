@@ -374,10 +374,10 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			String sql = "CREATE TABLE IF NOT EXISTS MANDO (\n"
 					+ " ID_M INTEGER PRIMARY KEY AUTOINCREMENT, \n"
 					+ " NOMBRE TEXT NOT NULL,\n"
-					+ "ESTADOPRODUCTO ENUM NOT NULL,\n"
-					+ "PRECIO DOUBLE NOT NULL,\n"
-					+ "MARCA ENUM NOT NULL,\n"
-					+ "ID_P INTEGER NOT NULL,\n"
+					+ " ESTADOPRODUCTO ENUM NOT NULL,\n"
+					+ " PRECIO DOUBLE NOT NULL,\n"
+					+ " MARCA ENUM NOT NULL,\n"
+					+ " ID_P INTEGER NOT NULL,\n"
 					+ " TP ENUM NOT NULL\n"
 					+ ");";
 					

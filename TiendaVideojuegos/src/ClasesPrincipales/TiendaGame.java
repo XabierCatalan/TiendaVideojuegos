@@ -100,6 +100,7 @@ public class TiendaGame implements Serializable{
 				
 				
 				productos.add(p);
+				System.err.println(p);
 				
 			
 			}
@@ -147,6 +148,7 @@ public class TiendaGame implements Serializable{
 				
 				
 				Videojuegos.add(v);
+				System.err.println(v);
 			
 			}
 			
@@ -191,6 +193,7 @@ public class TiendaGame implements Serializable{
 				m.setTp(TipoProducto.valueOf(tokenizer.nextToken()));
 				
 				Mandos.add(m);
+				System.err.println(m);
 				
 			
 			}
@@ -237,6 +240,7 @@ public class TiendaGame implements Serializable{
 				
 				
 				Consolas.add(c);
+				System.err.println(c);
 				
 			
 			}
@@ -282,6 +286,7 @@ public class TiendaGame implements Serializable{
 				
 				
 				Usuarios.add(u);
+				System.err.println(u);
 				
 			
 			}
