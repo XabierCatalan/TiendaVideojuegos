@@ -983,11 +983,15 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			System.out.println("- Insertando carritos...");
 			
 			try(BufferedReader br = new BufferedReader(new FileReader("Data/carrito.csv"))) {
-				String linea;
+				StringTokenizer tokenizer;
+				String linea = null;
+				
 				br.readLine();
+				
 				while ((linea = br.readLine()) != null) {
-					String[] campos = linea.split(";");
-					if (1 == stmt.executeUpdate(String.format(sql, campos[0], campos[1], campos[2]))) {	//no sabemos si hay que poner el string en su valor real				
+					tokenizer = new StringTokenizer(linea, ";");
+					
+					if (1 == stmt.executeUpdate(String.format(sql, tokenizer.nextToken(), tokenizer.nextToken(), tokenizer.nextToken()))) {	//no sabemos si hay que poner el string en su valor real				
 						System.out.println(" - Carrito insertado:");
 					} else {
 						System.out.println(" - No se ha insertado el carrito: ");
@@ -995,7 +999,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 				}
 				
 			} catch (Exception e) {
-				System.err.println("error al cargar los datos del csv");
+				System.err.println("error al cargar los datos del csvCarrito");
 				e.printStackTrace();
 			}
 			
@@ -1006,7 +1010,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		}				
 	}
 	
-	public void insertarCarritoUnico( Carrito c) {
+	public void insertarCarritoUnico( String f, String ec, String mail) {
 		//Se abre la conexión y se obtiene el Statement
 		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
 		     Statement stmt = con.createStatement()) {
@@ -1016,10 +1020,10 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			System.out.println("- Insertando carrito...");
 			
 			
-				if (1 == stmt.executeUpdate(String.format(sql, c.getFecha(), c.getEstadoCarrito(), c.getUsuario().getEmail()))) {					
-					System.out.println(String.format(" - Carrito insertado: %s", c.toString()));
+				if (1 == stmt.executeUpdate(String.format(sql, f, ec, mail))) {					
+					System.out.println(" - Carrito insertado: ");
 				} else {
-					System.out.println(String.format(" - No se ha insertado el carrito: %s", c.toString()));
+					System.out.println(" - No se ha insertado el carrito: ");
 				}
 						
 		} catch (Exception ex) {
@@ -1246,7 +1250,9 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 				
 				String fecha = rs.getString("FECHA");
+				System.out.println(fecha);
 				Date fechaFormateada = sdf.parse(fecha);
+				System.out.println(fechaFormateada);
 				
 				
 	

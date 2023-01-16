@@ -2,6 +2,7 @@ package Ventanas;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -161,12 +162,15 @@ public class VentanaCarrito extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				precio2.setText("0.0");
+				
 				c.setElementos(Collections.list(DLM.elements()));
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 				
 				ArrayList<Carrito> carritos = Main.bd.obtenerDatosCarritos();
 				int id_C = carritos.get(carritos.size()-1).getId() + 1;
 				c.setId(id_C);
-				Main.bd.insertarCarritoUnico(c);
+				Main.bd.insertarCarritoUnico(sdf.format(c.getFecha()), String.valueOf(c.getEstadoCarrito()), c.getUsuario().getEmail());
 				Main.bd.insertarDatosProductoCarritoUnico(c);
 				System.out.println("Insertando pedido en la base de datos tabla carrito y carritoProducto");
 				
