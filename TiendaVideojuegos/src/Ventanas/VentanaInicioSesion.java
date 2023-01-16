@@ -111,6 +111,7 @@ public class VentanaInicioSesion extends JFrame {
 				if(msg=="OK") {
 					if(Main.administradores.contains(inMail)) {
 						Main.vGP.setVisible(true);
+						Main.vGP.cargarTabla();
 						dispose();
 						
 					}else {
