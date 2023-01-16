@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 public class GestorBD {
     private static final Logger LOG = Logger.getLogger(GestorBD.class.getName());
 
@@ -1614,11 +1616,51 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 		
 	}
 	
+	public void CambiarEstadodeCarritoConId (int id_c, EstadoCarrito estado) {
+		
+		
+		
+		if(estado == EstadoCarrito.PREPARACION) {
+			try(Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
+					Statement stmt = con.createStatement()) {
+				
+				String sql = "update CARRITO set ESTADOCARRITO = 'LISTO' where ID= " + id_c;   
+				
+				JOptionPane.showMessageDialog(null, "Se ha cambiado el estado a LISTO");
+				
+			
+			}catch(Exception ex) {
+				System.err.println(String.format("* Error al cambiar el estado de carrito a LISTO : %s", ex.getMessage()));
+				ex.printStackTrace();
+				
+			}
+			
+		}else if(estado == EstadoCarrito.LISTO){
+			
+			try(Connection con = DriverManager.getConnection(CONNECTION_STRING_CARRITO);
+					Statement stmt = con.createStatement()) {
+				
+				String sql = "update CARRITO set ESTADOCARRITO = 'RECOGIDO' where ID= " + id_c;   
+				
+				JOptionPane.showMessageDialog(null, "Se ha cambiado el estado a RECOGIDO");
+				
+				
+			}catch(Exception ex) {
+				System.err.println(String.format("* Error al cambiar el estado de carrito a RECOGIDO : %s", ex.getMessage()));
+				ex.printStackTrace();
+				
+			}
+		}else {
+			JOptionPane.showMessageDialog(null, "No se puede cambiar el estado de este pedido");
+		}
+		
+		
 	
 	
 	
 	
 	
+	}
 	
 }
 

@@ -179,7 +179,17 @@ public class VentanaCarrito extends JFrame{
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 				
 				ArrayList<Carrito> carritos = Main.bd.obtenerDatosCarritos();
-				int id_C = carritos.get(carritos.size()-1).getId() + 1;
+				
+				int id_C;
+				
+				if(carritos.size() != 0) {
+					id_C = carritos.get(carritos.size()-1).getId() + 1;
+					
+				}else {
+					id_C= 1;
+				}
+				
+				
 				c.setId(id_C);
 				Main.bd.insertarCarritoUnico(sdf.format(c.getFecha()), String.valueOf(c.getEstadoCarrito()), c.getUsuario().getEmail());
 				Main.bd.insertarDatosProductoCarritoUnico(c);

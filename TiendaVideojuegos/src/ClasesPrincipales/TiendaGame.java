@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -334,6 +335,45 @@ public class TiendaGame implements Serializable{
 				BW.newLine();
 				
 				BW.flush();
+			
+			
+			
+			
+		}catch(Exception e) {
+			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public static void AlterarCSVCarrito(int id_c, Date fecha, EstadoCarrito estado, String mail) {
+		
+		try (BufferedWriter BW = new BufferedWriter(new FileWriter("Data/carrito.csv",true));
+			BufferedReader BR = new BufferedReader(new FileReader("Data/carrito.csv"))) {
+			
+				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+				StringTokenizer tokenizer;
+				String linea = null;
+				int cont = 0;
+				
+				BR.readLine();
+				
+				while((linea = BR.readLine()) != null) {
+					cont++;
+					tokenizer = new StringTokenizer(linea, ";");
+					if (tokenizer.nextToken() == sdf.format(fecha) && tokenizer.nextToken() == String.valueOf(estado) && tokenizer.nextToken() == mail && id_c == cont) {
+						if (estado == EstadoCarrito.PREPARACION) {
+							
+							BW.write(sdf.format(fecha) + ";" + String.valueOf(EstadoCarrito.LISTO) + ";" + mail);
+							BW.flush();
+						}else if (estado == EstadoCarrito.LISTO) {
+							BW.write(sdf.format(fecha) + ";" + String.valueOf(EstadoCarrito.RECOGIDO) + ";" + mail);
+							BW.flush();
+						}
+					}
+					
+				}
+				
 			
 			
 			

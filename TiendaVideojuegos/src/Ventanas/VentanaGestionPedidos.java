@@ -2,8 +2,10 @@ package Ventanas;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.*;
@@ -15,11 +17,11 @@ import ClasesPrincipales.*;
 public class VentanaGestionPedidos extends JFrame {
 	
 	protected JButton botonAtras;
-	protected JButton botonEstado;
+	
 	protected JButton botonNombres;
 	
 	protected DefaultTableModel mP = new DefaultTableModel (
-			new Object[] {"Id", "Fecha","Estado", "Email", "Precio"}, 0
+			new Object[] {"Id", "Fecha","Estado", "Email", "Precio" , "Cambiar Estado"}, 0
 			){
 		@Override
 		public boolean isCellEditable(int row, int column) {
@@ -88,6 +90,16 @@ public class VentanaGestionPedidos extends JFrame {
 			}
 		});
 		
+		
+		botonNombres = new JButton("Buscar por Email");
+		
+		JPanel pAbajo = new JPanel();
+		pAbajo.setLayout(new FlowLayout());
+		pAbajo.add(botonNombres);
+		cp.add(pAbajo, BorderLayout.SOUTH);
+		
+		
+		
 		JPanel pArriba = new JPanel();
 		pArriba.setLayout(new BorderLayout());
 		pArriba.add(botonAtras, BorderLayout.WEST);
@@ -116,6 +128,14 @@ public class VentanaGestionPedidos extends JFrame {
 						l.setForeground(Color.WHITE);	
 						
 					}
+					
+					if (value instanceof JButton) {
+						
+						JButton camb = (JButton) value;
+							
+						return camb;
+					}
+					
 					
 					if(isSelected == true){
 						int id = (int) table.getValueAt(row, 0);
@@ -166,7 +186,8 @@ public class VentanaGestionPedidos extends JFrame {
 									Pagable pa = (Pagable) v;
 									modeloPagables.addElement(pa);
 								}
-							
+								
+								
 						}
 						
 						
@@ -191,11 +212,48 @@ public class VentanaGestionPedidos extends JFrame {
 		tP.getColumnModel().getColumn(3).setPreferredWidth(130);
 		tP.getColumnModel().getColumn(4).setPreferredWidth(50);
 		
-		
+		tP.addMouseListener(new MouseAdapter() {
+			
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				int fila = tP.rowAtPoint(e.getPoint());
+				int columna = tP.columnAtPoint(e.getPoint());
+				
+				if (columna == 5) {
+					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+					int id_c = (int) tP.getValueAt(fila, 0);
+					EstadoCarrito estadoC = (EstadoCarrito) tP.getValueAt(fila, 2);
+					String fechaP = (String) tP.getValueAt(fila, 1);
+					
+					
+					
+					
+					String mail = (String) tP.getValueAt(fila, 3);
+					
+					
+					Main.bd.CambiarEstadodeCarritoConId(id_c, estadoC);
+					try {
+						Main.tg.AlterarCSVCarrito(id_c, sdf.parse(fechaP) , estadoC, mail);
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				
+					cargarTabla();
+					
+				}
+			}
+		});
 
 		
 		
 	}
+	
+	
+	
 	
 	
 	protected void cargarTabla() {
@@ -259,7 +317,7 @@ public class VentanaGestionPedidos extends JFrame {
 			}
 			carrito.setElementos(pag);
 			
-			mP.addRow( new Object[] { carrito.getId(), sdf.format(carrito.getFecha()), carrito.getEstadoCarrito(), carrito.getUsuario().getEmail(), String.format("%.2f €",carrito.getPrecio()) } );
+			mP.addRow( new Object[] { carrito.getId(), sdf.format(carrito.getFecha()), carrito.getEstadoCarrito(), carrito.getUsuario().getEmail(), String.format("%.2f €",carrito.getPrecio()), new JButton("x") } );
 			
 		}
 	

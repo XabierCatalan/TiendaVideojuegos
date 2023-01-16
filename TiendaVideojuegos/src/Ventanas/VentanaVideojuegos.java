@@ -149,8 +149,7 @@ public class VentanaVideojuegos extends JFrame {
 				// TODO Auto-generated method stub
 				int fila = tV.rowAtPoint(e.getPoint());
 				int columna = tV.columnAtPoint(e.getPoint());
-				System.out.println(fila);
-				System.out.println(columna);
+				
 				
 				if (columna == 6) {
 					int id_p = (int) tV.getValueAt(fila, 0);
