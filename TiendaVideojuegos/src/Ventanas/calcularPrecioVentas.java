@@ -80,8 +80,8 @@ public class calcularPrecioVentas extends JFrame{
 		
 		
 		JPanel JP5 = new JPanel();
-		JP5.setLayout(new FlowLayout());
-		JP5.add(ScrollPane);
+		JP5.setLayout(new BorderLayout());
+		JP5.add(ScrollPane, BorderLayout.CENTER);
 		
 		
 		JP1.add(JP2, BorderLayout.NORTH);

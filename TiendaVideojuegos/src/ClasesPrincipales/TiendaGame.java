@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
@@ -379,10 +380,10 @@ public class TiendaGame implements Serializable{
 				
 				
 					
-				for (int c : todos.keySet()) {
+				for (Entry<Integer, Carrito> c : todos.entrySet()) {
 					
 					
-					if(c == carrito.getId()) {
+					if(c.getKey() == carrito.getId()) {
 						
 						if(carrito.getEstadoCarrito() == EstadoCarrito.PREPARACION) {
 							BW.write(sdf.format(carrito.getFecha()) + ";" + String.valueOf(EstadoCarrito.LISTO) + ";" + carrito.getUsuario().getEmail());
