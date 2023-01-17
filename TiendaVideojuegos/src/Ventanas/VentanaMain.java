@@ -17,7 +17,7 @@ import javax.swing.JPanel;
 public class VentanaMain extends JFrame{
 	protected JButton botonIniciarSesion;
 	protected JButton botonCrearCuenta;
-	protected JButton botonEntrarTienda;
+	
 	
 	public VentanaMain() {
 		
@@ -36,7 +36,7 @@ public class VentanaMain extends JFrame{
 		
 		botonIniciarSesion = new JButton("Iniciar Sesion");
 		botonCrearCuenta = new JButton("Crear Nueva Cuenta");
-		botonEntrarTienda = new JButton("Entar en la tienda");
+		
 		
 		botonIniciarSesion.addActionListener(new ActionListener() {
 			@Override
@@ -64,17 +64,11 @@ public class VentanaMain extends JFrame{
 			}
 		});
 		
-		botonEntrarTienda.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Main.vMP.setVisible(true);
-				dispose();
-			}
-		});
+		
 		
 		abajo.add(botonIniciarSesion);
 		abajo.add(botonCrearCuenta);
-		abajo2.add(botonEntrarTienda);
+		
 		
 		cp.add(abajo, BorderLayout.CENTER);
 		cp.add(abajo2, BorderLayout.SOUTH);
