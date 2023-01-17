@@ -138,10 +138,10 @@ public class calcularPrecioVentas extends JFrame{
 		
 		//Si el dinero del que disponemos en negativo se para 
 		
-		 if (0 >= dinerico) {
-			temporal.remove(temporal.size()-1);
-			
+		 if (0 > dinerico) {
 			if (temporal.size() > 0) {
+				temporal.remove(temporal.size()-1);
+
 				temporal.sort((Producto p1, Producto p2) -> Integer.compare(p1.getId(), p2.getId()));
 				
 				if (!productosFinal.contains(temporal)) {
@@ -152,27 +152,29 @@ public class calcularPrecioVentas extends JFrame{
 			
 		} else {
 			for (Producto p : productos) {
+				
+				if (!temporal.contains(p)) {
+				
 				temporal.add(p);
 				
 				if (p.getTp() == TipoProducto.MANDO) {
 					Mando m = Main.bd.buscarMandoPorID_P(p.getId());
-					double d = dinerico;
-					
-					System.out.println(d +","+ temporal);
 					comb(productosFinal, productos, dinerico - m.getPrecio(), temporal);
-				}  // else if (p.getTp() == TipoProducto.CONSOLA) {
-//					Consola c = Main.bd.buscarConsolaPorID_P(p.getId());
-//					comb(productosFinal, productos, dinerico - c.getPrecio(), temporal);
-//				} else {
-//					Videojuego v = Main.bd.buscarVideojuegoPorID_P(p.getId());
-//					comb(productosFinal, productos, dinerico - v.getPrecio(), temporal);
-//				}
-				
+				}   else if (p.getTp() == TipoProducto.CONSOLA) {
+					Consola c = Main.bd.buscarConsolaPorID_P(p.getId());
+					comb(productosFinal, productos, dinerico - c.getPrecio(), temporal);
+				} else {
+					Videojuego v = Main.bd.buscarVideojuegoPorID_P(p.getId());
+					comb(productosFinal, productos, dinerico - v.getPrecio(), temporal);
+				}
+				//System.out.println(dinerico);
+				//System.out.println(temporal);
+				///System.out.println(temporal.size());
 				temporal.remove(temporal.size()-1);
-				
 			}
-			
 		}
+			
+	}
 		
 		
 		
