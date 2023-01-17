@@ -13,6 +13,12 @@ public class GestorBDTest {
 		String inMail = "prueba";
 		String inPass = "1234";
 		GestorBD gestorBD = new GestorBD();
+		TiendaGame tg = new TiendaGame();
+		tg.LeerProperties();
+		gestorBD.borrarBBDDUsuario();
+		gestorBD.CrearBBDDUsuario();
+		gestorBD.insertarDatosUsuario(tg.LeerCSVUsuarios());
+		
 		String msg = gestorBD.iniciarSesion(inMail,inPass);
 		System.out.println(msg);
 		assertEquals("El usuario indicado no existe", msg);
@@ -32,10 +38,15 @@ public class GestorBDTest {
 		System.out.println("### crearCuenta");
 		// prueba 1 crear usuario
 		GestorBD gestorBD = new GestorBD();
-		gestorBD.crearCuenta("1234","1234","1234","1234");
+		gestorBD.borrarBBDDUsuario();
+		gestorBD.CrearBBDDUsuario();
+		
+		
+		gestorBD.crearCuenta("paco","paco1@gmail.com","1234","111111111");
 		//gestorBD.iniciarSesion(null, null);
 		System.out.println(gestorBD.logedUser);
-		assertEquals("1234", gestorBD.logedUser.getEmail());
+		assertEquals("paco1@gmail.com", gestorBD.logedUser.getEmail());
+		
 	}
 
 }
