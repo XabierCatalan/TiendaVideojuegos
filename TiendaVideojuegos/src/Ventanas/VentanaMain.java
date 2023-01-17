@@ -21,7 +21,6 @@ public class VentanaMain extends JFrame{
 	
 	public VentanaMain() {
 		
-		//Main.bd.insertarDatosCarrito(Main.tg.LeerCSVCarritos());
 
 		VentanaMain.this.setResizable(false);
 		Container cp = this.getContentPane();

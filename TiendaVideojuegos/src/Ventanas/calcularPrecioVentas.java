@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Arc2D.Double;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -140,7 +141,7 @@ public class calcularPrecioVentas extends JFrame{
 		if (dinerico < 0) {
 			return;
 		} else if(dinerico < devuelta) {
-	    	temporal.sort((Producto o1, Producto o2) -> Integer.compare(o1.getId(), o2.getId()));
+	    	Collections.sort(temporal);
 	    	if (!productosFinal.contains(temporal)) {
 	        	System.out.println(temporal);
 	            productosFinal.add(new ArrayList<>(temporal));        	

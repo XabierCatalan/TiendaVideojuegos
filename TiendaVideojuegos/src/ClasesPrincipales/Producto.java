@@ -1,6 +1,6 @@
 package ClasesPrincipales;
 
-public class Producto {
+public class Producto implements Comparable<Producto>{
 	protected int id;
 	protected String nombre;
 	protected TipoProducto tp;
@@ -54,6 +54,14 @@ public class Producto {
 	@Override
 	public String toString() {
 		return "Producto " + nombre + "(id: " + id + ")";
+	}
+
+
+
+	@Override
+	public int compareTo(Producto o) {
+		// TODO Auto-generated method stub
+		return Integer.compare(this.id, o.getId());
 	}
 	
 	

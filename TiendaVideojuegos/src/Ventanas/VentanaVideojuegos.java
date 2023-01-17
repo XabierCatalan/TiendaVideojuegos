@@ -161,12 +161,7 @@ public class VentanaVideojuegos extends JFrame {
 					System.out.println("Se ha añadido al carrito el videojuego");
 					JOptionPane.showMessageDialog(null, "Se ha añadido al carrito el videojuego");
 					
-					//System.out.println(Main.vC.DLM);
 					
-//					for (int i = 0; i < Main.vC.DLM.getSize(); i++) {
-//						Videojuego v =  Main.vC.DLM.getElementAt(i);
-//						double x   Main.vC.DLM.getElementAt(i);
-//					}
 					
 					double precio = Double.parseDouble(Main.vC.precio2.getText());  
 					double newPrecio = precio + v.getPrecio();
