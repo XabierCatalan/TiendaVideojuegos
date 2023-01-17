@@ -12,7 +12,9 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.StringTokenizer;
 
@@ -359,9 +361,12 @@ public class TiendaGame implements Serializable{
 		try (BufferedWriter BW = new BufferedWriter(new FileWriter(properties.getProperty("carrito")));
 			BufferedReader BR = new BufferedReader(new FileReader(properties.getProperty("carrito")))) {
 			
-				ArrayList<Carrito> todos = new ArrayList<>();
+				Map<Integer, Carrito> todos = new HashMap<>();
 				
-				todos = carritos;
+				for (Carrito c : carritos) {
+					todos.putIfAbsent(c.getId(), c);
+				}
+				
 				
 			
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -374,26 +379,26 @@ public class TiendaGame implements Serializable{
 				
 				
 					
-				for (Carrito c : todos) {
+				for (int c : todos.keySet()) {
 					
 					
-					if(c.getId() == carrito.getId()) {
+					if(c == carrito.getId()) {
 						
-						if(c.getEstadoCarrito() == EstadoCarrito.PREPARACION) {
-							BW.write(sdf.format(c.getFecha()) + ";" + String.valueOf(EstadoCarrito.LISTO) + ";" + c.getUsuario().getEmail());
+						if(carrito.getEstadoCarrito() == EstadoCarrito.PREPARACION) {
+							BW.write(sdf.format(carrito.getFecha()) + ";" + String.valueOf(EstadoCarrito.LISTO) + ";" + carrito.getUsuario().getEmail());
 							BW.newLine();
 							
-						}else if(c.getEstadoCarrito() == EstadoCarrito.LISTO) {
-							BW.write(sdf.format(c.getFecha()) + ";" + String.valueOf(EstadoCarrito.RECOGIDO) + ";" + c.getUsuario().getEmail());
+						}else if(carrito.getEstadoCarrito() == EstadoCarrito.LISTO) {
+							BW.write(sdf.format(carrito.getFecha()) + ";" + String.valueOf(EstadoCarrito.RECOGIDO) + ";" + carrito.getUsuario().getEmail());
 							BW.newLine();
 							
-						}else if(c.getEstadoCarrito() == EstadoCarrito.RECOGIDO){
-							BW.write(sdf.format(c.getFecha()) + ";" + String.valueOf(c.getEstadoCarrito()) + ";" + c.getUsuario().getEmail());
+						}else if(carrito.getEstadoCarrito() == EstadoCarrito.RECOGIDO){
+							BW.write(sdf.format(carrito.getFecha()) + ";" + String.valueOf(carrito.getEstadoCarrito()) + ";" + carrito.getUsuario().getEmail());
 							BW.newLine();
 						}
 						
 					}else {
-						BW.write(sdf.format(c.getFecha()) + ";" + String.valueOf(c.getEstadoCarrito()) + ";" + c.getUsuario().getEmail());
+						BW.write(sdf.format(carrito.getFecha()) + ";" + String.valueOf(carrito.getEstadoCarrito()) + ";" + carrito.getUsuario().getEmail());
 						BW.newLine();
 					}
 					
