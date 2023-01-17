@@ -3,6 +3,7 @@ package ClasesPrincipales;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -12,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 import java.util.StringTokenizer;
 
 import Ventanas.Main;
@@ -21,6 +23,8 @@ public class TiendaGame implements Serializable{
 	
 	protected ArrayList<Carrito> carritos;
 	protected ArrayList<Producto> productos;
+	protected static Properties properties;
+	
 	
 	public TiendaGame(ArrayList<Carrito> carritos, ArrayList<Producto> productos) {
 		super();
@@ -63,13 +67,26 @@ public class TiendaGame implements Serializable{
 		return "TiendaGame [carritos=" + carritos + ", productos=" + productos + "]";
 	}
 	
+	//Leer Properties
+	public static void LeerProperties() {
+		properties = new Properties();
+		try {
+			FileInputStream entrada = new FileInputStream("general.properties");
+			
+			properties.load(entrada);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+	
+	
 	// GUARDAR DATOS Y CARGAR DATOS
 	
 	public static List<Producto> LeerCSVProductos() {
 		List<Producto> productos = new ArrayList<>();
 		Producto p;
 		
-		try (BufferedReader BR = new BufferedReader(new FileReader("Data/Producto.csv"))) {
+		try (BufferedReader BR = new BufferedReader(new FileReader(properties.getProperty("producto")))) {
 			StringTokenizer tokenizer;
 			String linea = null;
 			int numLinea = 0;
@@ -113,7 +130,7 @@ public class TiendaGame implements Serializable{
 		List<Videojuego> Videojuegos = new ArrayList<>();
 		Videojuego v;
 		
-		try (BufferedReader BR = new BufferedReader(new FileReader("Data/Videojuegos.csv"))) {
+		try (BufferedReader BR = new BufferedReader(new FileReader(properties.getProperty("videojuego")))) {
 			StringTokenizer tokenizer;
 			String linea = null;
 			int numLinea = 0;
@@ -160,7 +177,7 @@ public class TiendaGame implements Serializable{
 		List<Mando> Mandos = new ArrayList<>();
 		Mando m;
 		
-		try (BufferedReader BR = new BufferedReader(new FileReader("Data/mandos.csv"))) {
+		try (BufferedReader BR = new BufferedReader(new FileReader(properties.getProperty("mando")))) {
 			StringTokenizer tokenizer;
 			String linea = null;
 			int numLinea = 0;
@@ -206,7 +223,7 @@ public class TiendaGame implements Serializable{
 		List<Consola> Consolas = new ArrayList<>();
 		Consola c;
 		
-		try (BufferedReader BR = new BufferedReader(new FileReader("Data/consolas.csv"))) {
+		try (BufferedReader BR = new BufferedReader(new FileReader(properties.getProperty("consola")))) {
 			StringTokenizer tokenizer;
 			String linea = null;
 			int numLinea = 0;
@@ -254,7 +271,7 @@ public class TiendaGame implements Serializable{
 		List<Usuario> Usuarios = new ArrayList<>();
 		Usuario u;
 		
-		try (BufferedReader BR = new BufferedReader(new FileReader("Data/usuarios.csv"))) {
+		try (BufferedReader BR = new BufferedReader(new FileReader(properties.getProperty("usuario")))) {
 			StringTokenizer tokenizer;
 			String linea = null;
 			int numLinea = 0;
@@ -297,8 +314,8 @@ public class TiendaGame implements Serializable{
 	
 	public static void EscribirCSVUsuarios(String mail, String nombre, String contraseña, String tel) {
 		
-		try (BufferedWriter BW = new BufferedWriter(new FileWriter("Data/usuarios.csv",true));
-			BufferedReader BR = new BufferedReader(new FileReader("Data/usuarios.csv"))) {
+		try (BufferedWriter BW = new BufferedWriter(new FileWriter(properties.getProperty("usuario"),true));
+			BufferedReader BR = new BufferedReader(new FileReader(properties.getProperty("usuario")))) {
 			
 				BW.write(nombre + ";" + mail + ";" + contraseña + ";" + tel);
 				BW.newLine();
@@ -317,8 +334,8 @@ public class TiendaGame implements Serializable{
 	
 	public static void EscribirCarrito(Carrito c) {
 		
-		try (BufferedWriter BW = new BufferedWriter(new FileWriter("Data/carrito.csv",true));
-			BufferedReader BR = new BufferedReader(new FileReader("Data/carrito.csv"))) {
+		try (BufferedWriter BW = new BufferedWriter(new FileWriter(properties.getProperty("carrito"),true));
+			BufferedReader BR = new BufferedReader(new FileReader(properties.getProperty("carrito")))) {
 			
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			
@@ -339,8 +356,8 @@ public class TiendaGame implements Serializable{
 	
 	public static void AlterarCSVCarrito(Carrito carrito,ArrayList<Carrito> carritos) {
 		
-		try (BufferedWriter BW = new BufferedWriter(new FileWriter("Data/carrito.csv"));
-			BufferedReader BR = new BufferedReader(new FileReader("Data/carrito.csv"))) {
+		try (BufferedWriter BW = new BufferedWriter(new FileWriter(properties.getProperty("carrito")));
+			BufferedReader BR = new BufferedReader(new FileReader(properties.getProperty("carrito")))) {
 			
 				ArrayList<Carrito> todos = new ArrayList<>();
 				
@@ -399,8 +416,8 @@ public class TiendaGame implements Serializable{
 	
 	public static void EscribirCarritoProducto(Carrito c) {
 		
-		try (BufferedWriter BW = new BufferedWriter(new FileWriter("Data/CarritoProducto.csv",true));
-			BufferedReader BR = new BufferedReader(new FileReader("Data/CarritoProducto.csv"))) {
+		try (BufferedWriter BW = new BufferedWriter(new FileWriter(properties.getProperty("carritoProducto"),true));
+			BufferedReader BR = new BufferedReader(new FileReader(properties.getProperty("carritoProducto")))) {
 			
 				for (Pagable pagable : c.getElementos()) {
 					Producto p  = (Producto) pagable;
@@ -426,7 +443,7 @@ public class TiendaGame implements Serializable{
 	public static List<String> LeerCSVAdministradores() {
 		List<String> administradores = new ArrayList<>();
 		
-		try (BufferedReader BR = new BufferedReader(new FileReader("Data/Administradores.csv"))) {
+		try (BufferedReader BR = new BufferedReader(new FileReader(properties.getProperty("admin")))) {
 			StringTokenizer tokenizer;
 			String linea = null;
 			int numLinea = 0;
@@ -461,109 +478,16 @@ public class TiendaGame implements Serializable{
 	
 	
 	
-//	public static List<Carrito> LeerCSVCarritos() {
-//		List<Carrito> Carritos = new ArrayList<>();
-//		Carrito c;
-//		
-//		try (BufferedReader BR = new BufferedReader(new FileReader("Data/carrito.csv"))) {
-//			StringTokenizer tokenizer;
-//			String linea = null;
-//			int numLinea = 0;
-//			
-//			BR.readLine();
-//			
-//			int id = 0;
-//			String fecha;
-//			
-//			
-//			while ((linea = BR.readLine()) != null) {
-//				c = new Carrito();
-//				tokenizer = new StringTokenizer(linea, ";");
-//				
-//				
-//				c.setId(0);
-//				id++;
-//				fecha = tokenizer.nextToken();
-//				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//				c.setFecha(sdf.format(fecha));
-//				
-//				c.setEstadoCarrito(tokenizer.nextToken());
-//				c.setUsuario();
-//				
-//				
-//				Carritos.add(c);
-//				
-//			
-//			}
-//			
-//			
-//			
-//		} catch (Exception e) {
-//			// TODO: handle exception
-//			System.err.println(String.format("Error en la Tienda Game: %s", e.getMessage()));
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		return Carritos;
-//	}
-	
+
 	
 	public static void main(String[] args) {
-		//GestorBD gestorBD = new GestorBD();
-		
-		//gestorBD.borrarBBDDVideojuego();
-		//gestorBD.borrarBBDDConsola();
-		//gestorBD.borrarBBDDMando();
-		
-		//gestorBD.CrearBBDDVideojuego();
-		//gestorBD.CrearBBDDConsola();
-		//gestorBD.CrearBBDDMando();
-		
-		
-		//gestorBD.insertarDatosVideojuego(LeerCSVvideojuego());
-		//gestorBD.obtenerDatosVideojuegos();
-		
-		//gestorBD.insertarDatosConsola(LeerCSVconsolas());
-		//gestorBD.obtenerDatosConsolas();
-		
-		//gestorBD.insertarDatosMando(LeerCSVmandos());
-		//gestorBD.obtenerDatosMandos();
-		
-		
-		
-		//gestorBD.borrarBBDDVideojuego();
-		//gestorBD.borrarBBDDConsola();
-		//gestorBD.borrarBBDDMando();
 		
 		
 	}
 	
 	
 	
-	private static void printVideojuegos(List<Videojuego> videojuegos) {
-		if (!videojuegos.isEmpty()) {
-			for (Videojuego a : videojuegos) {
-				System.out.println(String.format(" - %s", a.toString()));
-				}
-		}	
-	}
-
-	private static void printConsola(List<Consola> consolas) {
-		if (!consolas.isEmpty()) {
-			for (Consola a : consolas) {
-				System.out.println(String.format(" - %s", a.toString()));
-				}
-		}	
-	}
 	
-	private static void printMando(List<Mando> mandos) {
-		if (!mandos.isEmpty()) {
-			for (Mando a : mandos) {
-				System.out.println(String.format(" - %s", a.toString()));
-				}
-		}	
-	}
 	
 	
 	

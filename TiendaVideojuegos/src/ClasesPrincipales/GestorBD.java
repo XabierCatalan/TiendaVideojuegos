@@ -16,11 +16,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.util.logging.Logger;
+import java.util.Properties;
+
 
 import javax.swing.JOptionPane;
 
 public class GestorBD {
     private static final Logger LOG = Logger.getLogger(GestorBD.class.getName());
+    
 
 	protected static final String DRIVER_NAME = "org.sqlite.JDBC";	
 	

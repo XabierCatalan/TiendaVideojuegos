@@ -28,6 +28,8 @@ public class Main {
     
 	public static void main(String[] args) {
 		
+		tg.LeerProperties();
+		
 		GestorLog.fine("##### Comienza el programa #####");
 		
 		vM.setVisible(true);
