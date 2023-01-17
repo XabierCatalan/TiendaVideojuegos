@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -26,6 +29,7 @@ public class VentanaPedidosAntiguos extends JFrame{
 	};
 	
 	protected JTable tP = new JTable (mP);
+	protected JLabel lblFecha;
 	
 	protected JList<Pagable> pagables;
 	protected DefaultListModel<Pagable> modeloPagables;
@@ -78,10 +82,37 @@ public class VentanaPedidosAntiguos extends JFrame{
 			}
 		});
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss");
+		lblFecha = new JLabel("");
+		
 		JPanel pArriba = new JPanel();
 		pArriba.setLayout(new BorderLayout());
+		pArriba.add(lblFecha, BorderLayout.EAST);
 		pArriba.add(botonAtras, BorderLayout.WEST);
 		cp.add(pArriba, BorderLayout.NORTH);
+		
+		
+		Runnable r1 = new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				while(true) {	
+					Calendar hoy = new GregorianCalendar();
+										
+					lblFecha.setText( hoy.get(hoy.DATE) + "/" + (hoy.get(hoy.MONTH)+1) + "/" + hoy.get(hoy.YEAR)  + "    " + hoy.get(hoy.HOUR_OF_DAY) + ":" + hoy.get(hoy.MINUTE) + ":" + hoy.get(hoy.SECOND));
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+			
+		};
+		Thread t1 = new Thread(r1);
+		t1.start();
 		
 		tP.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
 			
