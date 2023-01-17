@@ -19,7 +19,7 @@ public class GestorBDTest {
 		
 		// prueba 2 usuario correcto
 		inMail = "unai.gonzalez@opendeusto.es";
-		inPass = "1121";
+		inPass = "2222";
 		msg = gestorBD.iniciarSesion(inMail,inPass);
 		assertEquals("OK", msg);
 
