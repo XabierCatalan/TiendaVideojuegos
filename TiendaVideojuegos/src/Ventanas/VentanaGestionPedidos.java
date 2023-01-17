@@ -17,7 +17,7 @@ import ClasesPrincipales.*;
 public class VentanaGestionPedidos extends JFrame {
 	
 	protected JButton botonAtras;
-	
+	protected JButton botonQuitar;
 	protected JButton botonNombres;
 	
 	protected DefaultTableModel mP = new DefaultTableModel (
@@ -93,9 +93,29 @@ public class VentanaGestionPedidos extends JFrame {
 		
 		botonNombres = new JButton("Buscar por Email");
 		
+		botonNombres.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				cargarTablaPersonal(JOptionPane.showInputDialog("Introduce un email para filtrar"));
+			}
+		});
+		
+		botonQuitar = new JButton("Quitar filtro de emails");
+		botonQuitar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				cargarTabla();
+			}
+		});
+		
 		JPanel pAbajo = new JPanel();
 		pAbajo.setLayout(new FlowLayout());
 		pAbajo.add(botonNombres);
+		pAbajo.add(botonQuitar);
 		cp.add(pAbajo, BorderLayout.SOUTH);
 		
 		
@@ -203,6 +223,29 @@ public class VentanaGestionPedidos extends JFrame {
 		});
 		
 		
+		KeyListener keyListener = new KeyAdapter() {
+			
+			
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_MINUS) { //WINDOWS
+					//Se invoca la funcionalidad del click del botón Cargar
+					botonQuitar.doClick();
+				}else if(e.isControlDown() && e.getKeyCode() == KeyEvent.VK_PLUS) {
+					
+					botonNombres.doClick();
+				}
+			}
+			
+			 
+		};
+		
+		this.tP.addKeyListener(keyListener);
+		this.pagables.addKeyListener(keyListener);
+		
+		
 		tP.getTableHeader().setReorderingAllowed(false);
 		
 		
@@ -225,24 +268,14 @@ public class VentanaGestionPedidos extends JFrame {
 					SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 					int id_c = (int) tP.getValueAt(fila, 0);
 					EstadoCarrito estadoC = (EstadoCarrito) tP.getValueAt(fila, 2);
-					String fechaP = (String) tP.getValueAt(fila, 1);
-					
-					
-					
-					
 					String mail = (String) tP.getValueAt(fila, 3);
 					
 					
-					Main.bd.CambiarEstadodeCarritoConId(id_c, estadoC);
-					try {
-						Main.tg.AlterarCSVCarrito(id_c, sdf.parse(fechaP) , estadoC, mail);
-					} catch (ParseException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					
+					Main.tg.AlterarCSVCarrito(Main.bd.buscarCarritoPorId(id_c, mail),Main.bd.obtenerDatosCarritos());
 					
 				
-					cargarTabla();
+					recargarTabla();
 					
 				}
 			}
@@ -259,6 +292,81 @@ public class VentanaGestionPedidos extends JFrame {
 	protected void cargarTabla() {
 		
 		listaCarrito = Main.bd.obtenerDatosCarritos();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		
+		while (mP.getRowCount() > 0) {
+			mP.removeRow( 0 );
+		}
+		
+		for (Carrito carrito : listaCarrito) {
+			ArrayList<Pagable> pag = new ArrayList<>();
+			for (Pagable pagable : carrito.getElementos()) {
+				Producto p = (Producto) pagable;
+				if(p.getTp() == TipoProducto.MANDO) {
+					
+					Mando m = (Mando) p;
+					if(m.getEstado() == EstadoProducto.SEGUNDA_MANO) {
+						m.setPrecio(m.getPrecio() * 3 * 3);
+						
+						Pagable pa = (Pagable) m;
+						
+						pag.add(pa);
+						
+					}else {
+						Pagable pa = (Pagable) m;
+						pag.add(pa);
+					}
+					
+				}else if(p.getTp() == TipoProducto.CONSOLA) {
+					
+					Consola c = (Consola) p;
+					
+					if(c.getEstado() == EstadoProducto.SEGUNDA_MANO) {
+						c.setPrecio(c.getPrecio() * 1.25 * 1.25);
+						
+						Pagable pa = (Pagable) c;
+						pag.add(pa);
+					}else {
+						Pagable pa = (Pagable) c;
+						pag.add(pa);
+					}
+				}else if(p.getTp() == TipoProducto.VIDEOJUEGO){
+					
+					Videojuego v = (Videojuego) p;
+					
+					if(v.getEstado() == EstadoProducto.SEGUNDA_MANO) {
+						v.setPrecio(v.getPrecio() * 3 * 3);
+						
+						Pagable pa = (Pagable) v;
+						pag.add(pa);
+					}else {
+						Pagable pa = (Pagable) v;
+						pag.add(pa);
+					}
+				}
+			
+				
+			}
+			carrito.setElementos(pag);
+			
+			mP.addRow( new Object[] { carrito.getId(), sdf.format(carrito.getFecha()), carrito.getEstadoCarrito(), carrito.getUsuario().getEmail(), String.format("%.2f €",carrito.getPrecio()), new JButton("x") } );
+			
+		}
+	
+	}
+	
+	protected void recargarTabla() {
+		Main.bd.borrarBBDDCarrito();
+		Main.bd.CrearBBDDCarrito();
+		Main.bd.insertarDatosCarrito();
+		
+		cargarTabla();
+	}
+	
+protected void cargarTablaPersonal(String mail) {
+		
+		listaCarrito = Main.bd.buscarCarritosDeUsuario(mail);
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
 		
