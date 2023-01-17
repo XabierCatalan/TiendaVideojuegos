@@ -82,7 +82,7 @@ public class VentanaPedidosAntiguos extends JFrame{
 			}
 		});
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss");
+		SimpleDateFormat sdfF = new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss");
 		lblFecha = new JLabel("");
 		
 		JPanel pArriba = new JPanel();
