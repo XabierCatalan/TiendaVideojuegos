@@ -209,7 +209,7 @@ public class VentanaCarrito extends JFrame{
 		
 		
 		
-		
+		this.setResizable(false);
 		this.setTitle("Carrito");
 		this.setSize(700, 400);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);

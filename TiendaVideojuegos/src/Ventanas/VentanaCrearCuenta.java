@@ -95,8 +95,7 @@ public class VentanaCrearCuenta extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				//Meter metodo que cree una cuenta nueva con todo vacio excepto los datos
-//				if(true) {
-				//GestorBD gestorBD = new GestorBD();
+
 				
 				String mail = mail1.getText();
 				String pass = new String(contraseña1.getPassword());
@@ -117,17 +116,13 @@ public class VentanaCrearCuenta extends JFrame {
 					GestorLog.warning(msg);
 				}
 				
-//				}else {
-//					Main.vMP.setVisible(true);
-//					dispose();		
-//				}
 
 				
 			}
 		});
 
 		
-		
+		this.setResizable(false);
 		this.setTitle("CrearCuenta");
 		this.setSize(600, 200);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
