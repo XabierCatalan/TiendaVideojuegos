@@ -1,6 +1,15 @@
 ID_C;ID_P
 1;18
 1;20
+<<<<<<< HEAD
 2;10
 2;3
 2;15
+=======
+1;10
+1;5
+2;19
+2;18
+3;19
+3;20
+>>>>>>> branch 'master' of https://github.com/XabierCatalan/TiendaVideojuegos.git

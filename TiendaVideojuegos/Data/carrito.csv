@@ -1,3 +1,9 @@
 FECHA;ESTADOCARRITO;EMAIL
+<<<<<<< HEAD
 16/01/2023;PREPARACION;o.perez@opendeusto.es
 17/01/2023;PREPARACION;o.perez@opendeusto.es
+=======
+16/01/2023;RECOGIDO;o.perez@opendeusto.es
+17/01/2023;RECOGIDO;eneko.demiguel@opendeusto.es
+17/01/2023;RECOGIDO;eneko.demiguel@opendeusto.es
+>>>>>>> branch 'master' of https://github.com/XabierCatalan/TiendaVideojuegos.git
