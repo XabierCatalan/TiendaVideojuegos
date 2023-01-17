@@ -363,10 +363,15 @@ public class TiendaGame implements Serializable{
 			BufferedReader BR = new BufferedReader(new FileReader(properties.getProperty("carrito")))) {
 			
 				Map<Integer, Carrito> todos = new HashMap<>();
+				ArrayList<Carrito> car = new ArrayList<>();
 				
 				for (Carrito c : carritos) {
 					todos.putIfAbsent(c.getId(), c);
 				}
+				
+				
+				
+				car.addAll(todos.values());
 				
 				
 			
@@ -380,26 +385,26 @@ public class TiendaGame implements Serializable{
 				
 				
 					
-				for (Entry<Integer, Carrito> c : todos.entrySet()) {
+				for (Carrito c : car ) {
 					
 					
-					if(c.getKey() == carrito.getId()) {
+					if(c.getId() == carrito.getId()) {
 						
-						if(carrito.getEstadoCarrito() == EstadoCarrito.PREPARACION) {
-							BW.write(sdf.format(carrito.getFecha()) + ";" + String.valueOf(EstadoCarrito.LISTO) + ";" + carrito.getUsuario().getEmail());
+						if(c.getEstadoCarrito() == EstadoCarrito.PREPARACION) {
+							BW.write(sdf.format(c.getFecha()) + ";" + String.valueOf(EstadoCarrito.LISTO) + ";" + c.getUsuario().getEmail());
 							BW.newLine();
 							
-						}else if(carrito.getEstadoCarrito() == EstadoCarrito.LISTO) {
-							BW.write(sdf.format(carrito.getFecha()) + ";" + String.valueOf(EstadoCarrito.RECOGIDO) + ";" + carrito.getUsuario().getEmail());
+						}else if(c.getEstadoCarrito() == EstadoCarrito.LISTO) {
+							BW.write(sdf.format(c.getFecha()) + ";" + String.valueOf(EstadoCarrito.RECOGIDO) + ";" + c.getUsuario().getEmail());
 							BW.newLine();
 							
-						}else if(carrito.getEstadoCarrito() == EstadoCarrito.RECOGIDO){
-							BW.write(sdf.format(carrito.getFecha()) + ";" + String.valueOf(carrito.getEstadoCarrito()) + ";" + carrito.getUsuario().getEmail());
+						}else if(c.getEstadoCarrito() == EstadoCarrito.RECOGIDO){
+							BW.write(sdf.format(c.getFecha()) + ";" + String.valueOf(c.getEstadoCarrito()) + ";" + c.getUsuario().getEmail());
 							BW.newLine();
 						}
 						
 					}else {
-						BW.write(sdf.format(carrito.getFecha()) + ";" + String.valueOf(carrito.getEstadoCarrito()) + ";" + carrito.getUsuario().getEmail());
+						BW.write(sdf.format(c.getFecha()) + ";" + String.valueOf(c.getEstadoCarrito()) + ";" + c.getUsuario().getEmail());
 						BW.newLine();
 					}
 					
