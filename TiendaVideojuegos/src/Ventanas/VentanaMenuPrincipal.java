@@ -150,6 +150,8 @@ public class VentanaMenuPrincipal extends JFrame{
 		
 		
 		
+		
+		
 		this.setSize(250,250);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);

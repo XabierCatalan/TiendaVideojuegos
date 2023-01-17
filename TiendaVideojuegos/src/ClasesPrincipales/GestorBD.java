@@ -30,7 +30,7 @@ public class GestorBD {
 	protected static final String DATABASE_FILE_MANDO = "db/databasemando.db";
 	protected static final String DATABASE_FILE_USUARIO = "db/databaseusuario.db";
 	protected static final String DATABASE_FILE_CARRITO = "db/databasecarrito.db";
-	protected static final String DATABASE_FILE_SERVICIO = "db/databaseservicio.db";
+	
 	
 	//Productos_carrito
 	protected static final String DATABASE_FILE_PRODUCTOSCARRITO = "db/databaseproductoscarrito.db";
@@ -41,7 +41,7 @@ public class GestorBD {
 	protected static final String CONNECTION_STRING_MANDO= "jdbc:sqlite:" + DATABASE_FILE_MANDO;
 	protected static final String CONNECTION_STRING_USUARIO= "jdbc:sqlite:" + DATABASE_FILE_USUARIO;
 	protected static final String CONNECTION_STRING_CARRITO = "jdbc:sqlite:" + DATABASE_FILE_CARRITO;
-	protected static final String CONNECTION_STRING_SERVICIO = "jdbc:sqlite:" + DATABASE_FILE_SERVICIO;
+	
 	
 	//Productos_carrito
 	protected static final String CONNECTION_STRING_PRODUCTOSCARRITO = "jdbc:sqlite:" + DATABASE_FILE_PRODUCTOSCARRITO;
@@ -839,95 +839,7 @@ public Videojuego buscarVideojuegoPorID_P(int id_P) {
 			ex.printStackTrace();						
 		}		
 	}	
-	// SERVICIOS:
 	
-	public void CrearBBDDServicio() {
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_SERVICIO);
-			 Statement stmt = con.createStatement()) {
-			
-			String sql = "CREATE TABLE IF NOT EXISTS SERVICIO (\n"
-					+ " TEXT EMAIL PRIMARY KEY , \n"
-					+ " TIPOSERVICIO ENUM NOT NULL,\n"
-					+ " FECHA DATE NOT NULL, \n"
-					+ " DESCRIP TEXT\n"
-					+ ");";
-					
-			if (!stmt.execute(sql)) {
-	        	System.out.println("- Se ha creado la tabla SERVICIO");}
-		}catch (Exception ex) {
-			System.err.println(String.format("* Error al crear la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();
-		}
-	}
-	
-	public void borrarBBDDServicio() {
-		//Se abre la conexión y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_SERVICIO);
-		     Statement stmt = con.createStatement()) {
-			
-	        String sql = "DROP TABLE IF EXISTS servicio";
-			
-	        //Se ejecuta la sentencia de creación de la tabla Estudiantes
-	        if (!stmt.execute(sql)) {
-	        	System.out.println("- Se ha borrado la tabla Servicio");
-	        }
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar la BBDDServicio: %s", ex.getMessage()));
-			ex.printStackTrace();			
-		}
-		
-		try {
-			//Se borra el fichero de la BBDD
-			Files.delete(Paths.get(DATABASE_FILE_SERVICIO));
-			System.out.println("- Se ha borrado el fichero de la BBDDServicio");
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error al borrar el archivo de la BBDDServicio: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}
-	}
-	
-	public void insertarDatosServicioCSV(List<Servicio> servicio) {
-		//Se abre la conexión y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_SERVICIO);
-		     Statement stmt = con.createStatement()) {
-			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO SERVICIO ( USUARIO, TIPO, FECHA, DESCRIP) VALUES ( '%s', '%s', '%s', '%s');";
-			
-			System.out.println("- Insertando servicios...");
-			
-			//Se recorren los clientes y se insertan uno a uno
-			for (Servicio s : servicio) {
-				if (1 == stmt.executeUpdate(String.format(sql, s.getU(), s.getTipo(), s.getFecha1(), s.getDescrip()))) {					
-					System.out.println(String.format(" - Usuario insertado: %s", s.toString()));
-				} else {
-					System.out.println(String.format(" - No se ha insertado el servicio: %s", s.toString()));
-				}
-			}			
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}				
-	}
-	
-	public void insertarDatosServicio(Servicio s) {
-		//Se abre la conexión y se obtiene el Statement
-		try (Connection con = DriverManager.getConnection(CONNECTION_STRING_SERVICIO);
-		     Statement stmt = con.createStatement()) {
-			//Se define la plantilla de la sentencia SQL
-			String sql = "INSERT INTO SERVICIO ( USUARIO, TIPO, FECHA, DESCRIP) VALUES ( '%s', '%s', '%s', '%s');";
-			
-			System.out.println("- Insertando servicios...");
-			
-			//Se recorren los clientes y se insertan uno a uno
-			
-			stmt.executeUpdate(String.format(sql, s.getU(), s.getTipo(), s.getFecha1(), s.getDescrip()));					
-			System.out.println(String.format(" - Usuario insertado: %s", s.toString()));
-							
-		} catch (Exception ex) {
-			System.err.println(String.format("* Error al insertar datos de la BBDD: %s", ex.getMessage()));
-			ex.printStackTrace();						
-		}				
-	}
 	// CARRITOS:
 	
 	public void CrearBBDDCarrito() {

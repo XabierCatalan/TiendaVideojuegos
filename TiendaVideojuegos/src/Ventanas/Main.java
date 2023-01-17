@@ -19,7 +19,7 @@ public class Main {
 	static VentanaConsolaMandos vCM = new VentanaConsolaMandos();
 	static VentanaVideojuegos vV = new VentanaVideojuegos();
 	static VentanaCarrito vC = new VentanaCarrito();
-	static VentanaServicio vS = new VentanaServicio();
+	
 	static VentanaGestionPedidos vGP = new VentanaGestionPedidos();
 	static calcularPrecioVentas cPV = new calcularPrecioVentas();
 	static VentanaPedidosAntiguos vPA = new VentanaPedidosAntiguos();
