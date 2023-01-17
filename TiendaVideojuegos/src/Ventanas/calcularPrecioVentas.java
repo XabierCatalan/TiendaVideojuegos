@@ -35,9 +35,9 @@ public class calcularPrecioVentas extends JFrame{
 		buscar = new JButton("Buscar");
 		
 		
-		slider = new JSlider(0,1000,500);
-		slider.setMajorTickSpacing(200);
-		slider.setMinorTickSpacing(50);
+		slider = new JSlider(0,500,250);
+		slider.setMajorTickSpacing(100);
+		slider.setMinorTickSpacing(25);
 		
 		slider.setPaintTicks(true);
 		
@@ -186,7 +186,39 @@ public class calcularPrecioVentas extends JFrame{
 //	}
 	
 	public static void comb (List<List<Producto>> productosFinal, List<Producto> productos, 
-			double dinerico, List<Producto> temporal ) {
+			double dinerico, double devuelta, List<Producto> temporal ) {
+		if (dinerico < 0) {
+			return;
+		} else if(dinerico < devuelta) {
+	    	temporal.sort((Producto o1, Producto o2) -> Integer.compare(o1.getId(), o2.getId()));
+	    	if (!productosFinal.contains(temporal)) {
+	        	System.out.println(temporal);
+	            productosFinal.add(new ArrayList<>(temporal));        	
+	    	}
+	    	
+		} else {
+			for (Producto p : productos) {
+				temporal.add(p);
+				
+				if (p.getTp() == TipoProducto.MANDO) {
+					Mando m = Main.bd.buscarMandoPorID_P(p.getId());
+		    		comb(productosFinal, productos, dinerico - m.getPrecio(), devuelta, temporal);
+
+					
+				} else if (p.getTp() == TipoProducto.CONSOLA) {
+					Consola c = Main.bd.buscarConsolaPorID_P(p.getId());
+		    		comb(productosFinal, productos, dinerico - c.getPrecio(), devuelta, temporal);
+					
+				} else if (p.getTp() == TipoProducto.VIDEOJUEGO) {
+					Videojuego v = Main.bd.buscarVideojuegoPorID_P(p.getId());
+		    		comb(productosFinal, productos, dinerico - v.getPrecio(), devuelta, temporal);
+		    		
+				}
+				
+				temporal.remove(temporal.size()-1);
+			}
+			
+		}
 	
 	}
 	
@@ -194,10 +226,69 @@ public class calcularPrecioVentas extends JFrame{
 	public static List<List<Producto>> combinacionesPorPrecio (List<Producto> productos, double dinerico) {
 		List<List<Producto>> resultado = new ArrayList<>();
 		
+		double devuelta = dinerico - (dinerico / 3);
 		
-		
-		comb(resultado, productos, dinerico, new ArrayList<Producto>());
+		comb(resultado, productos, dinerico, devuelta, new ArrayList<Producto>());
 		
 		return resultado;
 	}
 }
+
+
+
+///**
+// * Crea una lista de listas de productos que se pueden comparar dada una 
+// * cantidad máxima de dinero y una cantidad máxima de sobrante. 
+// * @param result List<List<Producto>> listas de productos que se pueden comprar.
+// * @param elementos List<Producto> con los productos que se pueden comprar.
+// * @param disponible double con el importe restante por gastar.
+// * @param sobranteMax double con el importe sobrante máximo.
+// * @param temp List<Producto> lista temporal de productos que se pueden comprar.
+// */
+//private static void combinaciones(List<List<Producto>> result, 
+//								  List<Producto> elementos, 
+//								  double disponible,
+//								  double sobranteMax,
+//								  List<Producto> temp) {
+//    // Caso base. Si el importe disponible es negativo se detiene la recursividad
+//	if (disponible < 0) {
+//    	return;
+//    // Caso base. Si el importe disponible es menor que el sobrante máximo
+//    } else if (disponible < sobranteMax) {
+//    	//Se reordena la lista temporal de productos para evitar combinaciones equivalentes
+//    	//Para reordenar se crea un Comparator de productos con una expresión lambda.
+//    	temp.sort((Producto o1, Producto o2) -> Integer.compare(o1.getId(), o2.getId()));
+//    	//Se añade la lista temporal si no se había añadido previamente.
+//    	if (!result.contains(temp)) {
+//        	//Se añade la lista temporal a la lista de resultados
+//            result.add(new ArrayList<>(temp));        	
+//    	}
+//    } else {
+//        // Caso recursivo. Por cada elemento        	
+//    	for(Producto e : elementos) {
+//    		//Se añade el elemento a la lista temporal
+//    		temp.add(e);
+//    		//Se realiza la invocación recursiva en la que se va decrementado el importe disponible
+//    		combinaciones(result, elementos, disponible-e.getPrecio(), sobranteMax, temp);
+//    		//Se elimina el último de la lista temporal
+//    		temp.remove(temp.size()-1);
+//    	}
+//    }
+//}
+
+///**
+// * Genera las combinaciones de productos que se pueden comprar con un importe máximo y un resto máximo.
+// * @param elementos List<Producto> con los productos que se pueden comprar.
+// * @param disponible double con el importe máximo a gastar.
+// * @param sobranteMax double con el importe máximo que puede sobrar al configurar las compras.
+// * @return List<List<Producto>> listas de productos que se pueden comprar con el importe dado.
+// */
+//public static List<List<Producto>> combinaciones(List<Producto> elementos, double disponible, double sobranteMax) {
+//	//Se inicializa la lista de combinaciones que se devolverá como resultado.
+//	List<List<Producto>> result = new ArrayList<>();
+//	//Se invoca al método recursivo
+//	combinaciones(result, elementos, disponible, sobranteMax, new ArrayList<>());
+//	//Se devuelve el resultado.
+//	return result;
+//}
+
