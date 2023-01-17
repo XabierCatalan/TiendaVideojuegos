@@ -304,6 +304,14 @@ public class VentanaGestionPedidos extends JFrame {
 					
 					Main.tg.AlterarCSVCarrito(Main.bd.buscarCarritoPorId(id_c, mail),Main.bd.obtenerDatosCarritos());
 					
+					if(estadoC== EstadoCarrito.PREPARACION) {
+						JOptionPane.showMessageDialog(null, "El estado del carrito ha sido actualizado a LISTO");
+					}else if (estadoC== EstadoCarrito.LISTO) {
+						JOptionPane.showMessageDialog(null, "El estado del carrito ha sido actualizado a RECOGIDO");
+					}else if (estadoC== EstadoCarrito.RECOGIDO){
+						JOptionPane.showMessageDialog(null, "No se puede actualizar más el estado del carrito");
+					}
+					
 				
 					recargarTabla();
 					
